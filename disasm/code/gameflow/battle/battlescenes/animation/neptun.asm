@@ -16,39 +16,39 @@ spellanimationSetup_Neptun:
                 bsr.w   LoadInvocationSpriteFrameToVram
                 sndCom  SFX_PRISM_LASER_FIRING
                 bset    #6,((byte_FFB56E-$1000000)).w
-                moveq   #$14,d1
+                moveq   #20,d1
                 moveq   #9,d2
                 lea     table_1B358(pc), a0
                 lea     6(a0),a1
-loc_1B248:
+@BlinkInInvocation_Loop:
                 
                 movem.l d1-d2/a0-a1,-(sp)
                 bsr.w   LoadInvocationSprite
                 movem.l (sp)+,d1-d2/a0-a1
                 swap    d2
                 tst.w   d2
-                bne.s   loc_1B25E
+                bne.s   @GetBlinkDuration
                 moveq   #1,d0
-                bra.s   loc_1B268
-loc_1B25E:
+                bra.s   @Continue
+@GetBlinkDuration:
                 
                 subq.w  #1,d2
-                bne.s   loc_1B266
+                bne.s   @NotLastBlink
                 move.w  #1,d2
-loc_1B266:
+@NotLastBlink:
                 
                 move.w  d2,d0
-loc_1B268:
+@Continue:
                 
                 jsr     (Sleep).w       
                 exg     a0,a1
-                dbf     d1,loc_1B248
+                dbf     d1,@BlinkInInvocation_Loop
                 
-                moveq   #SPELLGRAPHICS_NEPTUN,d0
-                bsr.w   LoadSpellGraphicsForInvocation
-                moveq   #$26,d0 
+                moveq   #SPELLTILESET_NEPTUN,d0
+                bsr.w   LoadSpellTilesetForInvocation
+                moveq   #38,d0 
                 lea     table_1B364(pc), a0
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 moveq   #25,d0
                 jsr     (Sleep).w       
                 bclr    #6,((byte_FFB56E-$1000000)).w
@@ -56,7 +56,7 @@ loc_1B268:
                 sndCom  SFX_DESOUL_HOVERING
                 moveq   #2,d0
                 moveq   #0,d1
-                moveq   #$10,d2
+                moveq   #16,d2
                 lea     ((SPRITE_38-$1000000)).w,a0
 loc_1B2A0:
                 
@@ -76,8 +76,8 @@ loc_1B2BE:
                 jsr     (WaitForVInt).w
                 dbf     d2,loc_1B2A0
                 
-                moveq   #SPELLGRAPHICS_NEPTUN,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_NEPTUN,d0
+                bsr.w   LoadSpellTileset
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.b  #1,4(a0)
@@ -114,7 +114,7 @@ loc_1B314:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #4,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Neptun
 
@@ -132,22 +132,16 @@ table_1B358:    dc.b 1
                 dc.b 0
                 dc.b 1
                 
-table_1B364:    vdpSpell 296, 192, TILE1920, V3|H2|32
+table_1B364:    vdpSpell 296, 192, TILE1920, V3|H2|VALUE2
                 
 table_NeptunBackgroundModification:
                 dc.b 0
-                dc.b 56
-                dc.b 4
-                dc.b 96
-                dc.b 0
-                dc.b 1
-                dc.b -77
-                dc.b 116
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b -1
-                dc.b -1
-                dc.b 0
-                dc.b 0
+                dc.b $38
+                dc.b 4  ; number of entries
+                dc.b $60
+                dc.l table_1B374
+table_1B374:
+                dc.w 1
+                dc.w 0
+                dc.w -1
+                dc.w 0

@@ -37,13 +37,13 @@ loc_1D526:
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
                 tst.w   (a3)
                 beq.s   loc_1D536
-                add.w   d0,$E(a4)
+                add.w   d0,NEXTVDPSPRITE_OFFSET_X(a4)
 loc_1D536:
                 
-                cmpi.w  #$12,(a5)
+                cmpi.w  #18,(a5)
                 bcs.s   loc_1D546
                 addq.w  #1,2(a5)
-                move.w  #$22,4(a5) 
+                move.w  #34,4(a5) 
 loc_1D546:
                 
                 bra.w   return_1D5C4
@@ -57,8 +57,8 @@ loc_1D54A:
                 move.w  8(a3),(a4)
                 tst.w   (a3)
                 beq.s   loc_1D572
-                move.w  6(a3),$E(a4)
-                move.w  8(a3),8(a4)
+                move.w  6(a3),NEXTVDPSPRITE_OFFSET_X(a4)
+                move.w  8(a3),NEXTVDPSPRITE_OFFSET_Y(a4)
 loc_1D572:
                 
                 move.w  #1,(a5)
@@ -89,13 +89,13 @@ loc_1D5A6:
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
                 tst.w   (a3)
                 beq.s   loc_1D5B6
-                add.w   d0,$E(a4)
+                add.w   d0,NEXTVDPSPRITE_OFFSET_X(a4)
 loc_1D5B6:
                 
-                cmpi.w  #$10,(a5)
+                cmpi.w  #16,(a5)
                 bcs.s   return_1D5C4
                 clr.b   ((byte_FFB588-$1000000)).w
-                bra.w   sub_1B82A
+                bra.w   ReinitializeSceneAfterSpell
 return_1D5C4:
                 
                 rts

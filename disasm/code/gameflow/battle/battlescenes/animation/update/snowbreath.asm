@@ -12,8 +12,8 @@ spellanimationUpdate_SnowBreath:
                 lea     ((byte_FFB532-$1000000)).w,a3
                 addq.b  #1,2(a3)
                 move.b  2(a3),3(a3)
-                moveq   #$18,d1
-                moveq   #$26,d0 
+                moveq   #24,d1
+                moveq   #38,d0 
 loc_1E7CC:
                 
                 movem.w d0-d1,-(sp)
@@ -25,12 +25,12 @@ loc_1E7CC:
                 lea     table_1E8E2(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1E7EE
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
 loc_1E7EE:
                 
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 move.w  (a4),8(a5)
-                moveq   #$28,d6 
+                moveq   #40,d6 
                 jsr     (GenerateRandomNumber).w
                 add.w   (a3),d7
                 move.w  d7,2(a5)
@@ -93,7 +93,7 @@ loc_1E85C:
                 bra.w   loc_1E8AA
 loc_1E88A:
                 
-                cmpi.w  #$26,(a5) 
+                cmpi.w  #38,(a5) 
                 bcs.w   loc_1E8AA
                 clr.w   (a5)
                 move.w  #1,(a4)
@@ -104,14 +104,15 @@ loc_1E88A:
 loc_1E8AA:
                 
                 move.w  8(a5),(a4)
-                moveq   #$10,d0
+                moveq   #16,d0
                 lea     table_1E8F2(pc), a0
                 bsr.w   sub_1B884
                 movem.w (sp)+,d0-d1
-                lea     $C(a5),a5
-                addq.w  #8,a4
+                lea     12(a5),a5
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1E7CC
+                
                 move.b  2(a3),d0
                 andi.w  #3,d0
                 bne.s   loc_1E8D6
@@ -119,126 +120,78 @@ loc_1E8AA:
 loc_1E8D6:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                beq.w   sub_1B82A
-                bra.w   loc_1D45C
+                beq.w   ReinitializeSceneAfterSpell
+                bra.w   AnimateBreath
 
     ; End of function spellanimationUpdate_SnowBreath
 
-table_1E8E2:    dc.b 1
-                dc.b $1C
-                dc.b 0
-                dc.b $DE
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b $E0
-                dc.b 0
-                dc.b $DF
-                dc.b 5
-                dc.b $20
-                dc.b 0
-                dc.b $20
-table_1E8F2:    dc.b 0
-                dc.b 2
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 4
-                dc.b 0
-                dc.b 4
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 8
-                dc.b 0
-                dc.b 6
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $C
-                dc.b 0
-                dc.b 8
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $10
-                dc.b 0
-                dc.b $A
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $14
-                dc.b 0
-                dc.b $D
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $18
-                dc.b 0
-                dc.b $F
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $21
-                dc.b 0
-                dc.b $11
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $2A
-                dc.b 0
-                dc.b $13
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $33
-                dc.b 0
-                dc.b $15
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $3C
-                dc.b 0
-                dc.b $17
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $45
-                dc.b 0
-                dc.b $1A
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $4E
-                dc.b 0
-                dc.b $1C
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $5E
-                dc.b 0
-                dc.b $1E
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $6E
-                dc.b 0
-                dc.b $20
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $7E
-                dc.b 0
-                dc.b $22
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $8E
-                dc.b 0
-                dc.b $24
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $9E
+table_1E8E2:    vdpSpell 284, 222, VDPTILE_SPELLTILE1, V1|H1|VALUE2
+                vdpSpell 224, 223, VDPTILE_SPELLTILE1, V1|H1|VALUE2
+				
+table_1E8F2:    dc.w 2
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 4
+				
+                dc.w 4
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 8
+				
+                dc.w 6
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w $C
+				
+                dc.w 8
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 16
+				
+                dc.w 10
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 20
+				
+                dc.w 13
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 24
+				
+                dc.w 15
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 33
+				
+                dc.w 17
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 42
+				
+                dc.w 19
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 51
+				
+                dc.w 21
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 60
+				
+                dc.w 23
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 69
+				
+                dc.w 26
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 78
+				
+                dc.w 28
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 94
+				
+                dc.w 30
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 110
+				
+                dc.w 32
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 126
+				
+                dc.w 34
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 142
+				
+                dc.w 36
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 158

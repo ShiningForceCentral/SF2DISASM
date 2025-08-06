@@ -13,20 +13,21 @@ spellanimationSetup_Apollo:
                 bsr.w   LoadInvocationSpell
                 sndCom  SFX_INTRO_LIGHTNING
                 lea     ((SPRITE_20-$1000000)).w,a0
-                moveq   #$15,d0
-loc_1B0EA:
+                moveq   #21,d0
+@LowerInvocation_OuterLoop:
                 
                 move.l  a0,-(sp)
-                moveq   #$F,d1
-loc_1B0EE:
+                moveq   #15,d1
+@LowerInvocation_InnerLoop:
                 
-                addq.w  #8,(a0)
-                addq.w  #8,a0
-                dbf     d1,loc_1B0EE
+                addq.w  #8,(a0) ; add 1 tile height to y
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
+                dbf     d1,@LowerInvocation_InnerLoop
                 
                 movea.l (sp)+,a0
                 jsr     (WaitForVInt).w
-                dbf     d0,loc_1B0EA
+                dbf     d0,@LowerInvocation_OuterLoop
+                
                 moveq   #SUMMON_APOLLO,d0
                 moveq   #1,d1
                 bsr.w   LoadInvocationSpriteFrameToVram
@@ -37,8 +38,8 @@ loc_1B0EE:
                 moveq   #SUMMON_APOLLO,d0
                 moveq   #2,d1
                 bsr.w   LoadInvocationSpriteFrameToVram
-                moveq   #SPELLGRAPHICS_APOLLO,d0
-                bsr.w   LoadSpellGraphicsForInvocation
+                moveq   #SPELLTILESET_APOLLO,d0
+                bsr.w   LoadSpellTilesetForInvocation
                 lea     (FF8B04_LOADING_SPACE).l,a0
                 lea     ($3000).w,a1
                 move.w  #$100,d0
@@ -63,21 +64,24 @@ loc_1B0EE:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-                moveq   #$26,d0 ; offset to sprite_38
+				
+                moveq   #38,d0 ; offset to sprite_38
                 lea     table_1B1FA(pc), a0
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 jsr     (WaitForVInt).w
                 sndCom  SFX_BATTLEFIELD_DEATH
+				
                 lea     ((SPRITE_38-$1000000)).w,a0
-                moveq   #$13,d0
+                moveq   #19,d0
                 moveq   #1,d1
-loc_1B1A4:
+@BuoyInvocation_Loop:
                 
+				; bob up/down
                 move.w  (a0),d2
                 exg     d1,d2
                 move.w  d2,(a0)
                 jsr     (WaitForVInt).w
-                dbf     d0,loc_1B1A4
+                dbf     d0,@BuoyInvocation_Loop
                 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -92,34 +96,24 @@ loc_1B1A4:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Apollo
 
-table_1B1FA:    vdpSpell 274, 203, TILE1920, V2|H2|32
+table_1B1FA:    vdpSpell 274, 203, TILE1920, V2|H2|VALUE2
                 
 table_ApolloBackgroundModification:
                 dc.b 0
-                dc.b 56
-                dc.b 8
-                dc.b 96
-                dc.b 0
-                dc.b 1
-                dc.b -78
-                dc.b 10
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 2
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b -1
-                dc.b -1
-                dc.b -1
-                dc.b -2
-                dc.b -1
-                dc.b -1
-                dc.b 0
-                dc.b 0
+                dc.b $38
+                dc.b 8  ; number of entries
+                dc.b $60
+                dc.l table_1B20A
+table_1B20A:
+                dc.w 1
+                dc.w 2
+                dc.w 1
+                dc.w 0
+                dc.w -1
+                dc.w -2
+                dc.w -1
+                dc.w 0
