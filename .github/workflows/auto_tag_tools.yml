@@ -1,0 +1,69 @@
+name: auto tag tools
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**/*.jar'
+
+jobs:
+  tag-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository (full history)
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Detect changed JAR files
+      id: detect_changes
+      run: |
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- '**/*.jar')
+
+        if [ -z "$changed_files" ]; then
+          echo "No .jar files changed."
+          echo "should_run=false" >> $GITHUB_OUTPUT
+        else
+          echo "Found changed .jar files:"
+          echo "$changed_files"
+          echo "should_run=true" >> $GITHUB_OUTPUT
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$changed_files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Tag based on Implementation-Version
+      if: steps.detect_changes.outputs.should_run == 'true'
+      run: |
+        echo "${{ steps.detect_changes.outputs.changed_files }}" | while read file_path; do
+          if [ -f "$file_path" ]; then
+            jar_file=$(basename "$file_path")
+            base_name="${jar_file%.jar}"
+
+            # Extract Implementation-Version from the MANIFEST.MF inside the jar
+            version=$(unzip -p "$file_path" META-INF/MANIFEST.MF | grep -oP '^Implementation-Version:\s*\K.*' | tr -d '\r' | tr -cd '[:print:]')
+
+
+            if [ -z "$version" ]; then
+              echo "No Implementation-Version found in $file_path. Skipping."
+              continue
+            fi
+
+            tag_name="${base_name}-${version}"
+            echo "Creating tag: $tag_name"
+
+            git config user.name 'GitHub Auto Merge Action'
+            git config user.email 'actions@github.com'
+
+            if git rev-parse "$tag_name" >/dev/null 2>&1; then
+              echo "Tag $tag_name already exists. Skipping."
+            else
+              git tag "$tag_name"
+              git push origin "$tag_name"
+            fi
+          fi
+        done
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
