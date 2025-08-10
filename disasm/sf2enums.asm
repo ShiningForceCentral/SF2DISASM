@@ -1749,14 +1749,14 @@ SPELLDEFS_COUNTER: equ spellDefsCounter
 
 ; enum SpellAnimations (bitfield)
 SPELLANIMATION_NONE: equ 0
-SPELLANIMATION_BLAZE: equ 1             ; variation 1: lone flame
-                                        ; variation 2: small flame/fireballs
-                                        ; variation 3: large flame/fireballs
-                                        ; variation 4: large flame and flame serpent
+SPELLANIMATION_BLAZE: equ 1 ; variation 1: lone flame
+                            ; variation 2: small flame/fireballs
+                            ; variation 3: large flame/fireballs
+                            ; variation 4: large flame and flame serpent
 SPELLANIMATION_FREEZE: equ 2
 SPELLANIMATION_DESOUL: equ 3
-SPELLANIMATION_HEALING_FAIRY: equ 4     ; ally caster: fairy of light
-                                        ; enemy caster: fairy of darkness
+SPELLANIMATION_HEALING_FAIRY: equ 4 ; ally caster: fairy of light
+                                    ; enemy caster: fairy of darkness
 SPELLANIMATION_BLAST: equ 5
 SPELLANIMATION_DETOX: equ 6
 SPELLANIMATION_BOLT: equ 7
@@ -1783,8 +1783,8 @@ SPELLANIMATION_BUFF2: equ $19
 SPELLANIMATION_ATTACK_SPELL: equ $1A        ; ATTACK spell animation used in SFCD, but unused in SF2
 SPELLANIMATION_DEBUFF2: equ $1B
 SPELLANIMATION_DEBUFF3: equ $1C
-SPELLANIMATION_PHOENIX_ATTACK: equ $1D  ; variation 1/3: sound waves
-                                        ; variation 2/4: Blast cyclone
+SPELLANIMATION_PHOENIX_ATTACK: equ $1D ; variation 1/3: sound waves
+                                       ; variation 2/4: Blast cyclone
 SPELLANIMATION_BURST_ROCK_EXPLOSION: equ $1E
 SPELLANIMATION_ODD_EYE_BEAM: equ $1F
 SPELLANIMATION_VARIATION2: equ $20
@@ -1835,32 +1835,40 @@ DEBUFF_FLASH_COLOR: equ $E22
 BOLT_FLASH_COLOR: equ $ECA
 CUTOFF_FLASH_COLOR: equ $EEE
 
+QUARTER_COLOR_MASK: equ $333
+HALF_COLOR_MASK: equ $777
+FULL_COLOR_MASK: equ $EEE
+
+COLOR_MASK_RED: equ $E
+COLOR_MASK_GREEN: equ $E0
+COLOR_MASK_BLUE: equ $E00
+
 ; ---------------------------------------------------------------------------
 
-; enum SpellGraphics
-SPELLGRAPHICS_BUBBLE_BREATH: equ 0
-SPELLGRAPHICS_FLAME_BREATH: equ 1
-SPELLGRAPHICS_BLAZE: equ 2
-SPELLGRAPHICS_DAO: equ 3
-SPELLGRAPHICS_BOLT: equ 4
-SPELLGRAPHICS_ARROWS_AND_SPEARS: equ 5
-SPELLGRAPHICS_HEALING: equ 6
-SPELLGRAPHICS_DETOX: equ 7
-SPELLGRAPHICS_PRSIM_LASER: equ 8
-SPELLGRAPHICS_DEBUFF: equ 9
-SPELLGRAPHICS_CUTOFF: equ $A
-SPELLGRAPHICS_FREEZE: equ $B
-SPELLGRAPHICS_SNOW_BREATH: equ $C
-SPELLGRAPHICS_DESOUL: equ $D
-SPELLGRAPHICS_NEPTUN: equ $E
-SPELLGRAPHICS_BLAST: equ $F
-SPELLGRAPHICS_EXPLOSION: equ $10
-SPELLGRAPHICS_GUNNER_PROJECTILE: equ $11
-SPELLGRAPHICS_CANNON_PROJECTILE: equ $12
-SPELLGRAPHICS_APOLLO: equ $13
-SPELLGRAPHICS_SOUND_WAVES: equ $14
-SPELLGRAPHICS_ODD_EYE_BEAM: equ $15
-SPELLGRAPHICS_DEMON_BREATH: equ $16
+; enum SpellTilesets
+SPELLTILESET_BUBBLE_BREATH: equ 0
+SPELLTILESET_FLAME_BREATH: equ 1
+SPELLTILESET_BLAZE: equ 2
+SPELLTILESET_DAO: equ 3
+SPELLTILESET_BOLT: equ 4
+SPELLTILESET_ARROWS_AND_SPEARS: equ 5
+SPELLTILESET_HEALING: equ 6
+SPELLTILESET_DETOX: equ 7
+SPELLTILESET_PRSIM_LASER: equ 8
+SPELLTILESET_DEBUFF: equ 9
+SPELLTILESET_CUTOFF: equ $A
+SPELLTILESET_FREEZE: equ $B
+SPELLTILESET_SNOW_BREATH: equ $C
+SPELLTILESET_DESOUL: equ $D
+SPELLTILESET_NEPTUN: equ $E
+SPELLTILESET_BLAST: equ $F
+SPELLTILESET_EXPLOSION: equ $10
+SPELLTILESET_GUNNER_PROJECTILE: equ $11
+SPELLTILESET_CANNON_PROJECTILE: equ $12
+SPELLTILESET_APOLLO: equ $13
+SPELLTILESET_SOUND_WAVES: equ $14
+SPELLTILESET_ODD_EYE_BEAM: equ $15
+SPELLTILESET_DEMON_BREATH: equ $16
 
 ; ---------------------------------------------------------------------------
 
@@ -3924,6 +3932,7 @@ END_GAME_TIMER: equ $2A30 ; wait for 3 minutes till hidden battle starts
 
 ; enum Cram
 CRAM_PALETTES_COUNTER: equ 3
+CRAM_PALETTE_LONGWORDS_COUNTER: equ 7
 CRAM_PER_PALETTE_COLORS_COUNTER: equ 15
 CRAM_LONGWORDS_COUNTER: equ 31
 CRAM_PALETTE_SIZE: equ 32

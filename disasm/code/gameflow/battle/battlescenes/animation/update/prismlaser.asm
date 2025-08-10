@@ -22,8 +22,8 @@ spellanimationUpdate_PrismLaser:
                 move.w  d1,2(a5)
                 cmpi.w  #4,d1
                 bcc.w   sub_1E4AC
-                addi.w  #$10,VDPSPRITE_OFFSET_TILE(a4)
-                move.w  #$28,4(a5) 
+                addi.w  #16,VDPSPRITE_OFFSET_TILE(a4) ; add volume of 4x4 graphic
+                move.w  #40,4(a5) 
                 bra.w   sub_1E4AC
 loc_1E31A:
                 
@@ -33,7 +33,7 @@ loc_1E31A:
                 bsr.w   sub_1E4AC
                 tst.w   d0
                 bne.w   return_1E452
-                move.w  #$D4,(a4) 
+                move.w  #212,(a4) 
                 addq.w  #1,2(a5)
                 bra.w   return_1E452
 loc_1E33C:
@@ -42,7 +42,7 @@ loc_1E33C:
                 bne.w   loc_1E3A8
                 tst.w   6(a5)
                 bne.s   loc_1E36C
-                move.w  #$563|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
+                move.w  #VDPTILE_SPELLTILE68|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 sndCom  SFX_PRISM_LASER_FIRING
                 move.b  #OUT_TO_WHITE,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
@@ -51,13 +51,13 @@ loc_1E33C:
                 move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 loc_1E36C:
                 
-                move.w  #$D8,d3 
-                addq.w  #8,a4
+                move.w  #216,d3 
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 bsr.w   sub_1E454
                 cmpi.w  #8,6(a5)
                 bcs.w   return_1E452
                 addq.w  #1,2(a5)
-                move.w  #$1E,4(a5)
+                move.w  #30,4(a5)
                 move.b  #IN_FROM_WHITE,((FADING_SETTING-$1000000)).w
                 clr.w   ((FADING_TIMER_WORD-$1000000)).w
                 clr.b   ((FADING_POINTER-$1000000)).w
@@ -77,7 +77,7 @@ loc_1E3C2:
                 
                 subq.w  #1,d1
                 bne.w   loc_1E3E2
-                bsr.w   sub_1E48A
+                bsr.w   EndcapLaserBeam
                 cmpi.w  #9,6(a5)
                 bcs.w   return_1E452
                 addq.w  #1,2(a5)
@@ -102,7 +102,7 @@ loc_1E404:
                 sndCom  SFX_PRISM_LASER_FIRING
 loc_1E414:
                 
-                move.w  #$80,d3 
+                move.w  #128,d3 
                 bsr.w   sub_1E454
                 cmpi.w  #9,6(a5)
                 bcs.w   loc_1E44A
@@ -111,7 +111,7 @@ loc_1E414:
                 bra.w   loc_1E44A
 loc_1E432:
                 
-                bsr.w   sub_1E48A
+                bsr.w   EndcapLaserBeam
                 cmpi.w  #9,6(a5)
                 bcs.w   loc_1E44A
                 clr.b   ((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
@@ -119,7 +119,7 @@ loc_1E432:
 loc_1E44A:
                 
                 tst.w   ((byte_FFB404-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
 return_1E452:
                 
                 rts
@@ -137,18 +137,18 @@ sub_1E454:
                 subq.w  #1,d2
                 lsl.w   #3,d2
                 adda.w  d2,a4
-                move.w  #$D4,(a4)+ 
-                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H4,(a4)+
-                move.w  #VDPTILE_SPELLTILE84|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
+                move.w  #212,(a4)+ 
+                move.w  #VDPSPELLPROP_V4|VDPSPELLPROP_H4,(a4)+
+                move.w  #VDPTILE_SPELLTILE84|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+ ; beam middle
                 lsl.w   #2,d2
                 add.w   d2,d3
                 move.w  d3,(a4)+
-                addi.w  #$20,d3 
+                addi.w  #32,d3 
 loc_1E476:
                 
-                move.w  #$D4,(a4)+ 
-                move.w  #VDPGRAPHICDIMENSION_V4|VDPGRAPHICDIMENSION_H4,(a4)+
-                move.w  #VDPTILE_SPELLTILE100|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
+                move.w  #212,(a4)+ 
+                move.w  #VDPSPELLPROP_V4|VDPSPELLPROP_H4,(a4)+
+                move.w  #VDPTILE_SPELLTILE100|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+ ; leading edge
                 move.w  d3,(a4)
                 addq.w  #1,6(a5)
                 rts
@@ -159,34 +159,35 @@ loc_1E476:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1E48A:
+EndcapLaserBeam:
                 
                 move.w  6(a5),d2
                 beq.s   loc_1E4A0
                 subq.w  #1,d2
-                lsl.w   #3,d2
+                lsl.w   #VDP_SPRITE_SHIFT_COUNT,d2
                 adda.w  d2,a4
                 move.w  #1,(a4)+
                 clr.l   (a4)+
                 move.w  #1,(a4)+
 loc_1E4A0:
                 
-                move.w  #$CD83,4(a4)
+                move.w  #VDPTILE_SPELLTILE100|VDPTILE_MIRROR|VDPTILE_PALETTE3|VDPTILE_PRIORITY,VDPSPRITE_OFFSET_TILE(a4)
                 addq.w  #1,6(a5)
                 rts
 
-    ; End of function sub_1E48A
+    ; End of function EndcapLaserBeam
 
 
 ; =============== S U B R O U T I N E =======================================
 
+; charging sequence
 
 sub_1E4AC:
                 
                 movem.l a4-a5,-(sp)
                 bchg    #0,(a3)
                 bne.s   loc_1E4BC
-                move.w  #$D4,(a4) 
+                move.w  #212,(a4) 
                 bra.s   loc_1E4C0
 loc_1E4BC:
                 
@@ -197,8 +198,8 @@ loc_1E4C0:
                 moveq   #4,d1
 loc_1E4C4:
                 
-                lea     $C(a5),a5
-                addq.w  #8,a4
+                lea     12(a5),a5
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 tst.w   (a5)
                 beq.w   loc_1E5C6
                 addq.w  #1,d0
@@ -206,25 +207,25 @@ loc_1E4C4:
                 bcc.w   loc_1E532
                 subq.w  #1,2(a5)
                 bne.w   loc_1E5C6
-                moveq   #$38,d6 
+                moveq   #56,d6 
                 jsr     (GenerateRandomNumber).w
                 move.w  d7,d2
-                addi.w  #$C8,d2 
+                addi.w  #200,d2 
                 move.w  d2,(a4)
-                clr.w   2(a4)
+                clr.w   VDPSPRITE_OFFSET_SIZE(a4)
                 moveq   #3,d6
                 jsr     (GenerateRandomNumber).w
-                addi.w  #-$3AE0,d7
+                addi.w  #SPELLTILE_START|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d7
                 move.w  d7,4(a4)
-                moveq   #$14,d6
+                moveq   #20,d6
                 jsr     (GenerateRandomNumber).w
-                addi.w  #$D4,d7 
-                move.w  d7,6(a4)
-                subi.w  #$C0,d7 
+                addi.w  #212,d7 
+                move.w  d7,VDPSPRITE_OFFSET_X(a4)
+                subi.w  #192,d7 
                 asl.w   #NIBBLE_SHIFT_COUNT,d7
                 neg.w   d7
                 move.w  d7,4(a5)
-                subi.w  #$E4,d2 
+                subi.w  #228,d2 
                 asl.w   #NIBBLE_SHIFT_COUNT,d2
                 neg.w   d2
                 move.w  d2,6(a5)
@@ -234,7 +235,7 @@ loc_1E4C4:
 loc_1E532:
                 
                 addq.w  #1,(a5)
-                cmpi.w  #$12,(a5)
+                cmpi.w  #18,(a5)
                 bcc.w   loc_1E596
                 move.w  4(a5),d2
                 add.w   8(a5),d2
@@ -257,7 +258,7 @@ loc_1E560:
                 move.w  d3,8(a5)
                 add.w   d2,6(a4)
                 move.w  6(a5),d2
-                add.w   $A(a5),d2
+                add.w   10(a5),d2
                 tst.w   d2
                 bmi.s   loc_1E57E
                 move.w  d2,d3
@@ -274,7 +275,7 @@ loc_1E57E:
                 neg.w   d2
 loc_1E58C:
                 
-                move.w  d3,$A(a5)
+                move.w  d3,10(a5)
                 add.w   d2,(a4)
                 bra.w   loc_1E5C6
 loc_1E596:

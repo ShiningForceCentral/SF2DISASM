@@ -1440,5 +1440,5 @@ vdpSpell:  macro
                 dc.w \1 ; X
                 dc.w \2 ; Y
                 vdpTile \3 ; starting tile
-                defineBitfield.w VDPGRAPHICDIMENSION_,\4
+                defineBitfield.w VDPSPELLPROP_,\4
             endm

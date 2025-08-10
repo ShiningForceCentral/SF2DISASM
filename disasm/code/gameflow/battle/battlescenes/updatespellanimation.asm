@@ -15,7 +15,7 @@ UpdateSpellanimation:
                 beq.s   loc_1B7CE
                 subq.b  #1,d0
                 beq.s   loc_1B7CA
-                bra.w   sub_1B82A
+                bra.w   ReinitializeSceneAfterSpell
 @Return:
                 
                 rts
@@ -85,19 +85,19 @@ spellanimationUpdate_Absorb:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1B82A:
+ReinitializeSceneAfterSpell:
                 
                 clr.w   ((PALETTE_1_CURRENT-$1000000)).w
                 clr.w   ((PALETTE_3_CURRENT_02-$1000000)).w
                 jsr     (ApplyVIntCramDma).w
                 jsr     (EnableDmaQueueProcessing).w
-                bsr.w   sub_1A00A
+                bsr.w   ClearSpellGraphics
                 bsr.w   ClearSpellanimationProperties
                 cmpi.b  #SPELLANIMATION_DAO,((CURRENT_SPELLANIMATION-$1000000)).w
                 bcs.s   loc_1B858
                 cmpi.b  #SPELLANIMATION_ATLAS,((CURRENT_SPELLANIMATION-$1000000)).w
                 bhi.s   loc_1B858
-                moveq   #$10,d0
+                moveq   #16,d0   ; first 16 sprites composing ally battle scene
                 jsr     (InitializeSprites).w
 loc_1B858:
                 
@@ -113,7 +113,7 @@ loc_1B858:
                 clr.b   ((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 jmp     (WaitForVInt).w
 
-    ; End of function sub_1B82A
+    ; End of function ReinitializeSceneAfterSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -123,22 +123,22 @@ sub_1B884:
                 
                 movem.w d1-d2,-(sp)
                 move.w  (a5),d1
-loc_1B88A:
+@Loop:
                 
                 cmp.w   (a0)+,d1
-                bne.s   loc_1B8A6
-                move.w  (a0)+,2(a4)
-                move.w  4(a4),d2
-                andi.w  #$F800,d2
+                bne.s   @NextEntry
+                move.w  (a0)+,VDPSPRITE_OFFSET_SIZE(a4)
+                move.w  VDPSPRITE_OFFSET_TILE(a4),d2
+                andi.w  #VDPTILE_PROPERTIES_MASK,d2
                 add.w   (a0),d2
-                addi.w  #$520,d2
-                move.w  d2,4(a4)
-                bra.s   loc_1B8AC
-loc_1B8A6:
+                addi.w  #VDPTILE_SPELLTILE1,d2
+                move.w  d2,VDPSPRITE_OFFSET_TILE(a4)
+                bra.s   @Done
+@NextEntry:
                 
                 addq.w  #4,a0
-                dbf     d0,loc_1B88A
-loc_1B8AC:
+                dbf     d0,@Loop
+@Done:
                 
                 movem.w (sp)+,d1-d2
                 rts
@@ -165,7 +165,7 @@ sub_1B8B2:
 loc_1B8D6:
                 
                 move.w  2(a0),d0
-                clr.w   d1
+                clr.w   d1        ; Black
 loc_1B8DC:
                 
                 move.w  d0,d6

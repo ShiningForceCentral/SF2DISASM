@@ -10,7 +10,7 @@ spellanimationUpdate_GunnerBlast:
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
-                tst.w   $C(a3)
+                tst.w   12(a3)
                 bne.w   loc_1DB2E
                 addq.w  #1,(a5)
                 tst.w   2(a5)
@@ -19,6 +19,8 @@ spellanimationUpdate_GunnerBlast:
                 add.w   6(a5),d0
                 tst.w   d0
                 bmi.s   loc_1DA2E
+				
+				; mirrored
                 move.w  d0,d1
                 andi.w  #BYTE_MASK,d1
                 asr.w   #BYTE_SHIFT_COUNT,d0
@@ -56,10 +58,10 @@ loc_1DA68:
                 move.w  d1,8(a5)
                 add.w   d0,(a4)
                 bsr.w   sub_1DC14
-                cmpi.w  #$12,(a5)
+                cmpi.w  #18,(a5)
                 bcs.s   loc_1DA82
                 addq.w  #1,2(a5)
-                move.w  #$26,4(a5) 
+                move.w  #38,4(a5) 
 loc_1DA82:
                 
                 bra.w   loc_1DBF8
@@ -118,12 +120,12 @@ loc_1DB00:
                 move.w  d1,8(a5)
                 add.w   d0,(a4)
                 bsr.w   sub_1DC14
-                cmpi.w  #$F,(a5)
+                cmpi.w  #15,(a5)
                 bcs.w   loc_1DBF8
                 move.w  #1,(a5)
                 clr.w   2(a5)
                 move.w  #1,4(a5)
-                move.w  #1,$C(a3)
+                move.w  #1,12(a3)
                 sndCom  SFX_BIG_DOOR_RUMBLE
                 bra.w   loc_1DBF8
 loc_1DB2E:
@@ -144,7 +146,7 @@ loc_1DB2E:
 loc_1DB62:
                 
                 bsr.w   sub_1B90C       
-                cmpi.w  #$20,(a5) 
+                cmpi.w  #32,(a5) 
                 bcs.w   loc_1DBF8
                 bne.s   loc_1DB8E
                 bsr.w   sub_1DC48
@@ -155,7 +157,7 @@ loc_1DB62:
                 move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
 loc_1DB8E:
                 
-                cmpi.w  #$36,(a5) 
+                cmpi.w  #54,(a5) 
                 bne.s   loc_1DB9C
                 bsr.w   LoadPalette1FromFFB41E
                 clr.b   ((byte_FFB588-$1000000)).w
@@ -177,11 +179,11 @@ loc_1DBBC:
                 lsl.w   #3,d4
                 move.w  d4,d0
                 lsl.w   #3,d4
-                add.w   d0,d4
+                add.w   d0,d4  ; 72 x
                 btst    #0,1(a5)
                 beq.s   loc_1DBD6
                 move.w  8(a3),d2
-                move.w  $A(a3),d3
+                move.w  10(a3),d3
                 bra.s   loc_1DBDE
 loc_1DBD6:
                 
@@ -189,12 +191,12 @@ loc_1DBD6:
                 move.w  #-127,d3
 loc_1DBDE:
                 
-                moveq   #$26,d0 
-                moveq   #$C,d1  ; graphic made of 12 elements
+                moveq   #38,d0 
+                moveq   #12,d1  ; graphic made of 12 elements
                 lea     graphic_GunnerBlast(pc), a0
-                bsr.w   sub_19FAA       
-                moveq   #4,d0
-                moveq   #$B,d1
+                bsr.w   ConstructComplexGraphic       
+                moveq   #4,d0 ; shot graphic size
+                moveq   #11,d1
 loc_1DBEE:
                 
                 add.w   d4,(a4,d0.w)
@@ -206,12 +208,13 @@ loc_1DBF8:
                 bne.s   return_1DC12
                 lea     ((PALETTE_1_BASE-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
-                moveq   #$1F,d0
+                moveq   #CRAM_LONGWORDS_COUNTER,d0
 loc_1DC08:
                 
                 move.l  (a1)+,(a0)+
                 dbf     d0,loc_1DC08
-                bra.w   sub_1B82A
+                
+                bra.w   ReinitializeSceneAfterSpell
 return_1DC12:
                 
                 rts
@@ -221,24 +224,25 @@ return_1DC12:
 
 ; =============== S U B R O U T I N E =======================================
 
+; for animating missile graphic
 
 sub_1DC14:
                 
-                move.w  #$C520,d0
+                move.w  #VDPTILE_SPELLTILE1|VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 btst    #1,1(a5)
-                bne.s   loc_1DC2E
+                bne.s   @GetFrame2
                 btst    #2,1(a5)
-                beq.s   loc_1DC2C
-                bset    #$B,d0
-loc_1DC2C:
+                beq.s   @Mirror
+                bset    #VDPTILE_MIRROR_BIT,d0
+@Mirror:
                 
-                bra.s   loc_1DC30
-loc_1DC2E:
+                bra.s   @Continue
+@GetFrame2:
                 
-                addq.w  #4,d0
-loc_1DC30:
+                addq.w  #4,d0 ; missile graphic volume
+@Continue:
                 
-                move.w  d0,4(a4)
+                move.w  d0,VDPSPRITE_OFFSET_TILE(a4)
                 rts
 
     ; End of function sub_1DC14
@@ -251,11 +255,11 @@ sub_1DC36:
                 
                 lea     ((PALETTE_1_CURRENT-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
-                moveq   #$1F,d0
-loc_1DC40:
+                moveq   #CRAM_LONGWORDS_COUNTER,d0
+@Loop:
                 
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_1DC40
+                dbf     d0,@Loop
                 rts
 
     ; End of function sub_1DC36
@@ -269,17 +273,18 @@ sub_1DC48:
                 lea     ((byte_FFB41E-$1000000)).w,a0
                 lea     ((PALETTE_1_BASE-$1000000)).w,a1
                 movem.l a0-a1,-(sp)
-                moveq   #$3F,d0 
+                moveq   #CRAM_COLORS_COUNTER,d0 
 loc_1DC56:
                 
                 move.w  (a0)+,d1
                 lsr.w   #1,d1
-                andi.w  #$EEE,d1
+                andi.w  #FULL_COLOR_MASK,d1
                 move.w  d1,(a1)+
                 dbf     d0,loc_1DC56
+                
                 movem.l (sp)+,a0-a1
-                move.w  $52(a0),$52(a1)
-                move.l  $5A(a0),$5A(a1)
+                move.w  $52(a0),$52(a1) ; palette 3 color 9
+                move.l  $5A(a0),$5A(a1) ; palette 3 colors 13/14
                 rts
 
     ; End of function sub_1DC48
@@ -292,27 +297,27 @@ LoadPalette1FromFFB41E:
                 
                 lea     ((PALETTE_1_BASE-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
-                moveq   #$1F,d0
-loc_1DC80:
+                moveq   #CRAM_LONGWORDS_COUNTER,d0
+@Loop:
                 
                 move.l  (a1)+,(a0)+
-                dbf     d0,loc_1DC80
+                dbf     d0,@Loop
                 rts
 
     ; End of function LoadPalette1FromFFB41E
 
 graphic_GunnerBlast:
-                vdpSpell 0, 0, SPELLTILE9, V4|H4|32
-                vdpSpell 0, 32, SPELLTILE25, V4|H4|32
-                vdpSpell 0, 64, SPELLTILE41, V4|H4|32
-                vdpSpell 32, 0, SPELLTILE57, V4|H2|32
-                vdpSpell 32, 32, SPELLTILE65, V4|H2|32
-                vdpSpell 32, 64, SPELLTILE73, V4|H2|32
+                vdpSpell 0, 0, SPELLTILE9, V4|H4|VALUE2
+                vdpSpell 0, 32, SPELLTILE25, V4|H4|VALUE2
+                vdpSpell 0, 64, SPELLTILE41, V4|H4|VALUE2
+                vdpSpell 32, 0, SPELLTILE57, V4|H2|VALUE2
+                vdpSpell 32, 32, SPELLTILE65, V4|H2|VALUE2
+                vdpSpell 32, 64, SPELLTILE73, V4|H2|VALUE2
                 
                 ; mirror to complete image
-                vdpSpell 48, 0, SPELLTILE57, V4|H2|33
-                vdpSpell 48, 32, SPELLTILE65, V4|H2|33
-                vdpSpell 48, 64, SPELLTILE73, V4|H2|33
-                vdpSpell 64, 0, SPELLTILE9, V4|H4|33
-                vdpSpell 64, 32, SPELLTILE25, V4|H4|33
-                vdpSpell 64, 64, SPELLTILE41, V4|H4|33
+                vdpSpell 48, 0, SPELLTILE57, V4|H2|VALUE2|MIRRORED
+                vdpSpell 48, 32, SPELLTILE65, V4|H2|VALUE2|MIRRORED
+                vdpSpell 48, 64, SPELLTILE73, V4|H2|VALUE2|MIRRORED
+                vdpSpell 64, 0, SPELLTILE9, V4|H4|VALUE2|MIRRORED
+                vdpSpell 64, 32, SPELLTILE25, V4|H4|VALUE2|MIRRORED
+                vdpSpell 64, 64, SPELLTILE41, V4|H4|VALUE2|MIRRORED

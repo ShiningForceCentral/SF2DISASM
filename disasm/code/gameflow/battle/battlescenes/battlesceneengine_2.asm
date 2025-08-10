@@ -166,11 +166,11 @@ return_19F5C:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_19F5E:
+ConstructSimpleGraphic:
                 
                 movem.l d1/a1,-(sp)
                 lea     (byte_FFAFA0).l,a1
-                move.b  VDPSPELL_OFFSET_LINK(a0),d1
+                move.b  VDPSPELL_OFFSET_PROPERTIES(a0),d1
                 lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 move.b  d1,(a1,d0.w)
                 lea     ((SPRITE_TABLE-$1000000)).w,a1
@@ -182,7 +182,7 @@ sub_19F5E:
                 move.b  VDPSPELL_OFFSET_SIZE(a0),d1
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 move.w  d1,(a1)+
-                move.b  VDPSPELL_OFFSET_LINK(a0),d1
+                move.b  VDPSPELL_OFFSET_PROPERTIES(a0),d1
                 andi.w  #3,d1
                 ror.w   #5,d1
                 or.w    VDPSPELL_OFFSET_GRAPHIC(a0),d1
@@ -194,7 +194,7 @@ sub_19F5E:
                 addq.w  #1,d0
                 rts
 
-    ; End of function sub_19F5E
+    ; End of function ConstructSimpleGraphic
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -202,12 +202,12 @@ sub_19F5E:
 ; In: a0 = pointer to spellanimation data
 
 
-sub_19FAA:
+ConstructComplexGraphic:
                 
                 movem.l d0-d3/a1-a2,-(sp)
                 subq.w  #1,d1
-                addi.w  #$80,d2 
-                addi.w  #$80,d3 
+                addi.w  #128,d2 
+                addi.w  #128,d3 
                 lea     (byte_FFAFA0).l,a2
                 adda.w  d0,a2
                 lsl.w   #3,d0
@@ -215,23 +215,23 @@ sub_19FAA:
                 adda.w  d0,a1
 loc_19FC8:
                 
-                move.w  2(a0),d0
+                move.w  VDPSPELL_OFFSET_Y(a0),d0
                 add.w   d3,d0
                 move.w  d0,(a1)+
                 clr.w   d0
-                move.b  6(a0),d0
+                move.b  VDPSPELL_OFFSET_SIZE(a0),d0
                 lsl.w   #BYTE_SHIFT_COUNT,d0
                 move.w  d0,(a1)+
-                move.b  7(a0),d0
+                move.b  VDPSPELL_OFFSET_PROPERTIES(a0),d0
                 andi.w  #3,d0
                 ror.w   #5,d0
-                or.w    4(a0),d0
-                ori.w   #$C000,d0
+                or.w    VDPSPELL_OFFSET_GRAPHIC(a0),d0
+                ori.w   #VDPTILE_PALETTE3|VDPTILE_PRIORITY,d0
                 move.w  d0,(a1)+
                 move.w  (a0),d0
                 add.w   d2,d0
                 move.w  d0,(a1)+
-                move.b  7(a0),d0
+                move.b  VDPSPELL_OFFSET_PROPERTIES(a0),d0
                 lsr.b   #NIBBLE_SHIFT_COUNT,d0
                 move.b  d0,(a2)+
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
@@ -241,13 +241,13 @@ loc_19FC8:
                 add.w   d1,d0
                 rts
 
-    ; End of function sub_19FAA
+    ; End of function ConstructComplexGraphic
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1A00A:
+ClearSpellGraphics:
                 
                 moveq   #38,d0
                 moveq   #25,d7
@@ -255,18 +255,11 @@ loc_1A00E:
                 
                 lea     table_1A020(pc), a0
                 nop
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 dbf     d7,loc_1A00E
                 
                 jmp     (sub_1942).w    
 
-    ; End of function sub_1A00A
+    ; End of function ClearSpellGraphics
 
-table_1A020:    dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 0
+table_1A020:    vdpSpell 1, 1, 0, V1|H1|VALUE0  ; null graphic

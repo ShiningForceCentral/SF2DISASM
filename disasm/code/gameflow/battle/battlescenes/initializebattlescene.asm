@@ -206,7 +206,7 @@ InitializeBattlescene:
                 addq.w  #4,a0
                 move.l  (a0),((WEAPON_IDLE_FRAME1_INDEX-$1000000)).w
                 move.l  (a0),((WEAPON_FRAME_INDEX-$1000000)).w
-                move.w  $A(a0),((WEAPON_IDLE_FRAME2_X-$1000000)).w
+                move.w  10(a0),((WEAPON_IDLE_FRAME2_X-$1000000)).w
                 clr.w   d1
                 bsr.w   UpdateBattlesceneWeaponVdpSprites
                 lea     (FF2000_LOADING_SPACE).l,a0
@@ -307,7 +307,7 @@ InitializeBattlescene:
 @MoveGroundToPosition_Loop:
                 
                 subi.w  #1,(a0)
-                addq.w  #8,a0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 dbf     d1,@MoveGroundToPosition_Loop
 @WaitForNextFrame:
                 

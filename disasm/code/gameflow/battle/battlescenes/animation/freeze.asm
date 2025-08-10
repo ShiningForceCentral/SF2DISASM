@@ -13,8 +13,8 @@ spellanimationSetup_Freeze:
                 move.w  #FREEZE_FLASH_COLOR,d0
                 bsr.w   ExecuteSpellcastFlashEffect
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_FREEZE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_FREEZE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d1
                 lea     (table_1A6DA-12)(pc), a0
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
@@ -28,14 +28,14 @@ loc_1A680:
                 add.w   d0,d1
                 adda.w  d1,a0 ; offset by 12x variation #
                 lea     ((byte_FFB532-$1000000)).w,a1
-                move.b  #1,$E(a1)
+                move.b  #1,14(a1)
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
                 move.l  (a0),(a1)
                 moveq   #1,d1
                 btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.s   loc_1A6B4
-                moveq   #$14,d0
+                moveq   #20,d0
                 bsr.w   sub_1A2F6       
                 move.b  #2,(byte_FFAFC6).l
                 addq.w  #1,d1
@@ -50,118 +50,86 @@ loc_1A6CC:
                 
                 move.b  d1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Freeze
 
                 ; Variation 1
-table_1A6DA:    dc.b 1
-                dc.b $70
-                dc.b 0
-                dc.b $9E
-                dc.b $10
-                dc.b 0
-                dc.b 0
-                dc.b $A0
-                dc.b $FF
-                dc.b $FA
-                dc.b 0
-                dc.b $C8
+table_1A6DA:    dc.w $170  ; x parameter
+                dc.b 0     ; 2
+                dc.b $9E   ; 3
+                dc.w $1000 ; 4
+                dc.w $A0   ; 6
+                dc.b -1    ; 8
+                dc.b -6    ; 9
+                dc.w $C8   ; x parameter
                 
                 ; Variation 2
-                dc.b 1
-                dc.b $70
+                dc.w $170
                 dc.b 0
                 dc.b $9E
-                dc.b $16
-                dc.b 0
-                dc.b 0
-                dc.b $C0
-                dc.b $FF
-                dc.b $FA
-                dc.b 0
-                dc.b $C8
+                dc.w $1600
+                dc.w $C0
+                dc.b -1
+                dc.b -6
+                dc.w $C8
                 
                 ; Variation 3
-                dc.b 1
-                dc.b $70
+                dc.w $170
                 dc.b 0
                 dc.b $9E
-                dc.b $1C
-                dc.b 0
-                dc.b 0
-                dc.b $E0
-                dc.b $FF
-                dc.b $FA
-                dc.b 0
-                dc.b $C8
+                dc.w $1C00
+                dc.w $E0
+                dc.b -1
+                dc.b -6
+                dc.w $C8
                 
                 ; Variation 4
-                dc.b 1
-                dc.b $70
+                dc.w $170
                 dc.b 0
                 dc.b $9E
-                dc.b $22
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $FF
-                dc.b $FA
-                dc.b 0
-                dc.b $C8
+                dc.w $2200
+                dc.w $100
+                dc.b -1
+                dc.b -6
+                dc.w $C8
                 
                 ; Variation 1 Mirrored
-                dc.b 0
-                dc.b $80
+                dc.w $80
                 dc.b 0
                 dc.b $E2
-                dc.b $10
-                dc.b 0
-                dc.b 0
-                dc.b $A0
+                dc.w $1000
+                dc.w $A0
                 dc.b 1
                 dc.b 6
-                dc.b 1
-                dc.b $38
+                dc.w $138
                 
                 ; Variation 2 Mirrored
-                dc.b 0
-                dc.b $80
+                dc.w $80
                 dc.b 0
                 dc.b $E2
-                dc.b $16
-                dc.b 0
-                dc.b 0
-                dc.b $C0
+                dc.w $1600
+                dc.w $C0
                 dc.b 1
                 dc.b 6
-                dc.b 1
-                dc.b $38
+                dc.w $138
                 
                 ; Variation 3 Mirrored
-                dc.b 0
-                dc.b $80
+                dc.w $80
                 dc.b 0
                 dc.b $E2
-                dc.b $1C
-                dc.b 0
-                dc.b 0
-                dc.b $E0
+                dc.w $1C00
+                dc.w $E0
                 dc.b 1
                 dc.b 6
-                dc.b 1
-                dc.b $38
+                dc.w $138
                 
                 ; Variation 4 Mirrored
-                dc.b 0
-                dc.b $80
+                dc.w $80
                 dc.b 0
                 dc.b $E2
-                dc.b $22
-                dc.b 0
-                dc.b 1
-                dc.b 0
+                dc.w $2200
+                dc.w $100
                 dc.b 1
                 dc.b 6
-                dc.b 1
-                dc.b $38
+                dc.w $138

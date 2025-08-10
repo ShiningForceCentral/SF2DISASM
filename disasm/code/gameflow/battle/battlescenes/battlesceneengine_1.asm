@@ -629,7 +629,7 @@ LoadInvocationSpriteFrameToVram:
                 addq.w  #2,a1
                 lea     ((PALETTE_1_CURRENT_01-$1000000)).w,a2
                 lea     ((PALETTE_1_BASE_01-$1000000)).w,a3
-                moveq   #$E,d0
+                moveq   #14,d0
 loc_19C14:
                 
                 move.w  (a1),(a2)+
@@ -689,7 +689,7 @@ loc_19CA0:
 ; In: d0.w = spellanimation graphics data index
 
 
-LoadSpellGraphics:
+LoadSpellTileset:
                 
                 disableSram
                 getPointer p_pt_SpellGraphics, a0
@@ -710,7 +710,7 @@ LoadSpellGraphics:
                 moveq   #2,d1
                 processDmaAndEnableSram ApplyVIntVramDmaOnCompressedTiles
 
-    ; End of function LoadSpellGraphics
+    ; End of function LoadSpellTileset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -720,7 +720,7 @@ LoadSpellGraphics:
 ; In: d0.w = spellanimation graphics data index
 
 
-LoadSpellGraphicsForInvocation:
+LoadSpellTilesetForInvocation:
                 
                 disableSram
                 getPointer p_pt_SpellGraphics, a0
@@ -744,7 +744,7 @@ LoadSpellGraphicsForInvocation:
                 moveq   #2,d1
                 processDmaAndEnableSram ApplyVIntVramDma
 
-    ; End of function LoadSpellGraphicsForInvocation
+    ; End of function LoadSpellTilesetForInvocation
 
 
 ; =============== S U B R O U T I N E =======================================
