@@ -10,8 +10,8 @@ spellanimationUpdate_FlameBreath:
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((byte_FFB532-$1000000)).w,a3
-                moveq   #$18,d1
-                moveq   #$26,d0 
+                moveq   #24,d1
+                moveq   #38,d0 
 loc_1D2F6:
                 
                 movem.w d0-d1,-(sp)
@@ -20,23 +20,23 @@ loc_1D2F6:
                 addq.w  #1,(a5)
                 cmpi.w  #2,(a5)
                 bne.w   loc_1D348
-                lea     table_1D4A0(pc), a0
+                lea     graphic_FlameBreathParticle(pc), a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 beq.w   loc_1D33C
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
                 move.w  ((BATTLESCENE_ENEMYBATTLESPRITE-$1000000)).w,d2
                 cmpi.w  #ENEMYBATTLESPRITE_CERBERUS,d2
                 beq.w   loc_1D33C
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
                 cmpi.w  #ENEMYBATTLESPRITE_HYDRA,d2
                 beq.w   loc_1D33C
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
                 cmpi.w  #ENEMYBATTLESPRITE_WYVERN,d2
                 beq.w   loc_1D33C
-                addq.w  #8,a0
+                addq.w  #VDP_SPELL_ENTRY_SIZE,a0
 loc_1D33C:
                 
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 sndCom  SFX_DOOR_OPEN
                 bra.w   loc_1D424
 loc_1D348:
@@ -139,84 +139,79 @@ loc_1D424:
                 bsr.w   sub_1B884
                 btst    #2,1(a5)
                 bne.s   loc_1D43E
-                bclr    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bclr    #3,VDPSPRITE_OFFSET_TILE(a4) ; subtract 8
                 bra.s   loc_1D444
 loc_1D43E:
                 
-                bset    #3,VDPSPRITE_OFFSET_TILE(a4)
+                bset    #3,VDPSPRITE_OFFSET_TILE(a4) ; add 8
 loc_1D444:
                 
                 movem.w (sp)+,d0-d1
-                lea     $C(a5),a5
-                addq.w  #8,a4
+                lea     12(a5),a5
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1D2F6
+                
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                beq.w   sub_1B82A
-loc_1D45C:
+                beq.w   ReinitializeSceneAfterSpell
+AnimateBreath:
                 
                 lea     ((SPRITE_38-$1000000)).w,a4
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
-                moveq   #$17,d0
-loc_1D466:
+                moveq   #23,d0
+@UpdateParticle_OuterLoop:
                 
                 tst.w   (a5)
-                bne.s   loc_1D494
-                lea     (a4),a0
-                lea     (a5),a1
+                bne.s   @NextEvent
+                lea     (a4),a0 ; copy sprite address
+                lea     (a5),a1 ; copy animation properties address
                 move.w  d0,d1
-loc_1D470:
+@UpdateParticle_InnerLoop:
                 
-                move.l  8(a0),(a0)
-                move.l  $C(a0),4(a0)
-                move.l  $C(a1),(a1)
-                move.l  $10(a1),4(a1)
-                move.l  $14(a1),8(a1)
-                addq.w  #8,a0
-                lea     $C(a1),a1
-                dbf     d1,loc_1D470
-loc_1D494:
+                move.l  NEXTVDPSPRITE_OFFSET_Y(a0),(a0)
+                move.l  NEXTVDPSPRITE_OFFSET_TILE(a0),VDPSPRITE_OFFSET_TILE(a0)
+                move.l  12(a1),(a1)
+                move.l  16(a1),4(a1)
+                move.l  20(a1),8(a1)
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
+                lea     12(a1),a1
+                dbf     d1,@UpdateParticle_InnerLoop
+@NextEvent:
                 
-                addq.w  #8,a4
-                lea     $C(a5),a5
-                dbf     d0,loc_1D466
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
+                lea     12(a5),a5
+                dbf     d0,@UpdateParticle_OuterLoop
                 rts
 
     ; End of function spellanimationUpdate_FlameBreath
 
-table_1D4A0:    vdpSpell 284, 222, SPELLTILE1, V1|H1|32  ; ally
-                vdpSpell 210, 236, SPELLTILE1, V1|H1|32  ; enemy
-                vdpSpell 223, 214, SPELLTILE1, V1|H1|32  ; cerberus
-                vdpSpell 208, 216, SPELLTILE1, V1|H1|32  ; hydra
-                vdpSpell 212, 204, SPELLTILE1, V1|H1|32  ; wyvern
+graphic_FlameBreathParticle:
+                vdpSpell 284, 222, SPELLTILE1, V1|H1|32  ; ally
+                vdpSpell 210, 236, SPELLTILE1, V1|H1|32  ; cerberus
+                vdpSpell 223, 214, SPELLTILE1, V1|H1|32  ; hydra
+                vdpSpell 208, 216, SPELLTILE1, V1|H1|32  ; wyvern
+                vdpSpell 212, 204, SPELLTILE1, V1|H1|32  ; dragon
                 
-table_1D4C8:    dc.b 0
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b 1
-                dc.b 0
-                dc.b $A
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 2
-                dc.b 0
-                dc.b $F
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b 6
-                dc.b 0
-                dc.b $14
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b $A
-                dc.b 0
-                dc.b $19
-                dc.b $F
-                dc.b 0
-                dc.b 0
-                dc.b $13
+table_1D4C8:    ; dc.w [yet unknown][location offset?]
+                ; dc.w [spell graphic dimensions]
+                ; dc.w [graphic tile-offset]
+				
+                dc.w 5
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 1
+				
+                dc.w 10
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 2
+				
+                dc.w 15
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 6
+				
+                dc.w 20
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 10
+				
+                dc.w 25
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 19

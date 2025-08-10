@@ -20,7 +20,7 @@ spellanimationUpdate_Detox:
                 lea     table_1CE0C(pc), a0
                 moveq   #5,d0
                 bsr.w   sub_1B884
-                cmpi.w  #$26,(a5) 
+                cmpi.w  #38,(a5) 
                 bcs.w   loc_1CCB2
                 move.w  #1,(a3)
                 bra.w   loc_1CCB2
@@ -29,7 +29,7 @@ loc_1CC92:
                 lea     table_1CE2A(pc), a0
                 moveq   #5,d0
                 bsr.w   sub_1B884
-                cmpi.w  #$26,(a5) 
+                cmpi.w  #38,(a5) 
                 bcs.w   loc_1CCB2
                 clr.w   (a5)
                 move.w  #1,(a4)
@@ -49,7 +49,7 @@ loc_1CCB2:
                 moveq   #8,d1
 loc_1CCD4:
                 
-                move.w  #$130,d3
+                move.w  #304,d3
                 bra.s   loc_1CCF4
 loc_1CCDA:
                 
@@ -59,10 +59,10 @@ loc_1CCDA:
                 cmpi.w  #8,d0
                 bne.s   loc_1CCF0
                 bclr    #0,6(a5)
-                moveq   #$78,d1 
+                moveq   #120,d1 
 loc_1CCF0:
                 
-                move.w  #$D0,d3 
+                move.w  #208,d3 
 loc_1CCF4:
                 
                 move.w  d1,2(a5)
@@ -71,11 +71,11 @@ loc_1CCF4:
                 add.w   d3,d2
                 move.w  d2,VDPSPRITE_OFFSET_X(a4)
                 swap    d2
-                addi.w  #$C0,d2 
+                addi.w  #192,d2 
                 move.w  d2,(a4)
 loc_1CD10:
                 
-                cmpi.w  #$80,d0 
+                cmpi.w  #128,d0 
                 bcc.s   loc_1CD1A
                 moveq   #1,d1
                 bra.s   loc_1CD1C
@@ -99,7 +99,7 @@ loc_1CD36:
                 jsr     (GenerateRandomNumber).w
                 addq.w  #2,d7
                 move.w  d7,4(a5)
-                cmpi.b  #$19,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
+                cmpi.b  #25,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1CD70
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -112,10 +112,10 @@ loc_1CD36:
                 addq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
 loc_1CD70:
                 
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 addq.w  #8,a4
-                moveq   #$27,d0 
-                moveq   #$17,d1
+                moveq   #39,d0 
+                moveq   #23,d1
 loc_1CD7A:
                 
                 movem.w d0-d1,-(sp)
@@ -127,7 +127,7 @@ loc_1CD7A:
                 lea     (byte_FFAFA0).l,a1
                 adda.w  d0,a1
                 lea     table_1CE48(pc), a0
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 move.w  4(a5),VDPSPRITE_OFFSET_X(a4)
                 move.w  6(a5),(a4)
                 move.b  (byte_FFAFA0).l,(a1)
@@ -152,76 +152,55 @@ loc_1CDBC:
 loc_1CDF2:
                 
                 movem.w (sp)+,d0-d1
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 addq.w  #8,a4
                 addq.w  #1,d0
                 dbf     d1,loc_1CD7A
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
                 rts
 
     ; End of function spellanimationUpdate_Detox
 
-table_1CE0C:    dc.b 0
-                dc.b 8
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $1A
-                dc.b 0
-                dc.b $E
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b $14
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $12
-                dc.b 0
-                dc.b $1A
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b 9
-                dc.b 0
-                dc.b $20
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b 0
-table_1CE2A:    dc.b 0
-                dc.b 8
-                dc.b $A
-                dc.b 0
-                dc.b 0
-                dc.b 9
-                dc.b 0
-                dc.b $E
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $12
-                dc.b 0
-                dc.b $14
-                dc.b 5
-                dc.b 0
-                dc.b 0
-                dc.b $16
-                dc.b 0
-                dc.b $1A
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $1A
-                dc.b 0
-                dc.b $20
-                dc.b 0
-                dc.b 0
-                dc.b 0
-                dc.b $1B
+table_1CE0C:    dc.w 8
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 26
+				
+                dc.w 14
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 22
+				
+                dc.w 20
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 18
+				
+                dc.w 26
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 9
+				
+                dc.w 32
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 0
+				
+table_1CE2A:    dc.w 8
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 9
+				
+                dc.w 14
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 18
+				
+                dc.w 20
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 22
+				
+                dc.w 26
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 26
+				
+                dc.w 32
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 27
                 
-table_1CE48:    vdpSpell 0, 0, SPELLTILE29, V1|H1|32
+table_1CE48:    vdpSpell 0, 0, SPELLTILE29, V1|H1|VALUE2
