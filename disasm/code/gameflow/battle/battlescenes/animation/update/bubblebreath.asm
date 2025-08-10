@@ -9,8 +9,8 @@ spellanimationUpdate_BubbleBreath:
                 
                 lea     ((SPELLANIMATION_PROPERTIES-$1000000)).w,a5
                 lea     ((SPRITE_38-$1000000)).w,a4
-                moveq   #$F,d7
-                moveq   #$26,d6 
+                moveq   #15,d7
+                moveq   #38,d6 
 loc_1E5DC:
                 
                 tst.w   (a5)
@@ -18,23 +18,23 @@ loc_1E5DC:
                 cmpi.w  #1,(a5)
                 bne.s   loc_1E622
                 movem.w d6-d7,-(sp)
-                move.w  #$200,d6
+                move.w  #512,d6
                 jsr     (GenerateRandomNumber).w
-                addi.w  #$140,d7
+                addi.w  #320,d7
                 move.w  d7,2(a5)
-                move.w  #$100,d6
+                move.w  #256,d6
                 jsr     (GenerateRandomNumber).w
-                subi.w  #$200,d7
+                subi.w  #512,d7
                 move.w  d7,4(a5)
                 movem.w (sp)+,d6-d7
                 lea     graphic_Bubble(pc), a0
                 move.w  d6,d0
-                bsr.w   sub_19F5E
+                bsr.w   ConstructSimpleGraphic
                 sndCom  SFX_SPAWN
                 bra.w   loc_1E730
 loc_1E622:
                 
-                cmpi.w  #$28,(a5) 
+                cmpi.w  #40,(a5) 
                 bcc.w   loc_1E68C
                 move.w  2(a5),d0
                 add.w   6(a5),d0
@@ -57,7 +57,7 @@ loc_1E64E:
                 move.w  d1,6(a5)
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
                 move.w  4(a5),d0
-                addi.w  #$1C,d0
+                addi.w  #28,d0
                 move.w  d0,4(a5)
                 add.w   8(a5),d0
                 tst.w   d0
@@ -84,16 +84,16 @@ loc_1E68C:
                 bne.w   loc_1E6B4
                 movem.w d6-d7,-(sp)
                 clr.w   2(a5)
-                move.w  #$20,d6 
+                move.w  #32,d6 
                 jsr     (GenerateRandomNumber).w
-                subi.w  #$40,d7 
+                subi.w  #64,d7 
                 move.w  d7,4(a5)
                 clr.l   6(a5)
                 movem.w (sp)+,d6-d7
                 bra.w   loc_1E730
 loc_1E6B4:
                 
-                cmpi.w  #$50,(a5) 
+                cmpi.w  #80,(a5) 
                 bcc.w   loc_1E716
                 addq.w  #1,2(a5)
                 move.w  2(a5),d0
@@ -111,7 +111,7 @@ loc_1E6DC:
                 
                 add.w   d0,VDPSPRITE_OFFSET_X(a4)
                 move.w  4(a5),d0
-                subi.w  #$20,d0 
+                subi.w  #32,d0 
                 move.w  d0,4(a5)
                 add.w   8(a5),d0
                 tst.w   d0
@@ -148,9 +148,9 @@ loc_1E730:
                 lea     table_1E78E(pc), a0
                 moveq   #5,d0
                 bsr.w   sub_1B884
-                cmpi.w  #$A,(a5)
+                cmpi.w  #10,(a5)
                 bne.s   loc_1E75A
-                cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
+                cmpi.b  #16,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.s   loc_1E75A
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.s   loc_1E75A
@@ -169,62 +169,44 @@ loc_1E76A:
 loc_1E770:
                 
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
-                lea     $C(a5),a5
+                lea     12(a5),a5
                 addq.w  #1,d6
                 dbf     d7,loc_1E5DC
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                beq.w   sub_1B82A
+                beq.w   ReinitializeSceneAfterSpell
                 rts
 
     ; End of function spellanimationUpdate_BubbleBreath
 
-graphic_Bubble: vdpSpell 212, 248, SPELLTILE1, V1|H1|32
+graphic_Bubble: vdpSpell 212, 248, SPELLTILE1, V1|H1|VALUE2
                 
 table_1E78E:    ; bubble 2
-                dc.b 0
-                dc.b $A
-                dc.b 0   ; dimensions 1x1
-                dc.b 0
-                dc.b 0
-                dc.b 1  ; spell tile # offset
+                dc.w 10
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 1  ; spell tile # offset
                 
                 ; bubble 3
-                dc.b 0
-                dc.b $14
-                dc.b 0   ; dimensions 1x1
-                dc.b 0
-                dc.b 0
-                dc.b 2  ; spell tile # offset
+                dc.w 20
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 2  ; spell tile # offset
                 
                 ; bubble 4
-                dc.b 0
-                dc.b $1E
-                dc.b 0   ; dimensions 1x1
-                dc.b 0
-                dc.b 0
-                dc.b 3  ; spell tile # offset
+                dc.w 30
+                dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
+                dc.w 3  ; spell tile # offset
                 
                 ; bubble 5
-                dc.b 0
-                dc.b $28
-                dc.b 5  ; dimensions 2x2
-                dc.b 0
-                dc.b 0
-                dc.b 4  ; spell tile # offset
+                dc.w 40
+                dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
+                dc.w 4  ; spell tile # offset
                 
                 ; bubble 6
-                dc.b 0
-                dc.b $32
-                dc.b $A  ; dimensions 3x3
-                dc.b 0
-                dc.b 0
-                dc.b 8  ; spell tile # offset
+                dc.w 50
+                dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
+                dc.w 8  ; spell tile # offset
                 
                 ; bubble 7
-                dc.b 0
-                dc.b $3C
-                dc.b $F  ; dimensions 4x4
-                dc.b 0
-                dc.b 0
-                dc.b 17  ; spell tile # offset
+                dc.w 60
+                dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
+                dc.w 17  ; spell tile # offset
