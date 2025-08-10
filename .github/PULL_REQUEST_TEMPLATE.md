@@ -17,7 +17,7 @@ List the key changes made in this PR. For example:
 
 ## 🔄 Coordination Notes
 
-Explain any dependencies or coordination needed between the [SF2DISASM](https://github.com/ShiningForceCentral/SF2DISASM) amd [SF2JavaToolSuite](https://github.com/ShiningForceCentral/SF2JavaToolSuite) projects:
+Explain any dependencies or coordination needed between the [SF2DISASM](https://github.com/ShiningForceCentral/SF2DISASM) and [SF2JavaToolSuite](https://github.com/ShiningForceCentral/SF2JavaToolSuite) projects:
 - Requires the ability to parse data files presented in the ASM format to be implemented
 - Changes to enums need to be accounted for
 - Default file paths need to be updated
