@@ -9,8 +9,8 @@ spellanimationSetup_CannonFire:
                 
                 move.w  d1,-(sp)
                 bsr.w   ClearSpellanimationProperties
-                moveq   #SPELLGRAPHICS_CANNON_PROJECTILE,d0
-                bsr.w   LoadSpellGraphics
+                moveq   #SPELLTILESET_CANNON_PROJECTILE,d0
+                bsr.w   LoadSpellTileset
                 move.w  (sp)+,d0
                 lea     table_1AEFA(pc), a1
                 btst    #SPELLANIMATION_BIT_MIRRORED,d0
@@ -28,13 +28,17 @@ loc_1AECA:
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((byte_FFB588-$1000000)).w
-                bra.w   sub_1A028
+                bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_CannonFire
 
-table_1AEFA:    dc.l $F300FFC0
-                dc.l $18000E8
+table_1AEFA:    dc.w -$D00 ; x parameter
+                dc.w -$40  ; y parameter
+                dc.w $180  ; x parameter
+                dc.w $E8   ; y parameter
                 
                 ; mirror
-                dc.l $D000040
-                dc.l $07000F0
+                dc.w $D00
+                dc.w $40
+                dc.w $70
+                dc.w $F0

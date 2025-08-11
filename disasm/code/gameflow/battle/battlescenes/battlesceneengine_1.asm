@@ -622,7 +622,7 @@ LoadInvocationSpriteFrameToVram:
                 addq.w  #2,a1
                 lea     ((PALETTE_1_CURRENT_01-$1000000)).w,a2
                 lea     ((PALETTE_1_BASE_01-$1000000)).w,a3
-                moveq   #$E,d0
+                moveq   #14,d0
 loc_19C14:
                 
                 move.w  (a1),(a2)+
@@ -682,7 +682,7 @@ loc_19CA0:
 ; In: d0.w = spellanimation graphics data index
 
 
-LoadSpellGraphics:
+LoadSpellTileset:
                 
                 movea.l (p_pt_SpellGraphics).l,a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
@@ -703,7 +703,7 @@ LoadSpellGraphics:
                 jsr     (ApplyVIntVramDmaOnCompressedTiles).w
                 jmp     (WaitForDmaQueueProcessing).w
 
-    ; End of function LoadSpellGraphics
+    ; End of function LoadSpellTileset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -713,7 +713,7 @@ LoadSpellGraphics:
 ; In: d0.w = spellanimation graphics data index
 
 
-LoadSpellGraphicsForInvocation:
+LoadSpellTilesetForInvocation:
                 
                 movea.l (p_pt_SpellGraphics).l,a0
                 lsl.w   #INDEX_SHIFT_COUNT,d0
@@ -737,7 +737,7 @@ LoadSpellGraphicsForInvocation:
                 jsr     (ApplyVIntVramDma).w
                 jmp     (WaitForDmaQueueProcessing).w
 
-    ; End of function LoadSpellGraphicsForInvocation
+    ; End of function LoadSpellTilesetForInvocation
 
 
 ; =============== S U B R O U T I N E =======================================

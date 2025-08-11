@@ -682,7 +682,7 @@ SwitchAllyBattlesprite:
 @MoveBattlesceneGround_Loop:
                 
                 add.w   d0,(a0)
-                addq.w  #8,a0
+                addq.w  #VDP_SPRITE_ENTRY_SIZE,a0
                 dbf     d2,@MoveBattlesceneGround_Loop
 @loc_6:
                 
@@ -732,9 +732,11 @@ bsc06_switchEnemies:
                 clr.w   d6
                 bsr.w   MoveBackgroundVertically
                 lea     ((SPRITE_BATTLESCENE_GROUND_VDPTILE-$1000000)).w,a0
-                bset    #7,(a0)
-                bset    #7,8(a0)
-                bset    #7,$10(a0)
+                
+                ; 
+                bset    #7,(a0)  ; maybe ground tiles start at index $700 ?
+                bset    #7,NEXTVDPSPRITE_OFFSET_Y(a0)
+                bset    #7,$10(a0) ; next-next sprite Y
                 move.w  (a6),d0
                 bsr.w   GetBattlespriteAndPalette
                 move.w  d1,d0
