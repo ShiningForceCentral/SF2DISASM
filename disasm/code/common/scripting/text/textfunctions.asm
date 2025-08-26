@@ -478,263 +478,263 @@ CopyAsciiBytesForDialogueString:
                 rts
 
     ; End of function CopyAsciiBytesForDialogueString
-
-table_666E:     dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b $44
-                dc.b 1
-                dc.b $4B
-                dc.b 1
-                dc.b $4C
-                dc.b $4D
-                dc.b $48
-                dc.b $49
-                dc.b $4A
-                dc.b 1
-                dc.b $4E
-                dc.b $43
-                dc.b $41
-                dc.b $42
-                dc.b $4F
-                dc.b 2
-                dc.b 3
-                dc.b 4
-                dc.b 5
-                dc.b 6
-                dc.b 7
-                dc.b 8
-                dc.b 9
-                dc.b $A
-                dc.b $B
-                dc.b $50
-                dc.b 1
-                dc.b $49
-                dc.b 1
-                dc.b $4A
-                dc.b $45
-                dc.b 1
-                dc.b $C
-                dc.b $D
-                dc.b $E
-                dc.b $F
-                dc.b $10
-                dc.b $11
-                dc.b $12
-                dc.b $13
-                dc.b $14
-                dc.b $15
-                dc.b $16
-                dc.b $17
-                dc.b $18
-                dc.b $19
-                dc.b $1A
-                dc.b $1B
-                dc.b $1C
-                dc.b $1D
-                dc.b $1E
-                dc.b $1F
-                dc.b $20
-                dc.b $21
-                dc.b $22
-                dc.b $23
-                dc.b $24
-                dc.b $25
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b $40
-                dc.b 1
-                dc.b $26
-                dc.b $27
-                dc.b $28
-                dc.b $29
-                dc.b $2A
-                dc.b $2B
-                dc.b $2C
-                dc.b $2D
-                dc.b $2E
-                dc.b $2F
-                dc.b $30
-                dc.b $31
-                dc.b $32
-                dc.b $33
-                dc.b $34
-                dc.b $35
-                dc.b $36
-                dc.b $37
-                dc.b $38
-                dc.b $39
-                dc.b $3A
-                dc.b $3B
-                dc.b $3C
-                dc.b $3D
-                dc.b $3E
-                dc.b $3F
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b $40
-                dc.b 1
-                dc.b $26
-                dc.b $27
-                dc.b $28
-                dc.b $29
-                dc.b $2A
-                dc.b $2B
-                dc.b $2C
-                dc.b $2D
-                dc.b $2E
-                dc.b $2F
-                dc.b $30
-                dc.b $31
-                dc.b $32
-                dc.b $33
-                dc.b $34
-                dc.b $35
-                dc.b $36
-                dc.b $37
-                dc.b $38
-                dc.b $39
-                dc.b $3A
-                dc.b $3B
-                dc.b $3C
-                dc.b $3D
-                dc.b $3E
-                dc.b $3F
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b $40
-                dc.b 1
-                dc.b $42
-                dc.b $49
-                dc.b $4A
-                dc.b $42
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
-                dc.b 1
+                        ;ASCII Dec   Hex
+table_666E:     dc.b 1         ; 0	 $00
+                dc.b 1         ; 1	 $01
+                dc.b 1         ; 2	 $02
+                dc.b 1         ; 3	 $03
+                dc.b 1         ; 4	 $04
+                dc.b 1         ; 5	 $05
+                dc.b 1         ; 6	 $06
+                dc.b 1         ; 7	 $07
+                dc.b 1         ; 8	 $08
+                dc.b 1         ; 9	 $09
+                dc.b 1         ;10	 $0A
+                dc.b 1         ;11	 $0B
+                dc.b 1         ;12	 $0C
+                dc.b 1         ;13	 $0D
+                dc.b 1         ;14	 $0E
+                dc.b 1         ;15	 $0F
+                dc.b 1         ;16	 $10
+                dc.b 1         ;17	 $11
+                dc.b 1         ;18	 $12
+                dc.b 1         ;19	 $13
+                dc.b 1         ;20	 $14
+                dc.b 1         ;21	 $15
+                dc.b 1         ;22	 $16
+                dc.b 1         ;23	 $17
+                dc.b 1         ;24	 $18
+                dc.b 1         ;25	 $19
+                dc.b 1         ;26	 $1A
+                dc.b 1         ;27	 $1B
+                dc.b 1         ;28	 $1C
+                dc.b 1         ;29	 $1D
+                dc.b 1         ;30	 $1E
+                dc.b 1         ;31	 $1F
+                dc.b 1         ;32	 $20
+                dc.b $44       ;33	 $21
+                dc.b 1         ;34	 $22
+                dc.b $4B       ;35	 $23
+                dc.b 1         ;36	 $24
+                dc.b $4C       ;37	 $25
+                dc.b $4D       ;38	 $26
+                dc.b $48       ;39	 $27
+                dc.b $49       ;40	 $28
+                dc.b $4A       ;41	 $29
+                dc.b 1         ;42	 $2A
+                dc.b $4E       ;43	 $2B
+                dc.b $43       ;44	 $2C
+                dc.b $41       ;45	 $2D
+                dc.b $42       ;46	 $2E
+                dc.b $4F       ;47	 $2F
+                dc.b 2         ;48	 $30
+                dc.b 3         ;49	 $31
+                dc.b 4         ;50	 $32
+                dc.b 5         ;51	 $33
+                dc.b 6         ;52	 $34
+                dc.b 7         ;53	 $35
+                dc.b 8         ;54	 $36
+                dc.b 9         ;55	 $37
+                dc.b $A        ;56	 $38
+                dc.b $B        ;57	 $39
+                dc.b $50       ;58	 $3A
+                dc.b 1         ;59	 $3B
+                dc.b $49       ;60	 $3C
+                dc.b 1         ;61	 $3D
+                dc.b $4A       ;62	 $3E
+                dc.b $45       ;63	 $3F
+                dc.b 1         ;64	 $40
+                dc.b $C        ;65	 $41
+                dc.b $D        ;66	 $42
+                dc.b $E        ;67	 $43
+                dc.b $F        ;68	 $44
+                dc.b $10       ;69	 $45
+                dc.b $11       ;70	 $46
+                dc.b $12       ;71	 $47
+                dc.b $13       ;72	 $48
+                dc.b $14       ;73	 $49
+                dc.b $15       ;74	 $4A
+                dc.b $16       ;75	 $4B
+                dc.b $17       ;76	 $4C
+                dc.b $18       ;77	 $4D
+                dc.b $19       ;78	 $4E
+                dc.b $1A       ;79	 $4F
+                dc.b $1B       ;80	 $50
+                dc.b $1C       ;81	 $51
+                dc.b $1D       ;82	 $52
+                dc.b $1E       ;83	 $53
+                dc.b $1F       ;84	 $54
+                dc.b $20       ;85	 $55
+                dc.b $21       ;86	 $56
+                dc.b $22       ;87	 $57
+                dc.b $23       ;88	 $58
+                dc.b $24       ;89	 $59
+                dc.b $25       ;90	 $5A
+                dc.b 1         ;91	 $5B
+                dc.b 1         ;92	 $5C
+                dc.b 1         ;93	 $5D
+                dc.b 1         ;94	 $5E
+                dc.b $40       ;95	 $5F
+                dc.b 1         ;96	 $60
+                dc.b $26       ;97	 $61
+                dc.b $27       ;98	 $62
+                dc.b $28       ;99	 $63
+                dc.b $29       ;100	 $64
+                dc.b $2A       ;101	 $65
+                dc.b $2B       ;102	 $66
+                dc.b $2C       ;103	 $67
+                dc.b $2D       ;104	 $68
+                dc.b $2E       ;105	 $69
+                dc.b $2F       ;106	 $6A
+                dc.b $30       ;107	 $6B
+                dc.b $31       ;108	 $6C
+                dc.b $32       ;109	 $6D
+                dc.b $33       ;110	 $6E
+                dc.b $34       ;111	 $6F
+                dc.b $35       ;112	 $70
+                dc.b $36       ;113	 $71
+                dc.b $37       ;114	 $72
+                dc.b $38       ;115	 $73
+                dc.b $39       ;116	 $74
+                dc.b $3A       ;117	 $75
+                dc.b $3B       ;118	 $76
+                dc.b $3C       ;119	 $77
+                dc.b $3D       ;120	 $78
+                dc.b $3E       ;121	 $79
+                dc.b $3F       ;122	 $7A
+                dc.b 1         ;123	 $7B
+                dc.b 1         ;124	 $7C
+                dc.b 1         ;125	 $7D
+                dc.b 1         ;126	 $7E
+                dc.b $40       ;127	 $7F
+                dc.b 1         ;128  $80
+                dc.b $26       ;129  $81
+                dc.b $27       ;130  $82
+                dc.b $28       ;131	 $83
+                dc.b $29       ;132	 $84
+                dc.b $2A       ;133	 $85
+                dc.b $2B       ;134	 $86
+                dc.b $2C       ;135	 $87
+                dc.b $2D       ;136	 $88
+                dc.b $2E       ;137	 $89
+                dc.b $2F       ;138	 $8A
+                dc.b $30       ;139	 $8B
+                dc.b $31       ;140	 $8C
+                dc.b $32       ;141	 $8D
+                dc.b $33       ;142	 $8E
+                dc.b $34       ;143	 $8F
+                dc.b $35       ;144	 $90
+                dc.b $36       ;145	 $91
+                dc.b $37       ;146	 $92
+                dc.b $38       ;147	 $93
+                dc.b $39       ;148	 $94
+                dc.b $3A       ;149	 $95
+                dc.b $3B       ;150	 $96
+                dc.b $3C       ;151	 $97
+                dc.b $3D       ;152	 $98
+                dc.b $3E       ;153	 $99
+                dc.b $3F       ;154	 $9A
+                dc.b 1         ;155	 $9B
+                dc.b 1         ;156	 $9C
+                dc.b 1         ;157	 $9D
+                dc.b 1         ;158	 $9E
+                dc.b $40       ;159	 $9F
+                dc.b 1         ;160	 $A0
+                dc.b $42       ;161	 $A1
+                dc.b $49       ;162	 $A2
+                dc.b $4A       ;163	 $A3
+                dc.b $42       ;164	 $A4
+                dc.b 1         ;165	 $A5
+                dc.b 1         ;166	 $A6
+                dc.b 1         ;167	 $A7
+                dc.b 1         ;168	 $A8
+                dc.b 1         ;169	 $A9
+                dc.b 1         ;170	 $AA
+                dc.b 1         ;171	 $AB
+                dc.b 1         ;172	 $AC
+                dc.b 1         ;173	 $AD
+                dc.b 1         ;174	 $AE
+                dc.b 1         ;175	 $AF
+                dc.b 1         ;176	 $B0
+                dc.b 1         ;177	 $B1
+                dc.b 1         ;178	 $B2
+                dc.b 1         ;179	 $B3
+                dc.b 1         ;180	 $B4
+                dc.b 1         ;181	 $B5
+                dc.b 1         ;182	 $B6
+                dc.b 1         ;183	 $B7
+                dc.b 1         ;184	 $B8
+                dc.b 1         ;185	 $B9
+                dc.b 1         ;186	 $BA
+                dc.b 1         ;187	 $BB
+                dc.b 1         ;188	 $BC
+                dc.b 1         ;189	 $BD
+                dc.b 1         ;190	 $BE
+                dc.b 1         ;191	 $BF
+                dc.b 1         ;192	 $C0
+                dc.b 1         ;193	 $C1
+                dc.b 1         ;194	 $C2
+                dc.b 1         ;195	 $C3
+                dc.b 1         ;196	 $C4
+                dc.b 1         ;197	 $C5
+                dc.b 1         ;198	 $C6
+                dc.b 1         ;199	 $C7
+                dc.b 1         ;200	 $C8
+                dc.b 1         ;201	 $C9
+                dc.b 1         ;202	 $CA
+                dc.b 1         ;203	 $CB
+                dc.b 1         ;204	 $CC
+                dc.b 1         ;205	 $CD
+                dc.b 1         ;206	 $CE
+                dc.b 1         ;207	 $CF
+                dc.b 1         ;208	 $D0
+                dc.b 1         ;209	 $D1
+                dc.b 1         ;210	 $D2
+                dc.b 1         ;211	 $D3
+                dc.b 1         ;212	 $D4
+                dc.b 1         ;213	 $D5
+                dc.b 1         ;214	 $D6
+                dc.b 1         ;215	 $D7
+                dc.b 1         ;216	 $D8
+                dc.b 1         ;217	 $D9
+                dc.b 1         ;218	 $DA
+                dc.b 1         ;219	 $DB
+                dc.b 1         ;220	 $DC
+                dc.b 1         ;221	 $DD
+                dc.b 1         ;222	 $DE
+                dc.b 1         ;223	 $DF
+                dc.b 1         ;224	 $E0
+                dc.b 1         ;225	 $E1
+                dc.b 1         ;226	 $E2
+                dc.b 1         ;227	 $E3
+                dc.b 1         ;228	 $E4
+                dc.b 1         ;229	 $E5
+                dc.b 1         ;230	 $E6
+                dc.b 1         ;231	 $E7
+                dc.b 1         ;232	 $E8
+                dc.b 1         ;233	 $E9
+                dc.b 1         ;234	 $EA
+                dc.b 1         ;235	 $EB
+                dc.b 1         ;236	 $EC
+                dc.b 1         ;237	 $ED
+                dc.b 1         ;238	 $EE   Flag: {DICT}
+                dc.b 1         ;239	 $EF   Flag: {N}
+                dc.b 1         ;240	 $F0   Flag: {D2}
+                dc.b 1         ;241	 $F1   Flag: {#}
+                dc.b 1         ;242	 $F2   Flag: {NAME}
+                dc.b 1         ;243	 $F3   Flag: {LEADER}
+                dc.b 1         ;244	 $F4   Flag: {ITEM}
+                dc.b 1         ;245	 $F5   Flag: {SPELL}
+                dc.b 1         ;246	 $F6   Flag: {CLASS}
+                dc.b 1         ;247	 $F7   Flag: {W2}
+                dc.b 1         ;248	 $F8   Flag: {D1}
+                dc.b 1         ;249	 $F9   Flag: {D3}
+                dc.b 1         ;250	 $FA   Flag: {W1}
+                dc.b 1         ;251	 $FB   Flag: {CLEAR}
+                dc.b 1         ;252	 $FC   Flag: {NAME
+                dc.b 1         ;253	 $FD   Flag: {COLOR
+                dc.b 1         ;254	 $FE   Flag: (START/EOL)
+                dc.b 1         ;255	 $FF   Flag: UNUSED
 
 ; =============== S U B R O U T I N E =======================================
 
