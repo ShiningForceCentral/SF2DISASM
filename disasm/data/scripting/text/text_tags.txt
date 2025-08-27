@@ -1,0 +1,29 @@
+Tags
+
+{N} Newline : Forces following text onto a newline
+{CLEAR} Clear : Clears the dialog window before printing more text.
+{COLOR;x} Color : Changes text color (Unused in base game). Valid values = 1-14, corresponding to basePalette colors. 15 = the dialog window color so will not be visible. Any other value will result in unpredicatable colors.
+
+WAIT - Waits for user input before text proceeds
+	{W1} Wait-close : Closes dialog window after user input. Any following text will open an new dialog window
+	{W2} Wait-newline : Does not close dialog window after user input. Any following text will be printed from current position
+
+DELAY - Delays the text printing before resuming. Does not require user input but user input will end the delay early
+	{D1} Delay-short : Delays for 15 ticks (~0.25 seconds)
+	{D2} Delay-medium : Delays for 77 ticks (~1.25 seconds). Used often for cutscenes
+	{D3} Delay-long : Delays for 119 ticks (~2 seconds)
+
+ALLY NAMES - Prints names of allies. These commands do not require any additional code
+	{LEADER} Name-leader : Prints the name of the leader (i.e. Bowie)
+	{NAME;x} Name-Hero-X : Prints a heroes name. X = name index. Names come from allynames.asm (or allynames-capitalized.asm)
+
+CODE SUPPORTED COMMANDS - Input values for these commands is determined by game code
+	{#} Number : Prints a number (TODO What determines the number?)
+	{NAME} Name-Hero : Prints the name of the affected character
+	{CLASS} Name-Class : Prints the class of the affected character
+	{ITEM} Name-Item :Prints the name of an item
+	{SPELL} Name-Spell : Prints the name of a spell
+	{DICT} : Prints a list of values. Context is determined by game code. Use when displaying record time in hidden time-trial battle and used in Caraven to list who can equip an item
+	
+UNSURE - Commands that are not fully understood
+	(START/EOL) : (Unknown - Maybe used internally to indicate the end of a string)
