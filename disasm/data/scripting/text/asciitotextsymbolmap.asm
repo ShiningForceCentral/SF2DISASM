@@ -64,9 +64,9 @@ table_AsciiToTextSymbolMap:
                 dc.b 11                 ;  57 $39 | 9
                 dc.b 80                 ;  58 $3A | :
                 dc.b 1                  ;  59 $3B
-                dc.b 73                 ;  60 $3C | (
+                dc.b 73                 ;  60 $3C | (   (duplicate)
                 dc.b 1                  ;  61 $3D
-                dc.b 74                 ;  62 $3E | )
+                dc.b 74                 ;  62 $3E | )   (duplicate)
                 dc.b 69                 ;  63 $3F | ?
                 dc.b 1                  ;  64 $40
                 dc.b 12                 ;  65 $41 | A
@@ -131,44 +131,44 @@ table_AsciiToTextSymbolMap:
                 dc.b 1                  ; 124 $7C
                 dc.b 1                  ; 125 $7D
                 dc.b 1                  ; 126 $7E
-                dc.b 64                 ; 127 $7F | _
+                dc.b 64                 ; 127 $7F | _   (duplicate)
                 dc.b 1                  ; 128 $80
-                dc.b 38                 ; 129 $81 | a
-                dc.b 39                 ; 130 $82 | b
-                dc.b 40                 ; 131 $83 | c
-                dc.b 41                 ; 132 $84 | d
-                dc.b 42                 ; 133 $85 | e
-                dc.b 43                 ; 134 $86 | f
-                dc.b 44                 ; 135 $87 | g
-                dc.b 45                 ; 136 $88 | h
-                dc.b 46                 ; 137 $89 | i
-                dc.b 47                 ; 138 $8A | j
-                dc.b 48                 ; 139 $8B | k
-                dc.b 49                 ; 140 $8C | l
-                dc.b 50                 ; 141 $8D | m
-                dc.b 51                 ; 142 $8E | n
-                dc.b 52                 ; 143 $8F | o
-                dc.b 53                 ; 144 $90 | p
-                dc.b 54                 ; 145 $91 | q
-                dc.b 55                 ; 146 $92 | r
-                dc.b 56                 ; 147 $93 | s
-                dc.b 57                 ; 148 $94 | t
-                dc.b 58                 ; 149 $95 | u
-                dc.b 59                 ; 150 $96 | v
-                dc.b 60                 ; 151 $97 | w
-                dc.b 61                 ; 152 $98 | x
-                dc.b 62                 ; 153 $99 | y
-                dc.b 63                 ; 154 $9A | z
+                dc.b 38                 ; 129 $81 | a   (duplicate)
+                dc.b 39                 ; 130 $82 | b   (duplicate)
+                dc.b 40                 ; 131 $83 | c   (duplicate)
+                dc.b 41                 ; 132 $84 | d   (duplicate)
+                dc.b 42                 ; 133 $85 | e   (duplicate)
+                dc.b 43                 ; 134 $86 | f   (duplicate)
+                dc.b 44                 ; 135 $87 | g   (duplicate)
+                dc.b 45                 ; 136 $88 | h   (duplicate)
+                dc.b 46                 ; 137 $89 | i   (duplicate)
+                dc.b 47                 ; 138 $8A | j   (duplicate)
+                dc.b 48                 ; 139 $8B | k   (duplicate)
+                dc.b 49                 ; 140 $8C | l   (duplicate)
+                dc.b 50                 ; 141 $8D | m   (duplicate)
+                dc.b 51                 ; 142 $8E | n   (duplicate)
+                dc.b 52                 ; 143 $8F | o   (duplicate)
+                dc.b 53                 ; 144 $90 | p   (duplicate)
+                dc.b 54                 ; 145 $91 | q   (duplicate)
+                dc.b 55                 ; 146 $92 | r   (duplicate)
+                dc.b 56                 ; 147 $93 | s   (duplicate)
+                dc.b 57                 ; 148 $94 | t   (duplicate)
+                dc.b 58                 ; 149 $95 | u   (duplicate)
+                dc.b 59                 ; 150 $96 | v   (duplicate)
+                dc.b 60                 ; 151 $97 | w   (duplicate)
+                dc.b 61                 ; 152 $98 | x   (duplicate)
+                dc.b 62                 ; 153 $99 | y   (duplicate)
+                dc.b 63                 ; 154 $9A | z   (duplicate)
                 dc.b 1                  ; 155 $9B
                 dc.b 1                  ; 156 $9C
                 dc.b 1                  ; 157 $9D
                 dc.b 1                  ; 158 $9E
-                dc.b 64                 ; 159 $9F | _
+                dc.b 64                 ; 159 $9F | _   (duplicate)
                 dc.b 1                  ; 160 $A0
-                dc.b 66                 ; 161 $A1 | .
-                dc.b 73                 ; 162 $A2 | (
-                dc.b 74                 ; 163 $A3 | )
-                dc.b 66                 ; 164 $A4 | .
+                dc.b 66                 ; 161 $A1 | .   (duplicate)
+                dc.b 73                 ; 162 $A2 | (   (duplicate)
+                dc.b 74                 ; 163 $A3 | )   (duplicate)
+                dc.b 66                 ; 164 $A4 | .   (duplicate)
                 dc.b 1                  ; 165 $A5
                 dc.b 1                  ; 166 $A6
                 dc.b 1                  ; 167 $A7
