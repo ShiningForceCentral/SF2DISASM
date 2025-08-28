@@ -1,0 +1,12 @@
+; ----------------------
+; Loaded in by the SF2TextEditor to visually replace text in the 'textbank' table with custom symbols.
+; Allows the editor to work with non-ascii symbols without affecting any stored data (effectively making one symbol look like another).
+; Still may require font symbols to be added to .\data\graphics\tech\fonts\variablewidthfont.bin.
+; ----------------------
+; Does not impact DISASM or game engine at all.
+; Format is "x y" where x is an ascii character & y is a non-ascii character, separated by a space.
+; Also supports unicode (u0000). e.g. "? u0278" replaces '?' with 'ɸ' symbol (since ɸ is not an ascii symbol).
+; ----------------------
+
+< “
+> ”
