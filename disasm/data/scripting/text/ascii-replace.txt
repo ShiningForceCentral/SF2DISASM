@@ -8,5 +8,5 @@
 ; Also supports unicode (u0000). e.g. "? u0278" replaces '?' with 'ɸ' symbol (since ɸ is not an ascii symbol).
 ; ----------------------
 
-< “
-> ”
+< u201C ; “
+> u201D ; ”
