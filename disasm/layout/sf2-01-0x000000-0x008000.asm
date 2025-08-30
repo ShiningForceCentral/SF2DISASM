@@ -85,7 +85,9 @@
                 include "code\common\scripting\entity\entityscriptengine_1.asm"    ; Entity script engine, part 1
                 includeIfVanilla "code\common\scripting\entity\unused_entityscriptfunction.asm"
                 include "code\common\scripting\entity\entityscriptengine_2.asm"    ; Entity script engine, part 2
-                include "code\common\scripting\text\textfunctions.asm"    ; Text functions
+                include "code\common\scripting\text\textfunctions_1.asm"    ; Text functions
+                include "data\scripting\text\asciitotextsymbolmap.asm"    ; ASCII to Variable Width Font text symbol map table
+                include "code\common\scripting\text\textfunctions_2.asm"    ; Text functions
                 includeIfStandard "code\common\scripting\text\displayuncompressedtext-standard.asm"
                 includeIfStandard "code\common\tech\findspecialproperties-standard.asm"
                 includeIfVanilla "code\common\scripting\text\unused_textfunctionsdata.asm"    ; Unused text functions data
