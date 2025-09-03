@@ -185,18 +185,23 @@ Promote:
 @Continue:
                 ; Get modified base MOV and reapply it after loading class data
                 bsr.w   GetBaseMov
+                move.w  d1,d2
+                bsr.w   GetClass
                 bsr.s   LoadAllyClassData
+                move.w  d2,d1
                 bsr.w   SetBaseMov
             else
                 bsr.s   LoadAllyClassData
             endif
             if (EXPANDED_SAVED_DATA=1)
                 ; Set promoted at level as current level (before promotion)
+                move.w  d0,-(sp)
                 bsr.w   GetLevel
                 andi.w  #BYTE_MASK,d0
                 loadSavedDataAddress PROMOTED_AT_LEVELS, a0
                 addToSavedBytePointer d0, a0
                 move.b  d1,(a0)
+                move.w  (sp)+,d0
             endif
                 bra.w   UpdateCombatantStats
 
