@@ -66,6 +66,9 @@ CONFIGURATION_MESSAGE_DONE:                 rs.b 1
 ; =============== S U B R O U T I N E =======================================
 
 ConfigurationScreenBattleTest:
+                
+                module
+                
                 pea     ConfigurationScreen(pc)
                 
 InitializeDebugModeConfigurationSettings:
@@ -106,7 +109,7 @@ InitializeConfigurationSettings:
             else
                 bclr    #7,(SAVE_FLAGS).l
             endif
-                rts
+@return         rts
 
     ; End of function InitializeConfiguration
 
@@ -116,15 +119,13 @@ InitializeConfigurationSettings:
 
 CheatModeConfiguration:
                 
-                module
-                
             if (TEST_BUILD=1)
                 bsr.s   InitializeDebugModeConfigurationSettings
             else
                 bsr.s   InitializeConfigurationSettings
             endif
                 btst    #INPUT_BIT_START,((PLAYER_1_INPUT-$1000000)).w
-                beq.w   @return
+                beq.s   @return
                 
                 ; Start sound test if pressing Up and game completed flag is set
                 btst    #INPUT_BIT_UP,((PLAYER_1_INPUT-$1000000)).w
@@ -180,11 +181,10 @@ CheatModeConfiguration:
 @done           txt     461             ; "Configuration is done.{N}Go ahead!{W1}"
                 rts
             endif
-                
-
 
     ; End of function CheatModeConfiguration
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -277,8 +277,6 @@ ConfigurationScreenEnd:
 @return         rts
 
     ; End of function Configuration
-
-                modend
 
 ; ---------------------------------------------------------------------------
 rjt_ConfigurationActions:
@@ -397,7 +395,7 @@ configurationAction_BattleTest:
                 
 @load           move.w  d0,d1
                 mulu.w  #BATTLEMAPCOORDINATES_ENTRY_SIZE_FULL,d0
-                lea     table_BattleMapCoordinates,a0
+                getPointer p_table_BattleMapCoordinates, a0
                 adda.w  d0,a0
                 move.b  (a0)+,d0
                 setSavedByte (a0)+, BATTLE_AREA_X
