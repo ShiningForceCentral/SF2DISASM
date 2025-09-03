@@ -118,13 +118,7 @@ ProcessBattleEntityControlPlayerInput:
                 bsr.w   GetEntityPositionAfterApplyingFacing
                 jsr     (CheckChestItem).w
                 move.w  d2,((CHEST_CONTENTS-$1000000)).w
-            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                move.w  #-1,d0
-                andi.b  #ITEMENTRY_MASK_INDEX,d0
-                cmp.w   d0,d2
-            else
                 cmpi.w  #-1,d2
-            endif
                 bne.s   @SearchMenu     ; if d2.w != -1, then there is an item
                 
                 moveq   #MENU_BATTLE_WITH_STAY,d2
@@ -987,14 +981,8 @@ byte_25066:
                 bra.w   @StartBattleMenu
 @CheckChoice_SearchStay:
                 
-            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                move.w  #-1,d0
-                andi.b  #ITEMENTRY_MASK_INDEX,d0
-                cmp.w   ((CHEST_CONTENTS-$1000000)).w,d0
-            else
                 cmpi.w  #-1,((CHEST_CONTENTS-$1000000)).w
                 bne.w   @ExamineContents
-            endif
                 move.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 clr.w   d0
                 bra.w   @EndBattleEntityControl

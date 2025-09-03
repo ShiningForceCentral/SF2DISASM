@@ -1417,9 +1417,6 @@ GetItem:
                 moveq   #-1,d0
                 move.w  d0,d1
                 move.w  d0,d2
-            if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-                andi.b  #ITEMENTRY_MASK_INDEX,d2
-            endif
 @Continue:
                 
                 lea     (FF0000_RAM_START).l,a2
