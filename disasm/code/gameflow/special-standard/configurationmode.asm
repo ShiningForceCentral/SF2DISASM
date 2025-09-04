@@ -1366,7 +1366,7 @@ InitializeActionTest:
 ProcessBattleTestFollowers:
                 
                 move.w  d0,d7
-@loop           moveq   #BATTLES_MAX_INDEX,d1
+@loop           move.w  d0,d1
                 sub.w   d7,d1
                 add.w   d1,d1
                 move.w  rjt_BattleTestFollowers(pc,d1.w),d1
