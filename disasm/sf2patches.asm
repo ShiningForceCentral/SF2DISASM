@@ -118,9 +118,9 @@ CHAPTER_SCREEN:                     equ 0       ; Patch implementation with temp
 CONFIGURATION_SCREEN:               equ 1       ; Re-implements the configuration screen featured in Final Conflict.
 
 
-; AI enhancements
+; AI enhancements (experimental)
 HEALER_AI_ENHANCEMENTS:             equ 0       ; See SF2_AI_Healing_Rewrite.txt for more details.
-SUPPORT_AI_ENHANCEMENTS:            equ 1       ; Increase support spell options enemies can use.
+SUPPORT_AI_ENHANCEMENTS:            equ 0       ; Increase support spell options enemies can use.
 
 
 ; Turn order modifications
