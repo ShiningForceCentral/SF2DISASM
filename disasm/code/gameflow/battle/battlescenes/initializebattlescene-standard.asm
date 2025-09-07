@@ -315,6 +315,9 @@ alt_InitializeBattlescene:
                 
                 jsr     (WaitForVInt).w
                 bsr.w   FadeInFromBlackIntoBattlescene
+            if (MUSIC_RESUMING&RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+                deactivateMusicResuming
+            endif
                 clr.w   d0
                 move.b  (BATTLESCENE_MUSIC_INDEX).l,d0
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
