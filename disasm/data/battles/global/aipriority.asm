@@ -2,7 +2,7 @@
 ; ASM FILE data\battles\global\aipriority.asm :
 ; 0xD8F4..0xDA82 : AI priority data
 table_HealPriorityMoveTypes:
-                dc.b $FF
+                dc.b -1
                 dc.b MOVETYPE_LOWER_HEALER
                 dc.b MOVETYPE_LOWER_MAGE
                 dc.b MOVETYPE_LOWER_STEALTH_ARCHER

@@ -11,10 +11,14 @@
 ApplyPositionsAfterEnemyLeaderDies:
                 
                 movem.l d0-d1/d7-a0,-(sp)
+            if (STANDARD_BUILD&NO_DEFEAT_ON_LEADER_DEATH=1)
+                ; Skip checking if Bowie is alive
+            else
                 moveq   #ALLY_BOWIE,d0
                 jsr     j_GetCurrentHp
                 tst.w   d1
                 beq.w   @Done
+            endif
                 move.w  #COMBATANT_ENEMIES_START,d0
                 jsr     j_GetCurrentHp
                 tst.w   d1

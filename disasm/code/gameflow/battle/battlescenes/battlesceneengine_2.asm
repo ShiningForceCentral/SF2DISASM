@@ -14,12 +14,8 @@ GetBattlesceneGround:
                 tst.b   d0
                 bmi.s   @Skip           ; skip if enemy
                 
-                ; Skip if ally is flying or hovering
-                lea     table_AirborneMovetypes,a0
-                jsr     GetMoveType
-                moveq   #0,d2           ; zero property bytes
-                jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcc.s   @Skip
+                jsr     IsAirborneMoveType
+                bcc.s   @Skip           ; skip if ally is flying or hovering
                 
                 bra.w   GetBattlesceneBackground
 @Skip:

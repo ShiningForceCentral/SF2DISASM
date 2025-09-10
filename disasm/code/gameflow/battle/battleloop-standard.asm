@@ -187,23 +187,43 @@ BattleLoop:
                 bcs.s   @Heal
                 
                 jsr     CloseTimerWindow
-@Heal:
-                
-                bsr.w   HealLivingAndImmortalAllies
+@Heal:          bsr.w   HealLivingAndImmortalAllies
+
                 getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
-                jsr     (UpdateForceAndGetFirstBattlePartyMemberIndex).w
                 
-                jsr     GetCombatantX
-                addFromSavedByte BATTLE_AREA_X, d1
-                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                ; Get first living, non-airborne battle party member in order to avoid a potential soft-lock
+                moveq   #-1,d3          ; set check airborne movetype toggle
+                jsr     FindFirstLivingBattlePartyMember ; -> d0.w (also updates the battle party members list)
+                bpl.s   @GetPosition
+                
+                ; If nobody is eligible, default to the leader's starting battle position
+                clr.w   d0
+                move.b  ((BATTLE_PARTY_MEMBERS-$1000000)).w,d0
+                pea     @Continue(pc)
+                jmp     GetCombatantStartingPosition
+@GetPosition:   
+                
                 jsr     GetCombatantY
-                addFromSavedByte BATTLE_AREA_Y, d1
+                move.w  d1,d2
+                jsr     GetCombatantX
+@Continue:      
+                ; Convert battle to map coordinates
+                addFromSavedByte BATTLE_AREA_X, d1
+                addFromSavedByte BATTLE_AREA_Y, d2
+                move.b  d1,((MAP_EVENT_PARAM_3-$1000000)).w
+                move.b  d2,((MAP_EVENT_PARAM_4-$1000000)).w
                 
-                move.b  d1,((MAP_EVENT_PARAM_4-$1000000)).w
+                ; Get party leader's facing direction
                 bsr.w   GetEntityIndexForCombatant
+                bpl.s   @GetFacing
+                
+                clr.w   d0              ; default to first entity if the leader entity does not exist (i.e., if they died)
+@GetFacing:
+                
                 lsl.w   #ENTITYDEF_SIZE_BITS,d0
                 lea     ((ENTITY_DATA-$1000000)).w,a0
                 move.b  ENTITYDEF_OFFSET_FACING(a0,d0.w),((MAP_EVENT_PARAM_5-$1000000)).w
+                
                 clr.b   ((MAP_EVENT_PARAM_1-$1000000)).w
                 jsr     ExecuteAfterBattleCutscene
                 clr.w   d1

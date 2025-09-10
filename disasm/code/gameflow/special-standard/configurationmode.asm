@@ -1342,10 +1342,7 @@ InitializeActionTest:
                 bmi.s   @Skip
                 
                 ; Skip if ally is flying or hovering
-                lea     table_AirborneMovetypes,a0
-                jsr     GetMoveType
-                moveq   #0,d2           ; zero property bytes
-                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                jsr     IsAirborneMoveType
                 bcc.s   @Skip
                 
                 move.w  battleBackground(a2),((BATTLESCENE_GROUND-$1000000)).w

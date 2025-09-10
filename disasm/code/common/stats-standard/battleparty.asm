@@ -4,6 +4,44 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d3 = check airborne movetype toggle
+;
+; Out: d0.w = ally index (or CCR negative-bit set if no one is eligible)
+
+
+FindFirstLivingBattlePartyMember:
+                
+                movem.l d1/d7-a0,-(sp)
+                bsr.s   UpdateForce
+                clr.w   d0
+                lea     ((BATTLE_PARTY_MEMBERS-$1000000)).w,a0
+                move.w  ((BATTLE_PARTY_MEMBERS_NUMBER-$1000000)).w,d7
+                bra.s   @FindAlly
+@FindAlly_Loop:
+                
+                move.b  (a0)+,d0
+                bsr.w   GetCurrentHp
+                beq.s   @FindAlly
+                
+                tst.w   d3
+                beq.s   @Found
+                
+                bsr.w   IsAirborneMoveType
+                bcs.s   @Found
+@FindAlly:
+                
+                dbf     d7,@FindAlly_Loop
+@Found:
+                
+                tst.w   d7
+                movem.l (sp)+,d1/d7-a0
+                rts
+
+    ; End of function FindFirstLivingBattlePartyMember
+
+
+; =============== S U B R O U T I N E =======================================
+
 ; Determine who is in the force or not based on flags and update RAM lists.
 
 

@@ -549,6 +549,42 @@ GetMoveType:
 
 ; =============== S U B R O U T I N E =======================================
 
+; In: d0.w = combatant index  Out: CCR carry-bit clear if true
+
+
+IsAirborneMoveType:
+                
+                movem.l d1-d2/a0,-(sp)
+                lea     table_AirborneMovetypes(pc), a0
+                bsr.s   GetMoveType
+                moveq   #0,d2           ; zero property bytes
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                rts
+
+    ; End of function IsAirborneMoveType
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = combatant index  Out: CCR carry-bit clear if true
+
+
+IsArcherMoveType:
+                
+                movem.l d1-d2/a0,-(sp)
+                lea     table_ArcherMovetypes(pc), a0
+                bsr.s   GetMoveType
+                moveq   #0,d2           ; zero property bytes
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d1-d2/a0
+                rts
+
+    ; End of function IsArcherMoveType
+
+
+; =============== S U B R O U T I N E =======================================
+
 ; Get AI commandset for combatant d0.w -> d1.w
 
 

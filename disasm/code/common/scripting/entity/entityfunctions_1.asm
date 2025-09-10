@@ -14,6 +14,18 @@ SpawnEnemyEntity:
                 jsr     j_GetCombatantY
                 move.w  d1,d2
                 jsr     j_GetCombatantX
+                
+                ; Is flying or hovering?
+            if (STANDARD_BUILD=1)
+                clr.w   d6
+                jsr     IsAirborneMoveType
+                bcs.s   @Continue
+                
+                addq.w  #1,d6
+@Continue:
+                
+                swap    d6
+            else
                 move.w  d1,-(sp)
                 jsr     j_GetMoveType
                 clr.w   d6
@@ -29,6 +41,8 @@ loc_444D6:
                 
                 swap    d6
                 move.w  (sp)+,d1
+            endif
+                
                 andi.w  #$3F,d1 
                 muls.w  #MAP_TILE_SIZE,d1
                 andi.w  #$3F,d2 
@@ -297,6 +311,19 @@ PositionBattleEntities:
                 bmi.w   @SkipAlly
                 
                 ; Is flying or hovering?
+            if (STANDARD_BUILD=1)
+                move.w  d0,-(sp)
+                move.w  battleEntity(a6),d0
+                clr.w   d6
+                jsr     IsAirborneMoveType
+                bcs.s   @Continue1
+                
+                addq.w  #1,d6
+@Continue1:
+                
+                swap    d6
+                move.w  (sp)+,d0
+            else
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
                 jsr     j_GetMoveType
@@ -313,6 +340,7 @@ PositionBattleEntities:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
+            endif
                 
                 andi.w  #$3F,d1
                 muls.w  #MAP_TILE_SIZE,d1
@@ -360,6 +388,19 @@ PositionBattleEntities:
                 bmi.w   @SkipEnemy
                 
                 ; Is flying or hovering?
+            if (STANDARD_BUILD=1)
+                move.w  d0,-(sp)
+                move.w  battleEntity(a6),d0
+                clr.w   d6
+                jsr     IsAirborneMoveType
+                bcs.s   @Continue2
+                
+                addq.w  #1,d6
+@Continue2:
+                
+                swap    d6
+                move.w  (sp)+,d0
+            else
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
                 jsr     j_GetMoveType
@@ -376,6 +417,7 @@ PositionBattleEntities:
                 
                 swap    d6
                 movem.w (sp)+,d0-d1
+            endif
                 
                 andi.w  #$3F,d1 
                 muls.w  #MAP_TILE_SIZE,d1
