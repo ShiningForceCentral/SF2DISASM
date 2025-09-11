@@ -1,17 +1,6 @@
 
 ; ASM FILE code\common\tech\graphics\specialsprites.asm :
-; 0x25BFC..0x25DF6 : Special Sprites functions
-pt_SpecialSprites:
-                dc.l SpecialSprites_Taros
-                dc.l SpecialSprites_Kraken
-                dc.l SpecialSprites_NazcaShip
-                dc.l SpecialSprites_EvilSpirit
-                dc.l SpecialSprites_Zeon
-                dc.l SpecialSprites_Zeon
-                dc.l SpecialSprites_Kraken
-                dc.l SpecialSprites_Kraken
-                dc.l SpecialSprites_Kraken
-                dc.l SpecialSprites_Kraken
+; 0x25C24..0x25DF6 : Special Sprites functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -96,16 +85,16 @@ specialSprite_Exploration:
 AnimateSpecialSprite:
                 
                 movem.l d0-d2/a0-a1,-(sp)
-                lea     (SpecialSprites_EvilSpirit+CRAM_PALETTE_SIZE)(pc), a0
+                lea     (SpecialSprite_EvilSpirit+$20)(pc), a0
                 tst.w   d0
                 beq.s   @Continue
                 cmpi.b  #1,d0
                 bne.s   @Zeon
-                lea     SpecialSprites_EvilSpiritAlt(pc), a0
+                lea     SpecialSprite_EvilSpiritAlt(pc), a0
                 bra.s   @Continue
 @Zeon:
                 
-                lea     (SpecialSprites_Zeon+CRAM_PALETTE_SIZE)(pc), a0
+                lea     (SpecialSprite_Zeon+$20)(pc), a0
 @Continue:
                 
                 lea     (FF6802_LOADING_SPACE).l,a1

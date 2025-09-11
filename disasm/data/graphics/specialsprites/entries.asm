@@ -1,15 +1,15 @@
 
-; ASM FILE code\common\tech\graphics\specialspritesentries.asm :
-; 0x25DF6..0x2784C : Special Sprites Entries
-SpecialSprites_Taros:
+; ASM FILE data\graphics\specialsprites\entries.asm :
+; 0x25DF6..0x2784C : Special Sprites entries
+SpecialSprite_Taros:
                 incbin "data/graphics/specialsprites/taros.bin"
-SpecialSprites_Kraken:
+SpecialSprite_Kraken:
                 incbin "data/graphics/specialsprites/kraken.bin"
-SpecialSprites_NazcaShip:
+SpecialSprite_NazcaShip:
                 incbin "data/graphics/specialsprites/nazcaship.bin"
-SpecialSprites_EvilSpirit:
+SpecialSprite_EvilSpirit:
                 incbin "data/graphics/specialsprites/evilspirit.bin"
-SpecialSprites_EvilSpiritAlt:
+SpecialSprite_EvilSpiritAlt:
                 incbin "data/graphics/specialsprites/evilspiritalt.bin"
-SpecialSprites_Zeon:
+SpecialSprite_Zeon:
                 incbin "data/graphics/specialsprites/zeon.bin"
