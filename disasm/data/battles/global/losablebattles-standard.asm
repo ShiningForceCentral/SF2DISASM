@@ -1,9 +1,10 @@
 
 ; ASM FILE data\battles\global\losablebattles-standard.asm :
 
-; Battles that are completed even in case of defeat.  Use 'MAP_NONE' if no wakeup scene after battle loss.
+; Battles that are completed even in case of defeat.
 table_LosableBattles:
                 
-                dc.b BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, MAP_GALAM_INTERIORS      ; battle 4, map 17
+                ; battle index, map index to warp to (or -1 to stay on current map)
+                dc.b BATTLE_AMBUSHED_BY_GALAM_SOLDIERS, MAP_GALAM_INTERIORS ; battle 4, map 17
                 
                 tableEnd.b

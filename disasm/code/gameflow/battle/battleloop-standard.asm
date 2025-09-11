@@ -128,7 +128,7 @@ BattleLoop:
                 beq.s   @Defeat
                 
                 tst.w   d3
-                beq.s   @Victory
+                beq.w   @Victory
                 
                 ; Start a new round of turns
                 loadSavedDataAddress CURRENT_BATTLE_TURN, a0
@@ -142,6 +142,7 @@ BattleLoop:
                 
                 bsr.w   UpdateBattleUnlockedFlag
                 clr.w   ((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                
                 ; HARDCODED music index
                 sndCom  MUSIC_SAD_THEME_2
                 txt     363             ; "{LEADER} is exhausted.{W1}"
@@ -149,32 +150,39 @@ BattleLoop:
             if (PLAYER_DEFEAT_IS_GAME_OVER=1)
                 jmp     (ResetGame).w
             endif
-                bsr.w   HealLivingAndImmortalAllies
+                
+                ; Revive battle party leader and divide current gold amount by 2
+                jsr     UpdateForce
+                move.b  ((BATTLE_PARTY_MEMBERS-$1000000)).w,d0
+                jsr     GetMaxHp
+                jsr     SetCurrentHp
                 jsr     GetGold
-                lsr.l   #1,d1           ; divide current gold amount by 2
+                lsr.l   #1,d1
                 jsr     SetGold
                 bsr.w   GetEgressPositionForBattle
+                
+                ; Are we allowed to progress even if the battle is lost?
+                movem.w d1-d3,-(sp)
                 moveq   #-1,d4
                 
-                ; Losable battles
-                clr.w   d1
                 lea     table_LosableBattles(pc), a0
+                clr.w   d1
                 getSavedByte CURRENT_BATTLE, d1
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Return
+                bcs.s   @Done
                 
                 addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     ClearFlag
                 addi.w  #BATTLE_COMPLETED_FLAGS_START-BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     SetFlag
-                cmpi.b  #TERMINATOR_BYTE,(a0)
-                beq.s   @Return
+                cmpi.b  #-1,(a0)
+                beq.s   @Done
                 
-                move.b  (a0),d0
+                move.b  (a0),d0         ; get map index to warp to
                 clr.w   d4
-@Return:
                 
+@Done:          movem.w (sp)+,d1-d3
                 rts
 
 ; ---------------------------------------------------------------------------
@@ -184,12 +192,10 @@ BattleLoop:
                 getSavedByte CURRENT_BATTLE, d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Heal
+                bcs.s   @GetMap
                 
                 jsr     CloseTimerWindow
-@Heal:          bsr.w   HealLivingAndImmortalAllies
-
-                getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
+@GetMap:        getSavedByte CURRENT_MAP, ((MAP_EVENT_PARAM_2-$1000000)).w
                 
                 ; Get first living, non-airborne battle party member in order to avoid a potential soft-lock
                 moveq   #-1,d3          ; set check airborne movetype toggle

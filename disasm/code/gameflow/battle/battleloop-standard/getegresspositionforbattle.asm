@@ -4,6 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
+; Out: d0.b = To map index, d1.b = X, d2.b = Y, d3.b = Facing
+
 
 GetEgressPositionForBattle:
                 
@@ -13,12 +15,15 @@ GetEgressPositionForBattle:
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
                 bcs.s   @GetEgressMap
+                
                 move.b  (a0),d0
                 cmpi.b  #-1,d0
                 bne.s   @Continue
+                
                 addi.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 jsr     ClearFlag
 @GetEgressMap:  getSavedByte EGRESS_MAP, d0
+                
 @Continue:      movem.l (sp)+,d1-d2/a0
                 jmp     (GetSavepointForMap).w
 
