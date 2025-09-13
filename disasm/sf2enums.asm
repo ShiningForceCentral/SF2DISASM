@@ -2148,15 +2148,17 @@ MAP_CURRENT: equ 255 ; reload current map
 
 ; enum BattleProperties
 
-battlesNumber: = 45
-battlesMaxIndex: = battlesNumber-1
-battlesDebugMaxIndex: = 49
+battlesNumber = 45
+battlesMaxIndex = battlesNumber-1
+battlesCounter = battlesNumber-1
+battlesDebugMaxIndex = 49
 
     if (STANDARD_BUILD=1)
 battlesDebugMaxIndex: = battlesMaxIndex
     endif
 
 BATTLES_MAX_INDEX: equ battlesMaxIndex
+BATTLES_COUNTER: equ battlesCounter
 BATTLES_NUMBER:  equ battlesNumber
 BATTLES_DEBUG_MAX_INDEX: equ battlesDebugMaxIndex
 

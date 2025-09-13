@@ -1210,7 +1210,7 @@ BattlefieldMenu:
             if (STANDARD_BUILD=1)
                 move.l  ((SECONDS_COUNTER-$1000000)).w,d0
                 loadSavedDataAddress SAVED_SECONDS_COUNTER, a0
-                setSavedWord d0, a0
+                setSavedLong d0, a0
             else
                 move.l  ((SECONDS_COUNTER-$1000000)).w,((SAVED_SECONDS_COUNTER-$1000000)).w
             endif

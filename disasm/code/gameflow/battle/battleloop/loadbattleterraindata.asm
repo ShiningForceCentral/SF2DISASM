@@ -8,16 +8,12 @@
 LoadBattleTerrainData:
                 
                 movem.l d0-d6/a0-a5,-(sp)
-            if (STANDARD_BUILD=1)
-                getPointer p_pt_BattleTerrainData, a0
-            else
                 lea     pt_BattleTerrainData(pc), a0
                 nop
-            endif
                 loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.l   d1
                 move.b  (a1),d1
-                lsl.l   #2,d1
+                lsl.l   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 lea     (BATTLE_TERRAIN_ARRAY).l,a1
                 jsr     (LoadStackCompressedData).w

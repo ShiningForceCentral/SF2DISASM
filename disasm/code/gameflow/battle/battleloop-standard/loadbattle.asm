@@ -51,10 +51,9 @@ LoadBattle:
                 
                 ; Load compressed terrain data
                 getPointer p_pt_BattleTerrainData, a0
-                loadSavedDataAddress CURRENT_BATTLE, a1
                 clr.w   d1
-                move.b  (a1),d1
-                lsl.l   #2,d1
+                getSavedByte CURRENT_BATTLE, d1
+                lsl.w   #INDEX_SHIFT_COUNT,d1
                 movea.l (a0,d1.w),a0
                 lea     (BATTLE_TERRAIN_ARRAY).l,a1
                 jsr     (LoadStackCompressedData).w

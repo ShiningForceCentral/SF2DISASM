@@ -4,10 +4,13 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: D0 = map index (if not supplied, will be pulled from CURRENT_MAP)
-;     D1 = player X coord to check
-;     D2 = player Y coord to check
-; Out: D7 = battle index to trigger (-1 if none)
+; In: d0.w = map index (if not supplied, will be pulled from CURRENT_MAP)
+;     d1.w = player X coordinate to check
+;     d2.w = player Y coordinate to check
+;
+; Out: d0.w = map index
+;      d7.w = battle index to trigger (-1 if none)
+;
 ; ...more
 
 
@@ -29,7 +32,7 @@ CheckBattle:
             else
                 lea     table_BattleMapCoordinates(pc), a0
             endif
-                moveq   #BATTLES_MAX_INDEX,d6
+                moveq   #BATTLES_COUNTER,d6
                 clr.w   d7
 @Loop:
                 

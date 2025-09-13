@@ -36,6 +36,8 @@ BattleLoop:
                 getSavedLong a0, d0
                 move.l  d0,((SECONDS_COUNTER-$1000000)).w
                 
+                ; Clear the "saved mid-battle" flag when continuing
+                clrFlg  88              ; checks if a game has been saved for copying purposes ? (or if saved from battle?)
                 clr.w   d0              ; VIEW_TARGET_ENTITY = party leader when loading battle
                 pea     @IndividualTurn(pc)
                 jmp     LoadBattle(pc)

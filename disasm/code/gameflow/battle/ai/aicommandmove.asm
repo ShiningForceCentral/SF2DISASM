@@ -162,7 +162,7 @@ ExecuteAiCommand_Move:
             endif
                 bsr.w   GetMoveType     
                 lea     (pt_AttackPriorityForMoveType).l,a1
-                lsl.l   #2,d1
+                lsl.l   #INDEX_SHIFT_COUNT,d1
                 movea.l (a1,d1.l),a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d6
                 clr.w   d5
