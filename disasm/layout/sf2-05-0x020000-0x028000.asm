@@ -78,8 +78,10 @@
                 include "code\gameflow\exploration\explorationfunctions_2.asm"    ; Exploration functions
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
+                
+                include "data\graphics\specialsprites\pointers.asm"    ; Special Sprites pointers
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
-                include "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
+                include "data\graphics\specialsprites\entries.asm"    ; Special Sprites entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 
                 includeIfStandard "data\battles\global\displaytimerbattles-standard.asm"
