@@ -13,7 +13,7 @@
 		align $220000
 		include "data\graphics\mapsprites\entries.asm"		; Map sprites
 		align $268000
-		include "code\common\tech\graphics\specialspritesentries.asm"		; Special Sprites Entries
+		include "data\graphics\specialsprites\entries.asm"		; Special Sprites entries
 		align $270000
 		include "data\graphics\battles\battlesprites\enemies\entries.asm"		; Enemy battle sprites
 		align $2E0000

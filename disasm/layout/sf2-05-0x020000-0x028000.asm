@@ -56,8 +56,9 @@
                 include "code\gameflow\battle\battlevints.asm"    ; Battle VInt functions
                 include "code\gameflow\exploration\explorationvints.asm"    ; Exploration VInt functions
                 
+                include "data\graphics\specialsprites\pointers.asm"    ; Special Sprites pointers
                 include "code\common\tech\graphics\specialsprites.asm"    ; Special Sprites functions
-                includeIfVanillaRom "code\common\tech\graphics\specialspritesentries.asm"    ; Special Sprites Entries
+                includeIfVanillaRom "data\graphics\specialsprites\entries.asm"    ; Special Sprites entries
                 include "code\common\tech\graphics\specialspritesanims.asm"    ; Special Sprites Animations
                 include "code\specialscreens\suspend\suspend.asm"    ; Suspend functions
                 include "code\specialscreens\witchend\witchend.asm"    ; Witch end functions
