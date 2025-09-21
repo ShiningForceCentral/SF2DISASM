@@ -4,8 +4,9 @@
                 module
                 
 @randomizeFirstTurnEntry: macro
+                andi.w  #TURN_AGILITY_MASK,d1
+                
               if (DISABLE_TURN_ORDER_RANDOMIZATION=0)
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 move.w  d1,d6
                 lsr.w   #3,d6
                 jsr     (GenerateRandomNumber).w
@@ -26,10 +27,11 @@
             endm
                 
 @randomizeSecondTurnEntry: macro
-              if (DISABLE_TURN_ORDER_RANDOMIZATION=0)
-                andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
+                andi.w  #TURN_AGILITY_MASK,d1
                 mulu.w  #5,d1
-                divu.w  #6,d1
+                divu.w  #6,d1                           ; second turn effective AGI = (current AGI * 5) / 6
+                
+              if (DISABLE_TURN_ORDER_RANDOMIZATION=0)
                 move.w  d1,d6
                 lsr.w   #3,d6
                 jsr     (GenerateRandomNumber).w
