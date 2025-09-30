@@ -1,5 +1,5 @@
 
-; ASM FILE code\gameflow\battle\battleloop\updateenemyaifunctions.asm :
+; ASM FILE code\gameflow\battle\battleloop\updateenemyai.asm :
 ; 0x2550C..0x25544 : Battle loop : Update Enemy AI functions
 
 ; =============== S U B R O U T I N E =======================================

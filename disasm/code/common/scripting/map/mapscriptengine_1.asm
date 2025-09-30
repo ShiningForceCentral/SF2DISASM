@@ -1790,11 +1790,11 @@ csc54_joinForceAi:
                 jsr     j_GetActivationBitfield
                 move.w  (a6)+,d2
                 bne.s   loc_46FEE
-                andi.w  #$FFFB,d1
+                andi.w  #($FFFF-AIBITFIELD_AI_CONTROLLED),d1
                 bra.s   loc_46FF8
 loc_46FEE:
                 
-                ori.w   #4,d1
+                ori.w   #AIBITFIELD_AI_CONTROLLED,d1
                 jsr     j_JoinForce
 loc_46FF8:
                 

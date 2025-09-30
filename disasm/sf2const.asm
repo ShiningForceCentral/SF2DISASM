@@ -431,8 +431,8 @@ WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
 AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
-PREVIOUSLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating regions triggered at the start of previous battle rounds
-                                        ; causes issues with region triggers in the vanilla build
+NEWLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating newly-triggered regions at the start of a battle round
+                                        ; note: causes issues with region triggers in the vanilla build involving enemy AI
 
 
 ; Battlescene block -- cleared when scene initializes

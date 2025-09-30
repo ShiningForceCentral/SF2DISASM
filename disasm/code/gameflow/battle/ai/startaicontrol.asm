@@ -86,7 +86,7 @@ StartAiControl:
 @NonSwarmAi:
             if (VANILLA_BUILD=1)
                 ; This causes issues with region triggers in the vanilla build. The RAM word is unused otherwise.
-                lea     (PREVIOUSLY_TRIGGERED_BATTLE_REGIONS).l,a0
+                lea     (NEWLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
             endif
                 move.w  d7,d0
