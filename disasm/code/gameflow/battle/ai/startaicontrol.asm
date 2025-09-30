@@ -85,7 +85,8 @@ StartAiControl:
                 ; Resume normal AI scripting (end of "swarm" AI)
 @NonSwarmAi:
                 
-                lea     (PREVIOUSLY_TRIGGERED_BATTLE_REGIONS).l,a0
+                ; This causes issues with region triggers in the vanilla build. The RAM word is unused otherwise.
+                lea     (NEWLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
                 move.w  d7,d0
                 bsr.w   GetAiRegion     
