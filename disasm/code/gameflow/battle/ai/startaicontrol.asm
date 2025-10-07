@@ -105,7 +105,7 @@ StartAiControl:
                 bne.s   @HandleSpecialAttackers
                 
                 ; If combatant AI is not yet activated
-                bsr.w   DetermineStandbyAiMovement
+                bsr.w   DetermineAiStandbyMovement
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   @Done
@@ -139,10 +139,10 @@ StartAiControl:
                 
                 ; Check if following a dead target and if so, change to second special move orders
                 move.w  d7,d0
-                bsr.w   GetAiSpecialMoveOrders
-                cmpi.w  #NOTHING_BYTE,d1
+                bsr.w   GetAiMoveOrders
+                cmpi.w  #AIORDER_NONE,d1
                 beq.s   @HandleSecondaryCharacteristics ; skip if no special orders
-                btst    #COMBATANT_BIT_SORT,d1
+                btst    #AIORDER_BIT_MOVE_TO,d1
                 bne.s   @HandleSecondaryCharacteristics ; skip if following a point
                 
                 move.w  d1,d0
@@ -150,10 +150,10 @@ StartAiControl:
                 tst.w   d1
                 bne.s   @HandleSecondaryCharacteristics ; skip if the followed target is still alive
                 move.w  d7,d0
-                bsr.w   GetAiSpecialMoveOrders
+                bsr.w   GetAiMoveOrders
                 move.w  d2,d1
-                move.w  #NOTHING_BYTE,d2
-                bsr.w   SetAiSpecialMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
+                move.w  #AIORDER_NONE,d2
+                bsr.w   SetAiMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
 @HandleSecondaryCharacteristics:
                 
                 move.w  d7,d0
@@ -166,12 +166,12 @@ StartAiControl:
                 beq.s   @HandleAiCommandset
                 cmpi.b  #1,d6
                 bne.s   @CheckSecondaryCharacteristic2
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
+                jsr     j_BlockNonMovableSpacesAroundDestination
 @CheckSecondaryCharacteristic2:
                 
                 cmpi.b  #2,d6
                 bne.s   @HandleAiCommandset
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
+                jsr     j_BlockAndCarveAroundDestination
 @HandleAiCommandset:
                 
                 move.w  d5,d1
@@ -198,7 +198,7 @@ StartAiControl:
                 dbf     d2,@HandleAiCommandset_Loop
 @Done:
                 
-                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                jsr     j_ClearAllTemporaryObstructionFlags
                 movem.l (sp)+,d0-a5
                 rts
 

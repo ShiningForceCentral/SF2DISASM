@@ -73,11 +73,18 @@
                 include "code\gameflow\battle\battlefield\getattackrange.asm"    ; Get Attack Range function
                 include "code\gameflow\battle\battlefield\battlefieldengine_3.asm"    ; Battlefield engine
                 include "code\gameflow\battle\battlefield\determinehealingspelllevel.asm"    ; Determine healing spell level function
-                include "code\gameflow\battle\battlefield\battlefieldengine_4.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\calculatehealtargetpriority.asm"    ; Calculate heal target priority function
+                include "code\gameflow\battle\battlefield\adjusttargetpriorityforally.asm"    ; Adjust target priority for ally function
+                include "code\gameflow\battle\ai\getclosestattackpositionformoveorder.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\gethighestusablespelllevel.asm"    ; Highest usable spell level getter function
+                include "code\gameflow\battle\battlefield\unusedbattlefieldfunctions_CF0E.asm"    ; Unused battlefield functions
                 include "code\gameflow\battle\battlefield\useableaiactions.asm"    ; Usable AI actions getter functions
                 include "code\gameflow\battle\battlefield\battlefieldengine_5.asm"    ; Battlefield engine
                 include "code\gameflow\battle\battlefield\doescombatantrequirehealing.asm"    ; Does combatant require healing function
-                include "code\gameflow\battle\battlefield\battlefieldengine_6.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\unusedbattlefieldfunctions_D3CA.asm"    ; Unused battlefield functions
+                include "code\gameflow\battle\getdifficulty.asm"    ; Difficulty getter function
+                include "code\gameflow\battle\ai\getcurrentterraintypeformoveorder.asm"    ; Current terrain type for move order getter function
+                include "code\gameflow\battle\battlefield\populateprioritylistforspell.asm"    ; Populate priority list for spell functions
                 include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
                 include "data\battles\global\aipriority.asm"    ; AI priority data
                 include "code\gameflow\battle\battlefield\battlefieldengine_7.asm"    ; Battlefield engine
@@ -89,11 +96,14 @@
                 include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function
                 include "code\gameflow\battle\ai\aicommandheal.asm"    ; AI command : Heal
                 include "code\gameflow\battle\ai\aicommandattack.asm"    ; AI command : Attack
-                include "code\gameflow\battle\ai\aicommandspecialmove.asm"    ; AI command : Special Move
+                include "code\gameflow\battle\ai\aicommandmoveorder.asm"    ; AI command : Move order
                 include "code\gameflow\battle\ai\aicommandsupport.asm"    ; AI command : Support
-                include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; Determine AI Battleaction function
+                include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; AI engine : Determine AI Battleaction function
                 include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
-                include "code\gameflow\battle\ai\aistandby.asm"    ; AI engine : standby movement
+                include "code\gameflow\battle\ai\determineaistandbymovement_1.asm"    ; AI engine : Determine standby movement function, part 1
+                include "data\battles\global\aistandbymovements.asm"    ; AI standby movements table
+                include "code\gameflow\battle\ai\buildmovestringformoveorder.asm"    ; AI engine : Build move string for Move Order function
+                include "code\gameflow\battle\ai\determineaistandbymovement_2.asm"    ; AI engine : Determine standby movement function, part 2
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 include "data\stats\spells\spellnames.asm"    ; Spell names

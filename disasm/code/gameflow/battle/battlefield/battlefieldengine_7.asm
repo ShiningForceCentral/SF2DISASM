@@ -398,7 +398,7 @@ loc_DD0A:
 ;     d0.b, d1.b = destination X,Y
 
 
-BuildAiMoveString:
+BuildMoveStringForAi:
                 
                 module
                 movem.l d0-d6/a0-a5,-(sp)
@@ -440,7 +440,7 @@ loc_DD48:
                 movem.l (sp)+,d0-d6/a0-a5
                 rts
 
-    ; End of function BuildAiMoveString
+    ; End of function BuildMoveStringForAi
 
                 modend
 

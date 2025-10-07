@@ -68,11 +68,11 @@ ExecuteAiCommand:
                 bra.w   @Done
 @CheckSpecialMove:
                 
-                cmpi.b  #AICOMMAND_SPECIAL_MOVE,d1
+                cmpi.b  #AICOMMAND_MOVE_ORDER,d1
                 bne.s   @CheckMove
                 move.w  #0,d1
                 move.w  #0,d2
-                bsr.w   ExecuteAiCommand_SpecialMove
+                bsr.w   ExecuteAiCommand_MoveOrder
                 bra.w   @Done
 @CheckMove:
                 
@@ -107,35 +107,35 @@ ExecuteAiCommand:
                 bra.w   @Done
 @CheckSpecialMove2:
                 
-                cmpi.b  #AICOMMAND_SPECIAL_MOVE2,d1
+                cmpi.b  #AICOMMAND_MOVE_ORDER2,d1
                 bne.s   @CheckSpecialMove3
                 move.w  #2,d1
                 move.w  #2,d2
-                bsr.w   ExecuteAiCommand_SpecialMove
+                bsr.w   ExecuteAiCommand_MoveOrder
                 bra.w   @Done
 @CheckSpecialMove3:
                 
-                cmpi.b  #AICOMMAND_SPECIAL_MOVE3,d1
+                cmpi.b  #AICOMMAND_MOVE_ORDER3,d1
                 bne.s   @CheckSpecialMove4
                 move.w  #1,d1
                 move.w  #1,d2
-                bsr.w   ExecuteAiCommand_SpecialMove
+                bsr.w   ExecuteAiCommand_MoveOrder
                 bra.w   @Done
 @CheckSpecialMove4:
                 
-                cmpi.b  #AICOMMAND_SPECIAL_MOVE4,d1
+                cmpi.b  #AICOMMAND_MOVE_ORDER4,d1
                 bne.s   @CheckSpecialMove5
                 clr.w   d1
                 move.w  #1,d2
-                bsr.w   ExecuteAiCommand_SpecialMove
+                bsr.w   ExecuteAiCommand_MoveOrder
                 bra.w   @Done
 @CheckSpecialMove5:
                 
-                cmpi.b  #AICOMMAND_SPECIAL_MOVE5,d1
+                cmpi.b  #AICOMMAND_MOVE_ORDER5,d1
                 bne.s   @Done
                 clr.w   d1
                 move.w  #2,d2
-                bsr.w   ExecuteAiCommand_SpecialMove
+                bsr.w   ExecuteAiCommand_MoveOrder
                 bra.w   *+4
 @Done:
                 

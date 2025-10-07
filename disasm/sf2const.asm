@@ -379,7 +379,9 @@ dword_FFB1A4: equ $FFB1A4
 WARP_SFX: equ $FFB1A8
 CONFIGURATION_MODE_OR_GAME_STAFF_POINTER: equ $FFB1AA
 AI_LAST_TARGET_TABLE: equ $FFB1AC ; Table of most recent target for each enemy
-AI_MEMORY_TABLE: equ $FFB1DC ; related to standby AI movement
+AI_MEMORY_TABLE: equ $FFB1DC    ; holds two pieces of data per combatant:
+                                ;   - low nibble = standby move count (3 or 4)
+                                ;   - high nibble = last-chosen relative position index (0..3)
 NEWLY_TRIGGERED_BATTLE_REGIONS: equ $FFB20C ; bitfield indicating newly-triggered regions at the start of a battle round
                                         ; note: causes issues with region triggers in the vanilla build involving enemy AI
 

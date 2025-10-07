@@ -229,7 +229,7 @@ ExecuteAiCommand_Support:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
                 clr.w   d1
 @Done:
                 

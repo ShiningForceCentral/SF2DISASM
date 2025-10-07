@@ -50,7 +50,7 @@
                 include "code\gameflow\battle\cutscenes\afterbattlecutscenesend.asm"    ; After battle cutscenes function end
                 include "data\battles\cutscenes\afterbattlejoins.asm"    ; After battle joins (unused)
                 include "code\gameflow\battle\cutscenes\afterenemyleaderdeathpositions.asm"    ; After-battlescene listener used to prepare entity positions for end cutscene before the enemy leader dies. Only used in battle 5.
-                include "data\battles\afterbattlepositions.asm"    ; After battle positions
+                include "data\battles\global\afterbattlepositions.asm"    ; After battle positions
                 include "code\gameflow\battle\cutscenes\regionactivatedcutscenes.asm"    ; Region-activated cutscenes functions
                 include "data\battles\cutscenes\regionactivatedcutscenes.asm"    ; Region-activated cutscenes data
                 include "code\common\tech\graphics\flashwhite.asm"    ; Flash white function and script

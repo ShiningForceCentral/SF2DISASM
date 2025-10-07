@@ -1,115 +1,6 @@
 
-; ASM FILE code\gameflow\battle\battlefield\battlefieldengine_6.asm :
-; 0xD3CA..0xD824 : Battlefield engine
-
-; =============== S U B R O U T I N E =======================================
-
-; Unused in the US version.
-
-
-sub_D3CA:
-                
-                movem.l d1-d2,-(sp)
-                jsr     GetCurrentMp
-                move.w  d1,d2
-                jsr     GetMaxMp
-                bra.w   loc_D3FC
-
-    ; End of function sub_D3CA
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-sub_D3E0:
-                
-                movem.l d1-d2,-(sp)
-                move.w  d1,d2
-                jsr     GetMaxMp
-                bra.w   loc_D3FC
-
-    ; End of function sub_D3E0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-sub_D3F0:
-                
-                movem.l d1-d2,-(sp)
-                move.w  d1,d2
-                jsr     GetCurrentMp
-loc_D3FC:
-                
-                mulu.w  #3,d2
-                cmp.w   d2,d1
-                movem.l (sp)+,d1-d2
-                rts
-
-    ; End of function sub_D3F0
-
-
-; =============== S U B R O U T I N E =======================================
-
-; Out: D1 = 0 if normal, 1 if hard, 2 if super, 3 if ouch
-
-
-GetDifficulty:
-                
-                movem.l d0/d2-a6,-(sp)
-                clr.w   d2
-                move.w  #FLAG_INDEX_DIFFICULTY1,d1
-                bsr.w   CheckFlag
-                beq.s   loc_D41C
-                move.w  #1,d2
-loc_D41C:
-                
-                move.w  #FLAG_INDEX_DIFFICULTY2,d1
-                bsr.w   CheckFlag
-                beq.s   loc_D428
-                addq.w  #2,d2
-loc_D428:
-                
-                move.w  d2,d1
-                movem.l (sp)+,d0/d2-a6
-                rts
-
-    ; End of function GetDifficulty
-
-
-; =============== S U B R O U T I N E =======================================
-
-var_2 = -2
-var_1 = -1
-
-sub_D430:
-                
-                movem.l d0/d2-a6,-(sp)
-                link    a6,#-2
-                move.b  d0,var_1(a6)
-                move.b  d1,var_2(a6)
-                clr.w   d0
-                move.b  var_1(a6),d0
-                bsr.w   GetCurrentTerrainType
-                btst    #COMBATANT_BIT_ENEMY,d0
-                bne.s   @Enemy
-                clr.w   d1
-                bra.s   @Done
-@Enemy:
-                
-                move.b  #-1,d1
-@Done:
-                
-                unlk    a6
-                movem.l (sp)+,d0/d2-a6
-                rts
-
-    ; End of function sub_D430
-
+; ASM FILE code\gameflow\battle\battlefield\populateprioritylistforspell.asm :
+; 0xD460..0xD824 : Populate priority list for spell functions
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -182,7 +73,7 @@ PopulatePrioritiesListForSpell_Boost2:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                move.w  #SPELL_DISPEL|SPELL_LV2,d1  ; should move SPELL_BOOST|SPELL_LV2 instead
+                move.w  #SPELL_DISPEL|SPELL_LV2,d1
                 bsr.w   GetTargetsReachableBySpell
                 lea     ((TARGETS_REACHABLE_BY_SPELL_NUMBER-$1000000)).w,a0
                 move.w  (a0),d0
@@ -213,7 +104,7 @@ loc_D52E:
                 
                 clr.w   d0
                 move.b  (a1,d4.w),d0
-                move.w  #SPELL_DISPEL|SPELL_LV2,d1  ; should move SPELL_BOOST|SPELL_LV2 instead
+                move.w  #SPELL_DISPEL|SPELL_LV2,d1
                 bsr.w   PopulateTargetableGrid
                 bsr.w   CalculateTargetPriorityForSpell_Boost
                 tst.w   d1

@@ -398,7 +398,7 @@ GetAiCommandset:
 ;      d2.w = second AI point
 
 
-GetAiSpecialMoveOrders:
+GetAiMoveOrders:
                 
                 movem.l d7-a0,-(sp)
                 moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
@@ -410,7 +410,7 @@ GetAiSpecialMoveOrders:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetAiSpecialMoveOrders
+    ; End of function GetAiMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================

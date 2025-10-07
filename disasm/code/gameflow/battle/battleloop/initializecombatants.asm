@@ -233,7 +233,7 @@ InitializeEnemyStats:
                 jsr     j_SetAiRegion
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER(a0),d2
-                jsr     j_SetAiSpecialMoveOrders
+                jsr     j_SetAiMoveOrders
                 move.w  BATTLESPRITESET_ENTITYOFFSET_ITEMS(a0),d1
                 bsr.w   InitializeEnemyItems
                 jsr     j_GetActivationBitfield

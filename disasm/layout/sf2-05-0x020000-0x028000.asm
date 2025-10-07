@@ -33,11 +33,11 @@
                 include "code\gameflow\exploration\explorationfunctions_0.asm"    ; Exploration functions
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
-                include "code\gameflow\battle\battlefunctions\battleloop_1.asm"    ; Battle loop main, part 1
+                include "code\gameflow\battle\battleloop_1.asm"    ; Battle loop main, part 1
                 include "code\gameflow\battle\battleloop\killallenemies.asm"    ; Battle loop function
                 include "code\gameflow\battle\battleloop\heallivingandimmortalallies.asm"    ; Battle loop function
                 include "code\gameflow\battle\battleloop\countremainingcombatants.asm"    ; Battle loop function
-                include "code\gameflow\battle\battlefunctions\battleloop_2.asm"    ; Battle loop main, part 2
+                include "code\gameflow\battle\battleloop_2.asm"    ; Battle loop main, part 2
                 include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
                 include "code\gameflow\battle\battleloop\getegresspositionforbattle.asm"    ; Battle loop : Get Egress Position For Battle function
                 include "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function

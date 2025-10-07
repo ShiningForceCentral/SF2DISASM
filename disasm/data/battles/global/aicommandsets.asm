@@ -29,7 +29,7 @@ AiCommandset00:
                              MOVE, &
                              STAY
 AiCommandset01: 
-                aiCommandset SPECIAL_MOVE, &
+                aiCommandset MOVE_ORDER, &
                              HEAL, &
                              SUPPORT, &
                              ATTACK, &
@@ -37,28 +37,28 @@ AiCommandset01:
                              STAY
 AiCommandset02: 
                 aiCommandset HEAL2, &
-                             SPECIAL_MOVE4, &
+                             MOVE_ORDER4, &
                              SUPPORT, &
                              ATTACK3, &
                              MOVE2, &
                              STAY
 AiCommandset03: 
                 aiCommandset HEAL2, &
-                             SPECIAL_MOVE4, &
+                             MOVE_ORDER4, &
                              SUPPORT, &
                              ATTACK3, &
                              MOVE, &
                              STAY
 AiCommandset04: 
                 aiCommandset HEAL3, &
-                             SPECIAL_MOVE5, &
+                             MOVE_ORDER5, &
                              SUPPORT, &
                              ATTACK2, &
                              MOVE3, &
                              STAY
 AiCommandset05: 
                 aiCommandset HEAL3, &
-                             SPECIAL_MOVE5, &
+                             MOVE_ORDER5, &
                              SUPPORT, &
                              ATTACK2, &
                              MOVE3, &
@@ -70,7 +70,7 @@ AiCommandset06:
                              MOVE, &
                              STAY
 AiCommandset07: 
-                aiCommandset SPECIAL_MOVE, &
+                aiCommandset MOVE_ORDER, &
                              ATTACK, &
                              HEAL, &
                              SUPPORT, &
@@ -84,15 +84,15 @@ AiCommandset08:
 AiCommandset10: 
                 aiCommandset STAY
 AiCommandset09: 
-                aiCommandset SPECIAL_MOVE3, &
+                aiCommandset MOVE_ORDER3, &
                              ATTACK3, &
                              HEAL2, &
                              SUPPORT, &
-                             SPECIAL_MOVE4, &
+                             MOVE_ORDER4, &
                              MOVE2, &
                              STAY
 AiCommandset12: 
-                aiCommandset SPECIAL_MOVE4, &
+                aiCommandset MOVE_ORDER4, &
                              SUPPORT, &
                              ATTACK3, &
                              HEAL2, &
@@ -100,19 +100,19 @@ AiCommandset12:
                              MOVE2, &
                              STAY
 AiCommandset13: 
-                aiCommandset SPECIAL_MOVE5, &
+                aiCommandset MOVE_ORDER5, &
                              ATTACK2, &
                              HEAL3, &
                              SUPPORT, &
-                             SPECIAL_MOVE2, &
+                             MOVE_ORDER2, &
                              MOVE3, &
                              STAY
 AiCommandset15: 
-                aiCommandset SPECIAL_MOVE, &
+                aiCommandset MOVE_ORDER, &
                              ATTACK3, &
                              HEAL2, &
                              SUPPORT, &
-                             SPECIAL_MOVE2, &
+                             MOVE_ORDER2, &
                              MOVE2, &
                              STAY
 table_AiSecondaryCharacteristics:

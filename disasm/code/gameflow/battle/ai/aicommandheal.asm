@@ -142,7 +142,7 @@ ExecuteAiCommand_Heal:
                 move.b  caster(a6),d0
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @EnemyTargets   
-				
+                
                 clr.w   d0              ; if ally (aka force member), highest priority target to heal is Bowie
                 move.w  #COMBATANT_ALLIES_COUNTER,d4 ; check the first 30 force members whether they need healing (this is only for when AI controls the force member)
                 bra.s   @MakeTargetsList_Loop
@@ -368,7 +368,7 @@ ExecuteAiCommand_Heal:
                 move.b  d2,d1           ; d2 = chosen y pos
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4400_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
                 lea     ((BATTLE_ENTITY_MOVE_STRING-$1000000)).w,a1 ; unnecessary
                 lea     ((CURRENT_BATTLEACTION-$1000000)).w,a1
                 cmpi.b  #ITEM_NOTHING,itemEntry(a6)

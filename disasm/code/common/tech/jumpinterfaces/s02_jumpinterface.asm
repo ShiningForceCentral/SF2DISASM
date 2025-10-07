@@ -243,11 +243,11 @@ j_GetCurrentAtt:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiSpecialMoveOrders:
+j_GetAiMoveOrders:
                 
-                jmp     GetAiSpecialMoveOrders(pc)
+                jmp     GetAiMoveOrders(pc)
 
-    ; End of function j_GetAiSpecialMoveOrders
+    ; End of function j_GetAiMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -565,11 +565,11 @@ j_SetCurrentAtt:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetAiSpecialMoveOrders:
+j_SetAiMoveOrders:
                 
-                jmp     SetAiSpecialMoveOrders(pc)
+                jmp     SetAiMoveOrders(pc)
 
-    ; End of function j_SetAiSpecialMoveOrders
+    ; End of function j_SetAiMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================

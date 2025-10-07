@@ -1,5 +1,5 @@
 
-; ASM FILE data\battles\afterbattlepositions.asm :
+; ASM FILE data\battles\global\afterbattlepositions.asm :
 ; 0x47E6C..0x47E82 : After battle positions
 table_AfterBattlePositions:
                 dc.w BATTLE_GALAM_CASTLE ; battle 5

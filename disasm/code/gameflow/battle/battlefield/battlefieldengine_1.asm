@@ -126,7 +126,7 @@ GetMoveCostToDestination:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Get terrain type of space occupied by battle entity d0.b -> d0.b
+; Get terrain type of space occupied by combatant d0.b -> d0.b
 
 
 GetCurrentTerrainType:

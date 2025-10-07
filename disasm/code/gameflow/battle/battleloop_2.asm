@@ -1,5 +1,5 @@
 
-; ASM FILE code\gameflow\battle\battlefunctions\battleloop_2.asm :
+; ASM FILE code\gameflow\battle\battleloop_2.asm :
 ; 0x23CBA..0x23D98 : Battle loop main, part 2
 
 ; =============== S U B R O U T I N E =======================================

@@ -80,7 +80,7 @@ ExecuteAiCommand_Attack:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
                 bra.w   @EndTurn
 @Check_CastSpell:
                 
@@ -113,7 +113,7 @@ ExecuteAiCommand_Attack:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
                 bra.w   @EndTurn
 @Check_Attack:
                 
@@ -183,7 +183,7 @@ ExecuteAiCommand_Attack:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
                 bra.w   @EndTurn
 @EndTurn_Stay:
                 

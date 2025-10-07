@@ -358,7 +358,7 @@ SetMoveTypeAndAiCommandset:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiSpecialMoveOrders:
+SetAiMoveOrders:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.w   #BYTE_SHIFT_COUNT,d1
@@ -369,7 +369,7 @@ SetAiSpecialMoveOrders:
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetAiSpecialMoveOrders
+    ; End of function SetAiMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================

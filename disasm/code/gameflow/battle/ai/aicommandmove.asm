@@ -24,12 +24,12 @@ ExecuteAiCommand_Move:
                 
                 cmpi.b  #1,d1
                 bne.s   @loc_1
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
+                jsr     j_BlockNonMovableSpacesAroundDestination
 @loc_1:
                 
                 cmpi.b  #2,d1
                 bne.s   @loc_2
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
+                jsr     j_BlockAndCarveAroundDestination
 @loc_2:
                 
                 bsr.w   InitializeMovementArrays
@@ -250,7 +250,7 @@ ExecuteAiCommand_Move:
                 bra.w   @BasicMovement
 @SpecialMovecosts:
                 
-                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                jsr     j_ClearAllTemporaryObstructionFlags
                 move.b  d6,d0
                 bsr.w   GetCombatantY
                 move.w  d1,d4
@@ -265,7 +265,7 @@ ExecuteAiCommand_Move:
                 bra.w   @CommitMoveString
 @BasicMovement:
                 
-                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                jsr     j_ClearAllTemporaryObstructionFlags
                 clr.w   d0
                 move.b  d7,d0
                 bsr.w   PopulateMovecostsTable
@@ -307,14 +307,14 @@ ExecuteAiCommand_Move:
                 cmpi.b  #1,d1
                 bne.s   @loc_39
                 move.b  d7,d0           ; d7 = character index of the moving unit
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1 
+                jsr     j_BlockNonMovableSpacesAroundDestination 
                                                         ; if d1 = 1
 @loc_39:
                 
                 cmpi.b  #2,d1
                 bne.s   @loc_40
                 move.b  d7,d0
-                jsr     j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2 
+                jsr     j_BlockAndCarveAroundDestination 
                                                         ; if d1 = 2
 @loc_40:
                 
@@ -353,10 +353,10 @@ ExecuteAiCommand_Move:
                 move.w  d2,d1
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
-                bsr.w   BuildAiMoveString
+                bsr.w   BuildMoveStringForAi
 @loc_42:
                 
-                jsr     j_ClearBattleTerrainArrayObstructionFlags
+                jsr     j_ClearAllTemporaryObstructionFlags
                 clr.w   d1
                 unlk    a6
                 movem.l (sp)+,d0/d3-a6

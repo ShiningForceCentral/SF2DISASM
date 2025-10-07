@@ -746,7 +746,7 @@ UpdateBattleTerrainOccupiedByAllies:
                 movem.l d0-a0,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
                 moveq   #COMBATANT_ALLIES_COUNTER,d7
-                bra.w   UpdateBattleTerrainOccupiedFlag
+                bra.w   UpdateBattleTerrainOccupiedFlags
 
     ; End of function UpdateBattleTerrainOccupiedByAllies
 
@@ -768,7 +768,7 @@ UpdateBattleTerrainOccupiedByEnemies:
 ; In: d3.w = 0 to clear flag, set otherwise
 
 
-UpdateBattleTerrainOccupiedFlag:
+UpdateBattleTerrainOccupiedFlags:
                 
                 jsr     GetCurrentHp
                 tst.w   d1
@@ -805,12 +805,12 @@ loc_C8F0:
 @Next:
                 
                 addq.b  #1,d0
-                dbf     d7,UpdateBattleTerrainOccupiedFlag
+                dbf     d7,UpdateBattleTerrainOccupiedFlags
                 
                 movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function UpdateBattleTerrainOccupiedFlag
+    ; End of function UpdateBattleTerrainOccupiedFlags
 
                 modend
 

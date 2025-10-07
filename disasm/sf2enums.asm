@@ -669,6 +669,12 @@ AIORDER_NONE: equ $FF
 
 ; ---------------------------------------------------------------------------
 
+; enum AiOrderBits
+AIORDER_BIT_MOVE_TO: equ 6
+AIORDER_BIT_FOLLOW_ENEMY: equ 7
+
+; ---------------------------------------------------------------------------
+
 ; enum SpawnSettings
 SPAWN_STARTING: equ 0
 SPAWN_RESPAWN: equ 1
@@ -1120,12 +1126,16 @@ MITHRIL_WEAPON_CLASSES_COUNTER: equ 7
 ; ---------------------------------------------------------------------------
 
 ; enum MapDef
-MAP_SIZE_MAX_TILEHEIGHT: equ $30
-MAP_SIZE_MAX_TILEWIDTH: equ $30
-MAP_ARRAY_SIZE: equ $900
-MAP_BLOCKINDEX_CLOSED_CHEST: equ $D801
-MAP_BLOCKINDEX_OPEN_CHEST: equ $D802
-MAP_NULLPOSITION: equ $FFFF
+MAP_MIN_X: equ 0
+MAP_MIN_Y: equ 0
+MAP_MAX_X: equ 47
+MAP_MAX_Y: equ 47
+MAP_SIZE_MAX_TILEHEIGHT: equ 48
+MAP_SIZE_MAX_TILEWIDTH: equ 48
+MAP_ARRAY_SIZE: equ 2304
+MAP_BLOCKINDEX_CLOSED_CHEST: equ 55297
+MAP_BLOCKINDEX_OPEN_CHEST: equ 55298
+MAP_NULLPOSITION: equ -1
 
 ; ---------------------------------------------------------------------------
 
@@ -3252,16 +3262,16 @@ AICOMMAND_ATTACK4: equ 6
 AICOMMAND_SUPPORT: equ 7
 AICOMMAND_UNUSED: equ 8
 AICOMMAND_UNUSED2: equ 9
-AICOMMAND_SPECIAL_MOVE: equ 10
+AICOMMAND_MOVE_ORDER: equ 10
 AICOMMAND_MOVE: equ 11
 AICOMMAND_MOVE2: equ 12
 AICOMMAND_MOVE3: equ 13
 AICOMMAND_STAY: equ 14
 AICOMMAND_UNUSED3: equ 15
-AICOMMAND_SPECIAL_MOVE2: equ 16
-AICOMMAND_SPECIAL_MOVE3: equ 17
-AICOMMAND_SPECIAL_MOVE4: equ 18
-AICOMMAND_SPECIAL_MOVE5: equ 19
+AICOMMAND_MOVE_ORDER2: equ 16
+AICOMMAND_MOVE_ORDER3: equ 17
+AICOMMAND_MOVE_ORDER4: equ 18
+AICOMMAND_MOVE_ORDER5: equ 19
 
 ; ---------------------------------------------------------------------------
 
