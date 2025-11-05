@@ -274,7 +274,7 @@ Map09:          include "data\maps\entries\map09\00-tilesets.asm"    ;
                 dc.l Map09s6_WarpEvents
                 dc.l Map09s7_ChestItems 
                 dc.l Map09s8_OtherItems
-                dc.l Map09s9_Animations
+                dc.l Map16s9_Animations
 Map09s2_Areas:  include "data\maps\entries\map09\2-areas.asm"    ; 
 Map09s3_FlagEvents:include "data\maps\entries\map09\3-flag-events.asm"    ; 
 Map09s4_StepEvents:include "data\maps\entries\map09\4-step-events.asm"    ; 
@@ -416,7 +416,7 @@ Map16:          include "data\maps\entries\map16\00-tilesets.asm"    ;
                 dc.l Map16s6_WarpEvents
                 dc.l Map16s7_ChestItems
                 dc.l Map16s8_OtherItems
-                dc.l Map09s9_Animations
+                dc.l Map16s9_Animations
 Map16s2_Areas:  include "data\maps\entries\map16\2-areas.asm"    ; 
 Map16s3_FlagEvents:include "data\maps\entries\map16\3-flag-events.asm"    ; 
 Map16s4_StepEvents:include "data\maps\entries\map16\4-step-events.asm"    ; 
