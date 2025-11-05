@@ -131,7 +131,7 @@ LoadAllyClassData:
                 move.b  (a0)+,COMBATANT_OFFSET_MOV_BASE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_RESIST_BASE_LOW_BYTE(a1)
-                move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI(a1)
+                move.b  (a0)+,COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a1)
                 move.b  (a0)+,COMBATANT_OFFSET_PROWESS_BASE(a1)
                 movem.l (sp)+,d0/a0-a1
                 rts

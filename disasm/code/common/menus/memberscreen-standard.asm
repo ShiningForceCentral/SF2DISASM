@@ -1011,7 +1011,7 @@ WriteEnemyLvOrExp:
                 
             if (SHOW_ALL_SPELLS_IN_MEMBER_SCREEN=0)
                 ; Do not display spell that is not affected by silence
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.w   @NextSpell      ; skip if spell is not affected by silence
             endif

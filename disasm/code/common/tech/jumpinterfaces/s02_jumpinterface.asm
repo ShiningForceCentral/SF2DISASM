@@ -65,11 +65,11 @@ j_GetCombatantX:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetMoveType:
+j_GetMovetype:
                 
-                jmp     GetMoveType(pc) 
+                jmp     GetMovetype(pc) 
 
-    ; End of function j_GetMoveType
+    ; End of function j_GetMovetype
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -251,21 +251,21 @@ j_GetCurrentAtt:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiSpecialMoveOrders:
+j_GetMoveOrders:
                 
-                jmp     GetAiSpecialMoveOrders(pc)
+                jmp     GetMoveOrders(pc)
 
-    ; End of function j_GetAiSpecialMoveOrders
+    ; End of function j_GetMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiRegion:
+j_GetTriggerRegions:
                 
-                jmp     GetAiRegion(pc) 
+                jmp     GetTriggerRegions(pc) 
 
-    ; End of function j_GetAiRegion
+    ; End of function j_GetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -389,11 +389,11 @@ j_SetCombatantX:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetMoveTypeAndAiCommandset:
+j_SetMovetypeAndAiCommandset:
                 
-                jmp     SetMoveTypeAndAiCommandset(pc)
+                jmp     SetMovetypeAndAiCommandset(pc)
 
-    ; End of function j_SetMoveTypeAndAiCommandset
+    ; End of function j_SetMovetypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -585,21 +585,21 @@ j_SetCurrentAtt:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetAiSpecialMoveOrders:
+j_SetMoveOrders:
                 
-                jmp     SetAiSpecialMoveOrders(pc)
+                jmp     SetMoveOrders(pc)
 
-    ; End of function j_SetAiSpecialMoveOrders
+    ; End of function j_SetMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_SetAiRegion:
+j_SetTriggerRegions:
                 
-                jmp     SetAiRegion(pc)
+                jmp     SetTriggerRegions(pc)
 
-    ; End of function j_SetAiRegion
+    ; End of function j_SetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1282,11 +1282,11 @@ j_GetSpellName:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetSpellDefAddress:
+j_GetSpellDefinitionAddress:
                 
-                jmp     GetSpellDefAddress(pc)
+                jmp     GetSpellDefinitionAddress(pc)
 
-    ; End of function j_GetSpellDefAddress
+    ; End of function j_GetSpellDefinitionAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1422,55 +1422,41 @@ j_WriteBattlesceneScript:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateAttackRangeGrid:
+j_BuildAttackRangeGrid:
                 
-                jmp     CreateAttackRangeGrid(pc)
+                jmp     BuildAttackRangeGrid(pc)
 
-    ; End of function j_CreateAttackRangeGrid
+    ; End of function j_BuildAttackRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateSpellRangeGrid:
+j_BuildSpellRangeGrid:
                 
-                jmp     CreateSpellRangeGrid(pc)
+                jmp     BuildSpellRangeGrid(pc)
 
-    ; End of function j_CreateSpellRangeGrid
+    ; End of function j_BuildSpellRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateItemRangeGrid:
+j_BuildSpellRangeGridForItemUse:
                 
-                jmp     CreateItemRangeGrid(pc)
+                jmp     BuildSpellRangeGridForItemUse(pc)
 
-    ; End of function j_CreateItemRangeGrid
+    ; End of function j_BuildSpellRangeGridForItemUse
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateTargetableGrid_GiveItem:
+j_BuildSpellRangeGridForItemGive:
                 
-                jmp     PopulateTargetableGrid_GiveItem(pc)
+                jmp     BuildSpellRangeGridForItemGive(pc)
 
-    ; End of function j_PopulateTargetableGrid_GiveItem
-
-
-; =============== S U B R O U T I N E =======================================
-
-; unused
-
-
-j_PopulateTargetableGrid_UseItem:
-                
-            if (VANILLA_BUILD=1)
-                jmp     PopulateTargetableGrid_UseItem(pc)
-            endif
-
-    ; End of function j_PopulateTargetableGrid_UseItem
+    ; End of function j_BuildSpellRangeGridForItemGive
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1478,13 +1464,13 @@ j_PopulateTargetableGrid_UseItem:
 ; unused
 
 
-j_sub_C5FA:
+j_PopulateTargetsListForItemUse:
                 
             if (VANILLA_BUILD=1)
-                jmp     sub_C5FA(pc)    
+                jmp     PopulateTargetsListForItemUse(pc)
             endif
 
-    ; End of function j_sub_C5FA
+    ; End of function j_PopulateTargetsListForItemUse
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1492,13 +1478,13 @@ j_sub_C5FA:
 ; unused
 
 
-j_PopulateTargetableGrid_CastSpell:
+j_unusedsub_C5FA:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetableGrid_CastSpell(pc)
+                jmp     unusedsub_C5FA(pc)      
             endif
 
-    ; End of function j_PopulateTargetableGrid_CastSpell
+    ; End of function j_unusedsub_C5FA
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1506,13 +1492,13 @@ j_PopulateTargetableGrid_CastSpell:
 ; unused
 
 
-j_PopulateTargetableGrid:
+j_PopulateTargetsListForSpell:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetableGrid(pc)
+                jmp     PopulateTargetsListForSpell(pc)
             endif
 
-    ; End of function j_PopulateTargetableGrid
+    ; End of function j_PopulateTargetsListForSpell
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1520,13 +1506,13 @@ j_PopulateTargetableGrid:
 ; unused
 
 
-j_PopulateTargetsArrayWithOpponents:
+j_PopulateTargetsList:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetsArrayWithOpponents(pc)
+                jmp     PopulateTargetsList(pc)
             endif
 
-    ; End of function j_PopulateTargetsArrayWithOpponents
+    ; End of function j_PopulateTargetsList
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1534,13 +1520,13 @@ j_PopulateTargetsArrayWithOpponents:
 ; unused
 
 
-j_PopulateTargetsArrayWithAllies:
+j_BuildTargetsArrayWithOpponents:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetsArrayWithAllies(pc)
+                jmp     BuildTargetsArrayWithOpponents(pc)
             endif
 
-    ; End of function j_PopulateTargetsArrayWithAllies
+    ; End of function j_BuildTargetsArrayWithOpponents
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1548,13 +1534,13 @@ j_PopulateTargetsArrayWithAllies:
 ; unused
 
 
-j_PopulateTargetsArrayWithEnemies:
+j_BuildTargetsArrayWithAllies:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetsArrayWithEnemies(pc)
+                jmp     BuildTargetsArrayWithAllies(pc)
             endif
 
-    ; End of function j_PopulateTargetsArrayWithEnemies
+    ; End of function j_BuildTargetsArrayWithAllies
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1562,33 +1548,47 @@ j_PopulateTargetsArrayWithEnemies:
 ; unused
 
 
-j_PopulateTargetsArrayWithAllCombatants:
+j_BuildTargetsArrayWithEnemies:
                 
             if (VANILLA_BUILD=1)
-                jmp     PopulateTargetsArrayWithAllCombatants(pc)
+                jmp     BuildTargetsArrayWithEnemies(pc)
             endif
 
-    ; End of function j_PopulateTargetsArrayWithAllCombatants
+    ; End of function j_BuildTargetsArrayWithEnemies
+
+
+; =============== S U B R O U T I N E =======================================
+
+; unused
+
+
+j_BuildTargetsArrayWithAllCombatants:
+                
+            if (VANILLA_BUILD=1)
+                jmp     BuildTargetsArrayWithAllCombatants(pc)
+            endif
+
+    ; End of function j_BuildTargetsArrayWithAllCombatants
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateBattleTerrainOccupiedByAllies:
+j_UpdateOccupiedByAlliesTerrain:
                 
-                jmp     UpdateBattleTerrainOccupiedByAllies(pc)
+                jmp     UpdateOccupiedByAlliesTerrain(pc)
 
-    ; End of function j_UpdateBattleTerrainOccupiedByAllies
+    ; End of function j_UpdateOccupiedByAlliesTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_UpdateBattleTerrainOccupiedByEnemies:
+j_UpdateOccupiedByEnemiesTerrain:
                 
-                jmp     UpdateBattleTerrainOccupiedByEnemies(pc)
+                jmp     UpdateOccupiedByEnemiesTerrain(pc)
 
-    ; End of function j_UpdateBattleTerrainOccupiedByEnemies
+    ; End of function j_UpdateOccupiedByEnemiesTerrain
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1836,21 +1836,21 @@ j_StartAiControl:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_PopulateMovementArrays:
+j_BuildMovementArrays:
                 
-                jmp     PopulateMovementArrays(pc)
+                jmp     BuildMovementArrays(pc)
 
-    ; End of function j_PopulateMovementArrays
+    ; End of function j_BuildMovementArrays
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_CreateMovementRangeGrid:
+j_BuildMovementRangeGrid:
                 
-                jmp     CreateMovementRangeGrid(pc)
+                jmp     BuildMovementRangeGrid(pc)
 
-    ; End of function j_CreateMovementRangeGrid
+    ; End of function j_BuildMovementRangeGrid
 
 
 ; =============== S U B R O U T I N E =======================================

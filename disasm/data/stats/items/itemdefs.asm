@@ -139,18 +139,18 @@ table_ItemDefinitions:
 
 
 ; Move type shorthands :
-@regular = MOVETYPE_LOWER_REGULAR
-@centaur = MOVETYPE_LOWER_CENTAUR
-@stealth = MOVETYPE_LOWER_STEALTH
-@brassGunner = MOVETYPE_LOWER_BRASS_GUNNER
-@flying = MOVETYPE_LOWER_FLYING
-@hovering = MOVETYPE_LOWER_HOVERING
-@aquatic = MOVETYPE_LOWER_AQUATIC
-@archer = MOVETYPE_LOWER_ARCHER
-@centaurArcher = MOVETYPE_LOWER_CENTAUR_ARCHER
-@stealthArcher = MOVETYPE_LOWER_STEALTH_ARCHER
-@mage = MOVETYPE_LOWER_MAGE
-@healer = MOVETYPE_LOWER_HEALER
+@regular = MOVETYPE_REGULAR
+@centaur = MOVETYPE_CENTAUR
+@stealth = MOVETYPE_STEALTH
+@brassGunner = MOVETYPE_BRASS_GUNNER
+@flying = MOVETYPE_FLYING
+@hovering = MOVETYPE_HOVERING
+@aquatic = MOVETYPE_AQUATIC
+@archer = MOVETYPE_ARCHER
+@centaurArcher = MOVETYPE_CENTAUR_ARCHER
+@stealthArcher = MOVETYPE_STEALTH_ARCHER
+@mage = MOVETYPE_MAGE
+@healer = MOVETYPE_HEALER
 
 ; ---------------------------------------------------------------------------
                 

@@ -27,14 +27,14 @@ SpawnEnemyEntity:
                 swap    d6
             else
                 move.w  d1,-(sp)
-                jsr     j_GetMoveType
+                jsr     j_GetMovetype
                 clr.w   d6
-                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
+                cmpi.b  #MOVETYPE_FLYING,d1
                 bne.s   loc_444CE
                 addq.w  #1,d6
 loc_444CE:
                 
-                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.b  #MOVETYPE_HOVERING,d1
                 bne.s   loc_444D6
                 addq.w  #1,d6
 loc_444D6:
@@ -303,6 +303,7 @@ PositionBattleEntities:
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   @SkipAlly
+                
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
                 jsr     j_GetCombatantX
@@ -326,14 +327,14 @@ PositionBattleEntities:
             else
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetMoveType
+                jsr     j_GetMovetype
                 clr.w   d6
-                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
+                cmpi.b  #MOVETYPE_FLYING,d1
                 bne.s   @CheckHovering_Ally
                 addq.w  #1,d6
 @CheckHovering_Ally:
                 
-                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.b  #MOVETYPE_HOVERING,d1
                 bne.s   @NotAerial_Ally
                 addq.w  #1,d6
 @NotAerial_Ally:
@@ -371,8 +372,9 @@ PositionBattleEntities:
                 move.w  battleEntity(a6),d0
                 jsr     j_GetActivationBitfield
                 move.w  (sp)+,d0
-                andi.w  #8,d1
+                andi.w  #AIBITFIELD_BIT3,d1
                 bne.w   @SkipEnemy
+                
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
                 jsr     j_GetCombatantY
@@ -380,6 +382,7 @@ PositionBattleEntities:
                 move.w  d1,d2
                 tst.b   d2
                 bmi.w   @SkipEnemy
+                
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
                 jsr     j_GetCombatantX
@@ -403,14 +406,14 @@ PositionBattleEntities:
             else
                 movem.w d0-d1,-(sp)
                 move.w  battleEntity(a6),d0
-                jsr     j_GetMoveType
+                jsr     j_GetMovetype
                 clr.w   d6
-                cmpi.b  #MOVETYPE_LOWER_FLYING,d1
+                cmpi.b  #MOVETYPE_FLYING,d1
                 bne.s   @CheckHovering_Enemy
                 addq.w  #1,d6
 @CheckHovering_Enemy:
                 
-                cmpi.b  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.b  #MOVETYPE_HOVERING,d1
                 bne.s   @NotAerial_Enemy
                 addq.w  #1,d6
 @NotAerial_Enemy:
@@ -500,6 +503,7 @@ PositionBattleEntities:
                 
                 cmpi.w  #-1,(a0)
                 beq.w   @Done
+                
                 move.w  d0,-(sp)
                 move.w  battleEntity(a6),d0
                 clr.w   d1
@@ -507,7 +511,7 @@ PositionBattleEntities:
                 jsr     j_SetCurrentHp
                 jsr     j_SetStatusEffects
                 jsr     j_GetActivationBitfield
-                ori.w   #8,d1
+                ori.w   #AIBITFIELD_BIT3,d1
                 jsr     j_SetActivationBitfield
                 clr.w   d1
                 move.b  (a0)+,d1
@@ -537,7 +541,8 @@ PositionBattleEntities:
                 bsr.w   DeclareNewEntity
                 addq.w  #1,d0
                 bra.w   @NextNeutralEntity
-                move.b  #-1,(a1)+
+                
+                move.b  #-1,(a1)+       ; unreachable code
 @NextNeutralEntity:
                 
                 subq.w  #1,battleEntity(a6)

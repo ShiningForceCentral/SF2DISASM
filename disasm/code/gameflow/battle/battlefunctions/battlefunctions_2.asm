@@ -16,11 +16,11 @@ UpdateTargetsListForCombatant:
                 tst.b   d0
                 movem.w (sp)+,d0
                 blt.s   @Enemy
-                jsr     j_UpdateBattleTerrainOccupiedByEnemies
+                jsr     j_UpdateOccupiedByEnemiesTerrain
                 bra.s   @Return
 @Enemy:
                 
-                jsr     j_UpdateBattleTerrainOccupiedByAllies
+                jsr     j_UpdateOccupiedByAlliesTerrain
 @Return:
                 
                 rts
@@ -64,7 +64,7 @@ ProcessBattleEntityControlPlayerInput:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                jsr     j_PopulateMovementArrays
+                jsr     j_BuildMovementArrays
                 clr.w   d0
                 jsr     UpdateTargetsListForCombatant(pc)
                 movem.w (sp)+,d0-d1
@@ -129,7 +129,7 @@ ProcessBattleEntityControlPlayerInput:
 @CheckTargetReachableByAttack:
                 
                 move.w  combatant(a6),d0
-                jsr     j_CreateAttackRangeGrid
+                jsr     j_BuildAttackRangeGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.s   @TargetIsInAttackRange
                 
@@ -154,7 +154,7 @@ ProcessBattleEntityControlPlayerInput:
                 move.w  ((BATTLE_ACTOR_Y-$1000000)).w,d1
                 jsr     j_SetCombatantY
                 move.w  combatant(a6),d0
-                jsr     j_CreateMovementRangeGrid
+                jsr     j_BuildMovementRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 bra.w   @Start
 @CheckChoice_Attack:
@@ -162,7 +162,7 @@ ProcessBattleEntityControlPlayerInput:
                 tst.w   d0
                 bne.w   @CheckChoice_Magic
                 move.w  combatant(a6),d0
-                jsr     j_CreateAttackRangeGrid
+                jsr     j_BuildAttackRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   @HasTarget_Attack
@@ -258,7 +258,7 @@ ProcessBattleEntityControlPlayerInput:
                 
                 move.w  d4,d1
                 move.w  combatant(a6),d0
-                jsr     j_CreateSpellRangeGrid
+                jsr     j_BuildSpellRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   @HasTarget_Spell
@@ -269,7 +269,7 @@ ProcessBattleEntityControlPlayerInput:
 @HasTarget_Spell:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -304,7 +304,7 @@ CreatePulsatingSpellRangeGrid:
                 movem.l d0-a6,-(sp)
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 move.w  ((TEMP_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_CreateSpellRangeGrid
+                jsr     j_BuildSpellRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 movem.l (sp)+,d0-a6
                 rts
@@ -395,7 +395,7 @@ CreatePulsatingSpellRangeGrid:
                 
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
-                jsr     j_CreateItemRangeGrid
+                jsr     j_BuildSpellRangeGridForItemUse
                 bsr.w   CreatePulsatingBlocksForGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   @HasTarget_Use
@@ -409,7 +409,7 @@ CreatePulsatingSpellRangeGrid:
                 jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 bsr.w   ControlCursorEntity_ChooseTarget
                 cmpi.w  #-1,d0
@@ -447,7 +447,7 @@ CreatePulsatingItemRangeGrid:
                 move.w  ((TEMP_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_IsItemUsableByCombatant
                 bcc.s   @NotUsable
-                jsr     j_CreateItemRangeGrid
+                jsr     j_BuildSpellRangeGridForItemUse
                 bsr.w   CreatePulsatingBlocksForGrid
                 bra.s   @Done
 @NotUsable:
@@ -711,7 +711,7 @@ loc_24D34:
 loc_24D42:
                 
                 jsr     j_HideBattleEquipWindow
-                jsr     j_CreateAttackRangeGrid
+                jsr     j_BuildAttackRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w,d0
                 move.w  (sp)+,d1
@@ -748,7 +748,7 @@ loc_24D42:
                 move.w  d1,(a0)+
                 move.w  (sp)+,d1
                 move.w  combatant(a6),d0
-                jsr     j_PopulateTargetableGrid_GiveItem
+                jsr     j_BuildSpellRangeGridForItemGive
                 bsr.w   CreatePulsatingBlocksForGrid
                 tst.w   ((TARGETS_LIST_LENGTH-$1000000)).w
                 bne.w   @HasTarget_Give
@@ -1250,7 +1250,7 @@ ExecuteAiControl:
                 
                 ; Move entity by move string
                 move.w  combatant(a6),d0
-                jsr     j_CreateMovementRangeGrid
+                jsr     j_BuildMovementRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  combatant(a6),d0
                 move.w  combatant(a6),d0
@@ -1276,7 +1276,7 @@ ExecuteAiControl:
                 bne.w   @Check_CastSpell
                 
                 move.w  combatant(a6),d0
-                jsr     j_CreateAttackRangeGrid
+                jsr     j_BuildAttackRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 clr.b   ((CURSOR_RADIUS-$1000000)).w
@@ -1291,11 +1291,11 @@ ExecuteAiControl:
                 bne.w   @Check_UseItem
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
-                jsr     j_CreateSpellRangeGrid
+                jsr     j_BuildSpellRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1308,14 +1308,14 @@ ExecuteAiControl:
                 bne.w   @Check_Explosion
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
-                jsr     j_CreateItemRangeGrid
+                jsr     j_BuildSpellRangeGridForItemUse
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 jsr     j_GetItemDefinitionAddress
                 clr.w   d1
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)
@@ -1328,11 +1328,11 @@ ExecuteAiControl:
                 bne.w   @Check_Laser
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
                 move.w  combatant(a6),d0
-                jsr     j_CreateSpellRangeGrid
+                jsr     j_BuildSpellRangeGrid
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   CreatePulsatingBlocksForGrid
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_RADIUS(a0),((CURSOR_RADIUS-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w,d0
                 move.w  d0,itemOrSpellIndex(a6)

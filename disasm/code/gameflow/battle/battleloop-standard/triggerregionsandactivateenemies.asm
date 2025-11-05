@@ -515,7 +515,7 @@ UpdateAllRegionActivatedEnemiesAi:
 UpdateRegionActivatedEnemyAi:
                 
                 ; Are associated regions triggered for this AI?
-                jsr     GetAiRegion     ; -> d1.w, d2.w
+                jsr     GetTriggerRegions     ; -> d1.w, d2.w
                 cmpi.w  #15,d1
                 beq.s   @CheckRegion2
                 

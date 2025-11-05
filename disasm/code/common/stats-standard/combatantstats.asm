@@ -538,7 +538,7 @@ GetMoveType:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a0),d1
                 lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movea.l (sp)+,a0
@@ -592,7 +592,7 @@ GetAiCommandset:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a0),d1
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a0),d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movea.l (sp)+,a0
                 rts
@@ -606,11 +606,11 @@ GetAiCommandset:
 ;      d2.w = second AI point
 
 
-GetAiSpecialMoveOrders:
+GetMoveOrders:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                getSavedWord a0, d1, COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS
+                getSavedWord a0, d1, COMBATANT_OFFSET_MOVE_ORDERS
                 move.w  d1,d2
                 lsr.w   #BYTE_SHIFT_COUNT,d1
                 andi.w  #BYTE_MASK,d1
@@ -627,11 +627,11 @@ GetAiSpecialMoveOrders:
 ; Out: d1.w, d2.w = AI activation regions 1 and 2 indexes
 
 
-GetAiRegion:
+GetTriggerRegions:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                move.b  COMBATANT_OFFSET_AI_REGION(a0),d1
+                move.b  COMBATANT_OFFSET_TRIGGER_REGIONS(a0),d1
                 move.b  d1,d2
                 lsr.b   #NIBBLE_SHIFT_COUNT,d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
@@ -639,7 +639,7 @@ GetAiRegion:
                 movea.l (sp)+,a0
                 rts
 
-    ; End of function GetAiRegion
+    ; End of function GetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -1055,7 +1055,7 @@ SetMoveTypeAndAiCommandset:
                 
                 move.l  a0,-(sp)
                 bsr.w   GetCombatantEntryAddress
-                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a0)
+                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a0)
                 movea.l (sp)+,a0
                 rts
 
@@ -1065,35 +1065,35 @@ SetMoveTypeAndAiCommandset:
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiSpecialMoveOrders:
+SetMoveOrders:
                 
                 movem.l d1-d2/a0,-(sp)
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 andi.w  #BYTE_MASK,d2
                 or.w    d2,d1
                 bsr.w   GetCombatantEntryAddress
-                setSavedWord d1, a0, COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS
+                setSavedWord d1, a0, COMBATANT_OFFSET_MOVE_ORDERS
                 movem.l (sp)+,d1-d2/a0
                 rts
 
-    ; End of function SetAiSpecialMoveOrders
+    ; End of function SetMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiRegion:
+SetTriggerRegions:
                 
                 movem.l d1-d2/a0,-(sp)
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
                 bsr.w   GetCombatantEntryAddress
-                move.b  d1,COMBATANT_OFFSET_AI_REGION(a0)
+                move.b  d1,COMBATANT_OFFSET_TRIGGER_REGIONS(a0)
                 movem.l (sp)+,d1-d2/a0
                 rts
 
-    ; End of function SetAiRegion
+    ; End of function SetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================

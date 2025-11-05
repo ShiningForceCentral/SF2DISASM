@@ -78,7 +78,7 @@ GetDealsItemInfo:
                 btst    #DEALS_BIT_REMAINDER,d1 ; since deals are stacked 2 to a byte, this is the bit index that stores whether we are an even or odd item index
                 bne.s   @OddIndex
                 
-                lsr.b   #BITS_HALFBYTE,d2
+                lsr.b   #NIBBLE_SHIFT_COUNT,d2
                 moveq   #DEALS_ADD_AMOUNT_EVEN,d0
                 bra.s   @Return
 @OddIndex:

@@ -107,67 +107,67 @@ UpgradeRandomBattleEnemies:
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 
                 ; Check regular move type
-                cmpi.b  #MOVETYPE_LOWER_REGULAR,d2
+                cmpi.b  #MOVETYPE_REGULAR,d2
                 bne.s   @CheckCentaur
                 getPointer p_table_MeleeTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckCentaur:
                 
-                cmpi.b  #MOVETYPE_LOWER_CENTAUR,d2
+                cmpi.b  #MOVETYPE_CENTAUR,d2
                 bne.s   @CheckStealth
                 getPointer p_table_MeleeTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckStealth:
                 
-                cmpi.b  #MOVETYPE_LOWER_STEALTH,d2
+                cmpi.b  #MOVETYPE_STEALTH,d2
                 bne.s   @CheckGunner
                 getPointer p_table_MeleeTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckGunner:
                 
-                cmpi.b  #MOVETYPE_LOWER_BRASS_GUNNER,d2
+                cmpi.b  #MOVETYPE_BRASS_GUNNER,d2
                 bne.s   @CheckFlying
                 getPointer p_table_MeleeTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckFlying:
                 
-                cmpi.b  #MOVETYPE_LOWER_FLYING,d2
+                cmpi.b  #MOVETYPE_FLYING,d2
                 bne.s   @CheckHovering
                 getPointer p_table_AirborneTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckHovering:
                 
-                cmpi.b  #MOVETYPE_LOWER_HOVERING,d2
+                cmpi.b  #MOVETYPE_HOVERING,d2
                 bne.s   @CheckArcher
                 getPointer p_table_AirborneTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_ARCHER,d2
+                cmpi.b  #MOVETYPE_ARCHER,d2
                 bne.s   @CheckCentaurArcher
                 getPointer p_table_RangedTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckCentaurArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_CENTAUR_ARCHER,d2
+                cmpi.b  #MOVETYPE_CENTAUR_ARCHER,d2
                 bne.s   @CheckStealthArcher
                 getPointer p_table_RangedTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckStealthArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_STEALTH_ARCHER,d2
+                cmpi.b  #MOVETYPE_STEALTH_ARCHER,d2
                 bne.s   @CheckMage
                 getPointer p_table_RangedTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckMage:
                 
-                cmpi.b  #MOVETYPE_LOWER_MAGE,d2
+                cmpi.b  #MOVETYPE_MAGE,d2
                 bne.s   @CheckHealer
                 getPointer p_table_MageTypeEnemyUpgradeDefinition, a0
                 bra.s   @GetLeaderEffectiveLevel
 @CheckHealer:
                 
-                cmpi.b  #MOVETYPE_LOWER_HEALER,d2
+                cmpi.b  #MOVETYPE_HEALER,d2
                 bne.w   @DefaultEnemy
                 getPointer p_table_HealerTypeEnemyUpgradeDefinition, a0
 @GetLeaderEffectiveLevel:

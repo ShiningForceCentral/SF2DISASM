@@ -136,7 +136,7 @@ InitializeEnemyBattlePosition:
                 clr.w   d2
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
-                jsr     SetAiRegion
+                jsr     SetTriggerRegions
 @loc_3:
                 
                 movem.l (sp)+,d0-a6
@@ -226,10 +226,10 @@ InitializeEnemyStats:
                 jsr     SetEnemyIndex
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
-                jsr     SetAiRegion
+                jsr     SetTriggerRegions
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER(a0),d2
-                jsr     SetAiSpecialMoveOrders
+                jsr     SetMoveOrders
                 move.w  BATTLESPRITESET_ENTITYOFFSET_ITEMS(a0),d1
                 bsr.s   InitializeEnemyItems
                 jsr     GetActivationBitfield

@@ -100,7 +100,7 @@ ExecuteIndividualTurn:
                 move.w  d0,((MOVING_BATTLE_ENTITY_INDEX-$1000000)).w
                 jsr     OpenBattlefieldMiniStatusWindow
                 jsr     OpenLandEffectWindow
-                jsr     CreateMovementRangeGrid
+                jsr     BuildMovementRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 bsr.w   HideCursorEntity
                 move.w  statusEffects(a6),d1

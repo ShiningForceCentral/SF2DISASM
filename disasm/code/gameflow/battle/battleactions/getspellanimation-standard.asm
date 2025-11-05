@@ -79,7 +79,7 @@ GetSpellAnimation:
                 bne.s   @Return
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                bsr.w   GetSpellDefAddress
+                bsr.w   GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Return:        rts
                 modend
@@ -95,7 +95,7 @@ GetSpellAnimation:
                 cmpi.b  #ITEM_NOTHING,d1
                 beq.s   @Return
                 
-                bsr.w   GetSpellDefAddress
+                bsr.w   GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Return:        rts
                 modend

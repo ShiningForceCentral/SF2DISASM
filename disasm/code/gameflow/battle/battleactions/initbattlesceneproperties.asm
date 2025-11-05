@@ -126,7 +126,7 @@ battlesceneScript_InitializeBattlesceneProperties:
                 andi.w  #SPELLENTRY_LOWERMASK_LV,d0
                 move.w  d0,((BATTLESCENE_SPELL_LEVEL-$1000000)).w
                 move.w  ((BATTLESCENE_SPELL_INDEX-$1000000)).w,d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 beq.s   @Skip2
                 move.b  (a4),d0

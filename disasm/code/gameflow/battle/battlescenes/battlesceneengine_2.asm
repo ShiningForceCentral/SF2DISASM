@@ -26,10 +26,10 @@ GetBattlesceneGround:
                 cmpi.w  #COMBATANT_ENEMIES_START,d0
                 bcc.w   @Skip           ; skip if no ally present
                 
-                jsr     j_GetMoveType
-                cmpi.w  #MOVETYPE_LOWER_FLYING,d1
+                jsr     j_GetMovetype
+                cmpi.w  #MOVETYPE_FLYING,d1
                 beq.w   @Skip           ; skip if ally is flying or hovering
-                cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.w  #MOVETYPE_HOVERING,d1
                 beq.w   @Skip
                 
                 bra.w   GetBattlesceneBackground

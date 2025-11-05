@@ -25,8 +25,8 @@ table_EnemyDefinitions:
 ;                   [SPELL_]enum[|level], &
 ;                   [SPELL_]enum[|level]
 ;               initialStatus  [STATUSEFFECT_]bitfield
-;               moveType       [MOVETYPE_UPPER]enum
-;               aiBitfield     [AIBITFIELD_]bitfield
+;               movetype       [MOVETYPE_UPPER]enum
+;               aiBitfield      [AIBITFIELD_]bitfield
 ;
 ;        level: LV1 = 0 (default when omitted)
 ;               LV2 = 64
@@ -57,8 +57,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 1           ; 1: HUGE RAT
                 spellPower REGULAR
@@ -82,8 +82,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 2           ; 2: GALAM SOLDIER
                 spellPower REGULAR
@@ -107,8 +107,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 3           ; 3: GALAM KNIGHT
                 spellPower REGULAR
@@ -132,8 +132,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      CENTAUR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      CENTAUR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 4           ; 4: GOBLIN
                 spellPower REGULAR
@@ -157,8 +157,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 5           ; 5: GREEN OOZE
                 spellPower REGULAR
@@ -182,8 +182,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 6           ; 6: DARK DWARF
                 spellPower REGULAR
@@ -207,8 +207,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 7           ; 7: HOBGOBLIN
                 spellPower REGULAR
@@ -232,8 +232,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 8           ; 8: ZOMBIE
                 spellPower REGULAR
@@ -257,8 +257,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 9           ; 9: GOLEM
                 spellPower REGULAR
@@ -282,8 +282,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 10          ; 10: KRAKEN LEG
                 spellPower REGULAR
@@ -307,8 +307,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      AQUATIC
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      AQUATIC
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 11          ; 11: SOULSOWER
                 spellPower REGULAR
@@ -332,8 +332,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 12          ; 12: ORC
                 spellPower REGULAR
@@ -357,8 +357,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 13          ; 13: PAWN
                 spellPower ENHANCED
@@ -382,8 +382,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 14          ; 14: KNIGHT
                 spellPower ENHANCED
@@ -407,8 +407,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 15          ; 15: RAT
                 spellPower REGULAR
@@ -432,8 +432,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 16          ; 16: BUBBLING OOZE
                 spellPower REGULAR
@@ -457,8 +457,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 17          ; 17: SKELETON
                 spellPower ENHANCED
@@ -482,8 +482,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 18          ; 18: DARK SOLDIER
                 spellPower ENHANCED
@@ -507,8 +507,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 19          ; 19: LIZARDMAN
                 spellPower ENHANCED
@@ -532,8 +532,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 20          ; 20: WORM
                 spellPower ENHANCED
@@ -557,8 +557,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 21          ; 21: DARK KNIGHT
                 spellPower ENHANCED
@@ -582,8 +582,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      CENTAUR
-                aiBitfield   PRIORITYMOD_2
+                movetype      CENTAUR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 22          ; 22: ORC LORD
                 spellPower ENHANCED
@@ -607,8 +607,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 23          ; 23: DEVIL SOLDIER
                 spellPower ENHANCED
@@ -632,8 +632,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 24          ; 24: CERBERUS
                 spellPower ENHANCED
@@ -657,8 +657,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 25          ; 25: MUD MAN
                 spellPower ENHANCED
@@ -682,8 +682,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 26          ; 26: DRAGONEWT
                 spellPower ENHANCED
@@ -707,8 +707,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 27          ; 27: PURPLE WORM
                 spellPower ENHANCED
@@ -732,8 +732,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 28          ; 28: EXECUTIONER
                 spellPower ENHANCED
@@ -757,8 +757,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 29          ; 29: HELL HOUND
                 spellPower ENHANCED
@@ -782,8 +782,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 30          ; 30: MINOTAUR
                 spellPower ENHANCED
@@ -807,8 +807,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 31          ; 31: CYCLOPS
                 spellPower ENHANCED
@@ -832,8 +832,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 32          ; 32: BURST ROCK
                 spellPower ENHANCED
@@ -857,8 +857,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 33          ; 33: HYDRA
                 spellPower ENHANCED
@@ -882,8 +882,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2|BIT5
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2|BIT5
                 
                 unknownByte 34          ; 34: CHAOS WARRIOR
                 spellPower ENHANCED
@@ -907,8 +907,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 35          ; 35: REAPER
                 spellPower ENHANCED
@@ -932,8 +932,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 36          ; 36: EVIL BEAST
                 spellPower ENHANCED
@@ -957,8 +957,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 37          ; 37: PYROHYDRA
                 spellPower ENHANCED
@@ -982,8 +982,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_2
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 38          ; 38: ZEON GUARD
                 spellPower ENHANCED
@@ -1007,8 +1007,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_2
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 39          ; 39: GIZMO
                 spellPower REGULAR
@@ -1032,8 +1032,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HOVERING
-                aiBitfield   PRIORITYMOD_2
+                movetype      HOVERING
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 40          ; 40: HUGE BAT
                 spellPower REGULAR
@@ -1057,8 +1057,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 41          ; 41: VAMPIRE BAT
                 spellPower REGULAR
@@ -1082,8 +1082,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 42          ; 42: EVIL CLOUD
                 spellPower REGULAR
@@ -1107,8 +1107,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HOVERING
-                aiBitfield   PRIORITYMOD_2
+                movetype      HOVERING
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 43          ; 43: GARGOYLE
                 spellPower REGULAR
@@ -1132,8 +1132,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4|BIT5
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4|BIT5
                 
                 unknownByte 44          ; 44: HARPY
                 spellPower REGULAR
@@ -1157,8 +1157,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4|BIT5
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4|BIT5
                 
                 unknownByte 45          ; 45: LESSER DEMON
                 spellPower ENHANCED
@@ -1182,8 +1182,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4|BIT5
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4|BIT5
                 
                 unknownByte 46          ; 46: WYVERN
                 spellPower ENHANCED
@@ -1207,8 +1207,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4|BIT5
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4|BIT5
                 
                 unknownByte 47          ; 47: HARPY QUEEN
                 spellPower ENHANCED
@@ -1232,8 +1232,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 48          ; 48: PEGASUS KNIGHT
                 spellPower ENHANCED
@@ -1257,8 +1257,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 49          ; 49: GRIFFIN
                 spellPower ENHANCED
@@ -1282,8 +1282,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 50          ; 50: MIST DEMON
                 spellPower ENHANCED
@@ -1307,8 +1307,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HOVERING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      HOVERING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 51          ; 51: WHITE DRAGON
                 spellPower ENHANCED
@@ -1332,8 +1332,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 52          ; 52: DEMON
                 spellPower ENHANCED
@@ -1357,8 +1357,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 53          ; 53: CHAOS DRAGON
                 spellPower ENHANCED
@@ -1382,8 +1382,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 54          ; 54: DEVIL GRIFFIN
                 spellPower ENHANCED
@@ -1407,8 +1407,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 55          ; 55: ARCH DEMON
                 spellPower ENHANCED
@@ -1432,8 +1432,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 56          ; 56: GALAM ARCHER
                 spellPower REGULAR
@@ -1457,8 +1457,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 57          ; 57: HUNTER GOBLIN
                 spellPower REGULAR
@@ -1482,8 +1482,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH_ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      STEALTH_ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 58          ; 58: DEATH ARCHER
                 spellPower REGULAR
@@ -1507,8 +1507,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 59          ; 59: KRAKEN ARM
                 spellPower REGULAR
@@ -1532,8 +1532,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      AQUATIC
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      AQUATIC
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 60          ; 60: ARROW LAUNCHER
                 spellPower REGULAR
@@ -1557,8 +1557,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      BRASS_GUNNER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      BRASS_GUNNER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 61          ; 61: ROOK
                 spellPower REGULAR
@@ -1582,8 +1582,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      BRASS_GUNNER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      BRASS_GUNNER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 62          ; 62: DARK SNIPER
                 spellPower ENHANCED
@@ -1607,8 +1607,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH_ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      STEALTH_ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 63          ; 63: BOW MASTER
                 spellPower ENHANCED
@@ -1632,8 +1632,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 64          ; 64: BOW RIDER
                 spellPower ENHANCED
@@ -1657,8 +1657,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      CENTAUR_ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      CENTAUR_ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 65          ; 65: DARK GUNNER
                 spellPower ENHANCED
@@ -1682,8 +1682,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      BRASS_GUNNER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      BRASS_GUNNER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 66          ; 66: HORSEMAN
                 spellPower ENHANCED
@@ -1707,8 +1707,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      CENTAUR_ARCHER
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      CENTAUR_ARCHER
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 67          ; 67: GALAM MAGE
                 spellPower REGULAR
@@ -1732,8 +1732,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 68          ; 68: WITCH
                 spellPower REGULAR
@@ -1757,8 +1757,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 69          ; 69: MASTER MAGE
                 spellPower REGULAR
@@ -1782,8 +1782,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 70          ; 70: DARK MADAM
                 spellPower REGULAR
@@ -1807,8 +1807,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 71          ; 71: QUEEN
                 spellPower ENHANCED
@@ -1832,8 +1832,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 72          ; 72: WIZARD
                 spellPower ENHANCED
@@ -1857,8 +1857,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 73          ; 73: NECROMANCER
                 spellPower ENHANCED
@@ -1882,8 +1882,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 74          ; 74: CHAOS WIZARD
                 spellPower ENHANCED
@@ -1907,8 +1907,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2|BIT4
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2|BIT4
                 
                 unknownByte 75          ; 75: DEMON MASTER
                 spellPower ENHANCED
@@ -1932,8 +1932,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 76          ; 76: DARK CLERIC
                 spellPower REGULAR
@@ -1957,8 +1957,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 77          ; 77: DEATH MONK
                 spellPower REGULAR
@@ -1982,8 +1982,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 78          ; 78: BLACK MONK
                 spellPower REGULAR
@@ -2007,8 +2007,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 79          ; 79: HIGH PRIEST
                 spellPower REGULAR
@@ -2032,8 +2032,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 80          ; 80: EVIL BISHOP
                 spellPower ENHANCED
@@ -2057,8 +2057,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 81          ; 81: DARK BISHOP
                 spellPower ENHANCED
@@ -2082,8 +2082,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 0           ; 82: MASTER MONK
                 spellPower ENHANCED
@@ -2107,8 +2107,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 0           ; 83: SHAMAN
                 spellPower ENHANCED
@@ -2132,8 +2132,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 0           ; 84: EVIL BISHOP
                 spellPower ENHANCED
@@ -2157,8 +2157,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 0           ; 85: BLUE SHAMAN
                 spellPower ENHANCED
@@ -2182,8 +2182,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 
                 unknownByte 0           ; 86: DARK SMOKE
                 spellPower REGULAR
@@ -2207,8 +2207,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HOVERING
-                aiBitfield   PRIORITYMOD_0
+                movetype      HOVERING
+                aiBitfield    PRIORITYMOD_0
                 
                 unknownByte 0           ; 87: KRAKEN HEAD
                 spellPower REGULAR
@@ -2232,8 +2232,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      AQUATIC
-                aiBitfield   PRIORITYMOD_1
+                movetype      AQUATIC
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 88: TAROS
                 spellPower REGULAR
@@ -2257,8 +2257,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 89: KING
                 spellPower ENHANCED
@@ -2282,8 +2282,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_1
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 90: WILLARD
                 spellPower ENHANCED
@@ -2307,8 +2307,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      STEALTH
-                aiBitfield   PRIORITYMOD_0
+                movetype      STEALTH
+                aiBitfield    PRIORITYMOD_0
                 
                 unknownByte 0           ; 91: ZALBARD
                 spellPower ENHANCED
@@ -2332,8 +2332,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_1
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 92: CAMEELA
                 spellPower ENHANCED
@@ -2357,8 +2357,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 93: PRISM FLOWER
                 spellPower ENHANCED
@@ -2382,8 +2382,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 94: RED BARON
                 spellPower ENHANCED
@@ -2407,8 +2407,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 95: GESHP
                 spellPower ENHANCED
@@ -2432,8 +2432,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_1
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 96: ODD EYE
                 spellPower ENHANCED
@@ -2457,8 +2457,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_1
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 97: GALAM
                 spellPower ENHANCED
@@ -2482,8 +2482,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 98: ZEON
                 spellPower ENHANCED
@@ -2507,8 +2507,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      REGULAR
-                aiBitfield   PRIORITYMOD_1
+                movetype      REGULAR
+                aiBitfield    PRIORITYMOD_1
                 
                 unknownByte 0           ; 99: JAR
                 spellPower ENHANCED
@@ -2532,8 +2532,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      FLYING
-                aiBitfield   PRIORITYMOD_2
+                movetype      FLYING
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 0           ; 100: MASTER MAGE
                 spellPower REGULAR
@@ -2557,8 +2557,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 0           ; 101: NECROMANCER
                 spellPower ENHANCED
@@ -2582,8 +2582,8 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      MAGE
-                aiBitfield   PRIORITYMOD_2
+                movetype      MAGE
+                aiBitfield    PRIORITYMOD_2
                 
                 unknownByte 0           ; 102: BLUE SHAMAN
                 spellPower ENHANCED
@@ -2607,6 +2607,6 @@ table_EnemyDefinitions:
                     NOTHING, &
                     NOTHING
                 initialStatus NONE
-                moveType      HEALER
-                aiBitfield   PRIORITYMOD_3
+                movetype      HEALER
+                aiBitfield    PRIORITYMOD_3
                 

@@ -90,14 +90,16 @@ InitializeEnemyBattlePosition:
                 loadSavedDataAddress CURRENT_BATTLE, a0
                 move.b  (a0),d1
                 cmpi.b  #BATTLE_TO_MOUN,d1
-                bne.s   @loc_1
+                bne.s   @Continue
+                
                 cmpi.b  #COMBATANT_ENEMY_INDEX_15,d0
-                bne.s   @loc_1
+                bne.s   @Continue
+                
                 bsr.w   HasJaroJoinedTheForce ; HARDCODED check for Jaro in battle 32
                 tst.w   d1
-                beq.s   @loc_1
-                bra.w   @loc_3          ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
-@loc_1:
+                beq.s   @Continue
+                bra.w   @Done          ; skip positioning enemy 15 in battle 32 if Jaro has joined the Force
+@Continue:
                 
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
                 bsr.w   GetBattleSpritesetSubsection
@@ -105,18 +107,20 @@ InitializeEnemyBattlePosition:
                 bset    #COMBATANT_BIT_ENEMY,d2
                 clr.w   d1
                 cmp.b   d2,d0
-                bcc.w   @loc_2
+                bcc.w   @InitializeHiddenEnemy
+                
                 move.b  d0,d1
                 andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
                 mulu.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
-                cmpi.w  #2,d1
-                bge.w   @loc_2
+                cmpi.w  #SPAWN_HIDDEN,d1
+                bge.w   @InitializeHiddenEnemy
+                
                 bsr.w   InitializeEnemyStats
-                bra.w   @loc_3
-@loc_2:
+                bra.w   @Done
+@InitializeHiddenEnemy:
                 
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 jsr     j_SetActivationBitfield
@@ -129,8 +133,8 @@ InitializeEnemyBattlePosition:
                 clr.w   d2
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
-                jsr     j_SetAiRegion
-@loc_3:
+                jsr     j_SetTriggerRegions
+@Done:
                 
                 movem.l (sp)+,d0-a6
                 rts
@@ -219,29 +223,29 @@ InitializeEnemyStats:
                 jsr     j_SetCombatantX
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d1
                 jsr     j_SetCombatantY
-                jsr     j_GetMoveType
+                jsr     j_GetMovetype
                 lsl.w   #NIBBLE_SHIFT_COUNT,d1
                 andi.w  #BYTE_UPPER_NIBBLE_MASK,d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_AI_COMMANDSET(a0),d2
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.w    d2,d1
-                jsr     j_SetMoveTypeAndAiCommandset
+                jsr     j_SetMovetypeAndAiCommandset
                 move.b  d6,d1
                 jsr     j_SetEnemyIndex
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_TRIGGER_REGION(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_TRIGGER_REGION(a0),d2
-                jsr     j_SetAiRegion
+                jsr     j_SetTriggerRegions
                 move.b  BATTLESPRITESET_ENTITYOFFSET_PRIMARY_ORDER(a0),d1
                 move.b  BATTLESPRITESET_ENTITYOFFSET_SECONDARY_ORDER(a0),d2
-                jsr     j_SetAiSpecialMoveOrders
+                jsr     j_SetMoveOrders
                 move.w  BATTLESPRITESET_ENTITYOFFSET_ITEMS(a0),d1
                 bsr.w   InitializeEnemyItems
                 jsr     j_GetActivationBitfield
                 move.w  d1,d2
                 andi.w  #WORD_UPPER_NIBBLE_MASK,d2
                 move.w  BATTLESPRITESET_ENTITYOFFSET_INITIALIZATION_TYPE(a0),d1
-                ror.w   #8,d1
-                andi.w  #$FFF,d1
+                ror.w   #BYTE_SHIFT_COUNT,d1
+                andi.w  #BYTE_MASK|WORD_LOWER_NIBBLE_MASK,d1
                 or.w    d2,d1
                 jsr     j_SetActivationBitfield
                 bsr.w   AdjustEnemyBaseAttForDifficulty

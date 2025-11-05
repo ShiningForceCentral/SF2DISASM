@@ -7,7 +7,7 @@
 ; Find pointer to definition entry for spell d1.b -> a0
 
 
-GetSpellDefAddress:
+GetSpellDefinitionAddress:
                 
                 move.l  d0,-(sp)
                 getPointer p_table_SpellDefinitions, a0
@@ -24,7 +24,7 @@ GetSpellDefAddress:
 @Found:         move.l  (sp)+,d0
                 rts
 
-    ; End of function GetSpellDefAddress
+    ; End of function GetSpellDefinitionAddress
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -35,7 +35,7 @@ GetSpellDefAddress:
 GetSpellCost:
                 
                 move.l  a0,-(sp)
-                bsr.s   GetSpellDefAddress
+                bsr.s   GetSpellDefinitionAddress
                 clr.w   d1
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 movea.l (sp)+,a0

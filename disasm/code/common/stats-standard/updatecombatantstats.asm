@@ -78,10 +78,10 @@ UpdateCombatantStats:
 @Continue:
                 ; Set initial movetype as current
                 andi.b  #BYTE_UPPER_NIBBLE_MASK,d1
-                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a2),d2
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a2),d2
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
-                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
+                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a2)
                 
                 ; Apply equip effects on stats starting with weapon, then ring
                 moveq   #ITEMTYPE_WEAPON,d4
@@ -719,10 +719,10 @@ equipEffect_SetMoveType:
                 
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d1
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
-                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI(a2),d2
+                move.b  COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a2),d2
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
-                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI(a2)
+                move.b  d1,COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET(a2)
                 rts
 
     ; End of function equipEffect_SetMoveType

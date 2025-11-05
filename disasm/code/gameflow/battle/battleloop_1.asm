@@ -1,6 +1,6 @@
 
 ; ASM FILE code\gameflow\battle\battleloop_1.asm :
-; 0x23A84..0x23BB4 : Battle loop
+; 0x23A84..0x23BB4 : Battle loop main, part 1
 
 ; =============== S U B R O U T I N E =======================================
 

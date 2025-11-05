@@ -114,7 +114,7 @@ MainMenu_Magic:
                 beq.s   @NothingHappened        ; nothing happens if not an overworld map
                 
 @Egress:        move.b  spellEntry(a6),d1
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     DecreaseCurrentMP
@@ -146,7 +146,7 @@ MainMenu_Magic:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     DecreaseCurrentMP
