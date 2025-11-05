@@ -125,7 +125,7 @@ battlesceneScript_GetSpellanimation:
                 bne.s   @Silenced
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 clr.w   d4
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @Silenced:
@@ -146,7 +146,7 @@ battlesceneScript_GetSpellanimation:
                 cmpi.b  #-1,d1          ; should be $3F = nothing
                 beq.w   @loc_2
                 
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_ANIMATION(a0),d4
 @loc_2:
                 

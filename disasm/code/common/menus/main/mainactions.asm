@@ -108,7 +108,7 @@ byte_21348:
 @Egress:
                 
                 move.b  spellEntry(a6),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp
@@ -142,7 +142,7 @@ byte_213A8:
                 txt     243             ; "{NAME} cast{N}{SPELL} level {#}!"
                 clsTxt
                 move.b  spellEntry(a6),d1
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 move.b  SPELLDEF_OFFSET_MP_COST(a0),d1
                 move.w  member(a6),d0
                 jsr     j_DecreaseCurrentMp

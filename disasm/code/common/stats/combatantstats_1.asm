@@ -362,17 +362,17 @@ GetCurrentExp:
 ; Get movetype for combatant d0.w, shifted to the lower nibble position -> d1.w
 
 
-GetMoveType:
+GetMovetype:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET,d7
                 bsr.w   GetCombatantByte
                 lsr.w   #NIBBLE_SHIFT_COUNT,d1
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetMoveType
+    ; End of function GetMovetype
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -383,7 +383,7 @@ GetMoveType:
 GetAiCommandset:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET,d7
                 bsr.w   GetCombatantByte
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d1
                 movem.l (sp)+,d7-a0
@@ -398,10 +398,10 @@ GetAiCommandset:
 ;      d2.w = second AI point
 
 
-GetAiMoveOrders:
+GetMoveOrders:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
+                moveq   #COMBATANT_OFFSET_MOVE_ORDERS,d7
                 bsr.w   GetCombatantWord
                 move.w  d1,d2
                 lsr.w   #BYTE_SHIFT_COUNT,d1
@@ -410,7 +410,7 @@ GetAiMoveOrders:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetAiMoveOrders
+    ; End of function GetMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -419,10 +419,10 @@ GetAiMoveOrders:
 ; Out: d1.w, d2.w = AI activation regions 1 and 2 indexes
 
 
-GetAiRegion:
+GetTriggerRegions:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_AI_REGION,d7
+                moveq   #COMBATANT_OFFSET_TRIGGER_REGIONS,d7
                 bsr.w   GetCombatantByte
                 move.w  d1,d2
                 lsr.w   #NIBBLE_SHIFT_COUNT,d1
@@ -431,7 +431,7 @@ GetAiRegion:
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function GetAiRegion
+    ; End of function GetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================

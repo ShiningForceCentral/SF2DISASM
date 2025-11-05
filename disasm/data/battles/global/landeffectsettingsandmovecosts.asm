@@ -3,241 +3,241 @@
 ; 0xD824..0xD8F4 : Land effect settings and move costs table
 table_LandEffectSettingsAndMovecosts:
                 
-; Syntax        landEffectAndMoveCost [LANDEFFECTSETTING_]enum|moveCost
+; Syntax        landEffectAndMovecost [LANDEFFECTSETTING_]enum|movecost
 ;
 ; Note: Constant names ("enums"), shorthands (defined by macro), and numerical indexes are interchangeable.
                 
-; 0: 
-                landEffectAndMoveCost LE0|2 ; 0: Low Sky
-                landEffectAndMoveCost LE0|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE0|2 ; 3: Grass
-                landEffectAndMoveCost LE0|2 ; 4: Forest
-                landEffectAndMoveCost LE0|2 ; 5: Hills
-                landEffectAndMoveCost LE0|2 ; 6: Desert
-                landEffectAndMoveCost LE0|2 ; 7: High Sky
-                landEffectAndMoveCost LE0|2 ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+; 0: Unrestricted
+                landEffectAndMovecost LE0|2         ; 0: Low Sky
+                landEffectAndMovecost LE0|2         ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE0|2         ; 3: Grass
+                landEffectAndMovecost LE0|2         ; 4: Forest
+                landEffectAndMovecost LE0|2         ; 5: Hills
+                landEffectAndMovecost LE0|2         ; 6: Desert
+                landEffectAndMovecost LE0|2         ; 7: High Sky
+                landEffectAndMovecost LE0|2         ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 1: Regular
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|4 ; 4: Forest
-                landEffectAndMoveCost LE30|3 ; 5: Hills
-                landEffectAndMoveCost LE30|3 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|4        ; 4: Forest
+                landEffectAndMovecost LE30|3        ; 5: Hills
+                landEffectAndMovecost LE30|3        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 2: Centaur
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|5 ; 4: Forest
-                landEffectAndMoveCost LE30|5 ; 5: Hills
-                landEffectAndMoveCost LE30|5 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|5        ; 4: Forest
+                landEffectAndMovecost LE30|5        ; 5: Hills
+                landEffectAndMovecost LE30|5        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 3: Stealth
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|2 ; 3: Grass
-                landEffectAndMoveCost LE30|2 ; 4: Forest
-                landEffectAndMoveCost LE30|2 ; 5: Hills
-                landEffectAndMoveCost LE30|4 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|2        ; 3: Grass
+                landEffectAndMovecost LE30|2        ; 4: Forest
+                landEffectAndMovecost LE30|2        ; 5: Hills
+                landEffectAndMovecost LE30|4        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 4: Brass Gunner
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|2 ; 3: Grass
-                landEffectAndMoveCost LE30|3 ; 4: Forest
-                landEffectAndMoveCost LE30|3 ; 5: Hills
-                landEffectAndMoveCost LE30|3 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|2        ; 3: Grass
+                landEffectAndMovecost LE30|3        ; 4: Forest
+                landEffectAndMovecost LE30|3        ; 5: Hills
+                landEffectAndMovecost LE30|3        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 5: Flying
-                landEffectAndMoveCost LE0|2 ; 0: Low Sky
-                landEffectAndMoveCost LE0|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE0|2 ; 3: Grass
-                landEffectAndMoveCost LE0|2 ; 4: Forest
-                landEffectAndMoveCost LE0|2 ; 5: Hills
-                landEffectAndMoveCost LE0|2 ; 6: Desert
-                landEffectAndMoveCost LE0|2 ; 7: High Sky
-                landEffectAndMoveCost LE0|2 ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost LE0|2         ; 0: Low Sky
+                landEffectAndMovecost LE0|2         ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE0|2         ; 3: Grass
+                landEffectAndMovecost LE0|2         ; 4: Forest
+                landEffectAndMovecost LE0|2         ; 5: Hills
+                landEffectAndMovecost LE0|2         ; 6: Desert
+                landEffectAndMovecost LE0|2         ; 7: High Sky
+                landEffectAndMovecost LE0|2         ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 6: Hovering
-                landEffectAndMoveCost LE0|2 ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|2 ; 3: Grass
-                landEffectAndMoveCost LE30|2 ; 4: Forest
-                landEffectAndMoveCost LE30|2 ; 5: Hills
-                landEffectAndMoveCost LE0|2 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost LE0|2 ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost LE0|2         ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|2        ; 3: Grass
+                landEffectAndMovecost LE30|2        ; 4: Forest
+                landEffectAndMovecost LE30|2        ; 5: Hills
+                landEffectAndMovecost LE0|2         ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost LE0|2         ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 7: Aquatic
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost OBSTRUCTED ; 1: Plains
-                landEffectAndMoveCost OBSTRUCTED ; 2: Path
-                landEffectAndMoveCost OBSTRUCTED ; 3: Grass
-                landEffectAndMoveCost OBSTRUCTED ; 4: Forest
-                landEffectAndMoveCost OBSTRUCTED ; 5: Hills
-                landEffectAndMoveCost OBSTRUCTED ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost LE30|2 ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost OBSTRUCTED    ; 1: Plains
+                landEffectAndMovecost OBSTRUCTED    ; 2: Path
+                landEffectAndMovecost OBSTRUCTED    ; 3: Grass
+                landEffectAndMovecost OBSTRUCTED    ; 4: Forest
+                landEffectAndMovecost OBSTRUCTED    ; 5: Hills
+                landEffectAndMovecost OBSTRUCTED    ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost LE30|2        ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 8: Archer
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|4 ; 4: Forest
-                landEffectAndMoveCost LE30|3 ; 5: Hills
-                landEffectAndMoveCost LE30|3 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|4        ; 4: Forest
+                landEffectAndMovecost LE30|3        ; 5: Hills
+                landEffectAndMovecost LE30|3        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 9: Centaur Archer
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|5 ; 4: Forest
-                landEffectAndMoveCost LE30|5 ; 5: Hills
-                landEffectAndMoveCost LE30|5 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|5        ; 4: Forest
+                landEffectAndMovecost LE30|5        ; 5: Hills
+                landEffectAndMovecost LE30|5        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 10: Stealth Archer
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|2 ; 3: Grass
-                landEffectAndMoveCost LE30|2 ; 4: Forest
-                landEffectAndMoveCost LE30|2 ; 5: Hills
-                landEffectAndMoveCost LE30|4 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|2        ; 3: Grass
+                landEffectAndMovecost LE30|2        ; 4: Forest
+                landEffectAndMovecost LE30|2        ; 5: Hills
+                landEffectAndMovecost LE30|4        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 11: Mage
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|4 ; 4: Forest
-                landEffectAndMoveCost LE30|3 ; 5: Hills
-                landEffectAndMoveCost LE30|3 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|4        ; 4: Forest
+                landEffectAndMovecost LE30|3        ; 5: Hills
+                landEffectAndMovecost LE30|3        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 
 ; 12: Healer
-                landEffectAndMoveCost OBSTRUCTED ; 0: Low Sky
-                landEffectAndMoveCost LE15|2 ; 1: Plains
-                landEffectAndMoveCost LE0|2 ; 2: Path
-                landEffectAndMoveCost LE30|3 ; 3: Grass
-                landEffectAndMoveCost LE30|4 ; 4: Forest
-                landEffectAndMoveCost LE30|3 ; 5: Hills
-                landEffectAndMoveCost LE30|3 ; 6: Desert
-                landEffectAndMoveCost OBSTRUCTED ; 7: High Sky
-                landEffectAndMoveCost OBSTRUCTED ; 8: Water
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
-                landEffectAndMoveCost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED    ; 0: Low Sky
+                landEffectAndMovecost LE15|2        ; 1: Plains
+                landEffectAndMovecost LE0|2         ; 2: Path
+                landEffectAndMovecost LE30|3        ; 3: Grass
+                landEffectAndMovecost LE30|4        ; 4: Forest
+                landEffectAndMovecost LE30|3        ; 5: Hills
+                landEffectAndMovecost LE30|3        ; 6: Desert
+                landEffectAndMovecost OBSTRUCTED    ; 7: High Sky
+                landEffectAndMovecost OBSTRUCTED    ; 8: Water
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
+                landEffectAndMovecost OBSTRUCTED
                 

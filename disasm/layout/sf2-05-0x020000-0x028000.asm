@@ -48,7 +48,7 @@
                 include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
                 include "code\gameflow\battle\battleloop\updateenemyai.asm"    ; Battle loop : Enemy AI update functions
                 include "code\gameflow\battle\battleloop\turnorderfunctions.asm"    ; Battle loop : Turn order functions
-                include "code\gameflow\battle\battlefunctions\loadBattle.asm"    ; Battle data loading function
+                include "code\gameflow\battle\battlefunctions\loadbattle.asm"    ; Battle data loading function
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
                 include "code\gameflow\battle\battleloop\printdefcons.asm"    ; Battle loop : Debug messages
                 include "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function

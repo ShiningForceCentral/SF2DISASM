@@ -41,23 +41,23 @@ battlesceneScript_CalculateDamage:
                 
                 ; Check if defender is flying or hovering
                 move.b  (a5),d0
-                jsr     GetMoveType     
-                cmpi.w  #MOVETYPE_LOWER_FLYING,d1
+                jsr     GetMovetype     
+                cmpi.w  #MOVETYPE_FLYING,d1
                 beq.w   @CheckIfAttackerIsAnArcher
-                cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.w  #MOVETYPE_HOVERING,d1
                 beq.w   @CheckIfAttackerIsAnArcher
                 bra.w   @Return
 @CheckIfAttackerIsAnArcher:
                 
                 move.b  (a4),d0
-                jsr     GetMoveType     
-                cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1
+                jsr     GetMovetype     
+                cmpi.w  #MOVETYPE_BRASS_GUNNER,d1
                 beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_ARCHER,d1
+                cmpi.w  #MOVETYPE_ARCHER,d1
                 beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_CENTAUR_ARCHER,d1
+                cmpi.w  #MOVETYPE_CENTAUR_ARCHER,d1
                 beq.w   @ApplyArcherDamageBonus
-                cmpi.w  #MOVETYPE_LOWER_STEALTH_ARCHER,d1
+                cmpi.w  #MOVETYPE_STEALTH_ARCHER,d1
                 beq.w   @ApplyArcherDamageBonus
                 bra.w   @Return
 @ApplyArcherDamageBonus:

@@ -15,7 +15,7 @@
 ;      d3.w,d4.w = destination X,Y toward AI point, +/-4 spaces from starting position
 
 
-DetermineAiMoveOrderQuadrant:
+DetermineMoveOrderQuadrant:
                 
                 movem.l d0/d5-a6,-(sp)
                 jsr     j_GetCombatantX
@@ -24,7 +24,7 @@ DetermineAiMoveOrderQuadrant:
                 move.w  d1,d4           ; d4.w = combatant Y position
                 
                 ; Choose primary order if present else secondary (move order code placed in d0.b)
-                jsr     j_GetAiMoveOrders
+                jsr     j_GetMoveOrders
                 cmpi.b  #AIORDER_NONE,d1
                 bne.s   @ChoosePrimaryMoveOrder
                 
@@ -58,7 +58,7 @@ DetermineAiMoveOrderQuadrant:
                 bra.w   @ReturnInfo     
 @CheckAiPointPosition:
                 
-                jsr     GetAiMoveOrderPosition
+                jsr     GetMoveOrderPosition
                 clr.w   d5
                 cmp.w   d3,d1
                 bge.s   @IsAiPointAboveCombatant
@@ -116,7 +116,7 @@ DetermineAiMoveOrderQuadrant:
                 movem.l (sp)+,d0/d5-a6
                 rts
 
-    ; End of function DetermineAiMoveOrderQuadrant
+    ; End of function DetermineMoveOrderQuadrant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -137,7 +137,7 @@ BlockNonMovableSpacesAroundDestination:
                 
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7           ; save combatant index
-                jsr     j_GetAiMoveOrders
+                jsr     j_GetMoveOrders
                 cmpi.b  #AIORDER_NONE,d1
                 bne.s   @CheckMoveOrderType
                 bra.w   @Done
@@ -156,7 +156,7 @@ BlockNonMovableSpacesAroundDestination:
                 bra.w   @Done
 @Continue:
                 
-                jsr     GetAiMoveOrderPosition
+                jsr     GetMoveOrderPosition
                 clr.l   d5
                 clr.l   d6
                 move.w  d1,d5
@@ -166,7 +166,7 @@ BlockNonMovableSpacesAroundDestination:
                 jsr     j_InitializeMovementArrays
                 move.w  d5,d3
                 move.w  d6,d4
-                jsr     j_PopulateMovementArrays
+                jsr     j_BuildMovementArrays
                 
                 ; Iterate the entire terrain array rows and columns
                 move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
@@ -182,18 +182,18 @@ BlockNonMovableSpacesAroundDestination:
                 move.b  (a0,d1.w),d0
                 cmpi.b  #TERRAIN_OBSTRUCTED,d0
                 bne.s   @IsMovableSpace 
-                bra.w   @NextSpace      ; skip if space is impassable
+                bra.w   @NextSpace                  ; skip if space is impassable
 @IsMovableSpace:
                 
-                move.l  d3,-(sp)        ; otherwise, check corresponding movable-grid entry
+                move.l  d3,-(sp)                    ; otherwise, check corresponding movable-grid entry
                 move.w  d0,d3
                 move.b  (a1,d1.w),d0
-                btst    #7,d0
-                beq.s   @SkipMovableSpace ; skip if space is movable
+                btst    #TERRAIN_BIT_OCCUPIED,d0
+                beq.s   @SkipMovableSpace           ; skip if space is movable
                 
                 move.w  d3,d0
-                bset    #7,d0           ; otherwise, set obstruction flag
-                bset    #6,d0
+                bset    #TERRAIN_BIT_OCCUPIED,d0    ; otherwise, set obstruction flag
+                bset    #TERRAIN_BIT_IMPASSABLE,d0
                 move.b  d0,(a0,d1.w)
 @SkipMovableSpace:
                 
@@ -248,7 +248,7 @@ BlockAndCarveAroundDestination:
 @CheckSpecialMoveOrders:
                 
                 move.w  d7,d0
-                jsr     j_GetAiMoveOrders
+                jsr     j_GetMoveOrders
                 cmpi.b  #AIORDER_NONE,d1
                 bne.s   @CheckMoveOrderType
                 
@@ -268,7 +268,7 @@ BlockAndCarveAroundDestination:
                 bra.w   @Done
 @Continue:
                 
-                jsr     GetAiMoveOrderPosition
+                jsr     GetMoveOrderPosition
                 move.w  d1,d5
                 move.w  d2,d6           ; d5.w,d6.w = destination X,Y
                 
@@ -288,8 +288,8 @@ BlockAndCarveAroundDestination:
 @SetFlags:
                 
                 ; Set bits 7 and 6 (mark obstructed) for all non -1 spaces (this blocks the entire map area except -1)
-                bset    #7,d0
-                bset    #6,d0
+                bset    #TERRAIN_BIT_OCCUPIED,d0
+                bset    #TERRAIN_BIT_IMPASSABLE,d0
                 move.b  d0,(a0,d1.w)
 @Next:
                 
@@ -332,7 +332,7 @@ BlockAndCarveForTetheredTarget:
                 
                 movem.l d0-a6,-(sp)
                 move.b  d0,d7
-                jsr     j_GetAiMoveOrders
+                jsr     j_GetMoveOrders
                 cmpi.b  #AIORDER_NONE,d1
                 bne.s   @CheckMoveOrderType
                 
@@ -351,7 +351,7 @@ BlockAndCarveForTetheredTarget:
                 bra.w   @Done
 @Continue:
                 
-                bsr.w   GetAiMoveOrderPosition
+                bsr.w   GetMoveOrderPosition
                 move.w  d1,d5
                 move.w  d2,d6
                 move.w  #TERRAIN_ARRAY_ROWS_COUNTER,d4
@@ -368,8 +368,8 @@ BlockAndCarveForTetheredTarget:
                 bra.w   @NextSpace
 @SetFlags:
                 
-                bset    #7,d0           ; set obstruction flags
-                bset    #6,d0
+                bset    #TERRAIN_BIT_OCCUPIED,d0    ; set obstruction flags
+                bset    #TERRAIN_BIT_IMPASSABLE,d0
                 move.b  d0,(a0,d1.w)
 @NextSpace:
                 
@@ -424,8 +424,8 @@ ClearAllTemporaryObstructionFlags:
                 bra.w   @Next
 @ClearFlags:
                 
-                bclr    #7,d0
-                bclr    #6,d0
+                bclr    #TERRAIN_BIT_OCCUPIED,d0
+                bclr    #TERRAIN_BIT_IMPASSABLE,d0
                 move.b  d0,(a0,d1.w)
 @Next:
                 
@@ -443,7 +443,7 @@ ClearAllTemporaryObstructionFlags:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Call DetermineAiMoveOrderQuadrant and apply MarkTerrainRectangleObstructed
+; Call DetermineMoveOrderQuadrant and apply MarkTerrainRectangleObstructed
 ;   with permutations to mark regions.
 ; 
 ; In: d0.b = moving combatant index
@@ -454,7 +454,7 @@ ApplyQuadrantTerrainMarking:
                 movem.l d0-a6,-(sp)
                 clr.l   d7
                 move.b  d0,d7           ; save combatant index
-                bsr.w   DetermineAiMoveOrderQuadrant
+                bsr.w   DetermineMoveOrderQuadrant
                 clr.l   d6
                 clr.l   d5
                 move.b  d1,d5           ; save quadrant flags
@@ -596,11 +596,11 @@ MarkTerrainRectangleObstructed:
                 
                 ; Load byte from array
                 move.b  (a1,d1.w),d0
-                cmpi.b  #-1,d0          ; skip if entry = -1
+                cmpi.b  #-1,d0                      ; skip if entry = -1
                 beq.s   @NextSpace
                 
-                bset    #7,d0           ; otherwise, set bits 6 and 7
-                bset    #6,d0
+                bset    #TERRAIN_BIT_OCCUPIED,d0    ; otherwise, set bits 6 and 7
+                bset    #TERRAIN_BIT_IMPASSABLE,d0
                 move.b  d0,(a1,d1.w)
 @NextSpace:
                 
@@ -650,8 +650,8 @@ ClearObstructionFlagsAroundDestination:
                 cmpi.b  #TERRAIN_OBSTRUCTED,d0
                 beq.s   @Next
                 
-                bclr    #7,d0           ; clear obstructed flags if space is not impassable
-                bclr    #6,d0
+                bclr    #TERRAIN_BIT_OCCUPIED,d0    ; clear obstructed flags if space is not impassable
+                bclr    #TERRAIN_BIT_IMPASSABLE,d0
                 jsr     j_SetTerrain
 @Next:
                 

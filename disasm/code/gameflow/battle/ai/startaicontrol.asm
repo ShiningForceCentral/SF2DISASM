@@ -89,27 +89,28 @@ StartAiControl:
                 lea     (NEWLY_TRIGGERED_BATTLE_REGIONS).l,a0
                 move.w  #0,(a0)
                 move.w  d7,d0
-                bsr.w   GetAiRegion     
-                cmpi.w  #15,d1
+                bsr.w   GetTriggerRegions     
+                cmpi.w  #AI_TRIGGER_REGION_NONE,d1
                 bne.s   @CheckActivationFlag
-                cmpi.w  #15,d2
+                
+                cmpi.w  #AI_TRIGGER_REGION_NONE,d2
                 bne.s   @CheckActivationFlag
-                bra.w   @HandleSpecialAttackers
+                bra.w   @HandleActivatedCombatant
 @CheckActivationFlag:
                 
                 move.w  d7,d0
                 bsr.w   GetActivationBitfield
                 move.w  d1,d4
-                andi.w  #3,d1
-                btst    #0,d1
-                bne.s   @HandleSpecialAttackers
+                andi.w  #AIBITFIELD_TRIGGER_REGIONS_MASK,d1
+                btst    #AIBITFIELD_BIT_PRIMARY_ACTIVE,d1
+                bne.s   @HandleActivatedCombatant
                 
                 ; If combatant AI is not yet activated
                 bsr.w   DetermineAiStandbyMovement
                 lea     (CURRENT_BATTLEACTION).l,a0
                 move.w  #BATTLEACTION_STAY,(a0)
                 bra.w   @Done
-@HandleSpecialAttackers:
+@HandleActivatedCombatant:
                 
                 move.w  d7,d0
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -121,56 +122,66 @@ StartAiControl:
                 ; Check if line attacker
                 cmpi.w  #ENEMY_PRISM_FLOWER,d1 ; HARDCODED enemy indexes
                 bne.s   @IsZeonGuard
+                
                 bsr.w   ProcessLineAttackerAi
                 bra.w   @Done
 @IsZeonGuard:
                 
                 cmpi.w  #ENEMY_ZEON_GUARD,d1
                 bne.s   @IsBurstRock
+                
                 bsr.w   ProcessLineAttackerAi
                 bra.w   @Done
 @IsBurstRock:
                 
                 cmpi.w  #ENEMY_BURST_ROCK,d1
                 bne.s   @CheckSpecialMoveOrders
+                
                 bsr.w   ProcessExploderAi
                 bra.w   @Done
 @CheckSpecialMoveOrders:
                 
                 ; Check if following a dead target and if so, change to second special move orders
                 move.w  d7,d0
-                bsr.w   GetAiMoveOrders
+                bsr.w   GetMoveOrders
                 cmpi.w  #AIORDER_NONE,d1
-                beq.s   @HandleSecondaryCharacteristics ; skip if no special orders
+                beq.s   @HandlePathfindingModes ; skip if no special orders
+                
                 btst    #AIORDER_BIT_MOVE_TO,d1
-                bne.s   @HandleSecondaryCharacteristics ; skip if following a point
+                bne.s   @HandlePathfindingModes ; skip if following a point
                 
                 move.w  d1,d0
                 bsr.w   GetCurrentHp
                 tst.w   d1
-                bne.s   @HandleSecondaryCharacteristics ; skip if the followed target is still alive
+                bne.s   @HandlePathfindingModes ; skip if the followed target is still alive
+                
                 move.w  d7,d0
-                bsr.w   GetAiMoveOrders
+                bsr.w   GetMoveOrders
                 move.w  d2,d1
                 move.w  #AIORDER_NONE,d2
-                bsr.w   SetAiMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
-@HandleSecondaryCharacteristics:
+                bsr.w   SetMoveOrders ; set the primary special move orders equal to that of the secondary, and set the secondary to FF (aka no special orders)
+@HandlePathfindingModes:
                 
                 move.w  d7,d0
                 bsr.w   GetAiCommandset 
                 move.w  d1,d5           ; d5.w = copy of AI commandset
-                lea     table_AiSecondaryCharacteristics(pc), a0
+                lea     table_PathfindingModesForAiCommandset(pc), a0
                 nop
                 move.b  (a0,d1.w),d6
+                
+                ; Is regular pathfinding mode?
                 tst.b   d6
                 beq.s   @HandleAiCommandset
-                cmpi.b  #1,d6
-                bne.s   @CheckSecondaryCharacteristic2
-                jsr     j_BlockNonMovableSpacesAroundDestination
-@CheckSecondaryCharacteristic2:
                 
-                cmpi.b  #2,d6
+                cmpi.b  #AI_PATHFINDING_MODE_BLOCK_NON_MOVABLE,d6
+                bne.s   @CheckBlockAndCarve
+                
+                jsr     j_BlockNonMovableSpacesAroundDestination
+@CheckBlockAndCarve:
+                
+                cmpi.b  #AI_PATHFINDING_MODE_BLOCK_AND_CARVE,d6
                 bne.s   @HandleAiCommandset
+                
                 jsr     j_BlockAndCarveAroundDestination
 @HandleAiCommandset:
                 
@@ -248,7 +259,7 @@ ProcessLineAttackerAi:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d7
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   BuildTargetsArrayWithAllies
                 move.w  d7,d0
                 jsr     j_GetLaserFacing
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
@@ -288,9 +299,9 @@ ProcessExploderAi:
                 
                 movem.l d0-a6,-(sp)
                 move.w  d0,d5
-                bsr.w   PopulateTargetsArrayWithAllies
+                bsr.w   BuildTargetsArrayWithAllies
                 move.w  #SPELL_B_ROCK,d1 ; Burst Rock spell
-                bsr.w   PopulateTargetableGrid_CastSpell
+                bsr.w   PopulateTargetsListForSpell
                 lea     ((TARGETS_LIST_LENGTH-$1000000)).w,a0
                 move.w  (a0),d0
                 tst.w   d0
@@ -311,7 +322,7 @@ ProcessExploderAi:
 @DoNotExplode:
                 
                 move.w  d5,d0
-                move.w  #AICOMMAND_MOVE,d1
+                move.w  #AI_COMMAND_MOVE1,d1
                 clr.w   d7
                 bsr.w   ExecuteAiCommand
                 lea     (CURRENT_BATTLEACTION).l,a0

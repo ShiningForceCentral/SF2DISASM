@@ -89,9 +89,9 @@ DetermineAiStandbyMovement:
                 
                 clr.w   d0
                 move.b  combatant(a6),d0
-                bsr.w   GetAiMoveOrders 
+                bsr.w   GetMoveOrders 
                 move.w  d1,d0
-                jsr     j_GetAiMoveOrderPosition
+                jsr     j_GetMoveOrderPosition
                 move.b  d1,startingX(a6)
                 move.b  d1,startingY(a6)
 @SetupArraysAndMemory:
@@ -99,8 +99,8 @@ DetermineAiStandbyMovement:
                 ; Setup movement/target arrays and AI memory
                 move.b  combatant(a6),d0
                 bsr.w   InitializeMovementArrays
-                bsr.w   PopulateMovementArrays
-                bsr.w   PopulateTargetsArrayWithAllCombatants
+                bsr.w   BuildMovementArrays
+                bsr.w   BuildTargetsArrayWithAllCombatants
                 
                 ; Get pointer to this combatant's entry in AI_MEMORY_TABLE -> a0
                 lea     (AI_MEMORY_TABLE).l,a0 ; holds two pieces of data per combatant:
@@ -196,7 +196,7 @@ DetermineAiStandbyMovement:
                 move.l  d3,-(sp)
                 clr.w   d3
                 clr.w   d4
-                bsr.w   GetClosestAttackPosition
+                bsr.w   DetermineAttackPosition
                 move.l  (sp)+,d3
                 cmpi.b  #-1,d1
                 bne.s   @SetValidCandiateBit

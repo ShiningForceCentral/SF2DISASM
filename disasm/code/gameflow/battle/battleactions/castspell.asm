@@ -80,7 +80,7 @@ spellEffect_Heal:
                 jsr     GetCurrentHp
                 sub.w   d1,d2           ; D2 = target's missing HP
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 cmpi.b  #255,d6
@@ -879,7 +879,7 @@ spellEffect_FairyTear:
                 jsr     GetCurrentMp
                 sub.w   d1,d2
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
-                jsr     GetSpellDefAddress
+                jsr     GetSpellDefinitionAddress
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 cmpi.b  #255,d6         ; full recovery if spell power is 255

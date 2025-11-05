@@ -17,7 +17,7 @@
                 include "data\battles\terrainentries.asm"    ; Battle terrain data
                 include "code\gameflow\battle\battledebugfunction1B120A.asm"    ; unused
                 include "code\gameflow\battle\battleloop\initializecombatants.asm"    ; Battle loop functions
-                include "code\gameflow\battle\ai\getaimoveorderposition.asm"    ; AI Engine : Move Order Position getter function
+                include "code\gameflow\battle\battlefield\getmoveorderposition.asm"    ; AI Engine : Move Order Position getter function
                 include "code\gameflow\battle\getbattlespritesetsubsection.asm"    ; Battle spriteset subsection getter function
                 include "code\gameflow\battle\getcombatantstartingposition.asm"    ; Combatant starting position getter function
                 include "code\gameflow\battle\battlefield\checkfortrappedchest.asm"    ; Battlefield : Trapped chest checker function

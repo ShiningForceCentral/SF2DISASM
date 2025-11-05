@@ -21,11 +21,12 @@ ExecuteIndividualTurn:
                 bsr.w   ClearDeadCombatantsListLength
                 
                 ; Are we currently battling Taros, and is Bowie the actor?
-                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w 
-                                                        ; HARDCODED battle index
+                cmpi.b  #BATTLE_VERSUS_TAROS,((CURRENT_BATTLE-$1000000)).w ; HARDCODED battle index
                 bne.s   @IsActorAlive
+                
                 tst.w   combatant(a6)
                 bne.s   @IsActorAlive
+                
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
 @IsActorAlive:
                 
@@ -51,11 +52,14 @@ ExecuteIndividualTurn:
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_StartAiControl
+                
                 jsr     j_GetActivationBitfield
                 andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_StartAiControl
+                
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat1 ; check auto battle if ally
+                
                 tst.b   ((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 beq.w   @Call_StartAiControl
                 
@@ -80,7 +84,7 @@ ExecuteIndividualTurn:
                 jsr     j_OpenBattlefieldMiniStatusWindow
                 jsr     j_OpenLandEffectWindow
                 move.w  combatant(a6),d0
-                jsr     j_CreateMovementRangeGrid
+                jsr     j_BuildMovementRangeGrid
                 bsr.w   CreatePulsatingBlocksForGrid
                 bsr.w   HideCursorEntity
                 
@@ -89,6 +93,7 @@ ExecuteIndividualTurn:
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_SLEEP,d1
                 bne.w   @NoAction
+                
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_STUN,d1
                 bne.w   @NoAction
@@ -98,11 +103,14 @@ ExecuteIndividualTurn:
                 jsr     j_GetStatusEffects
                 andi.w  #STATUSEFFECT_MUDDLE,d1
                 bne.w   @Call_ExecuteAiControl
+                
                 jsr     j_GetActivationBitfield
                 andi.w  #AIBITFIELD_AI_CONTROLLED,d1
                 bne.w   @Call_ExecuteAiControl
+                
                 tst.b   d0
                 bpl.s   @CheckAutoBattleCheat2
+                
                 tst.b   ((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 beq.w   @Call_ExecuteAiControl
                 
@@ -116,6 +124,7 @@ ExecuteIndividualTurn:
                 bsr.w   ProcessBattleEntityControlPlayerInput
                 cmpi.w  #-1,d0
                 bne.w   @CheckBattleaction_CastEgress
+                
                 jsr     (WaitForViewScrollEnd).w
                 move.w  combatant(a6),d0
                 clr.b   ((IS_TARGETING-$1000000)).w
@@ -140,6 +149,7 @@ ExecuteIndividualTurn:
                 
                 cmpi.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
                 bne.s   @CheckBattleaction_UseAngelWing
+                
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 cmpi.w  #SPELL_EGRESS,d0
@@ -148,6 +158,7 @@ ExecuteIndividualTurn:
                 
                 cmpi.w  #BATTLEACTION_USE_ITEM,((CURRENT_BATTLEACTION-$1000000)).w
                 bne.s   @CheckBattleaction_Stay
+                
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 andi.w  #ITEMENTRY_MASK_INDEX,d0
                 cmpi.w  #ITEM_ANGEL_WING,d0
@@ -156,8 +167,10 @@ ExecuteIndividualTurn:
                 
                 cmpi.w  #BATTLEACTION_STAY,((CURRENT_BATTLEACTION-$1000000)).w
                 beq.w   @NoAction
+                
                 cmpi.w  #BATTLEACTION_TRAPPED_CHEST,((CURRENT_BATTLEACTION-$1000000)).w
                 bne.w   @DetermineKiwiFlameBreath
+                
                 clr.w   ((CURRENT_BATTLEACTION-$1000000)).w
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,d0
                 move.w  combatant(a6),((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
@@ -168,28 +181,34 @@ ExecuteIndividualTurn:
                 jsr     j_GetClass
                 cmpi.w  #CLASS_MNST,d1  ; HARDCODED class test : MNST (Monster, for Kiwi)
                 bne.s   @CheckFairyWoodsBattle
+                
                 tst.w   ((CURRENT_BATTLEACTION-$1000000)).w
                 bne.s   @CheckFairyWoodsBattle
+                
                 moveq   #CHANCE_TO_PERFORM_KIWI_FLAME_BREATH,d6 ; 1/4 chance to perform Kiwi's Flame Breath
                 jsr     (GenerateRandomNumber).w
                 tst.w   d7
                 bne.s   @CheckFairyWoodsBattle
+                
                 move.w  ((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w,((BATTLEACTION_ITEM_OR_SPELL_COPY-$1000000)).w
                 move.w  #BATTLEACTION_CAST_SPELL,((CURRENT_BATTLEACTION-$1000000)).w
                 jsr     j_GetLevel
                 clr.w   d0
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL1,d1
                 blt.s   @CheckUpgradeLevel2
+                
                 addq.w  #1,d0
 @CheckUpgradeLevel2:
                 
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL2,d1
                 blt.s   @CheckUpgradeLevel3
+                
                 addq.w  #1,d0
 @CheckUpgradeLevel3:
                 
                 cmpi.w  #KIWI_FLAME_BREATH_UPGRADE_LEVEL3,d1
                 blt.s   @LoadKiwiFlameBreathSpellEntry
+                
                 addq.w  #1,d0
 @LoadKiwiFlameBreathSpellEntry:
                 
@@ -208,14 +227,17 @@ ExecuteIndividualTurn:
                 jsr     (WaitForVInt).w
                 move.w  combatant(a6),d0
                 jsr     j_WriteBattlesceneScript
+                
                 move.w  combatant(a6),d0
                 
                 ; Load battlescene music index
                 tst.b   d0
                 blt.s   @EnemyMusic     
+                
                 jsr     j_GetClass
                 cmpi.w  #CHAR_CLASS_FIRSTPROMOTED,d1 ; HARDCODED music choices
                 bge.s   @PromotedMusic  
+                
                 move.b  #MUSIC_ATTACK,((BATTLESCENE_MUSIC_INDEX-$1000000)).w 
                                                         ; regular
                 bra.s   @Goto_GetFirstBattlesceneEnemy

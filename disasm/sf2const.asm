@@ -117,7 +117,7 @@ word_FF5C06: equ $FF5C06 ; related to map block copy
 byte_FF5C08: equ $FF5C08 ; related to map block copy
 BATTLE_TERRAIN_ARRAY: equ $FF5F00 ; 2304 bytes : 48*48 (battle max dimensions)
                                         ;   - bytes 0-3 = terrain type
-                                        ;   - bytes 6-7 = obtruction flags
+                                        ;   - bytes 6-7 = temporary obstruction flags
 MAP_LAYOUT_HISTORY_MAP_SIZES: equ $FF6000
 FF6800_MAP_LOADING_LEFT_HISTORY_MAP: equ $FF6800 ; Usage : 
                                         ; - map blocks

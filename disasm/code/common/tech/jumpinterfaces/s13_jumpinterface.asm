@@ -55,11 +55,11 @@ j_InitializeEnemyList:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiMoveOrderPosition:
+j_GetMoveOrderPosition:
                 
-                jmp     GetAiMoveOrderPosition(pc)
+                jmp     GetMoveOrderPosition(pc)
 
-    ; End of function j_GetAiMoveOrderPosition
+    ; End of function j_GetMoveOrderPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,11 +97,11 @@ j_GetCombatantStartingPosition:
 ; AI-related
 
 
-j_DetermineAiMoveOrderQuadrant:
+j_DetermineMoveOrderQuadrant:
                 
-                jmp     DetermineAiMoveOrderQuadrant(pc)  
+                jmp     DetermineMoveOrderQuadrant(pc)  
 
-    ; End of function j_DetermineAiMoveOrderQuadrant
+    ; End of function j_DetermineMoveOrderQuadrant
 
 
 ; =============== S U B R O U T I N E =======================================

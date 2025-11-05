@@ -182,12 +182,12 @@ COMBATANT_OFFSET_STATUSEFFECTS: equ 44
 COMBATANT_OFFSET_X: equ 46
 COMBATANT_OFFSET_Y: equ 47
 COMBATANT_OFFSET_EXP: equ 48
-COMBATANT_OFFSET_MOVETYPE_AND_AI: equ 49 ; upper nibble holds move type, lower nibble holds AI commandset
+COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET: equ 49 ; upper nibble holds movetype, lower nibble holds AI commandset
 COMBATANT_OFFSET_ALLY_KILLS: equ 50
-COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS: equ 50 ; upper byte holds combatant index to follow or first AI point if bit 6 is set, lower byte holds second AI point
+COMBATANT_OFFSET_MOVE_ORDERS: equ 50 ; upper byte holds combatant index to follow or first AI point if bit 6 is set, lower byte holds second AI point
 COMBATANT_OFFSET_ACTIVATION_BITFIELD: equ 52 ; bits 0 and 1 = %01 if region #1 is activated, or %10 if region #2
 COMBATANT_OFFSET_ALLY_DEFEATS: equ 54
-COMBATANT_OFFSET_AI_REGION: equ 54 ; upper nibble holds activation region index 1, lower nibble holds activation region index 2
+COMBATANT_OFFSET_TRIGGER_REGIONS: equ 54 ; upper nibble holds trigger region index #1, lower nibble holds region #2
 COMBATANT_OFFSET_ENEMY_INDEX: equ 55
 
 ; ---------------------------------------------------------------------------
@@ -343,36 +343,25 @@ RESISTANCESETTING_IMMUNITY: equ 3 ; immune to status effects
 
 ; ---------------------------------------------------------------------------
 
-; enum MoveType (bitfield)
-MOVETYPE_LOWER_REGULAR: equ 1
-MOVETYPE_LOWER_CENTAUR: equ 2
-MOVETYPE_LOWER_STEALTH: equ 3
-MOVETYPE_LOWER_BRASS_GUNNER: equ 4
-MOVETYPE_LOWER_FLYING: equ 5
-MOVETYPE_LOWER_HOVERING: equ 6
-MOVETYPE_LOWER_AQUATIC: equ 7
-MOVETYPE_LOWER_ARCHER: equ 8
-MOVETYPE_LOWER_CENTAUR_ARCHER: equ 9
-MOVETYPE_LOWER_STEALTH_ARCHER: equ $A
-MOVETYPE_LOWER_MAGE: equ $B
-MOVETYPE_LOWER_HEALER: equ $C
-MOVETYPE_UPPER_REGULAR: equ $10
-MOVETYPE_UPPER_CENTAUR: equ $20
-MOVETYPE_UPPER_STEALTH: equ $30
-MOVETYPE_UPPER_BRASS_GUNNER: equ $40
-MOVETYPE_UPPER_FLYING: equ $50
-MOVETYPE_UPPER_HOVERING: equ $60
-MOVETYPE_UPPER_AQUATIC: equ $70
-MOVETYPE_UPPER_ARCHER: equ $80
-MOVETYPE_UPPER_CENTAUR_ARCHER: equ $90
-MOVETYPE_UPPER_STEALTH_ARCHER: equ $A0
-MOVETYPE_UPPER_MAGE: equ $B0
-MOVETYPE_UPPER_HEALER: equ $C0
+; enum Movetypes
+MOVETYPE_UNRESTRICTED: equ 0
+MOVETYPE_REGULAR: equ 1
+MOVETYPE_CENTAUR: equ 2
+MOVETYPE_STEALTH: equ 3
+MOVETYPE_BRASS_GUNNER: equ 4
+MOVETYPE_FLYING: equ 5
+MOVETYPE_HOVERING: equ 6
+MOVETYPE_AQUATIC: equ 7
+MOVETYPE_ARCHER: equ 8
+MOVETYPE_CENTAUR_ARCHER: equ 9
+MOVETYPE_STEALTH_ARCHER: equ 10
+MOVETYPE_MAGE: equ 11
+MOVETYPE_HEALER: equ 12
 
 ; ---------------------------------------------------------------------------
 
-; enum MoveTypeProperties
-MOVETYPE_TOTAL: equ 13
+; enum MovetypeProperties
+MOVETYPES_NUMBER: equ 13
 
 ; ---------------------------------------------------------------------------
 
@@ -470,7 +459,7 @@ CLASS_NONE: equ 255
 
 ; enum ClassIndex
 CLASS_MASK_INDEX: equ $1F
-CLASS_NUMBER_TOTAL: equ $20
+CLASSES_NUMBER: equ $20
 
 ; ---------------------------------------------------------------------------
 
@@ -636,8 +625,49 @@ AIBITFIELD_BIT15: equ $8000
 
 ; ---------------------------------------------------------------------------
 
-; enum AiBitfield_Mask
+; enum AiBitfieldProperties
+AIBITFIELD_BIT_PRIMARY_ACTIVE: equ 0
+AIBITFIELD_BIT_SECONDARY_ACTIVE: equ 1
+AIBITFIELD_BIT_AI_CONTROLLED: equ 2
+AIBITFIELD_BIT_BIT3: equ 3
+AIBITFIELD_TRIGGER_REGIONS_MASK: equ 3
 AIBITFIELD_INITIALIZATION_MASK: equ $F00
+
+; ---------------------------------------------------------------------------
+
+; enum AiCommands
+AI_COMMAND_HEAL1: equ 0
+AI_COMMAND_HEAL2: equ 1
+AI_COMMAND_HEAL3: equ 2
+AI_COMMAND_ATTACK1: equ 3
+AI_COMMAND_ATTACK2: equ 4
+AI_COMMAND_ATTACK3: equ 5
+AI_COMMAND_ATTACK4: equ 6
+AI_COMMAND_SUPPORT: equ 7
+AI_COMMAND_UNUSED1: equ 8
+AI_COMMAND_UNUSED2: equ 9
+AI_COMMAND_MOVE_ORDER1: equ 10
+AI_COMMAND_MOVE1: equ 11
+AI_COMMAND_MOVE2: equ 12
+AI_COMMAND_MOVE3: equ 13
+AI_COMMAND_STAY: equ 14
+AI_COMMAND_UNUSED3: equ 15
+AI_COMMAND_MOVE_ORDER2: equ 16
+AI_COMMAND_MOVE_ORDER3: equ 17
+AI_COMMAND_MOVE_ORDER4: equ 18
+AI_COMMAND_MOVE_ORDER5: equ 19
+
+; ---------------------------------------------------------------------------
+
+; enum AiCommand_Params
+AI_COMMAND_PARAM_HEAL1: equ 0
+AI_COMMAND_PARAM_HEAL2: equ 1
+AI_COMMAND_PARAM_HEAL3: equ 2
+
+AI_COMMAND_PARAM_ATTACK1: equ 0
+AI_COMMAND_PARAM_ATTACK3: equ 1
+AI_COMMAND_PARAM_ATTACK2: equ 2
+AI_COMMAND_PARAM_ATTACK4: equ 3
 
 ; ---------------------------------------------------------------------------
 
@@ -652,12 +682,12 @@ AICOMMANDSET_ATTACKER1: equ 6
 AICOMMANDSET_ATTACKER2: equ 7
 AICOMMANDSET_SENTRY: equ 8
 AICOMMANDSET_ATTACKER3: equ 9
-AICOMMANDSET_INACTIVE: equ $A
-AICOMMANDSET_11: equ $B
-AICOMMANDSET_SUPPORT: equ $C
-AICOMMANDSET_CRITICAL: equ $D
-AICOMMANDSET_LEADER: equ $E
-AICOMMANDSET_SWARM: equ $F
+AICOMMANDSET_INACTIVE1: equ 10
+AICOMMANDSET_INACTIVE2: equ 11          ; duplicate of INACTIVE1
+AICOMMANDSET_SUPPORT: equ 12
+AICOMMANDSET_CRITICAL: equ 13
+AICOMMANDSET_LEADER: equ 14
+AICOMMANDSET_SWARM: equ 15
 
 ; ---------------------------------------------------------------------------
 
@@ -672,6 +702,25 @@ AIORDER_NONE: equ $FF
 ; enum AiOrderBits
 AIORDER_BIT_MOVE_TO: equ 6
 AIORDER_BIT_FOLLOW_ENEMY: equ 7
+
+; ---------------------------------------------------------------------------
+
+; enum AiPathfindingModes
+AI_PATHFINDING_MODE_REGULAR: equ 0
+AI_PATHFINDING_MODE_BLOCK_NON_MOVABLE: equ 1
+AI_PATHFINDING_MODE_BLOCK_AND_CARVE: equ 2
+
+; ---------------------------------------------------------------------------
+
+; enum AiTargetTypes
+AI_TARGET_TYPE_MOVE_TO_POINT: equ 0
+AI_TARGET_TYPE_FOLLOW1: equ 1
+AI_TARGET_TYPE_FOLLOW2: equ 2           ; duplicate of FOLLOW1
+
+; ---------------------------------------------------------------------------
+
+; enum AiTriggerRegions
+AI_TRIGGER_REGION_NONE: equ 15          ; if Trigger Region = None, then immediately activate
 
 ; ---------------------------------------------------------------------------
 
@@ -1128,11 +1177,14 @@ MITHRIL_WEAPON_CLASSES_COUNTER: equ 7
 ; enum MapDef
 MAP_MIN_X: equ 0
 MAP_MIN_Y: equ 0
-MAP_MAX_X: equ 47
-MAP_MAX_Y: equ 47
-MAP_SIZE_MAX_TILEHEIGHT: equ 48
+MAP_MAX_X: equ MAP_SIZE_MAX_TILEWIDTH-1
+MAP_MAX_Y: equ MAP_SIZE_MAX_TILEHEIGHT-1
 MAP_SIZE_MAX_TILEWIDTH: equ 48
-MAP_ARRAY_SIZE: equ 2304
+MAP_SIZE_MAX_TILEHEIGHT: equ 48
+MAP_ARRAY_QUAD_LONGWORDS_COUNTER: equ MAP_ARRAY_QUAD_LONGWORDS_NUMBER-1
+MAP_ARRAY_QUAD_LONGWORDS_NUMBER: equ MAP_ARRAY_LONGSIZE/4
+MAP_ARRAY_LONGSIZE: equ MAP_ARRAY_BYTESIZE/4
+MAP_ARRAY_BYTESIZE: equ MAP_SIZE_MAX_TILEWIDTH*MAP_SIZE_MAX_TILEHEIGHT
 MAP_BLOCKINDEX_CLOSED_CHEST: equ 55297
 MAP_BLOCKINDEX_OPEN_CHEST: equ 55298
 MAP_NULLPOSITION: equ -1
@@ -1818,13 +1870,24 @@ BATTLEACTION_ATTACKTYPE_COUNTER: equ 2
 
 ; ---------------------------------------------------------------------------
 
-; enum Battlescene
-BATTLESCENE_STACK_NEGSIZE: equ $FF68
+; enum BattlefieldEngineProperties
+BATTLEFIELD_COORDINATES_ENTRY_SIZE: equ 2
+BATTLEFIELD_PROCESSED_SPACE_BIT: equ 14 ; cleared after space has been processed
+BATTLEFIELD_MOVE_BUDGET_MASK: equ $1F
+BATTLEFIELD_TERRAIN_ENTRY_MASK: equ $1F
 
 ; ---------------------------------------------------------------------------
 
-; enum Def_Lengths
-BITS_HALFBYTE: equ 4
+; enum BattlefieldEngine_BuildMovementArrays
+BUILD_MOVEMENT_ARRAYS_STACK_LONGWORDS_COUNTER: equ BUILD_MOVEMENT_ARRAYS_STACK_LONGSIZE-1
+BUILD_MOVEMENT_ARRAYS_STACK_LONGSIZE: equ BUILD_MOVEMENT_ARRAYS_STACK_BYTESIZE/4
+BUILD_MOVEMENT_ARRAYS_STACK_BYTESIZE: equ 64
+BUILD_MOVEMENT_ARRAYS_STACK_INITIAL_PATTERN: equ $40004000
+
+; ---------------------------------------------------------------------------
+
+; enum Battlescene
+BATTLESCENE_STACK_NEGSIZE: equ $FF68
 
 ; ---------------------------------------------------------------------------
 
@@ -3147,16 +3210,18 @@ ENEMYITEMDROP_RANDOM_CHANCE: equ 32 ; 1/32 chance to drop some special items
 ; ---------------------------------------------------------------------------
 
 ; enum Terrain
-TERRAIN_MASK_TYPE: equ $F
-TERRAIN_TYPES_COUNTER: equ $F
-TERRAIN_ARRAY_ROWS_COUNTER: equ $2F
-TERRAIN_ARRAY_COLUMNS_COUNTER: equ $2F
-TERRAIN_ARRAY_OFFSET_NEXT_ROW: equ $30
-TERRAIN_OBSTRUCTED: equ $FF
+TERRAIN_BIT_IMPASSABLE: equ 6
+TERRAIN_BIT_OCCUPIED: equ 7
+TERRAIN_MASK_TYPE: equ 15
+TERRAIN_TYPES_COUNTER: equ 15
+TERRAIN_ARRAY_ROWS_COUNTER: equ 47
+TERRAIN_ARRAY_COLUMNS_COUNTER: equ 47
+TERRAIN_ARRAY_OFFSET_NEXT_ROW: equ 48
+TERRAIN_OBSTRUCTED: equ -1
 
 ; ---------------------------------------------------------------------------
 
-; enum LandEffectAndMoveCost
+; enum LandEffectAndMovecost
 MOVECOST_OBSTRUCTED: equ $F
 
 ; ---------------------------------------------------------------------------
@@ -3248,37 +3313,6 @@ MAP_EVENT_RELOADMAP: equ $100FF
 PLAYERTYPE_BOWIE: equ 0
 PLAYERTYPE_CARAVAN: equ 1
 PLAYERTYPE_RAFT: equ 2
-
-; ---------------------------------------------------------------------------
-
-; enum AiCommands
-AICOMMAND_HEAL: equ 0
-AICOMMAND_HEAL2: equ 1
-AICOMMAND_HEAL3: equ 2
-AICOMMAND_ATTACK: equ 3
-AICOMMAND_ATTACK2: equ 4
-AICOMMAND_ATTACK3: equ 5
-AICOMMAND_ATTACK4: equ 6
-AICOMMAND_SUPPORT: equ 7
-AICOMMAND_UNUSED: equ 8
-AICOMMAND_UNUSED2: equ 9
-AICOMMAND_MOVE_ORDER: equ 10
-AICOMMAND_MOVE: equ 11
-AICOMMAND_MOVE2: equ 12
-AICOMMAND_MOVE3: equ 13
-AICOMMAND_STAY: equ 14
-AICOMMAND_UNUSED3: equ 15
-AICOMMAND_MOVE_ORDER2: equ 16
-AICOMMAND_MOVE_ORDER3: equ 17
-AICOMMAND_MOVE_ORDER4: equ 18
-AICOMMAND_MOVE_ORDER5: equ 19
-
-; ---------------------------------------------------------------------------
-
-; enum AiCommand_Params
-AICOMMAND_PARAM_HEAL: equ 0
-AICOMMAND_PARAM_HEAL2: equ 1
-AICOMMAND_PARAM_HEAL3: equ 2
 
 ; ---------------------------------------------------------------------------
 
