@@ -404,7 +404,7 @@
 0193={NAME} opened the chest.{W2}{CLEAR}
 0194={NAME} investigated{N}the vase.{W2}{CLEAR}
 0195={NAME} looked in{N}the barrel.{W2}{CLEAR}
-0196=x
+0196={NAME} is already{N}holding a {ITEM}.{N}Do you want to sell it first?{N}{W2}
 0197=x
 0198=But, it was empty.{W1}
 0199=It was dark inside.{W1}

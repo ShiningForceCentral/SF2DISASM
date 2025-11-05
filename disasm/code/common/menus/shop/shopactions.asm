@@ -99,6 +99,39 @@ byte_2013C:
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.b  #1,d7
+
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)    
+                ; Check if weapon equippable (this is checked again later)            
+                move.w  selectedItem(a6),d1
+                jsr     j_GetEquipmentType
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
+                bne.s   loc_GEW01
+                move.w  selectedItem(a6),d1
+                move.w  member(a6),d0
+                jsr     j_IsWeaponOrRingEquippable
+                bcs.s   loc_GEW01
+                bra.s   loc_2015E   ; Weapon is not equipable so return to base game flow
+loc_GEW01:                
+                ; Check if character already has a weapon equipped
+                jsr GetEquippedWeapon
+                cmpi.w  #-1,d1
+                beq.s   loc_2015E   ; No current weapon equipped
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                jsr     j_GetItemDefinitionAddress
+                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                txt     406         ; "{NAME} is already{N}holding a {N}{ITEM}.{N}Do you want to sell it first?{N}{W2}"
+                move.w  itemPrice(a6),d0
+                mulu.w  #ITEMSELLPRICE_MULTIPLIER,d0
+                lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d0
+                txt     178         ; "I'll pay {#} gold coins{N}for it, OK?"
+                jsr     j_alt_YesNoPrompt
+                cmpi.w  #0,d0
+                beq.s   loc_2015E
+                txt     179             ; "{CLEAR}Too bad.{W2}"
+                bra.w   byte_2013C      ; @SelectRecipient_Buy
+
+            endif
+                
 loc_2015E:
                 
                 move.b  (a0)+,(a1)+
@@ -108,7 +141,11 @@ loc_2015E:
                 move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
-                beq.s   byte_20118      
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+                beq.w   byte_20118
+            else
+                beq.s   byte_20118
+            endif
                 move.w  d0,member(a6)
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
@@ -118,8 +155,16 @@ loc_2015E:
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+                beq.w   byte_2013C      ; @SelectRecipient_Buy
+            else
                 beq.s   byte_2013C      ; @SelectRecipient_Buy
-                bra.w   byte_20118      
+            endif
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+                bra.w   byte_20118
+            else
+                bra.s   byte_20118   
+            endif
 loc_201AC:
                 
                 move.w  selectedItem(a6),d1
