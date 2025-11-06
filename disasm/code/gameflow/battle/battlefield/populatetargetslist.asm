@@ -4,7 +4,7 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = actor combatant index
+; In: d0.w = target combatant index
 ;     d1.w = item index
 
 
@@ -51,8 +51,8 @@ unusedsub_C5FA:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = actor combatant index
-;     d1.w = spell index
+; In: d0.w = target combatant index
+;     d1.w = spell entry
 
 
 PopulateTargetsListForSpell:
@@ -73,7 +73,8 @@ PopulateTargetsListForSpell:
 
 ; Populate a list of targets positioned within a spell's area of effect.
 ;
-; In: d1.b = spell entry
+; In: d0.w = target combatant index
+;     d1.b = spell entry
 
 
 PopulateTargetsList:
@@ -98,10 +99,10 @@ PopulateTargetsList:
                 lsl.w   #2,d4
                 adda.w  d4,a1
                 cmpi.b  #SPELL_B_ROCK,d1
-                bne.s   @AvoidSelfTarget
+                bne.s   @Continue
                 
-                subq.b  #1,d2
-@AvoidSelfTarget:
+                subq.b  #1,d2           ; avoid targeting self if casting B.Rock
+@Continue:
                 
                 moveq   #0,d5
 @PopulateTargetCoordinates_Loop:
@@ -116,11 +117,11 @@ PopulateTargetsList:
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.s   @TargetEnemies
                 
-                bsr.w   PopulateTargetsListWithAllies
+                bsr.w   PopulateTargetsListWithAllAllies
                 bra.s   @Done
 @TargetEnemies:
                 
-                bsr.w   PopulateTargetsListWithEnemies
+                bsr.w   PopulateTargetsListWithAllEnemies
 @Done:
                 
                 movem.l (sp)+,d0-a6
@@ -133,7 +134,7 @@ PopulateTargetsList:
 ; =============== S U B R O U T I N E =======================================
 
 
-PopulateTargetsListWithAllies:
+PopulateTargetsListWithAllAllies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -166,13 +167,13 @@ PopulateTargetsListWithAllies:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetsListWithAllies
+    ; End of function PopulateTargetsListWithAllAllies
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-PopulateTargetsListWithEnemies:
+PopulateTargetsListWithAllEnemies:
                 
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
@@ -205,5 +206,5 @@ PopulateTargetsListWithEnemies:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateTargetsListWithEnemies
+    ; End of function PopulateTargetsListWithAllEnemies
 
