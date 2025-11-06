@@ -11,10 +11,10 @@ table_AllTargetingSpells:
                 tableEnd.b
 
 
-; Spells that are disallowed from targeting the caster
-table_SelfTargetingSpells:
+; Spells targeting both teammates and opponents
+table_FriendlyFireSpells:
                 
-                ; Spell entry (index|level)
-                dc.b SPELL_B_ROCK
+                ; Spell entry (index|level), target self toggle (0 = false, -1 = true)
+                dc.b SPELL_B_ROCK, 0
                 
                 tableEnd.b

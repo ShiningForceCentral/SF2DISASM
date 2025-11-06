@@ -36,7 +36,7 @@ BuildAttackRangeGrid:
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 eori.w  #$FFFF,d0       ; invert d0.w
-                bsr.w   BuildTargetsArrayWithOpponents
+                bsr.w   BuildTargetsArrayWithTeammatesOfTarget
                 eori.w  #$FFFF,d0       ; revert d0.w
                 bsr.w   GetAttackRange  ; d3.w, d4.w = max, min range
                 move.w  d3,d2
@@ -165,7 +165,7 @@ BuildSpellRangeGridForItemGive:
                 bsr.w   ClearTargetsArray
                 bsr.w   ClearTotalMovecostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
-                bsr.w   BuildTargetsArrayWithOpponents
+                bsr.w   BuildTargetsArrayWithTeammatesOfTarget
                 moveq   #-1,d5
                 lea     SpellRange1(pc), a0
                 nop

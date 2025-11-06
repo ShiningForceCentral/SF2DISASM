@@ -64,7 +64,7 @@ PopulateTargetsListForSpell:
                 bra.s   PopulateTargetsList
 @Continue:
                 
-                bsr.w   BuildTargetsArrayWithOpponents
+                bsr.w   BuildTargetsArrayWithTeammatesOfTarget
 
     ; End of function PopulateTargetsListForSpell
 

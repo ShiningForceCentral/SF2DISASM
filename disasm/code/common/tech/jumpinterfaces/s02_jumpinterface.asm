@@ -1520,13 +1520,13 @@ j_PopulateTargetsList:
 ; unused
 
 
-j_BuildTargetsArrayWithOpponents:
+j_BuildTargetsArrayWithTeammatesOfTarget:
                 
             if (VANILLA_BUILD=1)
-                jmp     BuildTargetsArrayWithOpponents(pc)
+                jmp     BuildTargetsArrayWithTeammatesOfTarget(pc)
             endif
 
-    ; End of function j_BuildTargetsArrayWithOpponents
+    ; End of function j_BuildTargetsArrayWithTeammatesOfTarget
 
 
 ; =============== S U B R O U T I N E =======================================
