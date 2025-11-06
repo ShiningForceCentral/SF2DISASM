@@ -9,12 +9,12 @@
 ; Note: enemy bit is flipped prior to calling this routine.
 
 
-BuildTargetsArrayWithOpponents:
+BuildTargetsArrayWithTeammatesOfTarget:
                 
                 btst    #COMBATANT_BIT_ENEMY,d0
                 bne.w   BuildTargetsArrayWithEnemies
 
-    ; End of function BuildTargetsArrayWithOpponents
+    ; End of function BuildTargetsArrayWithTeammatesOfTarget
 
 
 ; =============== S U B R O U T I N E =======================================

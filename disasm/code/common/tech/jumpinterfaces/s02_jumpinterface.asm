@@ -1461,11 +1461,11 @@ j_PopulateTargetsList:
 ; unused
 
 
-j_BuildTargetsArrayWithOpponents:
+j_BuildTargetsArrayWithTeammatesOfTarget:
                 
-                jmp     BuildTargetsArrayWithOpponents(pc)
+                jmp     BuildTargetsArrayWithTeammatesOfTarget(pc)
 
-    ; End of function j_BuildTargetsArrayWithOpponents
+    ; End of function j_BuildTargetsArrayWithTeammatesOfTarget
 
 
 ; =============== S U B R O U T I N E =======================================
