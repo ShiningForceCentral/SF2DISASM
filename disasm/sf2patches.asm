@@ -92,7 +92,7 @@ SKIP_TITLE_SCREEN:                  equ 0
 SKIP_WITCH_DIALOGUE:                equ 0
 UNLOCK_RENAME_CHARACTERS:           equ 1       ; Hold Start while confirming the leader's name to rename all characters when starting a new game.
 UNLOCK_SOUND_TEST:                  equ 1       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
-AUTO_SELL_WEAPONS:                  equ 1       ; When buying a weapon, adds an option to first sell the currently equipped weapon.
+SELL_BEFORE_BUY:                    equ 1       ; When buying a weapon, adds an option to first sell the currently equipped weapon (before checking if item slots are full).
 
 
 ; Misc. features
