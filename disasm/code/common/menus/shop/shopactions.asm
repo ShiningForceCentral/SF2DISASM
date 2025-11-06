@@ -98,40 +98,7 @@ byte_2013C:
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.b  #1,d7
-
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)    
-                ; Check if weapon equippable (this is checked again later)            
-                move.w  selectedItem(a6),d1
-                jsr     j_GetEquipmentType
-                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
-                bne.s   loc_GEW01
-                move.w  selectedItem(a6),d1
-                move.w  member(a6),d0
-                jsr     j_IsWeaponOrRingEquippable
-                bcs.s   loc_GEW01
-                bra.s   loc_2015E   ; Weapon is not equipable so return to base game flow
-loc_GEW01:                
-                ; Check if character already has a weapon equipped
-                jsr GetEquippedWeapon
-                cmpi.w  #-1,d1
-                beq.s   loc_2015E   ; No current weapon equipped
-                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                jsr     j_GetItemDefinitionAddress
-                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
-                txt     406         ; "{NAME} is already{N}holding a {N}{ITEM}.{N}Do you want to sell it first?{N}{W2}"
-                move.w  itemPrice(a6),d0
-                mulu.w  #ITEMSELLPRICE_MULTIPLIER,d0
-                lsr.l   #ITEMSELLPRICE_BITSHIFTRIGHT,d0
-                txt     178         ; "I'll pay {#} gold coins{N}for it, OK?"
-                jsr     j_alt_YesNoPrompt
-                cmpi.w  #0,d0
-                beq.s   loc_2015E
-                txt     179             ; "{CLEAR}Too bad.{W2}"
-                bra.w   byte_2013C      ; @SelectRecipient_Buy
-
-            endif
-                
+                subq.b  #1,d7                
 loc_2015E:
                 
                 move.b  (a0)+,(a1)+
@@ -141,12 +108,35 @@ loc_2015E:
                 move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
-                beq.w   byte_20118
-            else
                 beq.s   byte_20118
-            endif
                 move.w  d0,member(a6)
+
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+                ; Check if weapon is equippable (checks again later in normal flow)
+                ;jsr     j_IsWeaponOrRingEquippable
+                ;bcs.s   loc_GEW02   ; Weapon is not equipable so return to base game flow
+loc_GEW01:                
+
+                ; Check if character already has a weapon equipped
+                move.w  member(a6),d0
+                move.w  selectedItem(a6),d6
+                jsr GetEquippedWeapon
+                cmpi.w  #-1,d1
+                beq.s   loc_GEW02   ; No current weapon equipped
+                move.w  d2,itemSlot(a6)
+                move.w  d1,selectedItem(a6)
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                txt     406         ; "{NAME} is already{N}holding a {N}{ITEM}.{N}Do you want to sell it first?{N}{W2}"
+                ; Jump to sell flow and use sentinel to get back to loc_GEW02
+                clr.w   rareItemFlag(a6)
+                move.w  selectedItem(a6),d1
+                move.b  #200,d7         ; Set senetinel value
+                bra.w   loc_GEW03
+loc_GEW02:
+            endif
+
+                move.w  d6,selectedItem(a6)
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
@@ -157,13 +147,10 @@ loc_2015E:
                 cmpi.w  #0,d0
             if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
                 beq.w   byte_2013C      ; @SelectRecipient_Buy
-            else
-                beq.s   byte_2013C      ; @SelectRecipient_Buy
-            endif
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
                 bra.w   byte_20118
             else
-                bra.s   byte_20118   
+                beq.s   byte_2013C      ; @SelectRecipient_Buy
+                bra.s   byte_20118
             endif
 loc_201AC:
                 
@@ -283,6 +270,9 @@ loc_202F4:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+loc_GEW03: 
+            endif
                 jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
@@ -368,6 +358,10 @@ byte_20436:
 byte_2043A:
                 
                 clsTxt
+            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+                cmp.b   #200,d7         ; Senetinel value to indicate that player is selling before buying
+                beq.w   loc_GEW02
+            endif
                 bra.w   byte_202D2      
 @CheckChoice_Repair:
                 
