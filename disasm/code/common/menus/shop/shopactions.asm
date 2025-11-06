@@ -111,7 +111,7 @@ loc_2015E:
                 beq.s   byte_20118
                 move.w  d0,member(a6)
 
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 ; Check if weapon is equippable (checks again later in normal flow)
                 ;jsr     j_IsWeaponOrRingEquippable
                 ;bcs.s   loc_GEW02   ; Weapon is not equipable so return to base game flow
@@ -145,7 +145,7 @@ loc_GEW02:
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 beq.w   byte_2013C      ; @SelectRecipient_Buy
                 bra.w   byte_20118
             else
@@ -270,7 +270,7 @@ loc_202F4:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
 loc_GEW03: 
             endif
                 jsr     j_GetItemDefinitionAddress
@@ -358,7 +358,7 @@ byte_20436:
 byte_2043A:
                 
                 clsTxt
-            if (STANDARD_BUILD&AUTO_SELL_WEAPONS=1)
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 cmp.b   #200,d7         ; Senetinel value to indicate that player is selling before buying
                 beq.w   loc_GEW02
             endif
