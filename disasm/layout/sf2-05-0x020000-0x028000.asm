@@ -46,7 +46,7 @@
                 include "code\gameflow\battle\battleloop\cleardeadcombatantslist.asm"    ; Battle loop functions
                 include "code\gameflow\battle\battleloop\processkilledcombatants.asm"    ; Battle loop functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
-                include "code\gameflow\battle\battleloop\updateenemyai.asm"    ; Battle loop : Enemy AI update functions
+                include "code\gameflow\battle\battleloop\activateenemies.asm"    ; Battle loop : Enemy AI update functions
                 include "code\gameflow\battle\battleloop\turnorderfunctions.asm"    ; Battle loop : Turn order functions
                 include "code\gameflow\battle\battlefunctions\loadbattle.asm"    ; Battle data loading function
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
