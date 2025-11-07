@@ -117,9 +117,13 @@ loc_2015E:
                 ;bcs.s   loc_GEW02   ; Weapon is not equipable so return to base game flow
 loc_GEW01:                
 
+                move.w  member(a6),d5
+                move.w  selectedItem(a6),d6
+
+                ; TODO Check if new item is equippable
+
                 ; Check if character already has a weapon equipped
                 move.w  member(a6),d0
-                move.w  selectedItem(a6),d6
                 jsr GetEquippedWeapon
                 cmpi.w  #-1,d1
                 beq.s   loc_GEW02   ; No current weapon equipped
@@ -133,10 +137,16 @@ loc_GEW01:
                 move.w  selectedItem(a6),d1
                 move.b  #200,d7         ; Set senetinel value
                 bra.w   loc_GEW03
+loc_GEW05:
+                move.w  d5,member(a6)
+                move.w  d6,selectedItem(a6)
+                move.w  member(a6),d0
+                jsr     j_GetItemDefinitionAddress
+                move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
+                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
 loc_GEW02:
             endif
 
-                move.w  d6,selectedItem(a6)
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
@@ -360,7 +370,7 @@ byte_2043A:
                 clsTxt
             if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 cmp.b   #200,d7         ; Senetinel value to indicate that player is selling before buying
-                beq.w   loc_GEW02
+                beq.w   loc_GEW05
             endif
                 bra.w   byte_202D2      
 @CheckChoice_Repair:
