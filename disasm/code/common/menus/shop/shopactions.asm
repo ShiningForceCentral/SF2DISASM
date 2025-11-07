@@ -166,7 +166,7 @@ loc_SBB03:
                 bra.w   byte_20118
             else
                 beq.s   byte_2013C      ; @SelectRecipient_Buy
-                bra.s   byte_20118
+                bra.w   byte_20118
             endif
 loc_201AC:
                 
