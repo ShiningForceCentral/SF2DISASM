@@ -138,9 +138,11 @@ loc_GEW01:
                 move.b  #200,d7         ; Set senetinel value
                 bra.w   loc_GEW03
 loc_GEW05:
+
                 move.w  d5,member(a6)
                 move.w  d6,selectedItem(a6)
                 move.w  member(a6),d0
+                move.w  selectedItem(a6),d1z
                 jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
