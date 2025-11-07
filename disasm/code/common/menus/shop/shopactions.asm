@@ -108,10 +108,10 @@ loc_2015E:
                 move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
+                
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 beq.w   byte_20118
                 move.w  d0,member(a6)
-
-            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
                 move.w  member(a6),d5
                 move.w  selectedItem(a6),d6
 
@@ -151,6 +151,9 @@ loc_SBB01:
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
                 move.w  #0,d3
 loc_SBB03:
+            else
+                beq.s   byte_20118
+                move.w  d0,member(a6)
             endif
 
                 moveq   #0,d1
