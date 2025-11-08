@@ -98,7 +98,7 @@ byte_2013C:
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.b  #1,d7
+                subq.b  #1,d7                
 loc_2015E:
                 
                 move.b  (a0)+,(a1)+
@@ -108,8 +108,54 @@ loc_2015E:
                 move.b  #ITEM_SUBMENU_ACTION_USE,((CURRENT_ITEM_SUBMENU_ACTION-$1000000)).w
                 jsr     j_ExecuteMembersListScreenOnItemSummaryPage
                 cmpi.w  #-1,d0
-                beq.s   byte_20118      
+                
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
+                beq.w   byte_20118
                 move.w  d0,member(a6)
+                move.w  member(a6),d5
+                move.w  selectedItem(a6),d6
+
+                ; Check if new item is equippable (this is checked again later)
+                move.w  selectedItem(a6),d1
+                jsr     j_GetEquipmentType
+                cmpi.w  #EQUIPMENTTYPE_WEAPON,d2
+                bne.w   loc_SBB03               ; Not even a weapon so jump to regular flow
+                move.w  selectedItem(a6),d1
+                move.w  member(a6),d0
+                jsr     j_IsWeaponOrRingEquippable
+                bcc.s   loc_SBB01               ; Not equippable by character so jump to regular flow
+
+                ; Check if character already has a weapon equipped
+                move.w  member(a6),d0
+                jsr GetEquippedWeapon
+                cmpi.w  #-1,d1
+                beq.s   loc_SBB01   ; No current weapon equipped
+                move.w  d2,itemSlot(a6)
+                move.w  d1,selectedItem(a6)
+                move.w  member(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.w  selectedItem(a6),((DIALOGUE_NAME_INDEX_2-$1000000)).w
+                txt     406         ; "{NAME} is already{N}holding a {N}{ITEM}.{N}Do you want to sell it first?{N}{W2}"
+                ; Jump to sell flow and use sentinel to get back to loc_SBB02
+                clr.w   rareItemFlag(a6)
+                move.w  selectedItem(a6),d1
+                move.b  #200,d7         ; Set senetinel value
+                bra.w   loc_SBB02
+loc_SBB01:
+
+                move.w  d5,member(a6)
+                move.w  d6,selectedItem(a6)
+                move.w  member(a6),d0
+                move.w  selectedItem(a6),d1
+                jsr     j_GetItemDefinitionAddress
+                move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
+                move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
+                move.w  #0,d3
+loc_SBB03:
+            else
+                beq.s   byte_20118
+                move.w  d0,member(a6)
+            endif
+
                 moveq   #0,d1
                 jsr     j_GetItemBySlotAndHeldItemsNumber
                 cmpi.w  #COMBATANT_ITEMSLOTS,d2
@@ -118,8 +164,13 @@ loc_2015E:
                 txt     168             ; "Oops!  {NAME}'s hands{N}are full!  To anybody else?"
                 jsr     j_alt_YesNoPrompt
                 cmpi.w  #0,d0
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
+                beq.w   byte_2013C      ; @SelectRecipient_Buy
+                bra.w   byte_20118
+            else
                 beq.s   byte_2013C      ; @SelectRecipient_Buy
-                bra.w   byte_20118      
+                bra.w   byte_20118
+            endif
 loc_201AC:
                 
                 move.w  selectedItem(a6),d1
@@ -238,6 +289,9 @@ loc_202F4:
                 move.w  d1,itemSlot(a6)
                 move.w  d2,selectedItem(a6)
                 move.w  selectedItem(a6),d1
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
+loc_SBB02: 
+            endif
                 jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.l  ITEMDEF_OFFSET_TYPE(a0),itemTypeBitfield(a6)
@@ -323,6 +377,10 @@ byte_20436:
 byte_2043A:
                 
                 clsTxt
+            if (STANDARD_BUILD&SELL_BEFORE_BUY=1)
+                cmp.b   #200,d7         ; Senetinel value to indicate that player is selling before buying
+                beq.w   loc_SBB01
+            endif
                 bra.w   byte_202D2      
 @CheckChoice_Repair:
                 
