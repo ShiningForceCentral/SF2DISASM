@@ -45,7 +45,7 @@ SpawnEnemy:
                 bsr.w   HideCursorEntity
 @SkipCamera:
                 
-                moveq   #11,d7
+                moveq   #ANIM_SPRITE_SPAWN_SPINS_COUNTER,d7
 @Loop:
                 
                 move.w  combatant(a6),d0
@@ -56,7 +56,7 @@ SpawnEnemy:
                 moveq   #-1,d2
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).l
-                moveq   #3,d0
+                moveq   #ANIM_SPRITE_SPAWN_SPIN_DELAY,d0
                 jsr     (Sleep).w       
                 dbf     d7,@Loop
                 
