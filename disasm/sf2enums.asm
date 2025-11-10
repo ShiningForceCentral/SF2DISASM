@@ -86,9 +86,9 @@ ANIM_SPRITE_DEATH_SPIN_DELAY: equ 3 ; number of vints to wait between sprite dea
 ANIM_SPRITE_DEATH_SPINS_COUNTER: equ ANIM_SPRITE_DEATH_SPINS_NUMBER-1
 ANIM_SPRITE_DEATH_SPINS_NUMBER: equ 12 ; number of sprite death spins to perform
 
-ANIM_SPRITE_SPAWN_SPIN_DELAY: equ 3 ; number of vints to wait between sprite death spins
+ANIM_SPRITE_SPAWN_SPIN_DELAY: equ 3 ; number of vints to wait between sprite spawn spins
 ANIM_SPRITE_SPAWN_SPINS_COUNTER: equ ANIM_SPRITE_SPAWN_SPINS_NUMBER-1
-ANIM_SPRITE_SPAWN_SPINS_NUMBER: equ 12 ; number of sprite death spins to perform
+ANIM_SPRITE_SPAWN_SPINS_NUMBER: equ 12 ; number of sprite spawn spins to perform
 
 ; ---------------------------------------------------------------------------
 
