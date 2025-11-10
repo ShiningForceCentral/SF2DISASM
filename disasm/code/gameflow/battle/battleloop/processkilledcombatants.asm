@@ -10,7 +10,7 @@ ProcessKilledCombatants:
                 tst.w   ((DEAD_COMBATANTS_LIST_LENGTH-$1000000)).w
                 beq.w   @NoneKilled
                 movem.l d0-a2/a6,-(sp)
-                moveq   #ANIM_SPRITE_DEATH_SPINS_NUMBER,d6
+                moveq   #ANIM_SPRITE_DEATH_SPINS_COUNTER,d6
 @DeathSpin_Loop:
                 
                 lea     ((DEAD_COMBATANTS_LIST-$1000000)).w,a0 ; loop point for sprite death spin animation

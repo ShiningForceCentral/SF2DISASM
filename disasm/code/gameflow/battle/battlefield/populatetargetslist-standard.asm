@@ -65,7 +65,7 @@ PopulateTargetsList:
                 move.w  d7,d5
                 addq.w  #1,d5
                 lsl.w   #INDEX_SHIFT_COUNT,d5
-                movea.l (a1,d5.w),a1
+                adda.w  d5,a1
                 
                 ; Clear obstructed spaces handling mode toggle now for later use
                 moveq   #0,d5

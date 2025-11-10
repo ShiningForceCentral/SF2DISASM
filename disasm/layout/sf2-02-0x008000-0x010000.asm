@@ -126,6 +126,7 @@
                 include "code\gameflow\battle\ai\iscombatantconfused.asm"    ; Is combatant afflicted with Muddle 2 checker function
                 include "code\gameflow\battle\battlefield\buildactionrangegrids.asm"    ; Action range grids builder functions
                 include "data\stats\spells\spellranges.asm"    ; Spell range tables
+                align
                 includeIfStandard "code\gameflow\battle\battlefield\populatetargetslist-standard.asm"
                 includeIfVanilla "code\gameflow\battle\battlefield\populatetargetslist.asm"    ; Populate targets list functions
                 include "code\gameflow\battle\battlefield\determineattackposition.asm"    ; Determine attack position function

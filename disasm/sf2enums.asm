@@ -83,7 +83,12 @@ ENTITY_TRANSITION_MOSAIC_IN: equ 7
 
 ; enum Animation
 ANIM_SPRITE_DEATH_SPIN_DELAY: equ 3 ; number of vints to wait between sprite death spins
-ANIM_SPRITE_DEATH_SPINS_NUMBER: equ 11 ; number of sprite death spins to perform
+ANIM_SPRITE_DEATH_SPINS_COUNTER: equ ANIM_SPRITE_DEATH_SPINS_NUMBER-1
+ANIM_SPRITE_DEATH_SPINS_NUMBER: equ 12 ; number of sprite death spins to perform
+
+ANIM_SPRITE_SPAWN_SPIN_DELAY: equ 3 ; number of vints to wait between sprite death spins
+ANIM_SPRITE_SPAWN_SPINS_COUNTER: equ ANIM_SPRITE_SPAWN_SPINS_NUMBER-1
+ANIM_SPRITE_SPAWN_SPINS_NUMBER: equ 12 ; number of sprite death spins to perform
 
 ; ---------------------------------------------------------------------------
 
@@ -760,6 +765,10 @@ AIBITFIELD_BIT_PRIMARY_ACTIVE: equ 0
 AIBITFIELD_BIT_SECONDARY_ACTIVE: equ 1
 AIBITFIELD_BIT_AI_CONTROLLED: equ 2
 AIBITFIELD_BIT_BIT3: equ 3
+
+AIBITFIELD_BIT_RESPAWN: equ 8 ; Respawning
+AIBITFIELD_BIT_HIDDEN: equ 9 ; Hidden
+
 AIBITFIELD_TRIGGER_REGIONS_MASK: equ 3
 AIBITFIELD_INITIALIZATION_MASK: equ WORD_LOWER_NIBBLE_MASK
 
@@ -876,6 +885,9 @@ AI_TARGET_TYPE_FOLLOW2: equ 2           ; duplicate of FOLLOW1
 
 ; enum AiTriggerRegions
 AI_TRIGGER_REGION_NONE: equ 15          ; if Trigger Region = None, then immediately activate
+AI_TRIGGER_REGIONS_COUNTER: equ AI_TRIGGER_REGIONS_NUMBER-1
+AI_TRIGGER_REGIONS_NUMBER: equ 15
+AI_TRIGGER_REGIONS_MASK: equ $7FFF      ; reserve MSB of newly-triggered regions bitfield as "No Trigger Region" indicator
 
 ; ---------------------------------------------------------------------------
 

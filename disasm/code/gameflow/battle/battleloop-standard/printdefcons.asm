@@ -13,16 +13,15 @@ PrintAllActivatedDefCons:
                 
                 moveq   #0,d0
                 move.w  #BATTLE_REGION_FLAGS_START,d1
-                moveq   #15,d7
+                moveq   #AI_TRIGGER_REGIONS_COUNTER,d7
                 
 @Loop:          jsr     CheckFlag
-                beq.s   @RegionInactive
+                beq.s   @NextRegion
                 
                 move.l  d0,((DIALOGUE_NUMBER-$1000000)).w
                 txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
-@RegionInactive:
                 
-                addq.w  #1,d0
+@NextRegion:    addq.w  #1,d0
                 addq.w  #1,d1
                 dbf     d7,@Loop
                 
@@ -36,7 +35,7 @@ PrintAllActivatedDefCons:
 
 ; If EXTENDED_BATTLE_TURN_UPDATE is ON, run when activating a region for the first time while in debug mode.
 ;
-; In: d2.w = newly activated regions bitfield
+; In: d3.w = newly activated regions bitfield
 
 PrintNewlyActivatedDefCons:
                 
@@ -44,16 +43,15 @@ PrintNewlyActivatedDefCons:
                 beq.s   @Return
                 
                 moveq   #0,d0
-                moveq   #15,d7
+                moveq   #AI_TRIGGER_REGIONS_COUNTER,d7
                 
-@Loop:          btst    d0,d2
-                beq.s   @RegionInactive
+@Loop:          btst    d0,d3
+                beq.s   @NextRegion
                 
                 move.l  d0,((DIALOGUE_NUMBER-$1000000)).w
                 txt     463             ; "DEF-CON No. {#} has been{N}implemented.{D3}"
-@RegionInactive:
                 
-                addq.w  #1,d0
+@NextRegion:    addq.w  #1,d0
                 dbf     d7,@Loop
                 
                 clsTxt

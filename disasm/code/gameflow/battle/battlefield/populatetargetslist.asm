@@ -79,9 +79,6 @@ PopulateTargetsListForSpell:
 
 PopulateTargetsList:
                 
-            if (STANDARD_BUILD=1)
-                include "code\gameflow\battle\battlefield\populatetargetslist-standard.asm"
-            else
                 movem.l d0-a6,-(sp)
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetSpellDefinitionAddress
@@ -126,7 +123,6 @@ PopulateTargetsList:
                 
                 movem.l (sp)+,d0-a6
                 rts
-            endif
 
     ; End of function PopulateTargetsList
 

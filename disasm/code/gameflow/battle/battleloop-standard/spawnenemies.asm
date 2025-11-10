@@ -4,168 +4,114 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-                module
 
-SpawnRegionActivatedEnemies:
-                
-                moveq   #-1,d2
-                bra.s   @Continue
+                module
 SpawnAllEnemies:
                 
-                clr.w   d2
-
-; In: d2 = first time spawns only toggle, d3 = skip camera toggle
-;
-@Continue:      clr.w   d3              ; spawn with camera
-                pea     SpawnListedEnemies(pc)
+                moveq   #-1,d5          ; set spawn all enemies toggle
+                bra.s   @Continue
+SpawnRegionActivatedEnemies:
                 
-PopulateTargetsListWithSpawningEnemies:
+                clr.w   d5              ; clear spawn all enemies toggle
                 
-                movem.l d0-a0,-(sp)
-                lea     ((TARGETS_LIST-$1000000)).w,a0
+                ; Build previously-triggered regions bitfield
+@Continue:      clr.w   d3
+                moveq   #0,d0
+                move.w  #BATTLE_REGION_FLAGS_START,d1
+                moveq   #AI_TRIGGER_REGIONS_COUNTER,d7
+@Regions_Loop:  jsr     CheckFlag
+                beq.s   @NextRegion
+                
+                bset    d0,d3           ; set region bit if previously triggered
+@NextRegion:    addq.w  #1,d0
+                addq.w  #1,d1
+                dbf     d7,@Regions_Loop
+                
+                ; Process hidden and respawning enemy combatants
                 move.w  #COMBATANT_ENEMIES_START,d0
-                clr.w   d5
                 moveq   #COMBATANT_ENEMIES_COUNTER,d7
-                
-@Loop:          jsr     GetActivationBitfield
-                andi.w  #WORD_LOWER_NIBBLE_MASK,d1
-                beq.s   @Next
-                
-                ; $200 - region-triggered spawn - check if triggered and if not spawned yet
-                cmpi.w  #$200,d1
-                bne.s   @CheckRespawn
+@Enemies_Loop:  jsr     GetActivationBitfield
+                move.w  d1,d4
+                btst    #AIBITFIELD_BIT_HIDDEN,d4
+                beq.s   @CheckRespawn
                 
                 jsr     GetMaxHp
-                bne.s   @Next
+                beq.s   @IsActivated    ; branch to activation check if hidden enemy has not spawned yet
                 
-                bra.s   @UpdateEnemyActivation
-@CheckRespawn:
+@CheckRespawn:  tst.w   d5
+                beq.s   @NextEnemy      ; continue only if we have reached the end of a round
                 
-            if (EXTENDED_BATTLE_TURN_UPDATE=1)
-                tst.w   d2
-                bne.s   @Next
-            endif
-                ; $100 - respawn - check if dead
-                cmpi.w  #$100,d1
-                bne.s   @CheckRegionRespawn
+                btst    #AIBITFIELD_BIT_RESPAWN,d4
+                beq.s   @NextEnemy
                 
                 jsr     GetCurrentHp
-                bne.s   @Next
+                bne.s   @NextEnemy      ; continue only if respawning enemy is currently dead
                 
-                bra.s   @ResetEnemyStats
-@CheckRegionRespawn:
-                ; $300 - region-triggered respawn - check if dead and triggered
-                cmpi.w  #$300,d1
-                bne.s   @Next
-@UpdateEnemyActivation:
+                btst    #AIBITFIELD_BIT_HIDDEN,d4
+                beq.s   @ResetStats     ; skip activation check if respawning enemy is not hidden
                 
-                bsr.s   UpdateEnemyActivationIfDead ; Out: CCR carry-bit set if no update took place
-                bcs.s   @Next
-@ResetEnemyStats:
+@IsActivated:   bsr.w   UpdateEnemyActivationBitfield ; Out: CCR carry-bit set if no update took place
+                bcs.s   @NextEnemy
                 
-                jsr     GetActivationBitfield
-                bsr.s   ResetSpawningEnemyStats
-                bcs.s   @Next
+@ResetStats:    bsr.s   ResetSpawningEnemyStats ; Out: CCR carry-bit set if enemy is positioned off-screen (e.g., if spawn position is occupied)
+                bcs.s   @NextEnemy
                 
-                move.b  d0,(a0,d5.w)    ; append to targets list
-                addq.w  #1,d5
+                ; Spawn qualifying enemy with camera
+                clr.w   d1              ; clear skip camera toggle
+                bsr.w   SpawnEnemy
+@NextEnemy:     addq.w  #1,d0
+                dbf     d7,@Enemies_Loop
                 
-@Next:          addq.w  #1,d0
-                dbf     d7,@Loop
-                
-                move.w  d5,((TARGETS_LIST_LENGTH-$1000000)).w
-                movem.l (sp)+,d0-a0
                 rts
 
-    ; End of function PopulateTargetsListWithSpawningEnemies
+    ; End of function SpawnAllEnemies
 
                 modend
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: d0.w = character index
+; In: d0.w = enemy combatant index
 ; 
-; Out: CCR carry-bit set if no update took place
-
-UpdateEnemyActivationIfDead:
-                
-                jsr     GetCurrentHp
-                bne.s   @NoUpdate
-                
-                jsr     GetTriggerRegions ; -> d1.w, d2.w
-                cmpi.b  #15,d1
-                beq.s   @CheckRegion2
-                
-                addi.w  #BATTLE_REGION_FLAGS_START,d1
-                jsr     CheckFlag
-                beq.s   @CheckRegion2
-                
-                jsr     GetActivationBitfield
-                ori.w   #1,d1
-                jmp     SetActivationBitfield
-                
-@CheckRegion2:  cmpi.b  #15,d2
-                beq.s   @NoUpdate
-                
-                move.w  d2,d1
-                addi.w  #BATTLE_REGION_FLAGS_START,d1
-                jsr     CheckFlag
-                beq.s   @NoUpdate
-                
-                jsr     GetActivationBitfield
-                ori.w   #%11,d1
-                jmp     SetActivationBitfield
-                
-@NoUpdate:      ori     #1,ccr
-                rts
-
-    ; End of function UpdateEnemyActivationIfDead
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: d0.w = combatant index
-;     d1.w = AI activation bitfield
-; 
-; Out: CCR carry-bit set if spawn position is occupied
+; Out: CCR carry-bit set if enemy is positioned off-screen (e.g., if spawn position is occupied)
 
 
 ResetSpawningEnemyStats:
                 
-                movem.l d0-a0,-(sp)
-                move.w  d1,d2
+                move.w  d3,-(sp)
                 moveq   #BATTLESPRITESET_SUBSECTION_ENEMIES,d1
-                jsr     GetBattleSpritesetSubsection
-                bset    #7,d1
+                jsr     GetBattleSpritesetSubsection ; Out: a0 = subsection address, d1.w = subsection size
+                bset    #COMBATANT_BIT_ENEMY,d1
                 cmp.b   d1,d0
-                bhs.s   @PositionEnemyOffscreen
+                bhs.s   @PositionEnemyOffScreen
                 
-                move.b  d0,d1
-                andi.l  #COMBATANT_MASK_INDEX_AND_SORT_BIT,d1
+                move.w  d0,d1
+                andi.w  #COMBATANT_MASK_INDEX,d1
                 mulu.w  #BATTLESPRITESET_ENTITY_ENTRY_SIZE,d1
                 adda.w  d1,a0
                 clr.w   d3
                 clr.w   d4
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_X(a0),d3
                 move.b  BATTLESPRITESET_ENTITYOFFSET_STARTING_Y(a0),d4
+                move.w  d0,-(sp)
                 bsr.s   IsEnemyStartingPositionOccupied
-                bcs.s   @PositionEnemyOffscreen
+                movem.w (sp)+,d0        ; restore combatant index without affecting the CCR
+                bcs.s   @PositionEnemyOffScreen
                 
+                ; Reset stats but preserve the current activation state
+                jsr     GetActivationBitfield
                 bsr.w   InitializeEnemyStats
-                move.w  d2,d1
                 jsr     SetActivationBitfield
                 bra.s   @Done
-@PositionEnemyOffscreen:
                 
+@PositionEnemyOffScreen:
                 clr.w   d1
                 jsr     SetMaxHp
                 jsr     SetCurrentHp
                 moveq   #-1,d1
                 jsr     SetCombatantX
                 ori     #1,ccr
-@Done:
                 
-                movem.l (sp)+,d0-a0
+@Done:          movem.w (sp)+,d3        ; restore triggered regions bitfield without affecting the CCR
                 rts
 
     ; End of function ResetSpawningEnemyStats
@@ -173,51 +119,38 @@ ResetSpawningEnemyStats:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Is enemy starting position d3.w,d4.w curently occupied?
-; Return CCR carry-bit set if true.
+; Is enemy starting position d3.w,d4.w currently occupied?
+;
+; In: d3.w, d4.w = spawning enemy's starting position
+;
+; Out: CCR carry-bit set if true
 
 
 IsEnemyStartingPositionOccupied:
                 
-                movem.l d0-d2/d7,-(sp)
                 moveq   #COMBATANT_ALLIES_START,d0
-                moveq   #COMBATANT_ALLIES_COUNTER,d7
-@AlliesLoop:
+                moveq   #COMBATANT_ALLIES_COUNTER,d6
+                bsr.s   @Loop
+                bcs.s   @Return         ; immediately return true if any ally is occupying the position
                 
-                jsr     GetCombatantX
-                cmp.w   d1,d3
-                bne.s   @NextAlly
-                
-                jsr     GetCombatantY
-                cmp.w   d1,d4
-                ori     #1,ccr
-                beq.s   @Done
-@NextAlly:
-                
-                addq.w  #1,d0
-                dbf     d7,@AlliesLoop
-                
+                ; Otherwise, continue checking enemies
                 move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #COMBATANT_ENEMIES_COUNTER,d7
-@EnemiesLoop:
-                
-                jsr     GetCombatantX
+                moveq   #COMBATANT_ENEMIES_COUNTER,d6
+@Loop:          jsr     GetCombatantX
                 cmp.w   d1,d3
-                bne.s   @NextEnemy
+                bne.s   @Next
                 
                 jsr     GetCombatantY
                 cmp.w   d1,d4
-                ori     #1,ccr
-                beq.s   @Done
-@NextEnemy:
+                bne.s   @Next
                 
-                addq.w  #1,d0
-                dbf     d7,@EnemiesLoop
+                ori     #1,ccr
+@Return:        rts
+                
+@Next:          addq.w  #1,d0
+                dbf     d6,@Loop
                 
                 tst.b   d0
-@Done:
-                
-                movem.l (sp)+,d0-d2/d7
                 rts
 
     ; End of function IsEnemyStartingPositionOccupied
@@ -225,56 +158,24 @@ IsEnemyStartingPositionOccupied:
 
 ; =============== S U B R O U T I N E =======================================
 
-; In/Out: d2 = first time spawns only toggle, d3 = skip camera toggle
-
-SpawnListedEnemies:
-                
-                lea     ((TARGETS_LIST-$1000000)).w,a0
-                clr.w   d0
-                move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                bra.s   @SpawnEnemies
-@SpawnEnemies_Loop:
-                
-                move.b  (a0)+,d0
-                bsr.s   SpawnEnemy
-@SpawnEnemies:  dbf     d7,@SpawnEnemies_Loop
-                
-                rts
-
-    ; End of function SpawnListedEnemies
-
-
-; =============== S U B R O U T I N E =======================================
-
 ; In: d0.w = enemy combatant index
+;     d1.w = skip camera toggle
+;     d5.w = skip appending to turn order toggle
 
 combatant = -2
 
-                module
-
-SpawnEnemySkipCamera:
-                movem.l d2-d3/d7-a0,-(sp)
-                clr.w   d2
-                moveq   #-1,d3
-                bra.s   @Continue
-
-; In: d2 = first time spawns only toggle, d3 = skip camera toggle
-;
-SpawnEnemy:     
+SpawnEnemy:
                 
-                movem.l d2-d3/d7-a0,-(sp)
-@Continue:      link    a6,#-2
+                movem.w d0/d3/d5/d7,-(sp)
+                link    a6,#-2
                 move.w  d0,combatant(a6)
                 
                 jsr     SpawnEnemyEntity
-            if (EXTENDED_BATTLE_TURN_UPDATE=1)
-                tst.w   d2
-                beq.s   @CheckCamera
+                tst.w   d5
+                bne.s   @CheckCamera
                 
                 bsr.s   AppendSpawnedEnemyToTurnOrder
-@CheckCamera:
-            endif
-                tst.w   d3
+@CheckCamera:   tst.w   d1
                 bne.s   @SkipCamera
                 
                 ; Move cursor to combatant's position
@@ -287,19 +188,20 @@ SpawnEnemy:
                 bsr.w   WaitForCursorToStopMoving
                 jsr     (WaitForViewScrollEnd).w
                 bsr.w   HideCursorEntity
-@SkipCamera:    moveq   #11,d7
-
+                
+                ; Perform spinning mapsprite animation
+@SkipCamera:    moveq   #ANIM_SPRITE_SPAWN_SPINS_COUNTER,d6
 @Loop:          move.w  combatant(a6),d0
                 bsr.w   GetEntityIndexForCombatant
-                move.w  d7,d1
+                move.w  d6,d1
                 addq.w  #3,d1
-                andi.w  #3,d1
+                andi.w  #DIRECTION_MASK,d1
                 moveq   #-1,d2
                 moveq   #-1,d3
                 jsr     (UpdateEntityProperties).w
-                moveq   #3,d0
+                moveq   #ANIM_SPRITE_SPAWN_SPIN_DELAY,d0
                 jsr     (Sleep).w       
-                dbf     d7,@Loop
+                dbf     d6,@Loop
                 
                 sndCom  SFX_SPAWN
                 move.w  combatant(a6),((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -307,12 +209,11 @@ SpawnEnemy:
                 clsTxt
                 
                 unlk    a6
-                movem.l (sp)+,d2-d3/d7-a0
+                movem.w (sp)+,d0/d3/d5/d7
                 rts
 
-    ; End of function SpawnEnemyWithCamera
+    ; End of function SpawnEnemy
 
-                modend
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -320,11 +221,13 @@ SpawnEnemy:
 
 AppendSpawnedEnemyToTurnOrder:
                 
+                move.w  d1,-(sp)
+                
                 ; Append turn entry before update
                 loadSavedDataAddress (BATTLE_TURN_ORDER-TURN_ORDER_ENTRY_SIZE), a0
-                moveq   #TURN_ORDER_ENTRIES_COUNTER,d7
-@FindNullTurn_Loop:
+                moveq   #TURN_ORDER_ENTRIES_COUNTER,d6
                 
+@FindNullTurn_Loop:
                 ; Find first null entry
                 addq.w  #TURN_ORDER_ENTRY_SIZE,a0
                 getSavedWord a0, d1
@@ -337,15 +240,16 @@ AppendSpawnedEnemyToTurnOrder:
                 andi.w  #CHAR_STATCAP_AGI_CURRENT,d1
                 appendBattleTurnEntry d0, d1, a0
                 tst.b   d2
-                bpl.s   @Return
+                bpl.s   @Done
                 
                 ; Append second turn
                 appendBattleTurnEntry d0, d1, a0
-                bra.s   @Return
+                bra.s   @Done
                 
-@Next:          dbf     d7,@FindNullTurn_Loop
+@Next:          dbf     d6,@FindNullTurn_Loop
                 
-@Return:        rts
+@Done:          move.w  (sp)+,d1
+                rts
 
     ; End of function AppendSpawnedEnemyToTurnOrder
 

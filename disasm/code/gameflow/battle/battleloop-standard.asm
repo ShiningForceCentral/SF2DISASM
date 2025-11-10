@@ -84,15 +84,18 @@ BattleLoop:
                 pea     UpdateBattleTurnOrder(pc)
                 pea     SpawnRegionActivatedEnemies(pc)
 @Regions:       pea     ExecuteBattleRegionCutscene
-                jmp     TriggerRegionsAndActivateEnemies(pc)
+                pea     PrintNewlyActivatedDefCons(pc)
+                pea     ActivateEnemies(pc)
+                jmp     TriggerRegions(pc)
             else
 @StartRound:    ; Start a new round
                 pea     @IndividualTurn(pc)
                 pea     GenerateBattleTurnOrder(pc)
                 pea     SpawnAllEnemies(pc)
-                pea     PrintAllActivatedDefCons(pc)
                 pea     ExecuteBattleRegionCutscene
-                jmp     TriggerRegionsAndActivateEnemies(pc)
+                pea     PrintAllActivatedDefCons(pc)
+                pea     ActivateEnemies(pc)
+                jmp     TriggerRegions(pc)
                 
 @StartTurn:     ; Start of individual turn
             endif

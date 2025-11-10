@@ -1020,7 +1020,13 @@ loc_250B0:
                 move.w  d0,((BATTLEACTION_ITEM_OR_SPELL-$1000000)).w
                 move.w  d0,itemOrSpellIndex(a6)
                 sndCom  MUSIC_CORRUPTED_SAVE
+            if (STANDARD_BUILD=1)
+                moveq   #-1,d1          ; set skip camera toggle
+                moveq   #-1,d5          ; set skip appending to turn order toggle (relevant if EXTENDED_BATTLE_TURN_UPDATE is ON)
+                bsr.w   SpawnEnemy
+            else
                 bsr.w   SpawnEnemySkipCamera
+            endif
                 bra.w   @EndBattleEntityControl
 @CheckForGoldChest:
                 

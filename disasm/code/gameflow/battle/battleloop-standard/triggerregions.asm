@@ -1,5 +1,5 @@
 
-; ASM FILE code\gameflow\battle\battleloop-standard\triggerregionsandactivateenemies.asm :
+; ASM FILE code\gameflow\battle\battleloop-standard\triggerregions.asm :
 ;
 ; Conceptual Summary:
 ;   - Regions are decomposed into triangles.
@@ -10,10 +10,11 @@
 ;
 ; Optimization:
 ;   - Refactored region-trigger scan to single-pass discovery returning
-;       newly-triggered bitfield in d2; enemy AI activation now deferred to
-;       a separate pass to avoid per-enemy rescans.
-;   - As a result, worst-case complexity is reduced from O(regions * enemies)
-;       to O(regions + enemies).
+;       newly-triggered bitfield in d3; enemy AI activation now deferred to
+;       a separate pass to avoid per-enemy rescans. As a result, worst-case
+;       complexity is reduced from O(regions * enemies) to O(regions + enemies).
+;   - Simplified the core geometric test output for better readability and
+;       for faster evaluation by the caller routine.
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -22,7 +23,7 @@
 ;   IsRegionTriggered for each region and updating newly-triggered regions
 ;   bitfield accordingly.
 ;
-; Out: d2.w = newly-triggered regions bitfield (zero means no new triggers)
+; Out: d3.w = newly-triggered regions bitfield (0 = no new triggers)
 ;
 ; Optimization:
 ;   - Previously this routine performed region-trigger scanning per enemy,
@@ -30,22 +31,14 @@
 ;       ActivateEnemies until after all regions are scanned.
 
 
-
-TriggerRegionsAndActivateEnemies:
-                
-                ; Push address on the stack for later call by next RTS
-                pea     ActivateEnemies(pc)
-            if (EXTENDED_BATTLE_TURN_UPDATE=1)
-                pea     PrintNewlyActivatedDefCons(pc)  ; In: d2.w = newly-triggered regions bitfield
-            endif
 TriggerRegions:
                 
                 clr.w   d0
+                clr.w   d3                  ; clear newly-triggered regions bitfield
                 move.w  #BATTLESPRITESET_SUBSECTION_AI_REGIONS,d1
                 jsr     GetBattleSpritesetSubsection
                 move.w  d1,d7
                 move.w  #BATTLE_REGION_FLAGS_START,d1
-                clr.w   d2
                 bra.s   @EnterLoop
 @Loop:
                 ; Has region already been activated?
@@ -57,7 +50,7 @@ TriggerRegions:
                 beq.s   @Next
                 
                 jsr     SetFlag
-                bset    d0,d2               ; update newly-triggered regions bitfield
+                bset    d0,d3               ; update newly-triggered regions bitfield
                 
 @Next:
                 addq.w  #1,d0
@@ -82,7 +75,7 @@ TriggerRegions:
 
 IsRegionTriggered:
                 
-                movem.l d0-d2/d7,-(sp)
+                movem.l d0-d1/d3/d7-a0,-(sp)
                 
                 ; Retrieve region definition from the battle spriteset data
                 mulu.w  #BATTLESPRITESET_REGION_ENTRY_SIZE,d0
@@ -116,7 +109,7 @@ IsRegionTriggered:
                 bsr.s   AreAnyAlliesInTriangle  ; Out: d6.w = -1 if true
 @Done:
                 
-                movem.l (sp)+,d0-d2/d7
+                movem.l (sp)+,d0-d1/d3/d7-a0
                 rts
 
     ; End of function IsRegionTriggered
@@ -238,11 +231,8 @@ IsAllyInTriangle:
                 move.w  combatantY(a6),d6
                 bsr.w   CheckTestPointPositionRelativeToSegment
                 
-                cmpi.w  #%01,d0
-                beq.w   @ReturnInside       ; if result = %01 (collinear in-bounds), immediately return d6.w = -1 (inside)
-                
-                cmpi.w  #%11,d0
-                beq.s   @SecondEdgeTests    ; if result = %11 (exception), branch to next edge
+                beq.s   @ReturnInside       ; immediately return d6.w = -1 (inside) if CCR zero-bit is set
+                bmi.s   @ReturnOutside      ; immediately return d6.w = 0 (outside) if CCR negative-bit is set
                 
                 ; Otherwise, test edge against vertex3
                 move.w  d0,positionFlags(a6)
@@ -253,7 +243,6 @@ IsAllyInTriangle:
                 bne.s   @ReturnOutside      ; return d6.w = 0 (outside) if results of tests differ (ally and vertex3 are on opposite sides)
 ; ---------------------------------------------------------------------------
 
-@SecondEdgeTests:
                 ; Test edge (vertex3 -> vertex1)
                 move.w  regionX3(a6),d1
                 move.w  regionY3(a6),d2
@@ -264,11 +253,8 @@ IsAllyInTriangle:
                 bsr.s   CheckTestPointPositionRelativeToSegment
                 
                 ; Same logic as above
-                cmpi.w  #%01,d0
                 beq.s   @ReturnInside
-                
-                cmpi.w  #%11,d0
-                beq.s   @ThirdEdgeTests
+                bmi.s   @ReturnOutside
                 
                 ; Test against vertex2
                 move.w  d0,positionFlags(a6)
@@ -279,7 +265,6 @@ IsAllyInTriangle:
                 bne.s   @ReturnOutside
 ; ---------------------------------------------------------------------------
 
-@ThirdEdgeTests:
                 ; Test edge (vertex3 -> vertex2)
                 move.w  regionX3(a6),d1
                 move.w  regionY3(a6),d2
@@ -290,11 +275,8 @@ IsAllyInTriangle:
                 bsr.s   CheckTestPointPositionRelativeToSegment
                 
                 ; Same logic as above
-                cmpi.w  #%01,d0
                 beq.s   @ReturnInside
-                
-                cmpi.w  #%11,d0
-                beq.s   @ReturnOutside  ; return d6.w = 0 (outside) if result = %11 (exception)
+                bmi.s   @ReturnOutside
                 
                 ; Test against vertex1
                 move.w  d0,positionFlags(a6)
@@ -332,10 +314,13 @@ IsAllyInTriangle:
 ;     d3.w, d4.w = XB, YB (segment point B)
 ;     d5.w, d6.w = XC, YC (test point C)
 ;
-; Out: d0.w = %00 -> Test point is positioned above or to the left of segment line A-B
-;             %01 -> Test point is collinear and within segment bounds
-;             %10 -> Test point is below or to the right, or is collinear but out-of-bounds
-;             %11 -> Exception: Yproj/Xproj is negative or degenerate triangle detected
+; Out: d0.w = 0 -> Test point is collinear and within segment bounds
+;             1 -> Test point is positioned above or to the left of segment line A-B
+;             2 -> Test point is positioned below or to the right
+;            -1 -> Test point is collinear but out-of-bounds, or an exception is thrown (Yproj/Xproj is negative or degenerate triangle detected)
+;
+;      CCR zero-bit set causes caller to immediately return "inside"
+;      CCR negative-bit set causes caller to immediately return "outside"
 ;
 ; Method:
 ;   1. Calculate vertical and horizontal distances between A and B,
@@ -426,7 +411,7 @@ CheckTestPointPositionRelativeToSegment:
                 
                 move.w  YB(a6),d0
                 add.w   d6,d0                       ; d0.w = Yproj
-                bmi.w   @ReturnException            ; return d0 = %11 if Yproj is negative
+                bmi.w   @ReturnOutOfBounds          ; return d0 = -1 if Yproj is negative
                 
                 ; ------------------------------------------------------------
                 ; 3. Check collinearity in Y
@@ -437,8 +422,8 @@ CheckTestPointPositionRelativeToSegment:
                 
                 move.w  YC(a6),d1
                 sub.w   d1,d0
-                blo.w   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if YC is below Yproj
-                bhi.w   @ReturnAboveOrLeft                  ; return d0 = %00 if YC is above Yproj
+                bhi.w   @ReturnAboveOrLeft                  ; return d0 = 1 if YC is above Yproj
+                blo.w   @ReturnBelowOrRight                 ; return d0 = 2 if YC is below Yproj
                                                             ; otherwise, continue to boundedness checks
                 
                 ; ------------------------------------------------------------
@@ -457,32 +442,32 @@ CheckTestPointPositionRelativeToSegment:
                 ; (A is right of B) Is C right of A?
                 move.w  XC(a6),d1
                 cmp.w   d1,d0
-                blo.w   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 (out-of-bounds) if C is right of BA
+                blo.w   @ReturnOutOfBounds                  ; return d0 = -1 (out-of-bounds) if C is right of BA
                 
                 ; (A is right of BC) Is B right of C?
                 move.w  XC(a6),d0
                 move.w  XB(a6),d1
                 cmp.w   d1,d0
-                blo.w   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if BA is right of C
+                blo.w   @ReturnOutOfBounds                  ; return d0 = -1 if BA is right of C
                 
                 ; C is positioned between A and B along X
-                bra.w   @ReturnCollinearInBounds            ; return d0 = %01 (collinear in-bounds)
+                bra.w   @ReturnCollinearInBounds            ; return d0 = 0 (collinear in-bounds)
                 
 @IsCtoTheRightOfB:
                 ; (B is right of A) Is C right of B?
                 move.w  XB(a6),d0
                 move.w  XC(a6),d1
                 cmp.w   d1,d0
-                blo.w   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if C is right of AB
+                blo.w   @ReturnOutOfBounds                  ; return d0 = -1 if C is right of AB
                 
                 ; (B is right of AC) Is A right of C?
                 move.w  XC(a6),d0
                 move.w  XA(a6),d1
                 cmp.w   d1,d0
-                blo.w   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if AB is right of C
+                blo.w   @ReturnOutOfBounds                  ; return d0 = -1 if AB is right of C
                 
                 ; C is positioned  between B and A along X
-                bra.w   @ReturnCollinearInBounds            ; return d0 = %01
+                bra.w   @ReturnCollinearInBounds            ; return d0 = 0
 ; ---------------------------------------------------------------------------
 
                 ; ------------------------------------------------------------
@@ -507,14 +492,14 @@ CheckTestPointPositionRelativeToSegment:
                 move.w  YB(a6),d0
                 move.w  YA(a6),d1
                 sub.w   d1,d0
-                beq.s   @ReturnException            ; return d0 = %11 if ΔyBA = 0 (vertically aligned)
+                beq.s   @ReturnOutOfBounds          ; return d0 = -1 if ΔyBA = 0 (vertically aligned)
                 
                 ; Calculate vertical slope factor
                 divs.w  d0,d6                       ; d6.w = (ΔxBA * ΔyCB) / ΔyBA
                 
                 move.w  XB(a6),d0
                 add.w   d6,d0                       ; d0.w = Xproj
-                bmi.s   @ReturnException            ; return d0 = %11 if Xproj is negative
+                bmi.s   @ReturnOutOfBounds          ; return d0 = -1 if Xproj is negative
                 
                 ; ------------------------------------------------------------
                 ; 3. Check collinearity in X
@@ -525,8 +510,8 @@ CheckTestPointPositionRelativeToSegment:
                 
                 move.w  XC(a6),d1
                 sub.w   d1,d0
-                blo.s   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if XC is to the right of Xproj
-                bhi.s   @ReturnAboveOrLeft                  ; return d0 = %00 if XC is to the left
+                bhi.s   @ReturnAboveOrLeft                  ; return d0 = 1 if XC is to the left
+                blo.s   @ReturnBelowOrRight                 ; return d0 = 2 if XC is to the right of Xproj
                                                             ; otherwise, continue to boundedness checks
                 
                 ; ------------------------------------------------------------
@@ -542,129 +527,48 @@ CheckTestPointPositionRelativeToSegment:
                 ; (A is below B) Is C below A?
                 move.w  YC(a6),d1
                 cmp.w   d1,d0
-                blo.s   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 (out-of-bounds) if C is below AB
+                blo.s   @ReturnOutOfBounds                  ; return d0 = -1 (out-of-bounds) if C is below AB
                 
                 ; (A is below BC) Is B below C?
                 move.w  YC(a6),d0
                 move.w  YB(a6),d1
                 cmp.w   d1,d0
-                blo.s   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if AB is below C
-                bra.s   @ReturnCollinearInBounds            ; otherwise, return d0 = %01 (collinear in-bounds)
+                blo.s   @ReturnOutOfBounds                  ; return d0 = -1 if AB is below C
+                bra.s   @ReturnCollinearInBounds            ; otherwise, return d0 = 0 (collinear in-bounds)
                 
 @IsCBelowB:
                 ; (B is below A) Is C below B?
                 move.w  YB(a6),d0
                 move.w  YC(a6),d1
                 cmp.w   d1,d0
-                blo.s   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if C is below BA
+                blo.s   @ReturnOutOfBounds                  ; return d0 = -1 if C is below BA
                 
                 ; (B is below AC) Is A below C?
                 move.w  YC(a6),d0
                 move.w  YA(a6),d1
                 cmp.w   d1,d0
-                blo.s   @ReturnBelowOrRightOrOutOfBounds    ; return d0 = %10 if BA is below C
-                                                            ; otherwise, return d0 = %01
+                blo.s   @ReturnOutOfBounds                  ; return d0 = -1 if BA is below C
+                                                            ; otherwise, return d0 = 0
 ; ---------------------------------------------------------------------------
 
 @ReturnCollinearInBounds:
-                moveq   #%01,d0         ; return d0 = %01 if test point is collinear and within segment bounds
-                bra.s   @Done
-                
-@ReturnException:
-                moveq   #%11,d0         ; return d0 = %11 if negative Yproj/Xproj or degenerate triangle exception
+                moveq   #0,d0           ; return d0 = 0 if test point is collinear and within segment bounds
                 bra.s   @Done
                 
 @ReturnAboveOrLeft:
-                moveq   #%00,d0         ; return d0 = %00 if test point is positioned above or left of segment line A-B
+                moveq   #1,d0           ; return d0 = 1 if positioned above or left of segment line A-B
                 bra.s   @Done
                 
-@ReturnBelowOrRightOrOutOfBounds:
-                moveq   #%10,d0         ; return d0 = %10 if test point is below or right, or is out-of-bounds
+@ReturnBelowOrRight:
+                moveq   #2,d0           ; return d0 = 2 if positioned below or right
+                bra.s   @Done
                 
-@Done:
-                unlk    a6
+@ReturnOutOfBounds:
+                moveq   #-1,d0          ; return d0 = -1 if test point is out-of-bounds, or if negative Yproj/Xproj or degenerate triangle exception
+                
+@Done:          unlk    a6
                 movem.l (sp)+,d1-d6
                 rts
 
     ; End of function CheckTestPointPositionRelativeToSegment
-
-
-; =============== S U B R O U T I N E =======================================
-
-; If any regions were newly-triggered, iterate through all enemies activate
-;   AI linked to those regions.
-;
-; In: d2.w = newly-triggered regions bitfield
-;
-; Optimization:
-;   - Update now runs only when the newly-triggered bitfield is nonzero,
-;       avoiding unnecessary work when nothing changed.
-
-
-ActivateEnemies:
-
-                tst.w   d2
-                beq.s   @Return         ; skip if activated regions did not change
-                
-                move.w  #COMBATANT_ENEMIES_START,d0
-                moveq   #COMBATANT_ENEMIES_COUNTER,d7
-                
-                ; Update enemies currently on the field
-@Loop:          jsr     GetCombatantX
-                bmi.s   @Next
-                
-                jsr     GetCurrentHp
-                beq.s   @Next
-                
-                bsr.s   UpdateEnemyActivationBitfield
-                
-@Next:          addq.w  #1,d0
-                dbf     d7,@Loop
-                
-@Return:        rts
-
-    ; End of function ActivateEnemies
-
-
-; =============== S U B R O U T I N E =======================================
-
-; In: d0.w = enemy combatant index
-
-
-UpdateEnemyActivationBitfield:
-                
-                ; Are associated regions triggered for this AI?
-                jsr     GetTriggerRegions     ; -> d1.w, d2.w
-                cmpi.w  #AI_TRIGGER_REGION_NONE,d1
-                beq.s   @CheckRegion2
-                
-                ; Is region #1 triggered for this AI?
-                addi.w  #BATTLE_REGION_FLAGS_START,d1
-                jsr     CheckFlag
-                beq.s   @CheckRegion2
-                
-                ; Activate AI for region #1
-                jsr     GetActivationBitfield
-                andi.w  #($FFFF-AIBITFIELD_PRIMARY_ACTIVE),d1
-                ori.w   #AIBITFIELD_PRIMARY_ACTIVE,d1
-                jmp     SetActivationBitfield
-                
-@CheckRegion2:  cmpi.w  #AI_TRIGGER_REGION_NONE,d2
-                beq.s   @Return
-                
-                ; Is region #2 triggered for this AI?
-                move.w  d2,d1
-                addi.w  #BATTLE_REGION_FLAGS_START,d1
-                jsr     CheckFlag
-                beq.s   @Return
-                
-                ; Activate AI for region #2
-                jsr     GetActivationBitfield
-                andi.w  #($FFFF-AIBITFIELD_PRIMARY_ACTIVE|AIBITFIELD_SECONDARY_ACTIVE),d1
-                ori.w   #AIBITFIELD_PRIMARY_ACTIVE|AIBITFIELD_SECONDARY_ACTIVE,d1
-                jmp     SetActivationBitfield
-                
-@Return:        rts
-
-    ; End of function UpdateEnemyActivationBitfield
 
