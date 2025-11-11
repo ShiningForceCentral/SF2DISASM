@@ -781,7 +781,7 @@ script:     macro
 ; Data definition
 ; ---------------------------------------------------------------------------
                 
-defineBitfieldWithParam: macro Prefix,Bitfield,Param
+produceBitfieldValue: macro Prefix,Bitfield,Param
         if (type(\Prefix\\Param)&32>0)
 Value:          set \Prefix\\Param
         else
@@ -804,14 +804,24 @@ Value:          set Value|\Prefix\\Next
         else
 Value:          set Value|\Next
         endif
-                dc.\0 Value
     endm
                 
-defineBitfield: macro
-                defineBitfieldWithParam.\0 \1,\2,0
+defineBitfieldWithParam: macro Prefix,Bitfield,Param
+                produceBitfieldValue \Prefix,\Bitfield,\Param
+                dc.\0 Value
             endm
                 
-defineNibbleShiftedShorthand: macro Prefix,Shorthand
+defineBitfield: macro Prefix,Bitfield
+                produceBitfieldValue \Prefix,\Bitfield,0
+                dc.\0 Value
+            endm
+                
+defineByteSwappedBitfield: macro Prefix,Bitfield
+                produceBitfieldValue \Prefix,\Bitfield,0
+                dc.w ((Value>>BYTE_SHIFT_COUNT)|(Value<<BYTE_SHIFT_COUNT))&WORD_MASK
+            endm
+                
+defineNibbleShiftedLeftShorthand: macro Prefix,Shorthand
             if (type(\Prefix\\Shorthand)&32>0)
                 dc.\0 \Prefix\\Shorthand<<NIBBLE_SHIFT_COUNT
             else
@@ -1408,11 +1418,15 @@ mov:        macro
             endm
                 
 resistance: macro
+            if (STANDARD_BUILD&FIX_CLASSES_RESISTANCE=1)
                 defineBitfield.w RESISTANCE_,\1
-            endm
+            else
+                defineByteSwappedBitfield RESISTANCE_,\1
+            endif
+        endm
                 
 movetype:   macro
-                defineNibbleShiftedShorthand.b MOVETYPE_,\1
+                defineNibbleShiftedLeftShorthand.b MOVETYPE_,\1
             endm
                 
 prowess:    macro

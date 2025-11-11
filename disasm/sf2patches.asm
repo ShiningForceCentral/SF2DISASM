@@ -40,6 +40,7 @@ FIX_AI_CLAUDE_ATTACK_RANGE:          equ 1   ; Corrects an oversight resulting i
 FIX_BATTLE_TO_MOUN_SKIP:             equ 1   ; Sets the Egress map to Pacalon after Frayja asks to go to Moun, preventing the battle to Moun to be skipped by egressing to Tristan.
 FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chunks of 4.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.
+FIX_CLASSES_RESISTANCE:              equ 1   ; Swap the upper and lower bytes of the resistance bitfield for character classes, resulting in coherent resistance settings for promoted Kiwi, Zynk, and Claude. (Promoted Peter is unaffected.)
 FIX_COPY_SWAP_EXPLOIT:               equ 1   ; Some game data will be carried over from a previous file to a new one when deleting a save after copying it. Known items include: Character EXP, kills and defeats, item dropped flags, and queued up Mithril items.
 FIX_COUNT_DEFEATED_ENEMIES:          equ 1   ; Fixes the death counter that impacts "swarm AI" for battles 16, 20, 21. In vanilla, does not impact battles 16, 20, but makes 21 more aggressive.
 FIX_CRITICAL_HIT_DEFINITIONS:        equ 1   ; Makes the "Increase Critical" equipeffect increase chance while never impacting damage potential.
@@ -65,10 +66,10 @@ FIX_MOVEMENT_GLITCH:                 equ 1   ; The movement glitch is used in ba
 FIX_PRISM_FLOWER_OVERWORLD_ENTRANCE: equ 1   ; On Map 77, walking to the right on the tile closest to the bottom mountain brings the player into the Prism Flower battle rather than to the world map to the right.
 FIX_RANGED_COUNTER_EXP:              equ 1   ; Switches focus to ally target before giving EXP if a counterattack occurred.
 FIX_SEARCH_IN_BATTLE:                equ 1   ; Restores the ability to search chests during battle.
+FIX_SLADE_EXPLODES_AFTER_BATTLE_5:   equ 1   ; Fixes the bug where at the end of battle 5, if you kill the Galam Knight and at least one other target simultaneously, then Slade explodes during post-battle cutscene.
 FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
 FIX_TIMER_WINDOW_POSITION:           equ 1   ; Re-positions the timer window displayed during the Fairy Woods special stage battle to perfectly overlap the gold window when viewing the member status screen.
 FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
-FIX_SLADE_EXPLODES_AFTER_BATTLE_5:   equ 1   ; Fixes the bug where at the end of battle 5, if you kill the Galam Knight and at least one other target simultaneously, then Slade explodes during post-battle cutscene.
 
 
 ; Quality of life features

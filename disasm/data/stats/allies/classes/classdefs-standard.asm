@@ -148,17 +148,17 @@ table_ClassDefinitions:
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN16|COUNTER_1IN8
                 
                 mov 7                   ; 28: MNST
-                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_MAJOR|STATUS_MAJOR
+                resistance WIND_MAJOR|LIGHTNING_MAJOR|ICE_MAJOR|FIRE_MAJOR|NEUTRAL_NONE|STATUS_NONE
                 moveType   HOVERING
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 4                   ; 29: RBT
-                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_MINOR|STATUS_MINOR
+                resistance WIND_MINOR|LIGHTNING_NONE|ICE_NONE|FIRE_MINOR|NEUTRAL_NONE|STATUS_NONE
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
                 mov 4                   ; 30: GLM
-                resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_MAJOR|NEUTRAL_MINOR|STATUS_MINOR
+                resistance WIND_MINOR|LIGHTNING_MINOR|ICE_MINOR|FIRE_MINOR|NEUTRAL_NONE|STATUS_MAJOR
                 moveType   REGULAR
                 prowess    CRITICAL125_1IN16|DOUBLE_1IN32|COUNTER_1IN16
                 
@@ -167,7 +167,7 @@ table_ClassDefinitions:
                 moveType   REGULAR
                 prowess    CRITICAL150_1IN8|DOUBLE_1IN32|COUNTER_1IN8
                 
-            if (STANDARD_BUILD&EXPANDED_CLASSES=1)
+            if (EXPANDED_CLASSES=1)
                     
                 mov 6                   ; 32: 
                 resistance WIND_NONE|LIGHTNING_NONE|ICE_NONE|FIRE_NONE|NEUTRAL_NONE|STATUS_NONE
