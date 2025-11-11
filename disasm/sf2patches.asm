@@ -37,6 +37,7 @@ TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES:  equ 0       ; 1 = no battle messages dis
 ; - FIX_SPELL_LEARNING_PROMO_CHECK
 ;
 FIX_AI_CLAUDE_ATTACK_RANGE:          equ 1   ; Corrects an oversight resulting in AI-controlled Claude to attack with the same 1-2 range as the Kraken Arm enemy.
+FIX_ATTACK_PRIORITY_ADJUSTMENT:      equ 1   ; Apply adjustment to attack (regular or spell) priority score based on attacker's movetype and defender's class for AI controlled enemies rather than allies, since enemies do not have a class.
 FIX_BATTLE_TO_MOUN_SKIP:             equ 1   ; Sets the Egress map to Pacalon after Frayja asks to go to Moun, preventing the battle to Moun to be skipped by egressing to Tristan.
 FIX_CARAVAN_DESCRIPTIONS:            equ 1   ; Breaks up character list into chunks of 4.
 FIX_CARAVAN_FREE_REPAIR_EXPLOIT:     equ 1   ; Preserves the broken bit when items are stored in the Caravan, though as a result, inventory size must be halved to 32 items.

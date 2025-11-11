@@ -24,9 +24,14 @@ AdjustTargetPriority:
                 clr.w   d5
                 move.b  d0,d5           ; d5.b = copy of defender index
                 move.w  d4,d0
+            if (STANDARD_BUILD&FIX_ATTACK_PRIORITY_ADJUSTMENT=1)
+                tst.b   d0              ; apply adjustment to enemy attackers rather than ally
+                bpl.s   @Done
+            else
                 btst    #COMBATANT_BIT_ENEMY,d0
                 beq.s   @Continue
                 bra.w   @Done
+            endif
 @Continue:
                 
                 bsr.w   IsCombatantConfused
