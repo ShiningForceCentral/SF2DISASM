@@ -735,22 +735,22 @@ SPELLPOWER_ENHANCED: equ 99 ; spell power increased by 25%
 ; ---------------------------------------------------------------------------
 
 ; enum AiBitfield (bitfield)
-AIBITFIELD_PRIMARY_ACTIVE: equ 1 ; Activated for primary order
-AIBITFIELD_SECONDARY_ACTIVE: equ 2 ; Activated for secondary order
-AIBITFIELD_AI_CONTROLLED: equ 4 ; AI control toggle
-AIBITFIELD_BIT3: equ 8
+AIBITFIELD_PRIMARY_ACTIVE: equ 1    ; Activated for primary order
+AIBITFIELD_SECONDARY_ACTIVE: equ 2  ; Activated for secondary order
+AIBITFIELD_AI_CONTROLLED: equ 4     ; AI control toggle
+AIBITFIELD_NEUTRAL: equ 8           ; Declared as a neutral battle entity, i.e., one that cannot act or be targeted
 
 AIBITFIELD_BIT4: equ $10
 AIBITFIELD_BIT5: equ $20
 AIBITFIELD_BIT6: equ $40
 AIBITFIELD_BIT7: equ $80
 
-AIBITFIELD_RESPAWN: equ $100 ; Respawning
-AIBITFIELD_HIDDEN: equ $200 ; Hidden
+AIBITFIELD_RESPAWN: equ $100        ; Respawning
+AIBITFIELD_HIDDEN: equ $200         ; Hidden
 AIBITFIELD_BIT10: equ $400
 AIBITFIELD_BIT11: equ $800
 
-AIBITFIELD_PRIORITYMOD_0: equ 0 ; Dark Smoke and Willard
+AIBITFIELD_PRIORITYMOD_0: equ 0     ; Dark Smoke and Willard
 AIBITFIELD_PRIORITYMOD_1: equ $1000 ; Bosses
 AIBITFIELD_PRIORITYMOD_2: equ $2000 ; Fighters
 AIBITFIELD_PRIORITYMOD_3: equ $3000 ; Healer enemy
@@ -764,7 +764,7 @@ AIBITFIELD_BIT15: equ $8000
 AIBITFIELD_BIT_PRIMARY_ACTIVE: equ 0
 AIBITFIELD_BIT_SECONDARY_ACTIVE: equ 1
 AIBITFIELD_BIT_AI_CONTROLLED: equ 2
-AIBITFIELD_BIT_BIT3: equ 3
+AIBITFIELD_BIT_NEUTRAL: equ 3
 
 AIBITFIELD_BIT_RESPAWN: equ 8 ; Respawning
 AIBITFIELD_BIT_HIDDEN: equ 9 ; Hidden
