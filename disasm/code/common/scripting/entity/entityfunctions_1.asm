@@ -336,7 +336,7 @@ PositionBattleEntities:
                 move.w  battleEntity(a6),d0
                 jsr     j_GetActivationBitfield
                 move.w  (sp)+,d0
-                andi.w  #AIBITFIELD_BIT3,d1
+                andi.w  #AIBITFIELD_NEUTRAL,d1
                 bne.w   @SkipEnemy
                 
                 move.w  d0,-(sp)
@@ -442,7 +442,7 @@ PositionBattleEntities:
                 jsr     j_SetCurrentHp
                 jsr     j_SetStatusEffects
                 jsr     j_GetActivationBitfield
-                ori.w   #AIBITFIELD_BIT3,d1
+                ori.w   #AIBITFIELD_NEUTRAL,d1
                 jsr     j_SetActivationBitfield
                 clr.w   d1
                 move.b  (a0)+,d1

@@ -70,7 +70,7 @@ BuildTargetsArray:
                 beq.w   @Next
                 
                 jsr     GetActivationBitfield
-                btst    #AIBITFIELD_BIT_BIT3,d1
+                btst    #AIBITFIELD_BIT_NEUTRAL,d1
                 beq.s   @Continue
                 bra.w   @Next
 @Continue:
