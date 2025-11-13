@@ -92,7 +92,7 @@ GetSpellAnimation:
                 
                 bsr.w   GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
-                cmpi.b  #ITEM_NOTHING,d1
+                cmpi.b  #SPELL_NOTHING,d1
                 beq.s   @Return
                 
                 bsr.w   GetSpellDefinitionAddress
