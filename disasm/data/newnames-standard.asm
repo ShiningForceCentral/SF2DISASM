@@ -246,9 +246,9 @@ table_EffectNames:
                 defineName "Demon Breath"
                 defineName "Flame Breath"
                 defineName "Arrows and Spears"
-                defineName "Cannon Projectile"
-                defineName "Shot Projectile"
-                defineName "Gunner Projectile"
+                defineName "Cannon Fire"
+                defineName "Shot Fire"
+                defineName "Gunner Blast"
                 defineName "Dao"
                 defineName "Apollo"
                 defineName "Neptun"
@@ -256,7 +256,7 @@ table_EffectNames:
                 defineName "Prism Laser"
                 defineName "Bubble Breath"
                 defineName "Snow Breath"
-                defineName "Cutoff"
+                defineName "Cutoff and Dodge"
                 defineName "Buff 2"
                 defineName "Attack"
                 defineName "Debuff 2"
@@ -311,6 +311,7 @@ table_ConfigurationMessages:
                 defineName "Which map?"                     ; Map Select
                 defineName "Which battle?"                  ; Battle Test 1
                 defineName "Play intro cutscene?"           ; Battle Test 2
+                defineName "Setup battle party?"            ; Battle Test 3
                 defineName "Which menu?"                    ; Menu Select
                 defineName "Which shop?"                    ; Shop Select
                 defineName "Recruit which character?"       ; Party Select 1

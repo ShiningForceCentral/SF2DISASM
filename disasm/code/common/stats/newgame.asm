@@ -196,7 +196,7 @@ InitializeGameSettings:
                 move.l  d0,((mithrilOrders3and4-$1000000)).w 
             endif
                 move.l  #359999,((SPECIAL_BATTLE_RECORD-$1000000)).w
-                move.b  #2,((MESSAGE_SPEED-$1000000)).w
+                move.b  #GAMESTART_MESSAGE_SPEED,((MESSAGE_SPEED-$1000000)).w
                 move.l  #-1,((EXPLORATION_ENTITIES-$1000000)).w
                 move.w  #-1,((byte_FFAF26-$1000000)).w
                 movem.l (sp)+,d0/d7-a0

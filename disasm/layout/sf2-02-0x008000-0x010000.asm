@@ -25,6 +25,7 @@
                 includeIfStandard "code\common\stats-standard\iteminventory.asm"    ; Item inventory management functions
                 includeIfStandard "code\common\stats-standard\dealsinventory.asm"    ; Deals inventory management functions
                 includeIfStandard "code\common\stats-standard\caravaninventory.asm"    ; Caravan inventory management functions
+                includeIfStandard "data\stats\allies\newgameallies-standard.asm"
                 includeIfStandard "data\stats\allies\allieswithbetterdouble-standard.asm"
                 
                 ; Stats engine

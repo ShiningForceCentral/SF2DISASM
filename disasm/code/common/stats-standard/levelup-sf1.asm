@@ -41,16 +41,17 @@ LevelUp:
                 
                 ; Regular level up process : Find new learnable spell and finish with updating current stats
                 pea     UpdateCombatantStats(pc)
+                
                 movem.l d0-a1,-(sp)
-                moveq   #-1,d7
+                moveq   #-1,d7          ; d7.w = set learn spell toggle
                 bra.s   @Continue
 FastLevelUp:
                 
                 ; Faster process meant for running in loops -- make sure to update stats afterward!
                 movem.l d0-a1,-(sp)
-                moveq   #0,d7           ; d7.w = learn spell toggle
-@Continue:
+                moveq   #0,d7           ; d7.w = clear learn spell toggle
                 
+@Continue:      lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a1   ; level up messages arguments
                 bsr.w   GetClass        
                 move.w  d1,d3           ; d3.w = class
                 bsr.w   GetLevel
@@ -62,9 +63,7 @@ FastLevelUp:
                 bne.s   @CheckLevelCap
                 
                 moveq   #CHAR_LEVELCAP_BASE,d2
-@CheckLevelCap:
-                
-                cmp.w   d2,d5
+@CheckLevelCap: cmp.w   d2,d5
                 bhs.s   @Exit
                 
                 ; Get pointer to stat block for class d3.b -> a0
@@ -72,22 +71,20 @@ FastLevelUp:
                 bsr.s   GetAllyStatsBlockAddress
                 tst.w   d3
                 bpl.s   @CalculateStatGains
-@Exit:
+                
                 ; Exit routine if character is at the level cap
-                lea     (LEVELUP_ARGUMENTS).l,a1
-                st      (a1)+
+@Exit:          st      (a1)+
                 clr.b   (a1)+
                 clr.l   (a1)+
                 st      (a1)
                 bra.w   @Done
-@CalculateStatGains:
                 
+@CalculateStatGains:
                 ; SF1 stat gain calculations, adapted to SF2 data formats with modified parameters.
                 ; In comparison to SF1, this implementation slows the rate at which the randomization range increases
                 ;  down by half, and doubles the cap to better suit SF2's higher growth values.
                 ;
                 ; In: d5.w = current level
-                lea     (LEVELUP_ARGUMENTS).l,a1
                 moveq   #0,d2
                 moveq   #0,d3
                 moveq   #0,d4
@@ -155,9 +152,7 @@ FastLevelUp:
                 tst.w   d2
                 bne.s   @Done
                 move.b  d1,6(a1)
-@Done:
-                
-                movem.l (sp)+,d0-a1
+@Done:          movem.l (sp)+,d0-a1
                 rts
 
     ; End of function LevelUp
@@ -188,8 +183,8 @@ CalculateStatGain:
 @Exit:          move.w  d1,d2
                 clr.w   d1              ; otherwise, stat gain value = 0
                 rts
-@CheckProjectionLevel:
                 
+@CheckProjectionLevel:
                 movem.l d0/d3-a0,-(sp)
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5
                 blt.s   @Continue       ; keep going if current level is within projection
@@ -202,8 +197,8 @@ CalculateStatGain:
                 addq.w  #1,d2           ; if zero add one to target (i.e., 1/4 chance of increasing target by 1)
                 bra.s   @CalculateGain
                 
-@Continue:      ; Calculate stat d6.w increase amount given current value d1.w and level d5.w -> d2.w
-                bsr.s   CalculateStatTargetValue
+                ; Calculate stat d6.w increase amount given current value d1.w and level d5.w -> d2.w
+@Continue:      bsr.s   CalculateStatTargetValue
                 
                 ; (SF1_LEVELUP_RNG_CAP - 1) * SF1_LEVELUP_RNG_SCALE_RATE = stat value threshold where randomization range stops scaling, e.g., if both rate and cap are set to 8, rng scales up to stat value 56.
                 ; Subtract 1 from cap because the last point is considered separately when making final adjustments.
@@ -212,8 +207,8 @@ CalculateStatGain:
                 bls.s   @Randomize
                 
                 moveq   #(SF1_LEVELUP_RNG_CAP-1)*SF1_LEVELUP_RNG_SCALE_RATE,d6
-@Randomize:
-                ; d2 = stat target value
+                
+@Randomize:     ; d2 = stat target value
                 ; d6 = stat target value / SF1_LEVELUP_RNG_SCALE_RATE
                 ; randomization range = d6 + 1, capped to SF1_LEVELUP_RNG_CAP
                 ; stat final value = d2 ± randomization range
@@ -248,16 +243,16 @@ CalculateStatGain:
                 
                 addq.w  #1,d2
                 
-@Subtract:      ; Subtract 1 point with chance = (SF1_LEVELUP_RNG_SCALE_RATE - remainder) / SF1_LEVELUP_RNG_SCALE_RATE
-                subi.w  #SF1_LEVELUP_RNG_SCALE_RATE,d3
+                ; Subtract 1 point with chance = (SF1_LEVELUP_RNG_SCALE_RATE - remainder) / SF1_LEVELUP_RNG_SCALE_RATE
+@Subtract:      subi.w  #SF1_LEVELUP_RNG_SCALE_RATE,d3
                 neg.w   d3
                 jsr     (GenerateRandomNumber).w
                 cmp.w   d3,d7
                 bhs.s   @CheckCurrentValue
                 
                 subq.w  #1,d2
-@CheckCurrentValue:
                 
+@CheckCurrentValue:
                 cmp.w   d1,d2           ; keep highest of current and target
                 bge.s   @CalculateGain
                 
@@ -304,6 +299,7 @@ CalculateStatTargetValue:
 ; =============== S U B R O U T I N E =======================================
 
 ; Calculate stat d6.w initial value for ally d0.w, factoring in promoted at level d1.w -> d3.w
+
 
 CalculateStatInitialValue:
                 
@@ -366,18 +362,15 @@ CalculateGrowthPortion:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = ally index
-;     d1.w = starting level
+;     d3.w = automatic promotion toggle
+;     d4.w = initialization level
 
 
 InitializeAllyStats:
                 
-                ; Finish with updating current stats
-                pea     UpdateCombatantStats(pc)
-                
                 movem.l d0-d2/a0,-(sp)
-                move.w  d1,d4           ; d4.w = copy of starting level
                 
-                ; Get ally stats entry address -> A0
+                ; Get ally stats entry address -> a0
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 getPointer p_pt_AllyStats, a0
@@ -389,35 +382,55 @@ InitializeAllyStats:
                 move.b  (a0)+,d1
                 bsr.w   SetMaxHp
                 bsr.w   SetCurrentHp
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetMaxMp
                 bsr.w   SetCurrentMp
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseAtt
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseDef
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseAgi
+                
                 moveq   #1,d1
                 bsr.w   SetLevel
                 bsr.s   IncreaseAllyBaseDouble
-                subq.w  #2,d4           ; level up loop counter = current level - 2
-                blt.s   @Done
-@LevelUp_Loop:
+                subq.w  #1,d4           ; d4.w = level up loop counter
+                bra.s   @Next
                 
-                bsr.w   FastLevelUp
-                dbf     d4,@LevelUp_Loop
-@Done:
+@LevelUp_Loop:  bsr.w   FastLevelUp
+                tst.w   d3              ; continue if automatic promotion toggle is clear
+                beq.s   @Next
                 
-                movem.l (sp)+,d0-d2/a0
+                ; Apply automatic promotion
+                bsr.w   GetClassType
+                bne.s   @Next           ; skip if character is already promoted
+                
+@CheckPromote:  bsr.w   GetLevel
+                cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1 ; continue if not at the minimum promotable level
+                bne.s   @Next
+                
+                bsr.w   GetClass
+                bsr.s   FindRegularPromoClass ; Out: d1.w = new class, d2.w = current class
+                bsr.w   Promote
+                moveq   #1,d1
+                bsr.w   SetLevel
+                
+@Next:          dbf     d4,@LevelUp_Loop
+                
+@Done:          movem.l (sp)+,d0-d2/a0
                 rts
 
     ; End of function InitializeAllyStats
@@ -443,26 +456,53 @@ IncreaseAllyBaseDouble:
                 lsr.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2 ; shift double and counter attack settings into lower nibble position
                 andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 addq.w  #1,d2
-                bmi.s   @Zero           ; clamp to zero on negative
+                bmi.s   @Zero               ; clamp to zero on negative
                 
                 cmpi.w  #PROWESS_1IN4,d2
                 bls.s   @Continue
                 
-                moveq   #PROWESS_1IN4,d2 ; otherwise, cap to highest chance
+                moveq   #PROWESS_1IN4,d2    ; otherwise, cap to highest chance
                 bra.s   @Continue
-@Zero:          
                 
-                moveq   #PROWESS_1IN32,d2
-@Continue:
-                
-                lsl.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
+@Zero:          moveq   #PROWESS_1IN32,d2
+@Continue:      lsl.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.w  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,d1
                 or.w    d2,d1
                 bsr.w   SetBaseProwess
-@Done:
                 
-                movea.l (sp)+,a0
+@Done:          movea.l (sp)+,a0
                 rts
 
     ; End of function IncreaseAllyBaseDouble
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = current class  Out: d1.w = new class, d2.w = current class
+
+cannotPromoteFlag = -36
+promotionSectionLength = -34
+promotionSectionOffset = -32
+
+FindRegularPromoClass:
+                
+                move.w  d7,-(sp)
+                link    a6,#-36
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                jsr     GetPromotionData
+                move.w  promotionSectionOffset(a6),d7
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
+                jsr     FindPromotionSection
+                addq.w  #1,a0
+                move.w  d1,d2           ; d2.w = current class
+                bra.s   @FindNewClass
+                
+@Loop:          move.b  (a0)+,d1
+@FindNewClass:  dbf     d7,@Loop
+                
+                unlk    a6
+                move.w  (sp)+,d7
+                rts
+
+    ; End of function FindRegularPromoClass
 

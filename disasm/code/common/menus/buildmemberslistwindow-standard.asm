@@ -143,6 +143,10 @@ headerStringOffset = headerStringOffset+2
             if (SECOND_MEMBERS_LIST_PAGE=1)
                 cmpi.b  #WINDOW_MEMBERS_LIST_PAGE_HPMP,((CURRENT_MEMBERS_LIST_PAGE-$1000000)).w
                 bne.s   @WriteEntry_Stats2
+                
+              if (THREE_DIGITS_STATS=0)
+                addq.w  #2,a1
+              endif
                 move.w  currentMember(a6),d0              ; Write current HP
                 jsr     GetCurrentHp
                 bsr.w   WriteStatValue
@@ -150,7 +154,7 @@ headerStringOffset = headerStringOffset+2
                 move.w  currentMember(a6),d0              ; Write max HP
                 jsr     GetMaxHP
                 bsr.w   WriteStatValue
-                addq.w  #4,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_MP_START,a1
                 move.w  currentMember(a6),d0              ; Write current MP
                 jsr     GetCurrentMP
                 bsr.w   WriteStatValue
@@ -167,30 +171,30 @@ headerStringOffset = headerStringOffset+2
                 move.w  currentMember(a6),d0    ; Write current HP
                 jsr     GetCurrentHp
                 bsr.w   WriteStatValue
-                addq.w  #2,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT,a1
                 move.w  currentMember(a6),d0    ; Write current MP
                 jsr     GetCurrentMP
                 bsr.w   WriteStatValue
             endif
-                addq.w  #2,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT,a1
                 
                 ; Write ATT
                 move.w  currentMember(a6),d0
                 jsr     GetCurrentATT
                 bsr.w   WriteStatValue
-                addq.w  #2,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT,a1
                 
                 ; Write DEF
                 move.w  currentMember(a6),d0
                 jsr     GetCurrentDEF
                 bsr.w   WriteStatValue
-                addq.w  #2,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT,a1
                 
                 ; Write AGI
                 move.w  currentMember(a6),d0
                 jsr     GetCurrentAGI
                 bsr.w   WriteStatValue
-                addq.w  #2,a1
+                addq.w  #WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT,a1
                 
                 ; Write MOV
                 move.w  currentMember(a6),d0

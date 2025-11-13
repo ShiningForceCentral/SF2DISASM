@@ -41,16 +41,17 @@ LevelUp:
                 
                 ; Regular level up process : Find new learnable spell and finish with updating current stats
                 pea     UpdateCombatantStats(pc)
+                
                 movem.l d0-a1,-(sp)
-                moveq   #-1,d7
+                moveq   #-1,d7          ; d7.w = set learn spell toggle
                 bra.s   @Continue
 FastLevelUp:
                 
                 ; Faster process meant for running in loops -- make sure to update stats afterward!
                 movem.l d0-a1,-(sp)
-                moveq   #0,d7           ; d7.w = learn spell toggle
-@Continue:
+                moveq   #0,d7           ; d7.w = clear learn spell toggle
                 
+@Continue:      lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a1   ; level up messages arguments
                 bsr.w   GetClass        
                 move.w  d1,d3           ; d3.w = class
                 bsr.w   GetLevel
@@ -62,9 +63,7 @@ FastLevelUp:
                 bne.s   @CheckLevelCap
                 
                 moveq   #CHAR_LEVELCAP_BASE,d2
-@CheckLevelCap:
-                
-                cmp.w   d2,d5
+@CheckLevelCap: cmp.w   d2,d5
                 bhs.s   @Exit
                 
                 ; Get pointer to stat block for class d3.b -> a0
@@ -72,20 +71,18 @@ FastLevelUp:
                 bsr.s   GetAllyStatsBlockAddress
                 tst.w   d3
                 bpl.s   @CalculateStatGains
-@Exit:
+                
                 ; Exit routine if character is at the level cap
-                lea     (LEVELUP_ARGUMENTS).l,a1
-                st      (a1)+
+@Exit:          st      (a1)+
                 clr.b   (a1)+
                 clr.l   (a1)+
                 st      (a1)
                 bra.w   @Done
-@CalculateStatGains:
                 
+@CalculateStatGains:
                 ; Vanilla stat gain calculations
                 ;
                 ; In: d5.w = current level
-                lea     (LEVELUP_ARGUMENTS).l,a1
                 moveq   #0,d2
                 moveq   #0,d3
                 moveq   #0,d4
@@ -143,9 +140,7 @@ FastLevelUp:
                 tst.w   d2
                 bne.s   @Done
                 move.b  d1,6(a1)
-@Done:
-                
-                movem.l (sp)+,d0-a1
+@Done:          movem.l (sp)+,d0-a1
                 rts
 
     ; End of function LevelUp
@@ -176,7 +171,6 @@ CalculateStatGain:
                 rts
                 
 @CheckProjectionLevel:
-                
                 movem.l d0/d2-a0,-(sp)
                 movem.w d1-d5,-(sp)     ; -> push function arguments
                 cmpi.w  #CHAR_STATGAIN_PROJECTIONLEVEL,d5 ; If current level within projection
@@ -185,8 +179,8 @@ CalculateStatGain:
                 move.w  #256,d0         ; assume 100% of projected stats reached
                 move.w  #384,d4         ; out of growth data, so assume 1.5
                 bra.s   @RandomizeStatGain
-@CalculateGrowthPortion:
                 
+@CalculateGrowthPortion:
                 andi.w  #GROWTHCURVE_MASK_INDEX,d2
                 subq.w  #1,d2
                 mulu.w  #GROWTHCURVE_DEF_SIZE,d2
@@ -201,8 +195,8 @@ CalculateStatGain:
                 move.w  (a0)+,d7        ; D7 = curve_param_2 for current level
                 sub.w   d3,d4           ; D4 = projected growth (diff between initial and final)
                 mulu.w  d7,d4           ; get portion of growth for current level
-@RandomizeStatGain:
                 
+@RandomizeStatGain:
                 move.w  #128,d6         ; do 2 randoms instead of 1 to approx. bell curve
                 jsr     (GenerateRandomNumber).w
                 add.w   d7,d4           ; add 0 to 0.5 to random value
@@ -222,9 +216,7 @@ CalculateStatGain:
                 bge.s   @Done           ;  ...we're done.
                 
                 addq.w  #1,d6           ;  Otherwise, lovingly apply "loser pity bonus."
-@Done:
-                
-                move.w  d6,d1           ; return stat gain value -> D1
+@Done:          move.w  d6,d1           ; return stat gain value -> D1
                 movem.l (sp)+,d0/d2-a0
                 rts
 
@@ -234,18 +226,15 @@ CalculateStatGain:
 ; =============== S U B R O U T I N E =======================================
 
 ; In: d0.w = ally index
-;     d1.w = starting level
+;     d3.w = automatic promotion toggle
+;     d4.w = initialization level
 
 
 InitializeAllyStats:
                 
-                ; Finish with updating current stats
-                pea     UpdateCombatantStats(pc)
-                
                 movem.l d0-d2/a0,-(sp)
-                move.w  d1,d4           ; d4.w = copy of starting level
                 
-                ; Get ally stats entry address -> A0
+                ; Get ally stats entry address -> a0
                 move.w  d0,d2
                 lsl.w   #INDEX_SHIFT_COUNT,d2
                 getPointer p_pt_AllyStats, a0
@@ -257,35 +246,55 @@ InitializeAllyStats:
                 move.b  (a0)+,d1
                 bsr.w   SetMaxHp
                 bsr.w   SetCurrentHp
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetMaxMp
                 bsr.w   SetCurrentMp
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseAtt
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseDef
+                
                 clr.w   d1
                 addq.l  #ALLYSTATS_OFFSET_NEXT_STAT,a0
                 move.b  (a0)+,d1
                 bsr.w   SetBaseAgi
+                
                 moveq   #1,d1
                 bsr.w   SetLevel
                 bsr.s   IncreaseAllyBaseDouble
-                subq.w  #2,d4           ; level up loop counter = current level - 2
-                blt.s   @Done
-@LevelUp_Loop:
+                subq.w  #1,d4           ; d4.w = level up loop counter
+                bra.s   @Next
                 
-                bsr.w   FastLevelUp
-                dbf     d4,@LevelUp_Loop
-@Done:
+@LevelUp_Loop:  bsr.w   FastLevelUp
+                tst.w   d3              ; continue if automatic promotion toggle is clear
+                beq.s   @Next
                 
-                movem.l (sp)+,d0-d2/a0
+                ; Apply automatic promotion
+                bsr.w   GetClassType
+                bne.s   @Next           ; skip if character is already promoted
+                
+@CheckPromote:  bsr.w   GetLevel
+                cmpi.w  #CHURCHMENU_MIN_PROMOTABLE_LEVEL,d1 ; continue if not at the minimum promotable level
+                bne.s   @Next
+                
+                bsr.w   GetClass
+                bsr.s   FindRegularPromoClass ; Out: d1.w = new class, d2.w = current class
+                bsr.w   Promote
+                moveq   #1,d1
+                bsr.w   SetLevel
+                
+@Next:          dbf     d4,@LevelUp_Loop
+                
+@Done:          movem.l (sp)+,d0-d2/a0
                 rts
 
     ; End of function InitializeAllyStats
@@ -311,26 +320,53 @@ IncreaseAllyBaseDouble:
                 lsr.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2 ; shift double and counter attack settings into lower nibble position
                 andi.w  #PROWESS_MASK_LOWER_DOUBLE_OR_COUNTER,d2
                 addq.w  #1,d2
-                bmi.s   @Zero           ; clamp to zero on negative
+                bmi.s   @Zero               ; clamp to zero on negative
                 
                 cmpi.w  #PROWESS_1IN4,d2
                 bls.s   @Continue
                 
-                moveq   #PROWESS_1IN4,d2 ; otherwise, cap to highest chance
+                moveq   #PROWESS_1IN4,d2    ; otherwise, cap to highest chance
                 bra.s   @Continue
-@Zero:          
                 
-                moveq   #PROWESS_1IN32,d2
-@Continue:
-                
-                lsl.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
+@Zero:          moveq   #PROWESS_1IN32,d2
+@Continue:      lsl.w   #PROWESS_LOWER_DOUBLE_SHIFT_COUNT,d2
                 andi.w  #PROWESS_MASK_CRITICAL|PROWESS_MASK_COUNTER,d1
                 or.w    d2,d1
                 bsr.w   SetBaseProwess
-@Done:
                 
-                movea.l (sp)+,a0
+@Done:          movea.l (sp)+,a0
                 rts
 
     ; End of function IncreaseAllyBaseDouble
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d1.w = current class  Out: d1.w = new class, d2.w = current class
+
+cannotPromoteFlag = -36
+promotionSectionLength = -34
+promotionSectionOffset = -32
+
+FindRegularPromoClass:
+                
+                move.w  d7,-(sp)
+                link    a6,#-36
+                move.w  #PROMOTIONSECTION_REGULAR_BASE,d2
+                jsr     GetPromotionData
+                move.w  promotionSectionOffset(a6),d7
+                move.w  #PROMOTIONSECTION_REGULAR_PROMO,d2
+                jsr     FindPromotionSection
+                addq.w  #1,a0
+                move.w  d1,d2           ; d2.w = current class
+                bra.s   @FindNewClass
+                
+@Loop:          move.b  (a0)+,d1
+@FindNewClass:  dbf     d7,@Loop
+                
+                unlk    a6
+                move.w  (sp)+,d7
+                rts
+
+    ; End of function FindRegularPromoClass
 

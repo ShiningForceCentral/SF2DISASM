@@ -824,11 +824,23 @@ IsItemEquippable:
 ; Return CCR carry-bit set if true.
 
 
+                module
+                
+IsWeaponEquippable:
+                
+                movem.l d0/d2-d7/a0,-(sp)
+                move.w  #ITEMTYPE_WEAPON,d2
+                bra.s   @Continue
+IsRingEquippable:
+                
+                movem.l d0/d2-d7/a0,-(sp)
+                move.w  #ITEMTYPE_RING,d2
+                bra.s   @Continue
 IsWeaponOrRingEquippable:
                 
-                movem.l d0/d2-d6/a0,-(sp)
+                movem.l d0/d2-d7/a0,-(sp)
                 move.w  #ITEMTYPE_WEAPON|ITEMTYPE_RING,d2
-                bsr.w   GetCombatantEntryAddress
+@Continue:      bsr.w   GetCombatantEntryAddress
                 move.b  COMBATANT_OFFSET_CLASS(a0),d0
                 
             if (EXPANDED_CLASSES=1)
@@ -846,11 +858,12 @@ IsWeaponOrRingEquippable:
                 moveq   #1,d3
                 lsl.l   d0,d3
                 bsr.s   IsItemEquippable
-                movem.l (sp)+,d0/d2-d6/a0
+                movem.l (sp)+,d0/d2-d7/a0
                 rts
 
     ; End of function IsWeaponOrRingEquippable
 
+                modend
 
 ; =============== S U B R O U T I N E =======================================
 

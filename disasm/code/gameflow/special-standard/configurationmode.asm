@@ -33,6 +33,7 @@ CONFIGURATION_MESSAGE_END:                  rs.b 1
 CONFIGURATION_MESSAGE_MAP_SELECT:           rs.b 1
 CONFIGURATION_MESSAGE_BATTLE_TEST_1:        rs.b 1
 CONFIGURATION_MESSAGE_BATTLE_TEST_2:        rs.b 1
+CONFIGURATION_MESSAGE_BATTLE_TEST_3:        rs.b 1
 CONFIGURATION_MESSAGE_MENU_SELECT:          rs.b 1
 CONFIGURATION_MESSAGE_SHOP_SELECT:          rs.b 1
 CONFIGURATION_MESSAGE_PARTY_SELECT_1:       rs.b 1
@@ -102,13 +103,6 @@ InitializeConfigurationSettings:
                 move.b  #INITIAL_CONTROL_OPPONENT,((CONTROL_OPPONENT_TOGGLE-$1000000)).w
                 move.b  #INITIAL_AUTO_BATTLE,((AUTO_BATTLE_TOGGLE-$1000000)).w
                 move.b  #INITIAL_CONFIGURATION_MODE,((CONFIGURATION_MODE_TOGGLE-$1000000)).w
-                setSavedByte #INITIAL_MESSAGE_SPEED, MESSAGE_SPEED
-                setSavedByte #INITIAL_NO_BATTLE_MESSAGES, NO_BATTLE_MESSAGES_TOGGLE
-            if (INITIAL_GAME_COMPLETED=1)
-                bset    #7,(SAVE_FLAGS).l
-            else
-                bclr    #7,(SAVE_FLAGS).l
-            endif
 @return         rts
 
     ; End of function InitializeConfiguration
@@ -361,9 +355,24 @@ configurationAction_BattleTest:
                 getPointer p_table_BattleNames, a0
                 bsr.w   ExecuteConfigurationNumberPrompt
                 move.w  numberEntry(a2),d0
-                bmi.s   @return         ; skip action if player pressed B
+                bmi.w   @return         ; skip action if player pressed B
+                ; ---------------------------------------------------------------------------
                 
+                ; Process battle test party?
                 move.w  d0,-(sp)
+                moveq   #CONFIGURATION_MESSAGE_BATTLE_TEST_3,d1 ; "Setup battle party?"
+                bsr.w   DisplayConfigurationMessage
+                jsr     alt_YesNoPrompt
+                movem.w (sp)+,d0
+                bne.s   @checkIntro
+                
+                bsr.w   SetupBattleTestParty
+                jsr     CaravanMenu
+                move.b  #SHOP_DEBUG,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     ShopMenu
+                ; ---------------------------------------------------------------------------
+                
+@checkIntro     move.w  d0,-(sp)
                 moveq   #CONFIGURATION_MESSAGE_BATTLE_TEST_2,d1 ; "Play intro cutscene?"
                 bsr.w   DisplayConfigurationMessage
                 jsr     alt_YesNoPrompt
@@ -899,7 +908,7 @@ configurationAction_ActionTest:
                 
                 move.w  battleBackground(a2),d0
                 moveq   #1,d1
-                moveq   #SPELLENTRY_LEVELS_NUMBER,d2
+                moveq   #BATTLEBACKGROUNDS_NUMBER,d2
                 moveq   #-1,d3          ; set update textbox content toggle
                 getPointer p_table_BackgroundNames, a0
                 bsr.w   ExecuteConfigurationNumberPrompt
@@ -1500,3 +1509,351 @@ battleTestFollowers37:
 battleTestFollowers39:
                 setFlg  71 ; Caravan is unlocked and Peter + Astral + Lemon are followers
                 rts
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = battle index
+
+
+SetupBattleTestParty:
+                
+                move.w  d0,-(sp)
+                move.w  d0,d2           ; new effective level = battle index
+                bne.s   @upgradeShop
+                
+                ; Recruit and level everyone up to max value for the special battle
+                moveq   #BATTLES_MAX_INDEX,d2
+                
+                ; Find matching shop inventory for battle
+@upgradeShop    lea     table_ShopUpgradeBattles(pc), a0
+                moveq   #-1,d1
+                
+@shop_loop      cmp.b   (a0)+,d2
+                bls.s   @loadShop
+                
+                addq.w  #1,d1
+                bra.s   @shop_loop
+                
+@loadShop       move.b  d1,((CURRENT_SHOP_INDEX-$1000000)).w
+                jsr     GetShopInventoryAddress
+                movea.l a0,a3
+                
+                ; Dismiss everyone, re-initialize ally stats, and upgrade weapons
+                getPointer p_table_AllyStartDefinitions, a0
+                loadSavedDataAddress COMBATANT_DATA, a1
+                moveq   #COMBATANT_ALLIES_COUNTER,d7
+                
+@init_loop      moveq   #COMBATANT_ALLIES_COUNTER,d0
+                sub.w   d7,d0
+                move.b  (a0)+,d1        ; d1.b = class index
+                bpl.s   @continue
+                
+                ; Skip to next ally if current entry is a dummy
+                adda.w  #ALLYSTARTDEF_ENTRY_SIZE-1,a0
+                bra.s   @next
+                
+                ; Dismiss, then re-initialize class data
+@continue       jsr     LeaveForce
+                move.b  d1,COMBATANT_OFFSET_CLASS(a1)
+                jsr     LoadAllyClassData
+                move.w  d2,d4
+                jsr     GetClassType
+                beq.s   @init
+                
+                ; Subtract 10 from new current level if the character starts promoted
+                sub.w   #CHAR_CLASS_EXTRALEVEL,d4
+@init           moveq   #-1,d3                      ; set automatic promotion toggle
+                jsr     InitializeAllyStats
+                
+                ; Re-initialize items
+@resetItems     addq.w  #1,a0
+                getStartingItem (a0)+, d1
+                setSavedWord d1, a1, COMBATANT_OFFSET_ITEM_0
+                getStartingItem (a0)+, d1
+                setSavedWord d1, a1, COMBATANT_OFFSET_ITEM_1
+                getStartingItem (a0)+, d1
+                setSavedWord d1, a1, COMBATANT_OFFSET_ITEM_2
+                getStartingItem (a0)+, d1
+                setSavedWord d1, a1, COMBATANT_OFFSET_ITEM_3    ; a0 is now pointing to the start of the next entry
+                
+                tst.b   ((CURRENT_SHOP_INDEX-$1000000)).w
+                bmi.s   @skipShop
+                
+                bsr.w   UpgradeBattleTestWeapon
+@skipShop       jsr     UpdateCombatantStats
+                adda.w  #COMBATANT_DATA_ENTRY_SIZE,a1           ; a1 is now pointing to the start of the next entry
+@next           dbf     d7,@init_loop
+                
+                ; Recruit allies available for the chosen battle
+                move.w  d2,d7
+@recruit_loop   move.w  d2,d1
+                sub.w   d7,d1
+                add.w   d1,d1
+                move.w  rjt_BattleTestParty(pc,d1.w),d1
+                jsr     rjt_BattleTestParty(pc,d1.w)
+                dbf     d7,@recruit_loop
+                
+                move.w  (sp)+,d0
+                rts
+
+rjt_BattleTestParty:
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty01-rjt_BattleTestParty ; 01: Bowie, Sarah, Chester
+                dc.w battleTestParty02-rjt_BattleTestParty ; 02: Jaha
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty04-rjt_BattleTestParty ; 04: Kazin
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty06-rjt_BattleTestParty ; 06: Slade
+                dc.w battleTestParty07-rjt_BattleTestParty ; 07: Kiwi
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty09-rjt_BattleTestParty ; 09: Peter
+                dc.w battleTestParty10-rjt_BattleTestParty ; 10: May
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty13-rjt_BattleTestParty ; 13: Gerhalt
+                dc.w battleTestParty14-rjt_BattleTestParty ; 14: Luke
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty19-rjt_BattleTestParty ; 19: Rick
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty21-rjt_BattleTestParty ; 21: Elric
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty24-rjt_BattleTestParty ; 24: Eric, Karna, Randolf, Tyrin, Janet
+                dc.w battleTestParty25-rjt_BattleTestParty ; 25: Rohde
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty27-rjt_BattleTestParty ; 27: Higins
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty31-rjt_BattleTestParty ; 31: Taya, Skreech
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty33-rjt_BattleTestParty ; 33: Jaro, Frayja
+                dc.w battleTestParty34-rjt_BattleTestParty ; 34: Gyan
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty36-rjt_BattleTestParty ; 36: Zynk, Claude
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty39-rjt_BattleTestParty ; 39: Chaz, Lemon
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+                dc.w battleTestParty00-rjt_BattleTestParty
+
+battleTestParty00:
+                rts
+                
+battleTestParty01:
+                moveq   #ALLY_BOWIE,d0
+                jsr     JoinForce
+                moveq   #ALLY_SARAH,d0
+                jsr     JoinForce
+                moveq   #ALLY_CHESTER,d0
+                jmp     JoinForce
+                
+battleTestParty02:
+                moveq   #ALLY_JAHA,d0
+                jmp     JoinForce
+                
+battleTestParty04:
+                moveq   #ALLY_KAZIN,d0
+                jmp     JoinForce
+                
+battleTestParty06:
+                moveq   #ALLY_SLADE,d0
+                jmp     JoinForce
+                
+battleTestParty07:
+                moveq   #ALLY_KIWI,d0
+                jmp     JoinForce
+                
+battleTestParty09:
+                moveq   #ALLY_PETER,d0
+                jmp     JoinForce
+                
+battleTestParty10:
+                moveq   #ALLY_MAY,d0
+                jmp     JoinForce
+                
+battleTestParty13:
+                moveq   #ALLY_GERHALT,d0
+                jmp     JoinForce
+                
+battleTestParty14:
+                moveq   #ALLY_LUKE,d0
+                jmp     JoinForce
+                
+battleTestParty19:
+                moveq   #ALLY_RICK,d0
+                jmp     JoinForce
+                
+battleTestParty21:
+                moveq   #ALLY_ELRIC,d0
+                jmp     JoinForce
+                
+battleTestParty24:
+                moveq   #ALLY_ERIC,d0
+                jsr     JoinForce
+                moveq   #ALLY_KARNA,d0
+                jsr     JoinForce
+                moveq   #ALLY_RANDOLF,d0
+                jsr     JoinForce
+                moveq   #ALLY_TYRIN,d0
+                jsr     JoinForce
+                moveq   #ALLY_JANET,d0
+                jmp     JoinForce
+                
+battleTestParty25:
+                moveq   #ALLY_ROHDE,d0
+                jmp     JoinForce
+                
+battleTestParty27:
+                moveq   #ALLY_HIGINS,d0
+                jmp     JoinForce
+                
+battleTestParty31:
+                moveq   #ALLY_TAYA,d0
+                jsr     JoinForce
+                moveq   #ALLY_SKREECH,d0
+                jmp     JoinForce
+                
+battleTestParty33:
+                moveq   #ALLY_JARO,d0
+                jsr     JoinForce
+                moveq   #ALLY_FRAYJA,d0
+                jmp     JoinForce
+                
+battleTestParty34:
+                moveq   #ALLY_GYAN,d0
+                jmp     JoinForce
+                
+battleTestParty36:
+                moveq   #ALLY_ZYNK,d0
+                jsr     JoinForce
+                moveq   #ALLY_CLAUDE,d0
+                jmp     JoinForce
+                
+battleTestParty39:
+                moveq   #ALLY_CHAZ,d0
+                jsr     JoinForce
+                moveq   #ALLY_LEMON,d0
+                jmp     JoinForce
+
+    ; End of function SetupBattleTestParty
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: a1 = combatant data entry pointer
+;     a3 = shop inventory list pointer
+;     d0.w = combatant index
+
+
+UpgradeBattleTestWeapon:
+                
+                movem.l d2/a0/a3,-(sp)
+                jsr     GetEquippedWeapon   ; d1.w = item index, d2.w = item slot
+                tst.w   d1
+                bmi.s   @findEmptySlot
+                
+                ; Find ATT increase value for equipped weapon and apply item slot offset to pointer -> d4.w, a4
+                bsr.s   FindAttIncreaseValue
+                move.w  d3,d4               ; d4.w = current ATT increase value
+                add.w   d2,d2
+                movea.l a1,a4
+                adda.w  d2,a4               ; a4 = combatant entry pointer + item slot offset
+                bra.s   @continue
+                
+                ; Otherwise, find first empty item slot if no weapon equipped and apply offset to pointer -> a4
+@findEmptySlot  moveq   #0,d4               ; +0 ATT if no weapon equipped
+                moveq   #COMBATANT_ITEMSLOTS_COUNTER,d6
+                
+@findSlot_Loop  moveq   #COMBATANT_ITEMSLOTS_COUNTER,d2
+                sub.w   d6,d2
+                add.w   d2,d2
+                movea.l a1,a4
+                adda.w  d2,a4               ; a4 = combatant entry pointer + item slot offset
+                getSavedWord a4, d1, COMBATANT_OFFSET_ITEMS
+                andi.w  #ITEMENTRY_MASK_INDEX,d1
+                cmpi.w  #ITEM_NOTHING,d1
+                beq.s   @continue           ; break out of loop as soon as an empty item slot is found
+                
+                dbf     d6,@findSlot_Loop
+                bra.s   @done               ; otherwise, exit early if there is no empty slot
+                
+                ; Iterate current shop items
+@continue       clr.w   d6
+                move.b  (a3)+,d6
+                bra.s   @next
+                
+@shopItems_Loop clr.w   d1
+                move.b  (a3)+,d1
+                jsr     IsWeaponEquippable
+                bcc.s   @next               ; next item if this one is not equippable
+                
+                bsr.s   FindAttIncreaseValue
+                cmp.w   d3,d4
+                bhs.s   @next               ; next item if current weapon is as strong or stronger
+                
+                ; Upgrade weapon
+                move.w  d3,d4               ; d4.w = new ATT increase value
+                ori.w   #ITEM_EQUIPPED,d1
+                setSavedWord d1, a4, COMBATANT_OFFSET_ITEMS
+@next           dbf     d6,@shopItems_Loop
+                
+@done           movem.l (sp)+,d2/a0/a3
+                rts
+
+    ; End of function UpgradeBattleTestWeapon
+
+
+; =============== S U B R O U T I N E =======================================
+
+; Find "Increase ATT" equipeffect parameter for equipped weapon.
+;
+; In: d1.w = item index  Out: d3.w = ATT increase value if found, or -1
+
+
+FindAttIncreaseValue:
+                
+                jsr     GetItemDefinitionAddress
+                lea     ITEMDEF_OFFSET_EQUIPEFFECTS(a0),a0
+                moveq   #EQUIPEFFECTS_COUNTER,d5
+                
+@loop           moveq   #EQUIPEFFECTS_COUNTER,d3
+                sub.w   d5,d3
+                cmpi.b  #EQUIPEFFECT_INCREASE_ATT,(a0,d3.w)
+                beq.s   @found          ; return ATT increase value if found -> d3.w
+                
+                dbf     d5,@loop
+                moveq   #-1,d3          ; otherwise, return -1
+                rts
+                
+@found          add.w   d3,d3
+                move.w  EQUIPEFFECT_OFFSET_PARAMETER(a0,d3.w),d3
+                rts
+
+    ; End of function FindAttIncreaseValue
+
+table_ShopUpgradeBattles:
+                ; Last battle until the current shop index is upgraded
+                dc.b BATTLE_INSIDE_ANCIENT_TOWER    ; -1
+                dc.b BATTLE_GALAM_CASTLE            ; Granseal
+                dc.b BATTLE_NORTH_CLIFF             ; Galam 1
+                dc.b BATTLE_TO_RIBBLE               ; New Granseal 1
+                dc.b BATTLE_CAVE_OF_DARKNESS        ; Ribble
+                dc.b BATTLE_MOUNT_VOLCANO           ; Polca
+                dc.b BATTLE_VERSUS_KRAKEN           ; Bedoe
+                dc.b BATTLE_VERSUS_TAROS            ; Hassan 1
+                dc.b BATTLE_VERSUS_WILLARD          ; Hassan 2
+                dc.b BATTLE_NORTH_CAVE              ; New Granseal 2
+                dc.b BATTLE_OUTSIDE_KETTO           ; Ketto
+                dc.b BATTLE_PANGOAT_VALLEY_BRIDGE   ; Pacalon
+                dc.b BATTLE_INSIDE_MOUN             ; Tristan
+                dc.b BATTLE_TO_ROFT                 ; Moun
+                dc.b BATTLE_VERSUS_RED_BARON        ; Roft
+                dc.b -1                             ; Galam 2 (last entry is expected to be -1)

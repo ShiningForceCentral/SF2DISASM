@@ -71,7 +71,10 @@ CheckSram:      movem.l d7-a1,-(sp)
 @Loop:          setSavedByteWithPostIncrement (a0)+, a1
                 dbf     d7,@Loop
                 
-                clr.b   (SAVE_FLAGS).l  
+                clr.b   (SAVE_FLAGS).l
+            if (INITIAL_GAME_COMPLETED=1)
+                bset    #7,(SAVE_FLAGS).l
+            endif
                 clr.w   d0
                 clr.w   d1
 @Done:          movem.l (sp)+,d7-a1

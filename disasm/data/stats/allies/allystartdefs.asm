@@ -253,7 +253,7 @@ table_AllyStartDefinitions:
                     NOTHING, &
                     NOTHING
                 
-                startClass RDBN
+                startClass RDBN         ; 30: 
                 startLevel 1
                 startItems &
                     NOTHING, &
@@ -261,7 +261,7 @@ table_AllyStartDefinitions:
                     NOTHING, &
                     NOTHING
                 
-                startClass RDBN
+                startClass RDBN         ; 31: 
                 startLevel 1
                 startItems &
                     NOTHING, &

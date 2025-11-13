@@ -18,7 +18,7 @@ INITIAL_NO_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 
 ; Test build configuration settings
 TEST_BUILD_ALL_ALLIES_JOINED:           equ 1
-TEST_BUILD_ALLIES_START_LEVEL:          equ 24      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
+TEST_BUILD_ALLIES_START_LEVEL:          equ 40      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
 TEST_BUILD_INITIAL_SPECIAL_TURBO:       equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_DEBUG_MODE:          equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_CONTROL_OPPONENT:    equ 0       ; -1 = toggle ON
@@ -26,7 +26,7 @@ TEST_BUILD_INITIAL_AUTO_BATTLE:         equ 0       ; -1 = toggle ON
 TEST_BUILD_INITIAL_CONFIGURATION_MODE:  equ 0       ; -1 = toggle ON
 TEST_BUILD_INITIAL_GAME_COMPLETED:      equ 1
 TEST_BUILD_INITIAL_MESSAGE_SPEED:       equ 3       ; [0, 3]
-TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES:  equ 0       ; 1 = no battle messages display ON
+TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES:  equ 1       ; 1 = no battle messages display ON
 
 
 ; Fixes

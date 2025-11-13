@@ -1220,6 +1220,9 @@ SHOPS_DEBUG_MAX_INDEX: equ shopsDebugMaxIndex
 ; ---------------------------------------------------------------------------
 
 ; enum Shops
+
+debugShop = 30
+
 SHOP_WEAPON_GRANSEAL: equ 0
 SHOP_WEAPON_GALAM_0: equ 1
 SHOP_WEAPON_NEW_GRANSEAL_0: equ 2
@@ -1253,11 +1256,10 @@ SHOP_DWARVEN_VILLAGE: equ 28
 SHOP_ITEM_ROFT: equ 28
 SHOP_ITEM_GALAM_1: equ 29
 SHOP_YEEL_UNDERGROUND: equ 29
-SHOP_DEBUG: equ 30
-    if (STANDARD_BUILD&EXPANDED_ITEMS_AND_SPELLS=1)
-SHOP_DEBUG_EXTENDED: equ 31                     ; additional debug shop for extended items
-    endif
-SHOP_MINATURES_ROOM: equ SHOP_UNUSED1 ; made available in the Desktop Kingdom if MINIATURES_SHOP=1
+
+SHOP_DEBUG: equ debugShop
+SHOP_DEBUG_EXTENDED: equ debugShop+1    ; additional debug shop for expanded items
+SHOP_MINATURES_ROOM: equ SHOP_UNUSED1   ; made available in the Desktop Kingdom if MINIATURES_SHOP=1
 
 ; ---------------------------------------------------------------------------
 
@@ -2853,9 +2855,15 @@ WINDOW_MEMBERSTATUS_POSITION: equ $A01
 WINDOW_MEMBERSTATUS_SIZE: equ $151A
 WINDOW_MEMBERSTATUS_DEST: equ $2001
 
+promotionIndicatorOffset = 134
+
+    if (THREE_DIGITS_STATS=1)
+promotionIndicatorOffset = promotionIndicatorOffset-2
+    endif
+
     if (STANDARD_BUILD=1)
 WINDOW_MEMBERSTATUS_OFFSET_FULLCLASSNAME: equ 88
-WINDOW_MEMBERSTATUS_OFFSET_PROMOTION_INDICATOR: equ 132
+WINDOW_MEMBERSTATUS_OFFSET_PROMOTION_INDICATOR: equ promotionIndicatorOffset
 WINDOW_MEMBERSTATUS_OFFSET_EXP_FIELD: equ 254
 WINDOW_MEMBERSTATUS_OFFSET_WIND: equ 340
 WINDOW_MEMBERSTATUS_OFFSET_LIGHTNING: equ 348
@@ -2879,6 +2887,8 @@ memberslistDownArrow    = 11
 hpMpPage                = 255
 statsPage               = 1
 newAttAndDefPage        = 2
+nextStatOffset          = 4
+mpStartOffset           = 8
 newAttAndDefEntryOffset = 8
 entryStartOffset        = 16
 levelEntryOffset        = 22
@@ -2892,6 +2902,8 @@ memberslistDownArrow    = memberslistDownArrow+1
 hpMpPage                = 1
 statsPage               = 2
 newAttAndDefPage        = 3
+nextStatOffset          = nextStatOffset-2
+mpStartOffset           = mpStartOffset-4
 newAttAndDefEntryOffset = newAttAndDefEntryOffset-4
 levelEntryOffset        = levelEntryOffset-2
     endif
@@ -2904,9 +2916,11 @@ WINDOW_MEMBERS_LIST_HIGHLIGHTSPRITES_COUNTER: equ highlightSpritesCounter
 WINDOW_MEMBERS_LIST_PAGE_HPMP: equ hpMpPage
 WINDOW_MEMBERS_LIST_PAGE_STATS: equ statsPage
 WINDOW_MEMBERS_LIST_PAGE_NEWATTANDDEF: equ newAttAndDefPage
+WINDOW_MEMBERS_LIST_OFFSET_NEXT_STAT: equ nextStatOffset
 WINDOW_MEMBERS_LIST_ENTRIES_COUNTER: equ 4
 WINDOW_MEMBERS_LIST_OFFSET_ENTRY_EXP: equ 4
 WINDOW_MEMBERS_LIST_OFFSET_ENTRY_UNEQUIPPABLE: equ 4
+WINDOW_MEMBERS_LIST_OFFSET_MP_START: equ mpStartOffset
 WINDOW_MEMBERS_LIST_OFFSET_ENTRY_NEWDEFENSE: equ newAttAndDefEntryOffset
 WINDOW_MEMBERS_LIST_SPRITELINK_DOWNARROW: equ memberslistDownArrow
 WINDOW_MEMBERS_LIST_ENTRY_UNEQUIPPABLE_LENGTH: equ 16
@@ -3372,6 +3386,11 @@ BATTLEBACKGROUND_VERSUS_ZEON: equ 27
 BATTLEBACKGROUND_BURROW: equ 28
 BATTLEBACKGROUND_UNDERGROUND_SHRINE_0: equ 29
 BATTLEBACKGROUND_OVERWORLD: equ 255 ; used by custom backgrounds table
+
+; ---------------------------------------------------------------------------
+
+; enum BattleBackground_Properties
+BATTLEBACKGROUNDS_NUMBER: equ 30
 
 ; ---------------------------------------------------------------------------
 
@@ -4176,12 +4195,15 @@ PLAYERTYPE_RAFT: equ 2
 
 ; enum GameSettings
 
+longwordFollowersCounter = 7
 longwordDealsCounter = (DEALS_ITEMS_BYTES/4)-1
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/4)-1
 longwordGameFlagsCounter = 31
+longwordSpecialBattleRecordInitValue = 359999
 longwordSpellsInitValue = SPELL_NOTHING|(SPELL_NOTHING<<8)|(SPELL_NOTHING<<16)|(SPELL_NOTHING<<24)
 longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING<<8)|(ITEM_NOTHING<<16)|(ITEM_NOTHING<<24)
 longwordPromotedAtLevelsCounter = (COMBATANT_ALLIES_SPACE_END/4)-1
+longwordMithrilOrdersCounter = (BLACKSMITH_MAX_ORDERS_NUMBER/2)-1
 
     if (STANDARD_BUILD&EXPANDED_SRAM=1)
 longwordCaravanCounter = (CARAVAN_MAX_ITEMS_NUMBER/2)-1
@@ -4193,33 +4215,46 @@ longwordCaravanInitValue = ITEM_NOTHING|(ITEM_NOTHING*65536)
 
 LONGWORD_GAMEFLAGS_INITVALUE: equ 0
 LONGWORD_DEALS_INITVALUE: equ 0
+LONGWORD_FOLLOWERS_COUNTER: equ longwordFollowersCounter
 LONGWORD_DEALS_COUNTER: equ longwordDealsCounter ; $F
 LONGWORD_CARAVAN_COUNTER: equ longwordCaravanCounter ; $F
 LONGWORD_GAMEFLAGS_COUNTER: equ longwordGameFlagsCounter ; $1F
+LONGWORD_SPECIAL_BATTLE_RECORD_INITVALUE: equ longwordSpecialBattleRecordInitValue
 LONGWORD_SPELLS_INITVALUE: equ longwordSpellsInitValue ; $3F3F3F3F
 LONGWORD_CARAVAN_INITVALUE: equ longwordCaravanInitValue ; $7F7F7F7F
-LONGWORD_PROMOTED_AT_LEVELS_INITVALUE: equ 0
 LONGWORD_PROMOTED_AT_LEVELS_COUNTER: equ longwordPromotedAtLevelsCounter
+LONGWORD_MITHRIL_ORDERS_COUNTER: equ longwordMithrilOrdersCounter
 
 ; ---------------------------------------------------------------------------
 
 ; enum GameStartValues
 
 gamestartGold = 60
+gamestartMessageSpeed = 2
+gamestartNoBattleMessages = 0
 gamestartMap = MAP_GRANSEAL
 gamestartSavepointX = 56
 gamestartSavepointY = 3
 gamestartFacing = DOWN
 
+    if (STANDARD_BUILD=1)
+gamestartMessageSpeed = INITIAL_MESSAGE_SPEED
+gamestartNoBattleMessages = INITIAL_NO_BATTLE_MESSAGES
+    endif
+
     if (STANDARD_BUILD&TEST_BUILD=1)
 gamestartGold = 500000
+gamestartMessageSpeed = TEST_BUILD_INITIAL_MESSAGE_SPEED
+gamestartNoBattleMessages = TEST_BUILD_INITIAL_NO_BATTLE_MESSAGES
     endif
     
-GAMESTART_MAP:          equ gamestartMap
-GAMESTART_SAVEPOINT_Y:  equ gamestartSavepointY
-GAMESTART_FACING:       equ gamestartFacing
-GAMESTART_SAVEPOINT_X:  equ gamestartSavepointX
-GAMESTART_GOLD:         equ gamestartGold
+GAMESTART_MAP:                  equ gamestartMap
+GAMESTART_SAVEPOINT_Y:          equ gamestartSavepointY
+GAMESTART_FACING:               equ gamestartFacing
+GAMESTART_SAVEPOINT_X:          equ gamestartSavepointX
+GAMESTART_GOLD:                 equ gamestartGold
+GAMESTART_MESSAGE_SPEED:        equ gamestartMessageSpeed
+GAMESTART_NO_BATTLE_MESSAGES:   equ gamestartNoBattleMessages ; used in standard build only
 
 ; ---------------------------------------------------------------------------
 
