@@ -39,7 +39,7 @@ abcs_battle28:  textCursor 2670
                 nextText $0,FOLLOWER_B  ; "We'll take you with us.{W2}"
                 nextSingleText $0,FOLLOWER_B ; "Tristan is the nearest town.{N}I think you had better rest{N}there.{W1}"
                 nextSingleText $0,128   ; "Thank you, sir.{W1}"
-                setSprite 128,MAPSPRITE_WOMAN2
+                setSprite 128,MAPSPRITE_YOUNG_WOMAN
                 entityActions 128
                  moveUp 2
                 endActions

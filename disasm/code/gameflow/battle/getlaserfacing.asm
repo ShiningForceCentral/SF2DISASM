@@ -54,7 +54,7 @@ GetLaserFacing:
                 jsr     j_GetCombatantY
                 move.w  d1,d2
                 jsr     j_GetCombatantX
-                jsr     j_ClearTotalMovecostsAndMovableGridArrays
+                jsr     j_ClearTotalMoveCostsAndMovableGridArrays
             if (STANDARD_BUILD&DIAGONAL_LASERS=1)
                 btst    #0,d6
                 beq.s   @CheckFace_Up

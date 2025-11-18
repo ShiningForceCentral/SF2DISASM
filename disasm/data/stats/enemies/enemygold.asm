@@ -104,8 +104,9 @@ table_EnemyGold:dc.w 10                 ; OOZE
                 dc.w 220                ; MASTER MAGE
                 dc.w 520                ; NECROMANCER
                 dc.w 860                ; BLUE SHAMAN
-				
-				; unused
+                
+            if (VANILLA_BUILD=1)
+                ; unused
                 dc.w 1
                 dc.w 17922
                 dc.w 16643
@@ -175,3 +176,4 @@ table_EnemyGold:dc.w 10                 ; OOZE
                 dc.w 0
                 dc.w 0
                 dc.w 255
+            endif

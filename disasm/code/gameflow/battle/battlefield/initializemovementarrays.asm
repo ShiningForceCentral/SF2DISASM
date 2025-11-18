@@ -15,7 +15,7 @@
 InitializeMovementArrays:
                 
                 movem.l d1-d2/d5-a1,-(sp)
-                bsr.w   PopulateMovecostsTable
+                bsr.w   PopulateMoveCostsTable
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4

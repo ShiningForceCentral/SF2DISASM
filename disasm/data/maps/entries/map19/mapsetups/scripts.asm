@@ -3,12 +3,12 @@
 ; 0x53176..0x53634 : 
 cs_53176:       setCameraEntity CAMERA_NEUTRAL
                 textCursor 721
-                newEntity 144,29,9,UP,MAPSPRITE_SOLDIER2
-                newEntity 145,28,9,UP,MAPSPRITE_SOLDIER1
+                newEntity 144,29,9,UP,MAPSPRITE_SOLDIER
+                newEntity 145,28,9,UP,MAPSPRITE_GUARD
                 newEntity 146,28,10,UP,MAPSPRITE_WORKER
                 newEntity 147,28,11,UP,MAPSPRITE_WORKER
                 csWait 1
-                newEntity 148,30,9,UP,MAPSPRITE_SOLDIER1
+                newEntity 148,30,9,UP,MAPSPRITE_GUARD
                 newEntity 149,30,10,UP,MAPSPRITE_WORKER
                 newEntity 150,30,11,UP,MAPSPRITE_WORKER
                 csWait 1

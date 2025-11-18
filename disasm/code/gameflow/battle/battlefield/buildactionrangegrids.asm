@@ -33,7 +33,7 @@ BuildAttackRangeGrid:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTotalMoveCostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 eori.w  #$FFFF,d0       ; invert d0.w
                 bsr.w   BuildTargetsArrayWithTeammatesOfTarget
@@ -74,7 +74,7 @@ BuildSpellRangeGridForItemUse:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTotalMoveCostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetItemDefinitionAddress
                 move.b  ITEMDEF_OFFSET_USE_SPELL(a0),d1
@@ -100,7 +100,7 @@ BuildSpellRangeGrid:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTotalMoveCostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 jsr     GetSpellDefinitionAddress
                 btst    #COMBATANT_BIT_ENEMY,d0
@@ -163,7 +163,7 @@ BuildSpellRangeGridForItemGive:
                 
                 movem.l d0-a6,-(sp)
                 bsr.w   ClearTargetsArray
-                bsr.w   ClearTotalMovecostsAndMovableGridArrays
+                bsr.w   ClearTotalMoveCostsAndMovableGridArrays
                 move.w  #0,((TARGETS_LIST_LENGTH-$1000000)).w
                 bsr.w   BuildTargetsArrayWithTeammatesOfTarget
                 moveq   #-1,d5

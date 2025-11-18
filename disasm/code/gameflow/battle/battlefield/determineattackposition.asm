@@ -13,7 +13,7 @@
 ; 
 ; Out: d1.b,d2.b = destination X,Y (-1 if no position is available)
 
-candidateMovecost = -5
+candidateMoveCost = -5
 candidateY = -4
 candidateX = -3
 targetY = -2
@@ -27,7 +27,7 @@ DetermineAttackPosition:
                 move.b  d2,targetY(a6)
                 move.b  #-1,candidateX(a6)
                 move.b  #-1,candidateY(a6)
-                move.b  #-1,candidateMovecost(a6)
+                move.b  #-1,candidateMoveCost(a6)
                 
                 ; Validate target position
                 cmpi.b  #MAP_SIZE_MAX_TILEWIDTH,d1
@@ -68,7 +68,7 @@ DetermineAttackPosition:
                 cmpi.b  #MAP_SIZE_MAX_TILEHEIGHT,d2
                 bcc.w   @Next           ; skip if out-of-bounds
                 
-                bsr.w   GetMovecostToDestination
+                bsr.w   GetMoveCostToDestination
                 tst.w   d0
                 beq.w   @Done           ; exit early if attacker is already standing in range
                 
@@ -76,7 +76,7 @@ DetermineAttackPosition:
                 bne.w   @Next           ; skip if space is obstructed
                 
                 ; Compare candidate move-cost with the best found so far
-                cmp.b   candidateMovecost(a6),d0
+                cmp.b   candidateMoveCost(a6),d0
                 bcc.w   @Next           ; skip if best move-cost is higher or same
                 
                 ; Check occupancy
@@ -88,7 +88,7 @@ DetermineAttackPosition:
                 bne.w   @Next           ; someone is already there, so it can't be chosen
                 
                 ; Select this candidate as the best one so far
-                move.b  d7,candidateMovecost(a6)
+                move.b  d7,candidateMoveCost(a6)
                 move.b  d1,candidateX(a6)
                 move.b  d2,candidateY(a6)
 @Next:

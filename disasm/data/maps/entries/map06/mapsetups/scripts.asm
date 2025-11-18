@@ -278,7 +278,7 @@ cs_54F26:       textCursor 1074
                 setFacing 130,DOWN
                 csc_end
 cs_55242:       textCursor 1123
-                newEntity 142,11,0,DOWN,MAPSPRITE_SOLDIER1
+                newEntity 142,11,0,DOWN,MAPSPRITE_GUARD
                 customActscriptWait 142
                  ac_setSpeed 40,40      ;   
                  ac_jump eas_Idle       ;   

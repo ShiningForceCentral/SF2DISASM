@@ -24,7 +24,7 @@ battlesceneScript_SortTargets:
 @NextTarget:
                 
                 dbf     d7,@SetSortBit_Loop
-				
+                
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 moveq   #0,d0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
@@ -32,7 +32,7 @@ battlesceneScript_SortTargets:
                 subq.w  #1,d7
 @SortTargets_Loop:
                 
-				; sort targets by combatant index (Burst Rocks put at end)
+                ; Sort targets by combatant index (Burst Rocks put at end)
                 move.w  d0,d1
                 addq.w  #1,d1
 @SortTargets_InnerLoop:
@@ -49,7 +49,7 @@ battlesceneScript_SortTargets:
                 bcs.w   @SortTargets_InnerLoop
                 addq.w  #1,d0
                 dbf     d7,@SortTargets_Loop
-				
+                
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7
@@ -57,7 +57,7 @@ battlesceneScript_SortTargets:
                 moveq   #0,d6
 @SortTargets_Loop_2:
                 
-				; sort enemy targets by health (weakest Burst Rock put at end)
+                ; Sort enemy targets by health (weakest Burst Rock put at end)
                 btst    #COMBATANT_BIT_SORT,(a0,d6.w)
                 beq.s   @NextEntry_2
                 move.b  (a0,d6.w),d0
@@ -76,7 +76,7 @@ battlesceneScript_SortTargets:
                 
                 addq.w  #1,d6
                 dbf     d7,@SortTargets_Loop_2
-				
+                
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
                 subq.w  #1,d7

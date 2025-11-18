@@ -19,8 +19,8 @@ spellanimationUpdate_GunnerBlast:
                 add.w   6(a5),d0
                 tst.w   d0
                 bmi.s   loc_1DA2E
-				
-				; mirrored
+                
+                ; Mirrored
                 move.w  d0,d1
                 andi.w  #BYTE_MASK,d1
                 asr.w   #BYTE_SHIFT_COUNT,d0

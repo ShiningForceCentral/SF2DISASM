@@ -20,7 +20,7 @@ spellanimationSetup_Desoul:
                 lea     ((byte_FFB532-$1000000)).w,a0
                 bclr    #SPELLANIMATION_BIT_MIRRORED,d1
                 bne.s   loc_1A778
-				
+                
                 move.w  #192,(a0)  ; x parameter
                 move.w  #152,2(a0) ; y parameter
                 move.w  #128,d2 
@@ -42,20 +42,20 @@ loc_1A786:
                 moveq   #1,d2
                 cmpi.b  #2,d1
                 bcs.s   @Continue ; variation 1 has no extra sprites
-				
-				; soul sprite animation data
+                
+                ; soul sprite animation data
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #32,2(a0) 
                 move.w  #30,4(a0)
                 move.w  #3,6(a0)
-				
+                
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 move.w  #32,2(a0) 
                 move.w  #20,4(a0)
                 move.w  #$301,6(a0)
-				
+                
                 moveq   #42,d0   ; offset to sprite_42
                 lea     table_1A810(pc), a0
                 bsr.w   ConstructSimpleGraphic

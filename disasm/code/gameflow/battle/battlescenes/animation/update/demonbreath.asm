@@ -169,39 +169,39 @@ graphic_DemonbreathSpirit:
 table_1D2AA:    dc.w 32
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 48
-				
+                
                 dc.w 36
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 32
-				
+                
                 dc.w 40
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 48
-				
+                
                 dc.w 44
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 32
-				
+                
                 dc.w 48
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
                 dc.w 52
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 80
-				
+                
                 dc.w 56
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
                 dc.w 60
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 80
-				
+                
                 dc.w 64
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
                 dc.w 68
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 80

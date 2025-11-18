@@ -75,7 +75,7 @@ Map21_DefaultZoneEvent:
                 loadMapFadeIn MAP_OVERWORLD_GRANSEAL_KINGDOM,28,26
                 loadMapEntities ce_54736
                 setActscriptWait ALLY_BOWIE,eas_Init
-                setSprite ALLY_BOWIE,MAPSPRITE_BOAT
+                setSprite ALLY_BOWIE,MAPSPRITE_SHIP
                 fadeInB
                 customActscriptWait ALLY_BOWIE
                  ac_setSpeed 20,20      ;   

@@ -39,7 +39,7 @@ ApplyPositionsAfterEnemyLeaderDies:
                 adda.w  #6,a0
                 bra.s   @FindBattle_Loop
 @PreventAllyExplosions:
-				
+                
                 move.w  #$80FF,(DEAD_COMBATANTS_LIST).l ; BUG: In the original game, this bit of code was skipped, which in turn caused allies to potentially explode after the post-battle cutscene.
                 move.w  #1,(DEAD_COMBATANTS_LIST_LENGTH).l
 @Found:

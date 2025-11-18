@@ -64,19 +64,19 @@ spellanimationSetup_Apollo:
                 moveq   #2,d1
                 jsr     (ApplyVIntVramDma).w
                 jsr     (WaitForDmaQueueProcessing).w
-				
+                
                 moveq   #38,d0 ; offset to sprite_38
                 lea     table_1B1FA(pc), a0
                 bsr.w   ConstructSimpleGraphic
                 jsr     (WaitForVInt).w
                 sndCom  SFX_BATTLEFIELD_DEATH
-				
+                
                 lea     ((SPRITE_38-$1000000)).w,a0
                 moveq   #19,d0
                 moveq   #1,d1
 @BuoyInvocation_Loop:
                 
-				; bob up/down
+                ; bob up/down
                 move.w  (a0),d2
                 exg     d1,d2
                 move.w  d2,(a0)

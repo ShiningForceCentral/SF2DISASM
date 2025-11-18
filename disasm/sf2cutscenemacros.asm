@@ -622,11 +622,11 @@ entity: macro x, y, facing, mapsprite, actionScript
     endif
     dc.l \actionScript
     endm
-	
-cscEntitiesEnd:	macro
-	dc.w $FFFF
-	align
-	endm
+    
+cscEntitiesEnd: macro
+    dc.w $FFFF
+    align
+    endm
     
 entityRandomWalk: macro x, y, facing, mapsprite, originX, originY, walkRange
     dc.b \x

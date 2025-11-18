@@ -183,7 +183,7 @@ loc_1C9A0:
                 lea     12(a5),a5
                 addq.w  #8,a4
                 dbf     d1,loc_1C804
-				
+                
                 tst.w   (a5)
                 beq.w   loc_1CAA8
                 addq.w  #1,(a5)
@@ -416,42 +416,42 @@ table_Graphic_SlashOrange_Properties:
 table_1CBDE:    dc.w 5
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 1
-				
+                
                 dc.w 9
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H2
                 dc.w 5
-				
-				; 
+                
+                ; 
                 dc.w 5
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 25
-				
+                
                 dc.w 9
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H3
                 dc.w 29
-				
-				; 
+                
+                ; 
                 dc.w 5
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H2
                 dc.w 5
-				
+                
                 dc.w 9
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H3
                 dc.w 11
-				
-				; 
+                
+                ; 
                 dc.w 5
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H3
                 dc.w 29
-				
+                
                 dc.w 9
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H4
                 dc.w 35
-				
+                
 table_1CC0E:    dc.w $CC4
                 dc.w 10
                 dc.w 1
-				
+                
 table_1CC14:    dc.b 24
                 dc.b 24
                 dc.b 1 ; horizontal
@@ -508,15 +508,15 @@ table_1CC14:    dc.b 24
                 dc.b 0
                 dc.b 0
                 
-				; dc.b [dimensions],[tile offset]
+                ; dc.b [dimensions],[tile offset]
 table_1CC44:    dc.b $50,$97 ; Vertical
                 dc.b $70,$9B
                 dc.b $60,$A3
-				
+                
                 dc.b $50,$A9 ; Horizontal
                 dc.b $D0,$AD
                 dc.b $90,$B5
-				
+                
                 dc.b $50,$BB ; Angled
                 dc.b $F0,$BF
                 dc.b $60,$CF

@@ -4,8 +4,8 @@
 ms_map26_Entities:
                 msFixedEntity 27, 22, RIGHT, ALLY_RANDOLF, eas_Init
                 msFixedEntity 29, 22, LEFT, ALLY_TYRIN, eas_Init
-                msWalkingEntity 50, 12, DOWN, MAPSPRITE_MAN3, 50, 12, 3
-                msFixedEntity 5, 24, DOWN, MAPSPRITE_MAN2, eas_Init
+                msWalkingEntity 50, 12, DOWN, MAPSPRITE_OLD_MAN, 50, 12, 3
+                msFixedEntity 5, 24, DOWN, MAPSPRITE_YOUNG_MAN, eas_Init
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite

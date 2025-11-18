@@ -369,7 +369,7 @@ loc_55F34:
                 or.w    d3,d4
                 move.w  d4,(a1)+
                 dbf     d0,loc_55F06
-				
+                
                 clr.b   ((FADING_TIMER_BYTE-$1000000)).w
                 lea     (PALETTE_1_BASE).l,a0
                 jmp     (UpdateBasePalettesAndBackupCurrent).w

@@ -915,7 +915,7 @@ spellElement: macro
                 defineShorthand.b SPELLELEMENT_,\1
             endm
                 
-landEffectAndMovecost: macro
+landEffectAndMoveCost: macro
                 defineBitfield.b LANDEFFECTSETTING_,\1
             endm
                 
