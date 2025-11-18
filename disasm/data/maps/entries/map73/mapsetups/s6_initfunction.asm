@@ -276,7 +276,7 @@ ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,ALLY_JAHA,eas_Init
                 entity 63,63,DOWN,ALLY_KIWI,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_MERCHANT,eas_Init
                 entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 5,5,RIGHT,MAPSPRITE_SHIP,eas_Init
                 cscEntitiesEnd
@@ -290,7 +290,7 @@ ce_5072E:       mainEntity 0,0,UP
                 entity 23,34,DOWN,MAPSPRITE_BOY,eas_Init
                 entity 24,34,DOWN,MAPSPRITE_GIRL,eas_Init
                 entity 27,29,DOWN,MAPSPRITE_MAN,eas_Init
-                entity 27,30,LEFT,MAPSPRITE_SAILOR,eas_Init
+                entity 27,30,LEFT,MAPSPRITE_MERCHANT,eas_Init
                 entity 26,31,UP,MAPSPRITE_MAN,eas_Init
                 entity 24,26,UP,MAPSPRITE_YOUNG_WOMAN,eas_Init
                 entity 23,27,UP,MAPSPRITE_YOUNG_MAN,eas_Init

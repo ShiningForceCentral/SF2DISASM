@@ -7,7 +7,7 @@ ms_map25_Entities:
                 msWalkingEntity 20, 13, DOWN, MAPSPRITE_MAN, 20, 13, 1
                 msWalkingEntity 8, 21, DOWN, MAPSPRITE_YOUNG_MAN, 8, 21, 1
                 msWalkingEntity 4, 12, DOWN, MAPSPRITE_MAN, 4, 12, 1
-                msFixedEntity 11, 3, RIGHT, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 11, 3, RIGHT, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 12, 10, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 27, 17, RIGHT, MAPSPRITE_WOMAN, eas_Init
                 msEntitiesEnd

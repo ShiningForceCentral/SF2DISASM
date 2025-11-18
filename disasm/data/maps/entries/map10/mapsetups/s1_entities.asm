@@ -5,14 +5,14 @@ ms_map10_Entities:
                 msFixedEntity 38, 51, UP, ALLY_LUKE, eas_Init
                 msWalkingEntity 34, 8, DOWN, MAPSPRITE_BIRDMAN, 34, 8, 1
                 msWalkingEntity 37, 8, DOWN, MAPSPRITE_BIRDMAN, 37, 8, 1
-                msFixedEntity 34, 24, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 34, 24, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msWalkingEntity 44, 26, DOWN, MAPSPRITE_BIRDWOMAN, 44, 26, 1
                 msFixedEntity 41, 27, RIGHT, MAPSPRITE_BIRDMAN, eas_Init
                 msFixedEntity 42, 29, LEFT, MAPSPRITE_BIRDMAN, eas_Init
                 msFixedEntity 30, 34, DOWN, MAPSPRITE_BEDRIDDEN_BIRDMAN, eas_InitFixedSprite
                 msFixedEntity 30, 37, DOWN, MAPSPRITE_BEDRIDDEN_BIRDMAN, eas_InitFixedSprite
                 msWalkingEntity 41, 35, UP, MAPSPRITE_BIRDMAN, 41, 35, 2
-                msFixedEntity 28, 28, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 28, 28, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 27, 33, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 4, 41, UP, MAPSPRITE_BIRDWOMAN, eas_Init
                 msFixedEntity 10, 39, DOWN, MAPSPRITE_CHICK, eas_Init

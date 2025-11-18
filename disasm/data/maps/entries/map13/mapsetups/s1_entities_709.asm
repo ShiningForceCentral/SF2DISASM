@@ -6,8 +6,8 @@ ms_map13_flag710_Entities:
                 msWalkingEntity 13, 27, DOWN, MAPSPRITE_CENTAUR_MALE, 13, 27, 2
                 msWalkingEntity 6, 21, DOWN, MAPSPRITE_CENTAUR_FEMALE, 6, 21, 2
                 msFixedEntity 1, 11, DOWN, MAPSPRITE_KAPPA, eas_InitSlow
-                msFixedEntity 4, 7, RIGHT, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 8, 7, LEFT, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 4, 7, RIGHT, MAPSPRITE_MERCHANT, eas_Init
+                msFixedEntity 8, 7, LEFT, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 16, 4, RIGHT, MAPSPRITE_BEASTMAN1, eas_Init
                 msFixedEntity 18, 23, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msWalkingEntity 11, 13, RIGHT, MAPSPRITE_BEASTMAN1, 11, 13, 2

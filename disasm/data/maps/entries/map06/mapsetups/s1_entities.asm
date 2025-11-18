@@ -3,12 +3,12 @@
 ; 0x547F8..0x5489A : 
 ms_map6_Entities:
                 msFixedEntity 18, 25, UP, ALLY_PETER, eas_RightLeftLoop
-                msFixedEntity 20, 23, DOWN, MAPSPRITE_SAILOR, eas_InitSlow
+                msFixedEntity 20, 23, DOWN, MAPSPRITE_MERCHANT, eas_InitSlow
                 msWalkingEntity 18, 8, DOWN, MAPSPRITE_GIRL, 18, 8, 1
                 msFixedEntity 16, 23, DOWN, MAPSPRITE_WOMAN, eas_InitSlow
                 msFixedEntity 15, 25, RIGHT, MAPSPRITE_WOMAN, eas_InitSlow
                 msFixedEntity 15, 24, RIGHT, MAPSPRITE_PRIEST, eas_InitSlow
-                msFixedEntity 18, 23, DOWN, MAPSPRITE_SAILOR, eas_InitSlow
+                msFixedEntity 18, 23, DOWN, MAPSPRITE_MERCHANT, eas_InitSlow
                 msFixedEntity 17, 23, DOWN, MAPSPRITE_OLD_MAN, eas_InitSlow
                 msFixedEntity 14, 26, RIGHT, MAPSPRITE_WORKER, eas_InitSlow
                 msFixedEntity 16, 25, RIGHT, MAPSPRITE_BOY, eas_InitSlow

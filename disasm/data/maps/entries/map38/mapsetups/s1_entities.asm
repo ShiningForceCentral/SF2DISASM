@@ -14,7 +14,7 @@ ms_map38_Entities:
                 msFixedEntity 12, 3, RIGHT, MAPSPRITE_YOUNG_MAN, eas_Init
                 msFixedEntity 13, 4, UP, MAPSPRITE_YOUNG_WOMAN, eas_Init
                 msFixedEntity 22, 27, LEFT, MAPSPRITE_PRIEST, eas_Init
-                msFixedEntity 31, 14, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 35, 4, LEFT, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 31, 14, DOWN, MAPSPRITE_MERCHANT, eas_Init
+                msFixedEntity 35, 4, LEFT, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 13, 3, DOWN, MAPSPRITE_MAN, eas_InitFixedSprite
                 msEntitiesEnd

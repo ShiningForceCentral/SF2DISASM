@@ -8,7 +8,7 @@ ms_map2_flag530_Entities:
                 msFixedEntity 8, 21, RIGHT, MAPSPRITE_CENTAUR_FEMALE, eas_Init
                 msWalkingEntity 34, 7, DOWN, MAPSPRITE_CENTAUR_FEMALE, 34, 7, 1
                 msFixedEntity 21, 7, DOWN, MAPSPRITE_CENTAUR_MALE, eas_Init
-                msFixedEntity 9, 8, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 15, 5, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 9, 8, DOWN, MAPSPRITE_MERCHANT, eas_Init
+                msFixedEntity 15, 5, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 41, 8, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msEntitiesEnd

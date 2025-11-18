@@ -5,8 +5,8 @@ ms_map3_flag609_Entities:
                 msFixedEntity 6, 9, RIGHT, MAPSPRITE_WOMAN, eas_Init
                 msWalkingEntity 12, 9, RIGHT, MAPSPRITE_OLD_MAN, 12, 9, 1
                 msFixedEntity 14, 9, UP, MAPSPRITE_OLD_WOMAN, eas_Init
-                msFixedEntity 7, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 9, 23, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 7, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
+                msFixedEntity 9, 23, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 1, 23, DOWN, MAPSPRITE_GUARD, eas_Init
                 msWalkingEntity 16, 22, DOWN, MAPSPRITE_YOUNG_WOMAN, 16, 22, 2
                 msFixedEntity 13, 19, DOWN, MAPSPRITE_OLD_WOMAN, eas_Init
@@ -28,7 +28,7 @@ ms_map3_flag609_Entities:
                 msWalkingEntity 18, 14, DOWN, MAPSPRITE_BOY, 18, 14, 1
                 msFixedEntity 18, 9, DOWN, MAPSPRITE_WOMAN, eas_Init
                 msSequencedEntity 20, 16, DOWN, MAPSPRITE_DWARF, ems_50CAC
-                msFixedEntity 8, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 8, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 1, 29, UP, ALLY_JAHA, eas_Init
                 msEntitiesEnd
 ems_50CAC:      dc.b DOWN
