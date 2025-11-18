@@ -123,36 +123,36 @@ table_EnemyMapsprites:
                 mapsprite OBJECT2
                 mapsprite OBJECT3
                 mapsprite OBJECT4
-                mapsprite CHICK_FLYING
+                mapsprite FLYING_CHICK
                 mapsprite EFFECT4
                 mapsprite POSE5
-                mapsprite ZELOT
+                mapsprite MONK
                 mapsprite EFFECT5
                 mapsprite EFFECT6
                 mapsprite DESKTOP_KING
-                mapsprite WOMAN3
+                mapsprite OLD_WOMAN
                 mapsprite BLUE_FLAME
                 mapsprite FILLER10
                 mapsprite PRIEST
                 mapsprite SAILOR
-                mapsprite MAN1
-                mapsprite WOMAN1
-                mapsprite MAN2
-                mapsprite WOMAN2
-                mapsprite MAN3
-                mapsprite WOMAN3
+                mapsprite MAN
+                mapsprite WOMAN
+                mapsprite YOUNG_MAN
+                mapsprite YOUNG_WOMAN
+                mapsprite OLD_MAN
+                mapsprite OLD_WOMAN
                 mapsprite BOY
                 mapsprite GIRL
                 mapsprite WORKER
                 mapsprite GRANSEAL_KING
                 mapsprite ELIS
                 mapsprite MINISTER
-                mapsprite SOLDIER1
-                mapsprite SOLDIER2
+                mapsprite GUARD
+                mapsprite SOLDIER
                 mapsprite MAID
                 mapsprite ASTRAL
                 mapsprite CAT
-                mapsprite BOAT
+                mapsprite SHIP
                 mapsprite CREED
                 mapsprite ODDLER
                 mapsprite GALAM_KING
@@ -162,12 +162,12 @@ table_EnemyMapsprites:
                 mapsprite DUCK
                 mapsprite FAIRY
                 mapsprite BEASTMAN1
-                mapsprite TURTLE
+                mapsprite KAPPA
                 mapsprite BEASTMAN2
-                mapsprite ELF_BOY
-                mapsprite ELF_GIRL
-                mapsprite VIKING
+                mapsprite ELF_MALE
+                mapsprite ELF_FEMALE
+                mapsprite WARRIOR
                 mapsprite DWARF
                 mapsprite BEDOE_KING
-                mapsprite BEDOE_MINISTER
-                mapsprite BEDOE_SOLDIER
+                mapsprite BIRDWOMAN
+                mapsprite BEDRIDDEN_BIRDMAN

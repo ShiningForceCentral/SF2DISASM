@@ -422,7 +422,7 @@ cs_5766C:       textCursor 1680
                 entityActionsWait 153
                  jumpRight 1
                 endActions
-                setSprite 153,MAPSPRITE_CHICK_FLYING
+                setSprite 153,MAPSPRITE_FLYING_CHICK
                 setActscriptWait 153,eas_DeactivateAutoFacing
                 customActscriptWait 153
                  ac_setSpeed 4,4        ;   
@@ -458,7 +458,7 @@ cs_5766C:       textCursor 1680
                  moveRight 1
                  jumpRight 1
                 endActions
-                setSprite 153,MAPSPRITE_CHICK_FLYING
+                setSprite 153,MAPSPRITE_FLYING_CHICK
                 setActscriptWait 153,eas_DeactivateAutoFacing
                 entityActionsWait 153
                  moveDown 1

@@ -112,7 +112,7 @@ IntroCutscene2: textCursor 4202
 ce_48510:       mainEntity 63,63,UP
                 entity 12,6,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
                 entity 10,7,DOWN,MAPSPRITE_MINISTER,eas_Init
-                entity 12,13,UP,MAPSPRITE_SOLDIER1,eas_Init
+                entity 12,13,UP,MAPSPRITE_GUARD,eas_Init
                 entity 9,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
                 entity 15,6,LEFT,MAPSPRITE_EFFECT6,eas_Init
                 cscEntitiesEnd

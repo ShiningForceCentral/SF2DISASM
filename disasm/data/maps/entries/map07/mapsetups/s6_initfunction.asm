@@ -138,13 +138,13 @@ cs_55832:       textCursor 1290
 ce_559AE:       mainEntity 11,7,UP
                 entity 12,5,DOWN,MAPSPRITE_MINISTER,eas_Init
                 entity 11,4,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
-                entity 10,7,UP,MAPSPRITE_SOLDIER1,eas_Init
-                entity 10,8,UP,MAPSPRITE_SOLDIER1,eas_Init
-                entity 10,9,UP,MAPSPRITE_SOLDIER1,eas_Init
-                entity 10,10,UP,MAPSPRITE_SOLDIER2,eas_Init
-                entity 12,8,UP,MAPSPRITE_SOLDIER2,eas_Init
-                entity 12,9,UP,MAPSPRITE_SOLDIER2,eas_Init
-                entity 12,10,UP,MAPSPRITE_SOLDIER2,eas_Init
+                entity 10,7,UP,MAPSPRITE_GUARD,eas_Init
+                entity 10,8,UP,MAPSPRITE_GUARD,eas_Init
+                entity 10,9,UP,MAPSPRITE_GUARD,eas_Init
+                entity 10,10,UP,MAPSPRITE_SOLDIER,eas_Init
+                entity 12,8,UP,MAPSPRITE_SOLDIER,eas_Init
+                entity 12,9,UP,MAPSPRITE_SOLDIER,eas_Init
+                entity 12,10,UP,MAPSPRITE_SOLDIER,eas_Init
                 entity 8,7,RIGHT,MAPSPRITE_MAID,eas_Init
                 entity 14,7,LEFT,MAPSPRITE_MAID,eas_Init
                 entity 10,5,DOWN,MAPSPRITE_ASTRAL,eas_Init
