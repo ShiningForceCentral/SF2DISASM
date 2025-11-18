@@ -46,7 +46,7 @@ ClearTargetsArray:
 ; =============== S U B R O U T I N E =======================================
 
 
-ClearTotalMovecostsAndMovableGridArrays:
+ClearTotalMoveCostsAndMovableGridArrays:
                 
                 movem.l d0-a6,-(sp)
                 lea     (FF4400_LOADING_SPACE).l,a0
@@ -63,7 +63,7 @@ ClearTotalMovecostsAndMovableGridArrays:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function ClearTotalMovecostsAndMovableGridArrays
+    ; End of function ClearTotalMoveCostsAndMovableGridArrays
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,17 +88,17 @@ GetCombatantOccupyingSpace:
 ; Get movecost to reach entity d0.b -> d0.b
 
 
-GetMovecostToEntity:
+GetMoveCostToEntity:
                 
                 movem.l d1-a6,-(sp)
                 jsr     GetCombatantY
                 move.b  d1,d2
                 jsr     GetCombatantX
-                bsr.w   GetMovecostToDestination
+                bsr.w   GetMoveCostToDestination
                 movem.l (sp)+,d1-a6
                 rts
 
-    ; End of function GetMovecostToEntity
+    ; End of function GetMoveCostToEntity
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -108,7 +108,7 @@ GetMovecostToEntity:
 ; Out: d0.w (upper nibble = movable-grid entry, lower nibble = total movecost entry)
 
 
-GetMovecostToDestination:
+GetMoveCostToDestination:
                 
                 movem.l d1-a6,-(sp)
                 lea     (FF4400_LOADING_SPACE).l,a0
@@ -123,7 +123,7 @@ GetMovecostToDestination:
                 movem.l (sp)+,d1-a6
                 rts
 
-    ; End of function GetMovecostToDestination
+    ; End of function GetMoveCostToDestination
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -183,12 +183,12 @@ SetTerrain:
 ; Populate movecosts table for moving battle entity d0.b
 
 
-PopulateMovecostsTable:
+PopulateMoveCostsTable:
                 
                 movem.l d0-a6,-(sp)
                 jsr     GetMovetype     
                 lsl.w   #NIBBLE_SHIFT_COUNT,d1
-                lea     table_LandEffectSettingsAndMovecosts(pc), a0
+                lea     table_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 lea     ((MOVECOSTS_TABLE-$1000000)).w,a1
                 moveq   #TERRAIN_TYPES_COUNTER,d7
@@ -207,7 +207,7 @@ PopulateMovecostsTable:
                 movem.l (sp)+,d0-a6
                 rts
 
-    ; End of function PopulateMovecostsTable
+    ; End of function PopulateMoveCostsTable
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,7 +218,7 @@ PopulateMovecostsTable:
 sub_C1BE:
                 
                 movem.l d0/d2-a6,-(sp)
-                bsr.s   PopulateMovecostsTable
+                bsr.s   PopulateMoveCostsTable
                 lea     ((MOVECOSTS_TABLE-$1000000)).w,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #BYTE_LOWER_NIBBLE_MASK,d0
@@ -241,7 +241,7 @@ GetLandEffectSetting:
                 movem.l d0/d2-a6,-(sp)
                 jsr     GetMovetype     
                 lsl.w   #NIBBLE_SHIFT_COUNT,d1
-                lea     table_LandEffectSettingsAndMovecosts(pc), a0
+                lea     table_LandEffectSettingsAndMoveCosts(pc), a0
                 adda.w  d1,a0
                 bsr.w   GetCurrentTerrainType
                 andi.w  #TERRAIN_MASK_TYPE,d0

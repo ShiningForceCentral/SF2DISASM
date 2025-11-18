@@ -27,7 +27,7 @@ BuildMoveStringForMoveOrder:
                 ; Populate move costs table, then get move order position -> d3.w, d4.w
                 clr.w   d0
                 move.b  combatant(a6),d0
-                bsr.w   PopulateMovecostsTable
+                bsr.w   PopulateMoveCostsTable
                 move.b  moveOrder(a6),d0
                 jsr     j_GetMoveOrderPosition
                 move.w  d1,d3

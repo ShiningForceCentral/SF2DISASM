@@ -97,15 +97,15 @@ aiCommand_Move:
                 move.w  d2,((TARGETS_LIST_LENGTH-$1000000)).w
                 move.w  d2,d6
                 clr.w   d2
-@MovecostToTarget_Loop:
+@MoveCostToTarget_Loop:
                 
                 clr.w   d0
                 move.b  (a0,d2.w),d0
-                bsr.w   GetMovecostToEntity
+                bsr.w   GetMoveCostToEntity
                 move.b  d0,var_96(a6,d2.w)
                 addi.w  #1,d2
                 subq.w  #1,d6
-                bne.s   @MovecostToTarget_Loop
+                bne.s   @MoveCostToTarget_Loop
                 
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d1
                 cmpi.w  #1,d1
@@ -234,21 +234,21 @@ aiCommand_Move:
                 bsr.w   GetEnemy        
                 cmpi.b  #ENEMY_KRAKEN_LEG,d1 ; HARDCODED enemy indexes
                 bne.s   @CheckKrakenArm
-                bra.w   @SpecialMovecosts
+                bra.w   @SpecialMoveCosts
 @CheckKrakenArm:
                 
                 cmpi.b  #ENEMY_KRAKEN_ARM,d1
                 bne.s   @CheckKrakenHead
-                bra.w   @SpecialMovecosts
+                bra.w   @SpecialMoveCosts
 @CheckKrakenHead:
                 
                 cmpi.b  #ENEMY_KRAKEN_HEAD,d1
                 bne.s   @NoMoveTable
-                bra.w   @SpecialMovecosts
+                bra.w   @SpecialMoveCosts
 @NoMoveTable:
                 
                 bra.w   @BasicMovement
-@SpecialMovecosts:
+@SpecialMoveCosts:
                 
                 jsr     j_ClearAllTemporaryObstructionFlags
                 move.b  d6,d0
@@ -260,7 +260,7 @@ aiCommand_Move:
                 lea     (FF4400_LOADING_SPACE).l,a2
                 lea     (FF4D00_LOADING_SPACE).l,a3
                 lea     (BATTLE_TERRAIN_ARRAY).l,a4
-                lea     table_KrakenMovecosts(pc), a5
+                lea     table_KrakenMoveCosts(pc), a5
                 nop
                 bra.w   @CommitMoveString
 @BasicMovement:
@@ -268,7 +268,7 @@ aiCommand_Move:
                 jsr     j_ClearAllTemporaryObstructionFlags
                 clr.w   d0
                 move.b  d7,d0
-                bsr.w   PopulateMovecostsTable
+                bsr.w   PopulateMoveCostsTable
                 move.b  d6,d0
                 bsr.w   GetCombatantY
                 move.w  d1,d4

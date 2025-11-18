@@ -54,7 +54,7 @@ GetLaserFacing:
                 jsr     j_GetCombatantY
                 move.w  d1,d2
                 jsr     j_GetCombatantX
-                jsr     j_ClearTotalMovecostsAndMovableGridArrays
+                jsr     j_ClearTotalMoveCostsAndMovableGridArrays
                 tst.w   d6
                 bne.s   @CheckFace_Up
                 addi.w  #1,d1

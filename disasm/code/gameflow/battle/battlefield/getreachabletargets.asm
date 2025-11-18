@@ -88,7 +88,7 @@ PopulateReachableTargetsList:
                 addq.w  #1,(a1)
                 move.b  d0,(a2)+
                 move.b  d0,d5
-                bsr.w   GetMovecostToDestination
+                bsr.w   GetMoveCostToDestination
                 move.b  d0,(a3)+
                 move.b  d5,d0
 @Next:

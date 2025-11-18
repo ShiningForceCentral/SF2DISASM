@@ -1537,11 +1537,11 @@ j_ConvertCoordinatesToAddress:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearTotalMovecostsAndMovableGridArrays:
+j_ClearTotalMoveCostsAndMovableGridArrays:
                 
-                jmp     ClearTotalMovecostsAndMovableGridArrays(pc)
+                jmp     ClearTotalMoveCostsAndMovableGridArrays(pc)
 
-    ; End of function j_ClearTotalMovecostsAndMovableGridArrays
+    ; End of function j_ClearTotalMoveCostsAndMovableGridArrays
 
 
 ; =============== S U B R O U T I N E =======================================

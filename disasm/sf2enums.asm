@@ -3226,7 +3226,7 @@ TERRAIN_OBSTRUCTED: equ -1
 
 ; ---------------------------------------------------------------------------
 
-; enum LandEffectAndMovecost
+; enum LandEffectAndMoveCost
 MOVECOST_OBSTRUCTED: equ $F
 
 ; ---------------------------------------------------------------------------

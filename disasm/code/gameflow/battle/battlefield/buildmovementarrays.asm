@@ -9,7 +9,7 @@
 ;     d3.b, d4.b = moving combatant X, Y
 
 tempMovableGridArray = -BUILD_MOVEMENT_ARRAYS_STACK_BYTESIZE
-tempTotalMovecostsArray = -(BUILD_MOVEMENT_ARRAYS_STACK_BYTESIZE-1)
+tempTotalMoveCostsArray = -(BUILD_MOVEMENT_ARRAYS_STACK_BYTESIZE-1)
 
 BuildMovementArrays:
                 
@@ -37,13 +37,13 @@ BuildMovementArrays:
                 lea     (a2),a1
                 move.w  #MAP_ARRAY_QUAD_LONGWORDS_COUNTER,d5    ; 143
                 moveq   #-1,d1
-@ClearTotalMovecostsArray_Loop:
+@ClearTotalMoveCostsArray_Loop:
                 
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
                 move.l  d1,(a1)+
-                dbf     d5,@ClearTotalMovecostsArray_Loop
+                dbf     d5,@ClearTotalMoveCostsArray_Loop
                 
                 ; Convert moving combatant X, Y to offset
                 clr.w   d6
@@ -101,7 +101,7 @@ BuildMovementArrays:
                 bne.s   @FoundProcessedCandidate
                 
                 move.b  (a3,d5.w),tempMovableGridArray(a6,d1.w)
-                move.b  (a2,d5.w),tempTotalMovecostsArray(a6,d1.w)
+                move.b  (a2,d5.w),tempTotalMoveCostsArray(a6,d1.w)
                 bra.s   @ExpandMovement_Loop      
 @FoundProcessedCandidate:
                 
@@ -157,7 +157,7 @@ TestAndMarkNeighborSpace:
                 andi.w  #BATTLEFIELD_MOVE_BUDGET_MASK,d1 ; $1F
                 add.w   d1,d1
                 move.b  tempMovableGridArray(a6,d1.w),(a3,d5.w)
-                move.b  tempTotalMovecostsArray(a6,d1.w),(a2,d5.w)
+                move.b  tempTotalMoveCostsArray(a6,d1.w),(a2,d5.w)
                 move.w  d5,tempMovableGridArray(a6,d1.w) ; store latest candidate coordinates offset
                 rts                         ; (and clear bit 14 from stack frame entry in the process, indicating that the space has been checked)
 @MoveBudgetSpent:
