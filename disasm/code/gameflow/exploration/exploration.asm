@@ -1373,12 +1373,9 @@ GetItem:
 
 ; =============== S U B R O U T I N E =======================================
 
-;warpType = 2
-;warpFacing = 6 
 
 WarpIfSetAtPoint:
                 
-                module
                 movem.l d0-d1/d7,-(sp)
                 ext.l   d0
                 ext.l   d1
@@ -1392,24 +1389,27 @@ WarpIfSetAtPoint:
                 movea.l MAPDATA_OFFSET_EVENT_WARP(a2),a2
 @CheckWarp:
                 
-				; compare X
+                ; Compare X
                 cmpi.w  #-1,(a2)
                 beq.w   @Done
-                tst.b   (a2) ; if 255 any value works
+                
+                tst.b   (a2)            ; if -1, any value works
                 blt.s   @CompareY
-                cmp.b   (a2),d0 ; check exact X
+                
+                cmp.b   (a2),d0         ; check exact X
                 bne.w   @NextPoint
 @CompareY:
                 
-                tst.b   1(a2) ; if 255 any value works
+                tst.b   MAPDATA_EVENT_WARP_OFFSET_Y(a2)     ; if -1, any value works
                 blt.s   @SetWarpElements
-                cmp.b   1(a2),d1 ; check exact Y
+                
+                cmp.b   MAPDATA_EVENT_WARP_OFFSET_Y(a2),d1  ; check exact Y
                 bne.w   @NextPoint
 @SetWarpElements:
                 
                 move.w  #MAP_EVENT_WARP,((MAP_EVENT_TYPE-$1000000)).w
-                move.l  2(a2),((MAP_EVENT_PARAM_1-$1000000)).w
-                move.w  6(a2),((MAP_EVENT_PARAM_5-$1000000)).w
+                move.l  MAPDATA_EVENT_WARP_OFFSET_TYPE(a2),((MAP_EVENT_PARAM_1-$1000000)).w
+                move.w  MAPDATA_EVENT_WARP_OFFSET_FACING(a2),((MAP_EVENT_PARAM_5-$1000000)).w
                 move.w  #SFX_WARP,((WARP_SFX-$1000000)).w
 @Done:
                 
@@ -1417,12 +1417,11 @@ WarpIfSetAtPoint:
                 rts
 @NextPoint:
                 
-                addq.l  #8,a2
+                addq.l  #MAPDATA_EVENT_WARP_ENTRY_SIZE,a2
                 bra.s   @CheckWarp
 
     ; End of function WarpIfSetAtPoint
 
-                modend
 
 ; =============== S U B R O U T I N E =======================================
 

@@ -146,15 +146,15 @@ graphic_SoundWave:
 table_1EB90:    dc.w 8
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 16
-				
+                
                 dc.w 14
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 32
-				
+                
                 dc.w 20
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 48
-				
+                
 graphic_WindWedge:
                 vdpSpell 253, 221, SPELLTILE192, V4|H4|VALUE2|MIRRORED|FLIPPED
                 

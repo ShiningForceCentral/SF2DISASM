@@ -111,13 +111,13 @@ loc_1E0C0:
 MakeRainStreak:
                 moveq   #112,d6 
                 jsr     (GenerateRandomNumber).w
-				
+                
                 addi.w  #152,d7 
                 move.w  d7,(a4)+
                 move.w  #VDPSPELLPROP_V4|VDPSPELLPROP_H2,(a4)+
                 move.w  #VDPTILE_SPELLTILE19|VDPTILE_PALETTE3|VDPTILE_PRIORITY,(a4)+
                 move.w  (a0),(a4)+
-				
+                
                 addi.w  #32,d7 
                 move.w  d7,(a4)+
                 move.w  #VDPSPELLPROP_V2|VDPSPELLPROP_H2,(a4)+

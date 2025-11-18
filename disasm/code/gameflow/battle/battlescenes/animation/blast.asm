@@ -24,7 +24,7 @@ spellanimationSetup_Blast:
                 move.w  #224,2(a2) ; y value
                 cmpi.w  #3,d1
                 bcs.s   loc_1A96C
-				
+                
                 move.w  #64,d2 
                 move.w  d2,4(a2)
                 move.w  #80,d3 
@@ -37,7 +37,7 @@ loc_1A96E:
                 move.w  #240,2(a2) ; y value
                 cmpi.w  #3,d1
                 bcs.s   loc_1A98A
-				
+                
                 move.w  #168,d2 
                 move.w  d2,4(a2)
                 move.w  #96,d3 

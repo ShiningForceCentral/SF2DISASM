@@ -5,7 +5,7 @@ table_183C:     dc.b 6                  ; related to spellanimations
                 dc.b 11
                 dc.b 12
                 dc.b 1
-				
+                
 table_1840:     dc.w 0
                 dc.w 6
                 dc.w 12

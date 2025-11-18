@@ -148,15 +148,15 @@ table_1DFA2:    vdpSpell 274, 203, TILE1920, V2|H2|VALUE2
                 
 table_1DFB2:    vdpSpell 128, 144, TILE1940, V2|H2|VALUE2
                 vdpSpell 128, 144, TILE1776, V4|H4|VALUE2
-				
+                
 table_1DFC2:    dc.w $790
                 dc.w $78C
                 dc.w $788
-				
+                
                 dc.w $5A0
                 dc.w $210
                 dc.w $180
-				
+                
 table_1DFCE:    dc.w $00F
                 dc.w 8
                 dc.w 1

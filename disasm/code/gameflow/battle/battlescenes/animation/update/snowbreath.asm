@@ -127,71 +127,71 @@ loc_1E8D6:
 
 table_1E8E2:    vdpSpell 284, 222, VDPTILE_SPELLTILE1, V1|H1|VALUE2
                 vdpSpell 224, 223, VDPTILE_SPELLTILE1, V1|H1|VALUE2
-				
+                
 table_1E8F2:    dc.w 2
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 4
-				
+                
                 dc.w 4
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 8
-				
+                
                 dc.w 6
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w $C
-				
+                
                 dc.w 8
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 16
-				
+                
                 dc.w 10
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 20
-				
+                
                 dc.w 13
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 24
-				
+                
                 dc.w 15
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 33
-				
+                
                 dc.w 17
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 42
-				
+                
                 dc.w 19
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 51
-				
+                
                 dc.w 21
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 60
-				
+                
                 dc.w 23
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 69
-				
+                
                 dc.w 26
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 78
-				
+                
                 dc.w 28
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 94
-				
+                
                 dc.w 30
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 110
-				
+                
                 dc.w 32
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 126
-				
+                
                 dc.w 34
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 142
-				
+                
                 dc.w 36
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 158

@@ -284,123 +284,123 @@ table_1C18A:    dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1,VDPTILE_SPELLTILE1|VDPTILE_
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1,VDPTILE_SPELLTILE2|VDPTILE_PALETTE3|VDPTILE_PRIORITY
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2,VDPTILE_SPELLTILE3|VDPTILE_PALETTE3|VDPTILE_PRIORITY
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3,VDPTILE_SPELLTILE7|VDPTILE_PALETTE3|VDPTILE_PRIORITY
-				
+                
 table_1C19A:    ; Level 1
                 dc.w 8
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 40
-				
+                
                 dc.w 13
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 1
-				
+                
                 dc.w 18
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 41
-				
+                
                 dc.w 23
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 2
-				
+                
                 dc.w 28
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 42
-				
+                
                 dc.w 34
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 6
-				
+                
                 dc.w 40
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 46
-				
+                
                 ; Level 2
                 dc.w 8
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 41
-				
+                
                 dc.w 13
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 2
-				
+                
                 dc.w 18
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 42
-				
+                
                 dc.w 23
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 6
-				
+                
                 dc.w 28
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 46
-				
+                
                 dc.w 34
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 15
-				
+                
                 dc.w 40
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 55
-				
+                
                 ; Level 3
                 dc.w 8
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 42
-				
+                
                 dc.w 13
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 6
-				
+                
                 dc.w 18
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 46
-				
+                
                 dc.w 23
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 15
-				
+                
                 dc.w 28
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 55
-				
+                
                 dc.w 34
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 24
-				
+                
                 dc.w 40
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
                 ; Level 4
                 dc.w 8
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 46
-				
+                
                 dc.w 13
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 15
-				
+                
                 dc.w 18
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 55
-				
+                
                 dc.w 23
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 24
-				
+                
                 dc.w 28
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
                 dc.w 34
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 24
-				
+                
                 dc.w 40
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
-				
+                
 table_1C242:    dc.w $E44
                 dc.w 8
                 dc.w 1

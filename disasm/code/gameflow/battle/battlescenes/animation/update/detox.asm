@@ -166,39 +166,39 @@ loc_1CDF2:
 table_1CE0C:    dc.w 8
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 26
-				
+                
                 dc.w 14
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 22
-				
+                
                 dc.w 20
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 18
-				
+                
                 dc.w 26
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 9
-				
+                
                 dc.w 32
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 0
-				
+                
 table_1CE2A:    dc.w 8
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 9
-				
+                
                 dc.w 14
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 18
-				
+                
                 dc.w 20
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 22
-				
+                
                 dc.w 26
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 26
-				
+                
                 dc.w 32
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 27

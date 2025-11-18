@@ -185,7 +185,8 @@ sub_1A3E8:
                 moveq   #17,d0
                 btst    #5,((byte_FFB56F-$1000000)).w
                 beq.s   @BattlespriteArrangement
-				; Invocation arangement
+                
+                ; Invocation arangement
                 lea     72(a1),a1
                 moveq   #15,d0
 @BattlespriteArrangement:

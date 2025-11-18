@@ -158,11 +158,11 @@ loc_1E268:
                 move.w  d0,(a4)+
                 addi.w  #32,d2 
                 dbf     d3,@MoveInvocation_InnerLoop
-				
+                
                 addi.w  #32,d0 
                 subi.w  #128,d2 
                 dbf     d1,@MoveInvocation_OuterLoop
-				
+                
                 movea.l (sp)+,a4
                 rts
 
@@ -174,41 +174,41 @@ layout_Invocation_Mirror:
                 dc.w $170|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1F0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $200|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $140|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $150|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1D0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1E0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $120|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $130|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1B0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1C0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $100|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $110|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $190|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $1A0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w 00
                 dc.w 00
-				
-				; 
+                
+                ; 
                 dc.w $580|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $590|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $6D0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $6E0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $560|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $570|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $5F0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $6C0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $540|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $550|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $5D0|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $5E0|VDPTILE_PRIORITY|VDPTILE_MIRROR
-				
+                
                 dc.w $520|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $530|VDPTILE_PRIORITY|VDPTILE_MIRROR
                 dc.w $5B0|VDPTILE_PRIORITY|VDPTILE_MIRROR

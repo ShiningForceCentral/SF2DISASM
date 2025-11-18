@@ -138,5 +138,5 @@ loc_1B604:
 graphic_DustCloud:
                 vdpSpell 312, 272, SPELLTILE1, V2|H2|VALUE2
                 
-				; mirror
+                ; mirror
                 vdpSpell 192, 256, SPELLTILE1, V2|H2|VALUE2

@@ -195,23 +195,23 @@ graphic_FlameBreathParticle:
 table_1D4C8:    ; dc.w [yet unknown][location offset?]
                 ; dc.w [spell graphic dimensions]
                 ; dc.w [graphic tile-offset]
-				
+                
                 dc.w 5
                 dc.w VDPSPELLPROP_V1|VDPSPELLPROP_H1
                 dc.w 1
-				
+                
                 dc.w 10
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 2
-				
+                
                 dc.w 15
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 6
-				
+                
                 dc.w 20
                 dc.w VDPSPELLPROP_V3|VDPSPELLPROP_H3
                 dc.w 10
-				
+                
                 dc.w 25
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 19

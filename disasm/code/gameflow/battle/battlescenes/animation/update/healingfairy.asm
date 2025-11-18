@@ -209,7 +209,7 @@ loc_1C73E:
                 lea     16(a4),a4 ; offset 2 sprites
                 lea     24(a5),a5
                 dbf     d1,loc_1C552
-				
+                
                 moveq   #24,d1
                 move.w  10(a3),d2
                 add.w   d2,d2
@@ -265,7 +265,7 @@ loc_1C7D8:
 
 table_1C7EE:    dc.w 96  ; x
                 dc.w 128 ; y
-				
+                
                 ; 
                 dc.w 384 ; x
                 dc.w 128 ; y
