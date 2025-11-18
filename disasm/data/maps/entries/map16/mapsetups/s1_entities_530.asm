@@ -11,13 +11,13 @@ ms_map16_flag530_Entities:
                 msFixedEntity 32, 19, DOWN, MAPSPRITE_OLD_MAN, eas_Init
                 msWalkingEntity 45, 15, DOWN, MAPSPRITE_MAN, 45, 15, 1
                 msFixedEntity 15, 28, DOWN, MAPSPRITE_WORKER, eas_Init
-                msFixedEntity 35, 24, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 35, 24, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 27, 5, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msWalkingEntity 18, 19, DOWN, MAPSPRITE_GUARD, 18, 19, 1
                 msWalkingEntity 3, 13, DOWN, MAPSPRITE_GUARD, 3, 13, 1
                 msWalkingEntity 7, 20, DOWN, MAPSPRITE_SOLDIER, 7, 20, 1
                 msFixedEntity 23, 24, DOWN, MAPSPRITE_ORB, eas_InitFixedSprite
-                msFixedEntity 39, 24, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 39, 24, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 17, 10, DOWN, MAPSPRITE_SOLDIER, eas_Init
                 msFixedEntity 29, 23, DOWN, MAPSPRITE_CARAVAN, eas_Init
                 msEntitiesEnd

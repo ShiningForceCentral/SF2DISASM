@@ -12,10 +12,10 @@ ms_map3_flag506_Entities:
                 msFixedEntity 28, 8, UP, MAPSPRITE_YOUNG_MAN, eas_Init
                 msFixedEntity 30, 8, UP, MAPSPRITE_YOUNG_WOMAN, eas_Init
                 msFixedEntity 32, 11, DOWN, MAPSPRITE_PRIEST, eas_Init
-                msFixedEntity 7, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 7, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 2, 24, UP, MAPSPRITE_GUARD, eas_LyingRight
                 msWalkingEntity 26, 24, DOWN, MAPSPRITE_BOY, 26, 24, 3
                 msFixedEntity 7, 11, DOWN, MAPSPRITE_WOMAN, eas_Init
-                msFixedEntity 8, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 8, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 37, 21, UP, ALLY_KIWI, eas_Init
                 msEntitiesEnd

@@ -9,7 +9,7 @@ ms_map2_Entities:
                 msFixedEntity 16, 23, DOWN, MAPSPRITE_CENTAUR_FEMALE, eas_Init
                 msWalkingEntity 34, 7, DOWN, MAPSPRITE_CENTAUR_FEMALE, 34, 7, 1
                 msWalkingEntity 31, 15, DOWN, MAPSPRITE_CENTAUR_MALE, 31, 15, 1
-                msFixedEntity 9, 8, DOWN, MAPSPRITE_SAILOR, eas_Init
-                msFixedEntity 15, 5, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 9, 8, DOWN, MAPSPRITE_MERCHANT, eas_Init
+                msFixedEntity 15, 5, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 41, 8, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msEntitiesEnd

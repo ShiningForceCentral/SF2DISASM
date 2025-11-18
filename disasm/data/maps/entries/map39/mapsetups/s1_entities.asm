@@ -5,7 +5,7 @@ ms_map39_Entities:
                 msFixedEntity 22, 7, DOWN, ALLY_GYAN, eas_Init
                 msFixedEntity 63, 63, DOWN, ALLY_ZYNK, eas_Init
                 msFixedEntity 3, 6, RIGHT, MAPSPRITE_YOUNG_MAN, eas_Init
-                msWalkingEntity 9, 7, DOWN, MAPSPRITE_SAILOR, 9, 7, 1
+                msWalkingEntity 9, 7, DOWN, MAPSPRITE_MERCHANT, 9, 7, 1
                 msWalkingEntity 11, 10, DOWN, MAPSPRITE_WORKER, 11, 10, 1
                 msFixedEntity 12, 6, RIGHT, MAPSPRITE_BOY, eas_Init
                 msFixedEntity 13, 6, LEFT, MAPSPRITE_GIRL, eas_Init

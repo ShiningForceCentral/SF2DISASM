@@ -11,7 +11,7 @@ ms_map15_Entities:
                 msWalkingEntity 6, 16, DOWN, MAPSPRITE_ELF_MALE, 6, 16, 2
                 msWalkingEntity 28, 6, DOWN, MAPSPRITE_WARRIOR, 28, 6, 2
                 msWalkingEntity 31, 13, UP, MAPSPRITE_FAIRY, 31, 13, 1
-                msFixedEntity 3, 23, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 3, 23, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 12, 15, DOWN, MAPSPRITE_PRIEST, eas_Init
-                msFixedEntity 2, 23, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 2, 23, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msEntitiesEnd

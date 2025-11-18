@@ -134,7 +134,7 @@ table_EnemyMapsprites:
                 mapsprite BLUE_FLAME
                 mapsprite FILLER10
                 mapsprite PRIEST
-                mapsprite SAILOR
+                mapsprite MERCHANT
                 mapsprite MAN
                 mapsprite WOMAN
                 mapsprite YOUNG_MAN

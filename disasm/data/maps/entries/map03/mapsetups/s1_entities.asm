@@ -6,11 +6,11 @@ ms_map3_Entities:
                 msFixedEntity 44, 10, UP, ALLY_CHESTER, eas_Init
                 msFixedEntity 5, 6, RIGHT, MAPSPRITE_WOMAN, eas_InitSlow
                 msFixedEntity 13, 8, RIGHT, MAPSPRITE_OLD_WOMAN, eas_Init
-                msWalkingEntity 20, 13, DOWN, MAPSPRITE_SAILOR, 20, 13, 3
+                msWalkingEntity 20, 13, DOWN, MAPSPRITE_MERCHANT, 20, 13, 3
                 msWalkingEntity 18, 10, DOWN, MAPSPRITE_WOMAN, 18, 10, 1
                 msFixedEntity 21, 9, DOWN, MAPSPRITE_BOY, eas_Init
                 msWalkingEntity 12, 9, DOWN, MAPSPRITE_OLD_MAN, 12, 9, 1
-                msFixedEntity 7, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 7, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msFixedEntity 63, 63, DOWN, MAPSPRITE_ASTRAL, eas_Init
                 msFixedEntity 63, 63, DOWN, MAPSPRITE_ASTRAL, eas_Init
                 msFixedEntity 45, 22, UP, MAPSPRITE_YOUNG_MAN, eas_Init
@@ -20,5 +20,5 @@ ms_map3_Entities:
                 msFixedEntity 32, 11, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 54, 17, UP, MAPSPRITE_ASTRAL, eas_Init
                 msFixedEntity 63, 63, UP, MAPSPRITE_GUARD, eas_Init
-                msFixedEntity 8, 18, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 8, 18, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msEntitiesEnd
