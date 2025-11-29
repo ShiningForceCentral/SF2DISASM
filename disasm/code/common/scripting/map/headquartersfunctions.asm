@@ -43,7 +43,7 @@ InitializeNazcaShipForceMembers:
                 
                 movem.l d0-a2,-(sp)
                 moveq   #1,d0
-                moveq   #COMBATANT_ALLIES_MINUS_PLAYER_COUNTER,d7
+                moveq   #COMBATANT_ALLIES_TACTICAL_BASE_COUNTER,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
                 lea     table_TacticalBaseBattlePartyPositions(pc), a2
 @PositionMember_Loop:
@@ -77,7 +77,7 @@ InitializeTacticalBaseForceMembers:
                 
                 movem.l d0-a2,-(sp)
                 moveq   #1,d0
-                moveq   #COMBATANT_ALLIES_MINUS_PLAYER_COUNTER,d7
+                moveq   #COMBATANT_ALLIES_TACTICAL_BASE_COUNTER,d7
                 lea     ((OTHER_ENTITIES_DATA-$1000000)).w,a0
                 lea     table_TacticalBaseBattlePartyPositions(pc), a2
 @PositionMember_Loop:

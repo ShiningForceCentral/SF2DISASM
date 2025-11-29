@@ -112,6 +112,7 @@ combatantAlliesNumber = 32
     endif
 
 COMBATANT_ALLIES_START: equ 0
+COMBATANT_ALLIES_TACTICAL_BASE_COUNTER: equ 28 ; exclude Bowie, ally 30, and ally 31 to make space for Astral and Caravan entities
 COMBATANT_ALLIES_MINUS_PLAYER_AND_CREATURE_COUNTER: equ combatantAlliesNumber-3 ; exclude Bowie and Kiwi
 COMBATANT_ALLIES_MINUS_PLAYER_COUNTER: equ combatantAlliesNumber-2 ; exclude Bowie
 COMBATANT_ALLIES_COUNTER: equ combatantAlliesNumber-1
