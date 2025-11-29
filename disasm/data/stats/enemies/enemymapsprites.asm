@@ -102,7 +102,7 @@ table_EnemyMapsprites:
                 mapsprite RED_BARON     ; 94: RED BARON
                 mapsprite GESHP         ; 95: GESHP
                 mapsprite ODD_EYE       ; 96: ODD EYE
-                mapsprite GALAM_EVIL    ; 97: GALAM
+                mapsprite EVIL_GALAM    ; 97: GALAM
                 mapsprite ZEON          ; 98: ZEON
                 mapsprite JARO_SPECIAL  ; 99: JAR
                 mapsprite MASTER_MAGE   ; 100: MASTER MAGE
@@ -129,7 +129,7 @@ table_EnemyMapsprites:
                 mapsprite MONK
                 mapsprite EFFECT5
                 mapsprite EFFECT6
-                mapsprite DESKTOP_KING
+                mapsprite KING_PONPEI
                 mapsprite OLD_WOMAN
                 mapsprite BLUE_FLAME
                 mapsprite FILLER10
@@ -144,7 +144,7 @@ table_EnemyMapsprites:
                 mapsprite BOY
                 mapsprite GIRL
                 mapsprite WORKER
-                mapsprite GRANSEAL_KING
+                mapsprite KING_GRANSEAL
                 mapsprite ELIS
                 mapsprite MINISTER
                 mapsprite GUARD
@@ -155,7 +155,7 @@ table_EnemyMapsprites:
                 mapsprite SHIP
                 mapsprite CREED
                 mapsprite ODDLER
-                mapsprite GALAM_KING
+                mapsprite KING_GALAM
                 mapsprite MITULA
                 mapsprite POSE6
                 mapsprite POSE7
@@ -168,6 +168,6 @@ table_EnemyMapsprites:
                 mapsprite ELF_FEMALE
                 mapsprite WARRIOR
                 mapsprite DWARF
-                mapsprite BEDOE_KING
+                mapsprite KING_BEDOE
                 mapsprite BIRDWOMAN
                 mapsprite BEDRIDDEN_BIRDMAN

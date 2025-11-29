@@ -47,48 +47,48 @@ table_AllyNames:allyName "BOWIE"
                 defineName "Evil Galam"
                 defineName "Red Baron"
                 defineName "Priest"
-                defineName "Merchant"             ; Sailor
-                defineName "Man"                ; 1
-                defineName "Woman"              ; 1
-                defineName "Young Man"          ; 2
-                defineName "Young Woman"        ; 2
-                defineName "Old Man"            ; 3
-                defineName "Old Woman"          ; 3
+                defineName "Merchant"
+                defineName "Man"
+                defineName "Woman"
+                defineName "Young Man"
+                defineName "Young Woman"
+                defineName "Old Man"
+                defineName "Old Woman"
                 defineName "Boy"
                 defineName "Girl"
                 defineName "Worker"
-                defineName "Desktop King"
-                defineName "Granseal King"
+                defineName "King Ponpei"
+                defineName "King Granseal"
                 defineName "Elis"
                 defineName "Minister"
-                defineName "Guard"              ; Soldier 1
-                defineName "Soldier"            ; Soldier 2
+                defineName "Guard"
+                defineName "Soldier"
                 defineName "Maid"
                 defineName "Astral"
                 defineName "Cat"
                 defineName "Creed"
                 defineName "Oddler"
-                defineName "Galam King"
+                defineName "King Galam"
                 defineName "Mitula"
                 defineName "Pose 6 (Elis)"
                 defineName "Pose 7 (Sheela)"
                 defineName "Duck"
                 defineName "Fairy"
                 defineName "Beastman 1"
-                defineName "Kappa"          ; Turtle
+                defineName "Kappa"
                 defineName "Beastman 2"
-                defineName "Male Elf"        ; Elf Boy
-                defineName "Female Elf"      ; Elf Girl
-                defineName "Warrior"        ; Viking
+                defineName "Male Elf"
+                defineName "Female Elf"
+                defineName "Warrior"
                 defineName "Dwarf"
-                defineName "Bedoe King"
-                defineName "Birdwoman"        ; Bedoe Minister
-                defineName "Bedridden Birdman"  ; Bedoe Soldier
+                defineName "King Bedoe"
+                defineName "Birdwoman"
+                defineName "Bedridden Birdman"
                 defineName "Chick"
-                defineName "Pacalon King"
+                defineName "King Pacalon"
                 defineName "Pacalon Princess"
-                defineName "Male Centaur"      ; Pacalon Soldier
-                defineName "Female Centaur"    ; Pacalon Maid
+                defineName "Male Centaur"
+                defineName "Female Centaur"
                 defineName "Hen"
                 defineName "Birdman"
                 defineName "Zalbard"

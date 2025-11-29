@@ -13,13 +13,13 @@ table_Followers:follower 66, ALLY_SARAH, $FF, 1
                 follower 75, ALLY_LUKE, $FF, 1
                 follower 69, FOLLOWER_C, MAPSPRITE_FAIRY, 1
                 follower 70, FOLLOWER_B, MAPSPRITE_ASTRAL, 1
-                follower 74, FOLLOWER_A, MAPSPRITE_GRANSEAL_KING, 1
+                follower 74, FOLLOWER_A, MAPSPRITE_KING_GRANSEAL, 1
                 follower 71, ALLY_LEMON, $FF, 1
                 follower 74, FOLLOWER_D, MAPSPRITE_MINISTER, 1
                 follower 76, ALLY_ZYNK, $FF, 1
                 follower 77, FOLLOWER_A, MAPSPRITE_OLD_MAN, 1
                 follower 82, ALLY_FRAYJA, $FF, 1
-                follower 83, FOLLOWER_A, MAPSPRITE_GRANSEAL_KING, 1
+                follower 83, FOLLOWER_A, MAPSPRITE_KING_GRANSEAL, 1
                 follower 83, FOLLOWER_D, MAPSPRITE_MINISTER, 1
                 follower 84, ALLY_ROHDE, $FF, 1
                 

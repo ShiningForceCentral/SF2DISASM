@@ -9,7 +9,7 @@ ms_map36_flag530_Entities:
                 msFixedEntity 8, 3, DOWN, MAPSPRITE_CENTAUR_MALE, eas_Init
                 msFixedEntity 5, 22, LEFT, MAPSPRITE_CENTAUR_MALE, eas_Init
                 msFixedEntity 40, 17, DOWN, MAPSPRITE_CENTAUR_MALE, eas_Init
-                msFixedEntity 29, 3, DOWN, MAPSPRITE_PACALON_KING, eas_Init
+                msFixedEntity 29, 3, DOWN, MAPSPRITE_KING_PACALON, eas_Init
                 msFixedEntity 31, 5, LEFT, MAPSPRITE_CENTAUR_MALE, eas_Init
                 msFixedEntity 31, 11, LEFT, MAPSPRITE_CENTAUR_MALE, eas_Init
                 msFixedEntity 40, 4, DOWN, MAPSPRITE_PRIEST, eas_Init

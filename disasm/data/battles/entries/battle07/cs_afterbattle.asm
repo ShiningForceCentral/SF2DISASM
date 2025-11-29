@@ -649,9 +649,9 @@ abcs_battle07:  textCursor 2385
 ce_4A912:       mainEntity 13,23,UP
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
                 entity 63,63,RIGHT,MAPSPRITE_EFFECT3,eas_Init
-                entity 13,17,UP,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,17,UP,MAPSPRITE_EVIL_GALAM,eas_Init
                 entity 13,21,UP,MAPSPRITE_ASTRAL,eas_Init
                 entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
-                entity 12,27,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 12,27,UP,MAPSPRITE_KING_GRANSEAL,eas_Init
                 entity 14,27,UP,MAPSPRITE_MINISTER,eas_Init
                 cscEntitiesEnd

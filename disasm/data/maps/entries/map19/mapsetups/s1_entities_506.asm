@@ -5,7 +5,7 @@ ms_map19_flag506_Entities:
                 msFixedEntity 19, 10, RIGHT, ALLY_LEMON, eas_Init
                 msFixedEntity 25, 13, LEFT, MAPSPRITE_ASTRAL, eas_Init
                 msFixedEntity 26, 12, LEFT, MAPSPRITE_MINISTER, eas_Init
-                msFixedEntity 26, 13, LEFT, MAPSPRITE_GRANSEAL_KING, eas_Init
+                msFixedEntity 26, 13, LEFT, MAPSPRITE_KING_GRANSEAL, eas_Init
                 msFixedEntity 19, 11, DOWN, MAPSPRITE_GUARD, eas_LyingLeftBis
                 msFixedEntity 18, 11, RIGHT, MAPSPRITE_GUARD, eas_Init
                 msFixedEntity 18, 10, RIGHT, MAPSPRITE_GUARD, eas_Init

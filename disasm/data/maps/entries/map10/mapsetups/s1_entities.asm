@@ -22,7 +22,7 @@ ms_map10_Entities:
                 msWalkingEntity 9, 50, UP, MAPSPRITE_BIRDMAN, 9, 50, 1
                 msFixedEntity 15, 51, DOWN, MAPSPRITE_CHICK, eas_Init
                 msFixedEntity 21, 49, UP, MAPSPRITE_BIRDWOMAN, eas_Init
-                msFixedEntity 36, 49, DOWN, MAPSPRITE_BEDOE_KING, eas_Init
+                msFixedEntity 36, 49, DOWN, MAPSPRITE_KING_BEDOE, eas_Init
                 msFixedEntity 37, 50, DOWN, MAPSPRITE_BIRDWOMAN, eas_Init
                 msFixedEntity 28, 48, LEFT, MAPSPRITE_BIRDMAN, eas_Init
                 msFixedEntity 34, 51, UP, MAPSPRITE_BIRDMAN, eas_Init

@@ -273,7 +273,7 @@ cs_4EF5E:       stopEntity 128
 ce_4F328:       mainEntity 13,17,UP
                 entity 15,15,LEFT,ALLY_PETER,eas_Init
                 entity 12,19,RIGHT,ALLY_LEMON,eas_Init
-                entity 13,19,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,19,DOWN,MAPSPRITE_EVIL_GALAM,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 entity 62,62,DOWN,MAPSPRITE_ZEON,eas_Init
                 cscEntitiesEnd

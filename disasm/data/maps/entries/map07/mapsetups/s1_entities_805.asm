@@ -3,7 +3,7 @@
 ; 0x554B2..0x5550C : 
 ms_map7_flag805_Entities:
                 msFixedEntity 12, 5, DOWN, MAPSPRITE_MINISTER, eas_InitSlow
-                msFixedEntity 11, 4, DOWN, MAPSPRITE_GRANSEAL_KING, eas_InitSlow
+                msFixedEntity 11, 4, DOWN, MAPSPRITE_KING_GRANSEAL, eas_InitSlow
                 msWalkingEntity 3, 7, DOWN, MAPSPRITE_GUARD, 3, 7, 2
                 msWalkingEntity 4, 14, DOWN, MAPSPRITE_GUARD, 4, 14, 1
                 msFixedEntity 8, 10, DOWN, MAPSPRITE_GUARD, eas_InitSlow

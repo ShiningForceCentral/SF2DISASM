@@ -14,5 +14,5 @@ ms_map19_flag609_Entities:
                 msWalkingEntity 34, 20, DOWN, MAPSPRITE_MAN, 34, 20, 1
                 msFixedEntity 29, 7, DOWN, MAPSPRITE_MINISTER, eas_Init
                 msFixedEntity 31, 6, DOWN, MAPSPRITE_OLD_MAN, eas_Init
-                msFixedEntity 29, 6, DOWN, MAPSPRITE_GRANSEAL_KING, eas_Init
+                msFixedEntity 29, 6, DOWN, MAPSPRITE_KING_GRANSEAL, eas_Init
                 msEntitiesEnd
