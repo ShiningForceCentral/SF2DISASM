@@ -223,7 +223,7 @@ BuildItemMenu:
                 andi.w  #3,d0
                 lsl.w   #1,d0
                 move.w  (a0,d0.w),d1
-                cmpi.w  #ICON_UNARMED,d1
+                cmpi.w  #ITEM_UNARMED,d1
                 bne.s   @WriteItemName
                 move.w  #ITEM_NOTHING,((TEMP_ITEM_OR_SPELL-$1000000)).w
                 move.w  windowSlot(a6),d0
