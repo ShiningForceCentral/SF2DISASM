@@ -84,6 +84,6 @@ cs_4EDE8:       stopEntity 129
 ce_4EEDC:       mainEntity 13,35,UP
                 entity 12,36,UP,ALLY_PETER,eas_Init
                 entity 13,36,UP,ALLY_LEMON,eas_Init
-                entity 13,18,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,18,DOWN,MAPSPRITE_EVIL_GALAM,eas_Init
                 entity 13,15,DOWN,MAPSPRITE_ELIS,eas_Init
                 cscEntitiesEnd

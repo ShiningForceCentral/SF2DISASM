@@ -275,7 +275,7 @@ ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_MINISTER,eas_Init
                 entity 63,63,DOWN,ALLY_JAHA,eas_Init
                 entity 63,63,DOWN,ALLY_KIWI,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_KING_GRANSEAL,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_MERCHANT,eas_Init
                 entity 63,63,DOWN,ALLY_SLADE,eas_Init
                 entity 5,5,RIGHT,MAPSPRITE_SHIP,eas_Init

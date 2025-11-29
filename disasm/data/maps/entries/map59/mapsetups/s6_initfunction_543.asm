@@ -152,7 +152,7 @@ cs_615E6:       textCursor 3760
                 flashScreenWhite 4
                 csWait 10
                 setActscriptWait 134,eas_Init
-                setSprite 134,MAPSPRITE_GALAM_ZEON
+                setSprite 134,MAPSPRITE_ZEON_GALAM
                 shiver 134
                 playSound MUSIC_ZEON_ATTACK
                 nextSingleText $80,134  ; "I'm not Galam, you fools!{W1}"

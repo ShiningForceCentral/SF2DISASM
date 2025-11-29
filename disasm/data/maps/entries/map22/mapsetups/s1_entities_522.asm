@@ -10,7 +10,7 @@ ms_map22_flag522_Entities:
                 msWalkingEntity 24, 22, DOWN, MAPSPRITE_OLD_MAN, 24, 22, 1
                 msFixedEntity 5, 6, DOWN, MAPSPRITE_PRIEST, eas_Init
                 msFixedEntity 14, 3, DOWN, MAPSPRITE_MAID, eas_Init
-                msFixedEntity 15, 2, DOWN, MAPSPRITE_DESKTOP_KING, eas_Init
+                msFixedEntity 15, 2, DOWN, MAPSPRITE_KING_PONPEI, eas_Init
                 msFixedEntity 8, 7, LEFT, MAPSPRITE_GUARD, eas_Init
                 msFixedEntity 33, 24, LEFT, MAPSPRITE_GUARD, eas_Init
                 msFixedEntity 63, 63, UP, MAPSPRITE_OBJECT1, eas_InitFixedSprite

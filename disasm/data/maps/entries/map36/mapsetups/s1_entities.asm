@@ -10,7 +10,7 @@ ms_map36_Entities:
                 msWalkingEntity 21, 16, DOWN, MAPSPRITE_CENTAUR_MALE, 21, 16, 1
                 msFixedEntity 31, 5, LEFT, MAPSPRITE_CENTAUR_MALE, eas_Init
                 msWalkingEntity 31, 10, DOWN, MAPSPRITE_CENTAUR_MALE, 31, 10, 1
-                msFixedEntity 29, 3, DOWN, MAPSPRITE_PACALON_KING, eas_Init
+                msFixedEntity 29, 3, DOWN, MAPSPRITE_KING_PACALON, eas_Init
                 msFixedEntity 38, 5, DOWN, MAPSPRITE_PACALON_PRINCESS, eas_Init
                 msWalkingEntity 16, 10, DOWN, MAPSPRITE_CENTAUR_FEMALE, 16, 10, 1
                 msFixedEntity 22, 9, DOWN, MAPSPRITE_CENTAUR_FEMALE, eas_Init

@@ -139,10 +139,10 @@ bbcs_07:        textCursor 2357
                 setActscriptWait 135,eas_Jump
                 csc_end
 ce_49F36:       mainEntity 13,35,UP
-                entity 13,17,DOWN,MAPSPRITE_GALAM_EVIL,eas_Init
+                entity 13,17,DOWN,MAPSPRITE_EVIL_GALAM,eas_Init
                 entity 13,21,UP,MAPSPRITE_ASTRAL,eas_Init
                 entity 12,14,DOWN,MAPSPRITE_ELIS,eas_Init
-                entity 12,35,UP,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 12,35,UP,MAPSPRITE_KING_GRANSEAL,eas_Init
                 entity 14,35,UP,MAPSPRITE_MINISTER,eas_Init
                 entity 63,63,UP,MAPSPRITE_GALAM_MAGE,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GALAM_ARCHER,eas_Init

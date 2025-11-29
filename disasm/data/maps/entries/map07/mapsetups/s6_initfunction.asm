@@ -137,7 +137,7 @@ cs_55832:       textCursor 1290
                 csc_end
 ce_559AE:       mainEntity 11,7,UP
                 entity 12,5,DOWN,MAPSPRITE_MINISTER,eas_Init
-                entity 11,4,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 11,4,DOWN,MAPSPRITE_KING_GRANSEAL,eas_Init
                 entity 10,7,UP,MAPSPRITE_GUARD,eas_Init
                 entity 10,8,UP,MAPSPRITE_GUARD,eas_Init
                 entity 10,9,UP,MAPSPRITE_GUARD,eas_Init
