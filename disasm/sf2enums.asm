@@ -2530,9 +2530,13 @@ PROMOTIONSECTION_SPECIAL_ITEM: equ 4
 
 ; enum MessageProperties
 
-messagesNumber: = 4267
-messagesMaxIndex: = messagesNumber-1
+entitiesNumber = COMBATANT_ALLIES_NUMBER+60
+entitiesMaxIndex = entitiesNumber-1
+messagesNumber = 4267
+messagesMaxIndex = messagesNumber-1
 
+ENTITIES_MAX_INDEX: equ entitiesMaxIndex
+ENTITIES_NUMBER: equ entitiesNumber
 MESSAGES_MAX_INDEX: equ messagesMaxIndex
 MESSAGES_NUMBER: equ messagesNumber
 
@@ -3756,7 +3760,7 @@ PORTRAIT_SLADE_PROMO: equ 50
 PORTRAIT_KIWI_PROMO: equ 51
 PORTRAIT_BOWIE_PAINTING: equ 52
 PORTRAIT_NONE: equ 255
-PORTRAIT_DEFAULT: equ 65535
+PORTRAIT_DEFAULT: equ -1 ; word-sized, loaded in RAM at CURRENT_PORTRAIT in order to not display a portrait
 
 ; ---------------------------------------------------------------------------
 

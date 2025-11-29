@@ -56,7 +56,9 @@ CONFIGURATION_MESSAGE_ACTION_TEST_5:        rs.b 1
 CONFIGURATION_MESSAGE_ACTION_TEST_6:        rs.b 1
 CONFIGURATION_MESSAGE_ACTION_TEST_7:        rs.b 1
 CONFIGURATION_MESSAGE_ACTION_TEST_8:        rs.b 1
-CONFIGURATION_MESSAGE_MESSAGE_TEST:         rs.b 1
+CONFIGURATION_MESSAGE_MESSAGE_TEST_1:       rs.b 1
+CONFIGURATION_MESSAGE_MESSAGE_TEST_2:       rs.b 1
+CONFIGURATION_MESSAGE_MESSAGE_TEST_3:       rs.b 1
 CONFIGURATION_MESSAGE_SOUND_TEST:           rs.b 1
 CONFIGURATION_MESSAGE_RESET:                rs.b 1
 CONFIGURATION_MESSAGE_SAVE:                 rs.b 1
@@ -931,26 +933,97 @@ configurationAction_ActionTest:
 
 ;
 configurationAction_MessageTest:
-                moveq   #CONFIGURATION_MESSAGE_MESSAGE_TEST,d1 ; "Which message number?"
+                moveq   #PORTRAIT_DEFAULT,d1
+                moveq   #MUSIC_NOTHING,d2
+                
+                ; Load portrait and SFX indexes for ally or non-player entity?
+                moveq   #CONFIGURATION_MESSAGE_MESSAGE_TEST_2,d1 ; "Test portrait and SFX?"
                 bsr.w   DisplayConfigurationMessage
-
+                jsr     alt_YesNoPrompt
+                bne.s   @loadData       ; skip if player pressed B or choose No
+                
+                moveq   #CONFIGURATION_MESSAGE_MESSAGE_TEST_3,d1 ; "Which entity?"
+                bsr.w   DisplayConfigurationMessage
+                bsr.w   DelayUntilPlayerInput ; Delay for approximately 2 seconds or until player input
+                
+                move.w  ((DEBUG_MODE_CURRENT_ENTITY-$1000000)).w,d0
+                cmpi.w  #ENTITIES_MAX_INDEX,d0
+                bls.s   @continue1
+                
+                move.w  #ENTITIES_MAX_INDEX,d0
+@continue1      moveq   #0,d1
+                move.w  #ENTITIES_MAX_INDEX,d2
+                moveq   #-1,d3          ; set update textbox content toggle
+                getPointer p_table_AllyNames, a0
+                bsr.w   ExecuteConfigurationNumberPrompt
+                clsTxt
+                move.w  numberEntry(a2),d0
+                bmi.s   @loadData       ; skip if player pressed B
+                
+                move.w  d0,((DEBUG_MODE_CURRENT_ENTITY-$1000000)).w
+                cmpi.w  #COMBATANT_ALLIES_NUMBER,d0
+                blo.s   @ally
+                
+                ; Get portrait and SFX for non-player entity
+                getPointer p_table_MapspriteDialogueProperties, a0
+                subi.w  #COMBATANT_ALLIES_NUMBER,d0
+                mulu.w  #MAPSPRITEDIALOGUEDEF_ENTRY_SIZE,d0
+                adda.w  d0,a0
+                move.b  MAPSPRITEDIALOGUEDEF_OFFSET_PORTRAIT(a0),d1  ; return portrait and speech sfx indexes -> d1.w, d2.w
+                ext.w   d1
+                clr.w   d2
+                move.b  MAPSPRITEDIALOGUEDEF_OFFSET_SPEECHSFX(a0),d2
+                bra.s   @loadData
+                
+                ; Get portrait and SFX for ally
+@ally:          jsr     GetClassType    ; Get class type for ally d0.w -> d1.w
+                
+                ; Calculate offset to ally entries
+                move.w  d0,d2
+                add.w   d0,d2
+                add.w   d0,d2
+                add.w   d2,d2
+                
+                ; Calculate offset to ally entry for class type
+                add.w   d1,d1
+                add.w   d1,d2
+                
+                getPointer p_table_AllyDialogueProperties, a0
+                move.b  (a0,d2.w),d1
+                ext.w   d1
+                move.b  1(a0,d2.w),d2
+                
+@loadData       move.w  d2,((CURRENT_SPEECH_SFX-$1000000)).w
+                move.w  d1,d0
+                bmi.s   @skipPortrait
+                
+                clr.w   d1              ; clear portrait "is mirrored" and "is on right" toggles
+                clr.w   d2
+                jsr     OpenPortraitWindow
+                
+                ; Get message number
+@skipPortrait   moveq   #CONFIGURATION_MESSAGE_MESSAGE_TEST_1,d1 ; "Which message number?"
+                bsr.w   DisplayConfigurationMessage
+                
 @start          move.w  ((DEBUG_MODE_CURRENT_MESSAGE-$1000000)).w,d0
                 cmpi.w  #MESSAGES_MAX_INDEX,d0
-                bls.s   @continue
+                bls.s   @continue2
                 
                 move.w  #MESSAGES_MAX_INDEX,d0
-@continue       moveq   #0,d1
+@continue2      moveq   #0,d1
                 move.w  #MESSAGES_MAX_INDEX,d2
                 clr.w   d3              ; clear update textbox content toggle
                 bsr.w   ExecuteConfigurationNumberPrompt
                 clsTxt
                 move.w  numberEntry(a2),d0
-                bmi.s   @return
+                bmi.s   @exit
                 
                 move.w  d0,((DEBUG_MODE_CURRENT_MESSAGE-$1000000)).w
                 pea     @start(pc)
                 jmp     (DisplayText).w
-@return         rts
+                
+@exit           clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
+                jmp     ClosePortraitWindow
 
 
 ;

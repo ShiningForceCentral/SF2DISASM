@@ -334,7 +334,9 @@ table_ConfigurationMessages:
                 defineName "Which effect?"                  ; Battlescene Test 6
                 defineName "Which level?"                   ; Battlescene Test 7
                 defineName "Which background?"              ; Battlescene Test 8
-                defineName "Which message number?"          ; Message Test
+                defineName "Which message number?"          ; Message Test 1
+                defineName "Test portrait and speech SFX?"  ; Message Test 2
+                defineName "Which entity?"                  ; Message Test 3
                 defineName "Which sound number?"            ; Sound Test
                 defineName "Reset the game?"                ; Reset
                 defineName "Save to which file?"            ; Save

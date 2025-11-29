@@ -564,6 +564,7 @@ BATTLE_PARTY_MEMBERS: equ $FFB682 ; indexes of party members currently in battle
 RESERVE_MEMBERS: equ $FFB68E ; indexes of party members currently not in battle party
 ENEMY_LIST: equ $FFB6A2 ; unused
     if (STANDARD_BUILD=1)
+DEBUG_MODE_CURRENT_ENTITY: equ $FFB6BE ; 0..31 = ally index, 32+ = table_MapspriteDialogueProperties entry index
 DEBUG_MODE_CURRENT_MESSAGE: equ $FFB6C0
     endif
 MOVECOSTS_TABLE: equ $FFB6C2 ; table of 16 move cost values for currently moving battle entity, corresponding to terrain types

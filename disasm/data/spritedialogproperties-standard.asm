@@ -39,8 +39,8 @@ table_MapspriteDialogueProperties:
                 portrait PRIEST
                 speechSfx DIALOG_BLEEP_5
                 
-                mapsprite SAILOR
-                portrait SAILOR
+                mapsprite MERCHANT
+                portrait MERCHANT
                 speechSfx DIALOG_BLEEP_6
                 
                 mapsprite MAN

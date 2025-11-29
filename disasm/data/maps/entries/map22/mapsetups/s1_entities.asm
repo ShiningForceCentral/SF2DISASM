@@ -14,7 +14,7 @@ ms_map22_Entities:
                 msFixedEntity 8, 7, LEFT, MAPSPRITE_GUARD, eas_Init
                 msFixedEntity 33, 24, LEFT, MAPSPRITE_GUARD, eas_Init
             if (STANDARD_BUILD&MINIATURES_SHOP=1)
-                msFixedEntity 10, 11, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 10, 11, DOWN, MAPSPRITE_MERCHANT, eas_Init
             endif
                 msFixedEntity 24, 5, DOWN, MAPSPRITE_KING, eas_Init
                 msFixedEntity 26, 5, DOWN, MAPSPRITE_QUEEN, eas_Init
