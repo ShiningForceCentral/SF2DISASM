@@ -1,0 +1,1 @@
+SCROLLING_TEXT_INTRODUCTION: equ 1  ; An example for adding a scrolling text introduction between the SEGA logo and the introduction cutscene. Text extracted from SFC's translation of Shining Force : Final Conflict.

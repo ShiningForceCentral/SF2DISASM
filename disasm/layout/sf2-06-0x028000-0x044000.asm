@@ -25,4 +25,8 @@
                 include "data\scripting\text\entries.asm"    ; Textbank entries
                 include "data\scripting\gamestaff.asm"    ; Game Staff
                 align
+            if (SCROLLING_TEXT_INTRODUCTION=1)
+                include "code\gameflow\start\textintro.asm"
+                include "data\scripting\introtext.asm"
+            endif
                 align $44000

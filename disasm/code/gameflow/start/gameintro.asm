@@ -30,6 +30,9 @@ GameIntro:
                 move.l  sp,(GAME_INTRO_STACK_POINTER_BACKUP).l
                 move.l  #AfterGameIntro,((AFTER_INTRO_JUMP_POINTER-$1000000)).w
                 jsr     (EnableDisplayAndInterrupts).w
+            if (SCROLLING_TEXT_INTRODUCTION=1)
+                jsr     PlayTextIntro   ; TEXT INTRO CALL
+            endif
                 clr.w   d0
                 jsr     j_PlayIntroOrEndCutscene
                 clr.l   ((AFTER_INTRO_JUMP_POINTER-$1000000)).w
