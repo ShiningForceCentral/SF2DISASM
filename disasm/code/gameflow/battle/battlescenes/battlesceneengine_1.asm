@@ -122,25 +122,26 @@ loc_198D6:
                 
                 move.w  #VDPTILE_PALETTE4,(a0)+
                 dbf     d0,loc_198D6
-				
+                
                 moveq   #31,d0
 loc_198E0:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198E0
+                
                 lea     layout_BattlesceneBackground(pc), a1
                 move.w  #191,d0
 loc_198F0:
                 
                 move.l  (a1)+,(a0)+
                 dbf     d0,loc_198F0
-				
+                
                 moveq   #31,d0
 loc_198F8:
                 
                 move.w  #VDPTILE_BLANK|VDPTILE_PALETTE3,(a0)+
                 dbf     d0,loc_198F8
-				
+                
                 move.w  #383,d0
 loc_19904:
                 

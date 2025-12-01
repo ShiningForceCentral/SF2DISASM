@@ -347,7 +347,7 @@ ProduceGreenMonochromePalettes:
                 move.w  (a0),d0
                 move.w  d0,d1
                 andi.w  #COLOR_MASK_GREEN,d0   ; isolate green component
-                lsr.w   #1,d1    	           ; and halve the others
+                lsr.w   #1,d1                  ; and halve the others
                 andi.w  #(FULL_COLOR_MASK-COLOR_MASK_GREEN),d1
                 or.w    d1,d0
                 move.w  d0,(a0)+

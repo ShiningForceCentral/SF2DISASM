@@ -275,25 +275,25 @@ ce_506DE:       mainEntity 63,63,UP
                 entity 63,63,DOWN,MAPSPRITE_MINISTER,eas_Init
                 entity 63,63,DOWN,ALLY_JAHA,eas_Init
                 entity 63,63,DOWN,ALLY_KIWI,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
-                entity 63,63,DOWN,MAPSPRITE_SAILOR,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_KING_GRANSEAL,eas_Init
+                entity 63,63,DOWN,MAPSPRITE_MERCHANT,eas_Init
                 entity 63,63,DOWN,ALLY_SLADE,eas_Init
-                entity 5,5,RIGHT,MAPSPRITE_BOAT,eas_Init
+                entity 5,5,RIGHT,MAPSPRITE_SHIP,eas_Init
                 cscEntitiesEnd
 ce_5072E:       mainEntity 0,0,UP
                 entity 23,30,DOWN,MAPSPRITE_MINISTER,eas_Init
-                entity 19,29,UP,MAPSPRITE_MAN3,eas_Init
-                entity 21,29,LEFT,MAPSPRITE_MAN2,eas_Init
-                entity 20,30,DOWN,MAPSPRITE_WOMAN3,eas_Init
-                entity 20,31,UP,MAPSPRITE_WOMAN3,eas_Init
-                entity 19,32,DOWN,MAPSPRITE_WOMAN2,eas_Init
+                entity 19,29,UP,MAPSPRITE_OLD_MAN,eas_Init
+                entity 21,29,LEFT,MAPSPRITE_YOUNG_MAN,eas_Init
+                entity 20,30,DOWN,MAPSPRITE_OLD_WOMAN,eas_Init
+                entity 20,31,UP,MAPSPRITE_OLD_WOMAN,eas_Init
+                entity 19,32,DOWN,MAPSPRITE_YOUNG_WOMAN,eas_Init
                 entity 23,34,DOWN,MAPSPRITE_BOY,eas_Init
                 entity 24,34,DOWN,MAPSPRITE_GIRL,eas_Init
-                entity 27,29,DOWN,MAPSPRITE_MAN1,eas_Init
-                entity 27,30,LEFT,MAPSPRITE_SAILOR,eas_Init
-                entity 26,31,UP,MAPSPRITE_MAN1,eas_Init
-                entity 24,26,UP,MAPSPRITE_WOMAN2,eas_Init
-                entity 23,27,UP,MAPSPRITE_MAN2,eas_Init
+                entity 27,29,DOWN,MAPSPRITE_MAN,eas_Init
+                entity 27,30,LEFT,MAPSPRITE_MERCHANT,eas_Init
+                entity 26,31,UP,MAPSPRITE_MAN,eas_Init
+                entity 24,26,UP,MAPSPRITE_YOUNG_WOMAN,eas_Init
+                entity 23,27,UP,MAPSPRITE_YOUNG_MAN,eas_Init
                 cscEntitiesEnd
 ce_5079E:       mainEntity 40,8,LEFT
                 entity 51,8,DOWN,ALLY_SARAH,eas_Init
@@ -304,7 +304,7 @@ ce_5079E:       mainEntity 40,8,LEFT
                 entity 38,5,DOWN,ALLY_KIWI,eas_Init
                 entity 41,4,DOWN,MAPSPRITE_WORKER,eas_Init
                 entity 53,10,DOWN,MAPSPRITE_WORKER,eas_Init
-                entity 47,5,DOWN,MAPSPRITE_MAN2,eas_Init
+                entity 47,5,DOWN,MAPSPRITE_YOUNG_MAN,eas_Init
                 entity 44,6,RIGHT,MAPSPRITE_OBJECT2,eas_Init
                 entity 45,6,DOWN,MAPSPRITE_OBJECT2,eas_Init
                 entity 46,6,LEFT,MAPSPRITE_OBJECT2,eas_Init
@@ -385,5 +385,5 @@ cs_50806:       textCursor 2288
 ce_5094A:       mainEntity 61,48,LEFT
                 entity 62,48,LEFT,MAPSPRITE_WORKER,eas_Init
                 entity 63,48,LEFT,MAPSPRITE_WORKER,eas_Init
-                entity 28,49,RIGHT,MAPSPRITE_BOAT,eas_Init
+                entity 28,49,RIGHT,MAPSPRITE_SHIP,eas_Init
                 cscEntitiesEnd

@@ -1760,14 +1760,16 @@ csc54_joinForceAi:
                 move.w  (a6)+,d0
                 jsr     j_GetActivationBitfield
                 move.w  (a6)+,d2
-                bne.s   loc_46FEE
+                bne.s   @SetAiControl
+                
+                ; Clear AI control
                 andi.w  #($FFFF-AIBITFIELD_AI_CONTROLLED),d1
-                bra.s   loc_46FF8
-loc_46FEE:
+                bra.s   @Continue
+@SetAiControl:
                 
                 ori.w   #AIBITFIELD_AI_CONTROLLED,d1
                 jsr     j_JoinForce
-loc_46FF8:
+@Continue:
                 
                 jsr     j_SetActivationBitfield
                 rts

@@ -259,12 +259,12 @@ table_MapspriteDialogueProperties:
                 portrait  SLADE_BASE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite GALAM_ZEON
+                mapsprite ZEON_GALAM
                 portrait  ZEON
                 speechSfx DEMON_BREATH
                 
-                mapsprite GALAM_EVIL
-                portrait  GALAM_EVIL
+                mapsprite EVIL_GALAM
+                portrait  EVIL_GALAM
                 speechSfx DIALOG_BLEEP_7
                 
                 mapsprite RED_BARON
@@ -275,31 +275,31 @@ table_MapspriteDialogueProperties:
                 portrait  PRIEST
                 speechSfx DIALOG_BLEEP_5
                 
-                mapsprite SAILOR
-                portrait  SAILOR
+                mapsprite MERCHANT
+                portrait  MERCHANT
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite MAN1
+                mapsprite MAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapsprite WOMAN1
+                mapsprite WOMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapsprite MAN2
+                mapsprite YOUNG_MAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapsprite WOMAN2
+                mapsprite YOUNG_WOMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_3
                 
-                mapsprite MAN3
+                mapsprite OLD_MAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite WOMAN3
+                mapsprite OLD_WOMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
@@ -315,12 +315,12 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapsprite DESKTOP_KING
+                mapsprite KING_PONPEI
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite GRANSEAL_KING
-                portrait  GRANSEAL_KING
+                mapsprite KING_GRANSEAL
+                portrait  KING_GRANSEAL
                 speechSfx DIALOG_BLEEP_6
                 
                 mapsprite ELIS
@@ -331,11 +331,11 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapsprite SOLDIER1
+                mapsprite GUARD
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
-                mapsprite SOLDIER2
+                mapsprite SOLDIER
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
@@ -359,8 +359,8 @@ table_MapspriteDialogueProperties:
                 portrait  ODDLER
                 speechSfx DIALOG_BLEEP_4
                 
-                mapsprite GALAM_KING
-                portrait  GALAM_KING
+                mapsprite KING_GALAM
+                portrait  KING_GALAM
                 speechSfx DIALOG_BLEEP_7
                 
                 mapsprite MITULA
@@ -387,7 +387,7 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapsprite TURTLE
+                mapsprite KAPPA
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_8
                 
@@ -395,15 +395,15 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite ELF_BOY
+                mapsprite ELF_MALE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_4
                 
-                mapsprite ELF_GIRL
+                mapsprite ELF_FEMALE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapsprite VIKING
+                mapsprite WARRIOR
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
@@ -411,15 +411,15 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite BEDOE_KING
+                mapsprite KING_BEDOE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_7
                 
-                mapsprite BEDOE_MINISTER
+                mapsprite BIRDWOMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite BEDOE_SOLDIER
+                mapsprite BEDRIDDEN_BIRDMAN
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_5
                 
@@ -427,7 +427,7 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_1
                 
-                mapsprite PACALON_KING
+                mapsprite KING_PACALON
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
@@ -435,11 +435,11 @@ table_MapspriteDialogueProperties:
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 
-                mapsprite PACALON_SOLDIER
+                mapsprite CENTAUR_MALE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_6
                 
-                mapsprite PACALON_MAID
+                mapsprite CENTAUR_FEMALE
                 portrait  NONE
                 speechSfx DIALOG_BLEEP_2
                 

@@ -219,6 +219,7 @@ byte_7476:
                 move.b  #GAMESTART_MAP,((CURRENT_MAP-$1000000)).w
                 move.b  #GAMESTART_MAP,((EGRESS_MAP-$1000000)).w
                 bsr.w   SaveGame
+                disableSram
                 clsTxt
                 
                 ; HARDCODED initial starting position : map, x, y, facing
@@ -258,6 +259,7 @@ witchMenuAction_Load:
                 subq.w  #1,d0
                 move.w  d0,((CURRENT_SAVE_SLOT-$1000000)).w
                 bsr.w   LoadGame
+                disableSram
                 txt     226             ; "{NAME;0}, yes!  I knew it!{W2}"
                 bsr.w   CheatModeConfiguration
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"

@@ -253,19 +253,19 @@ table_1D9CE:    vdpSpell 0, 0, SPELLTILE65, V2|H2|VALUE2  ; graphic Burst_Shot
 table_1D9DE:    dc.w 3
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 68
-				
+                
                 dc.w 6
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 72
-				
+                
 table_1D9EA:    dc.w 3
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 16
-				
+                
                 dc.w 6
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 32
-				
+                
                 dc.w 9
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 48

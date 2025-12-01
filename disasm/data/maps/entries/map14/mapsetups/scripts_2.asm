@@ -221,9 +221,9 @@ ce_59270:       mainEntity 13,11,DOWN
                 entity 14,22,UP,ALLY_KIWI,eas_Init
                 entity 14,23,UP,ALLY_CHESTER,eas_Init
                 entity 14,24,UP,ALLY_KAZIN,eas_Init
-                entity 13,13,UP,MAPSPRITE_SAILOR,eas_Init
-                entity 9,13,LEFT,MAPSPRITE_MAN2,eas_Init
-                entity 16,13,RIGHT,MAPSPRITE_MAN1,eas_Init
+                entity 13,13,UP,MAPSPRITE_MERCHANT,eas_Init
+                entity 9,13,LEFT,MAPSPRITE_YOUNG_MAN,eas_Init
+                entity 16,13,RIGHT,MAPSPRITE_MAN,eas_Init
                 entity 13,20,UP,MAPSPRITE_WORKER,eas_Init
                 entity 12,11,RIGHT,MAPSPRITE_OBJECT2,eas_InitFixedSprite
                 entity 13,11,DOWN,MAPSPRITE_OBJECT2,eas_InitFixedSprite

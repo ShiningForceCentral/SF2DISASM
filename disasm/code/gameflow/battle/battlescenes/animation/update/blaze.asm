@@ -538,54 +538,54 @@ table_1BE1C:    dc.b 0
                 dc.b 0
                 dc.b $50
                 dc.b $FF
-				
+                
 table_1BE2A:    dc.w 33  ; small flame frame 1 offset
                 dc.w 33  ; small flame frame 1 offset
-				
+                
                 dc.w 41  ; small flame frame 2 offset
                 dc.w 41  ; small flame frame 2 offset
-				
+                
                 dc.w 49  ; medium flame frame 1 top offset
                 dc.w 61  ; medium flame frame 1 bottom offset
-				
+                
                 dc.w 67  ; medium flame frame 2 top offset
                 dc.w 79  ; medium flame frame 2 bottom offset
-				
+                
                 dc.w 85  ; large flame frame 1 top offset
                 dc.w 101 ; large flame frame 1 bottom offset
-				
+                
                 dc.w 117 ; large flame frame 2 top offset
                 dc.w 133 ; large flame frame 2 bottom offset
-				
+                
 table_1BE42:    vdpSpell 128, 96, SPELLTILE150, V2|H2|VALUE2  ; small meteor frame 1
                 vdpSpell 128, 96, SPELLTILE154, V2|H2|VALUE2  ; small meteor frame 2
-				
+                
 table_1BE52:    vdpSpell 128, 96, SPELLTILE158, V3|H3|VALUE2  ; small explosion frame 1
 table_1BE5A:    vdpSPell 128, 96, SPELLTILE167, V2|H3|VALUE2  ; small explosion frame 2
-				
+                
                 vdpSpell 128, 96, SPELLTILE173, V3|H3|VALUE2  ; large meteor frame 1
                 vdpSpell 128, 96, SPELLTILE182, V3|H3|VALUE2  ; large meteor frame 2
-				
+                
                 vdpSpell 128, 96, SPELLTILE191, V4|H4|VALUE2  ; large explosion frame 1
                 vdpSpell 128, 96, SPELLTILE207, V4|H4|VALUE2  ; large explosion frame 2
-				
+                
 table_1BE82:    dc.w 12
                 dc.w 4
-				
+                
                 dc.w 12
                 dc.w 4
-				
+                
                 dc.w 12
                 dc.w 4
-				
+                
                 dc.w 12
                 dc.w 4
-				
+                
                 dc.w 12
                 dc.w 4
-				
+                
                 dc.w 8
                 dc.w 8
-				
+                
                 dc.w 8
                 dc.w 8

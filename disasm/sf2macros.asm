@@ -211,6 +211,14 @@ defineBitfield: macro
                 defineBitfieldWithParam.\0 \1,\2,0
             endm
                 
+defineNibbleShiftedShorthand: macro Prefix,Shorthand
+            if (type(\Prefix\\Shorthand)&32>0)
+                dc.\0 \Prefix\\Shorthand<<NIBBLE_SHIFT_COUNT
+            else
+                dc.\0 \Shorthand<<NIBBLE_SHIFT_COUNT
+            endif
+        endm
+                
 defineShorthand: macro Prefix,Shorthand
             if (type(\Prefix\\Shorthand)&32>0)
                 dc.\0 \Prefix\\Shorthand
@@ -303,7 +311,7 @@ landEffectAndMoveCost: macro
 aiCommandset: macro
                 dc.b narg
             rept narg
-                defineShorthand.b AICOMMAND_,\1
+                defineShorthand.b AI_COMMAND_,\1
                 shift
             endr
         endm
@@ -729,8 +737,8 @@ resistance: macro
                 defineBitfield.w RESISTANCE_,\1
             endm
                 
-moveType:   macro
-                defineBitfield.b MOVETYPE_UPPER_,\1
+movetype:   macro
+                defineNibbleShiftedShorthand.b MOVETYPE_,\1
             endm
                 
 prowess:    macro

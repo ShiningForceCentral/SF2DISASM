@@ -657,7 +657,7 @@ BuildMemberStatusWindow:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @Break          ; break out of loop if no spells learned
                 movem.l d1/a0,-(sp)
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.w   @NextSpell
@@ -823,7 +823,7 @@ aJewel:
                 cmpi.b  #SPELL_NOTHING,d1
                 beq.w   @LoadItemIcons
                 movem.l d1/a0,-(sp)
-                jsr     j_GetSpellDefAddress
+                jsr     j_GetSpellDefinitionAddress
                 btst    #SPELLPROPS_BIT_AFFECTEDBYSILENCE,SPELLDEF_OFFSET_PROPS(a0)
                 movem.l (sp)+,d1/a0
                 beq.s   @NextSpellIcon

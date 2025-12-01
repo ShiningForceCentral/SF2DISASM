@@ -64,36 +64,59 @@
                 include "data\stats\enemies\enemygold.asm"    ; Enemy gold amounts
                 
                 ; Battlefield engine
-                include "code\gameflow\battle\battlefield\getenemydestination.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\getmovestringdestination.asm"    ; Battlefield engine
                 include "code\gameflow\battle\battleloop\clearaimemory.asm"    ; Battle loop function
-                include "code\gameflow\battle\battlefield\battlefieldengine_1.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\battlefieldengine.asm"    ; Battlefield engine general functions
+                include "code\gameflow\battle\battleactions\getresistancetospell.asm"    ; Resistance to spell element getter function
                 include "data\stats\spells\spellelements.asm"    ; Spell elements table
                 align
-                include "code\gameflow\battle\battlefield\battlefieldengine_2.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\getattackrange.asm"    ; Get Attack Range function
-                include "code\gameflow\battle\battlefield\battlefieldengine_3.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\determinehealingspelllevel.asm"    ; Determine healing spell level function
-                include "code\gameflow\battle\battlefield\battlefieldengine_4.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\useableaiactions.asm"    ; Usable AI actions getter functions
-                include "code\gameflow\battle\battlefield\battlefieldengine_5.asm"    ; Battlefield engine
-                include "code\gameflow\battle\battlefield\doescombatantrequirehealing.asm"    ; Does combatant require healing function
-                include "code\gameflow\battle\battlefield\battlefieldengine_6.asm"    ; Battlefield engine
+                include "code\gameflow\battle\ai\command\attack\determinemuddledbattleaction.asm"    ; Determine battleaction for AI controlled combatant afflicted with Muddle 2
+                include "code\gameflow\battle\battlefield\initializemovementarrays.asm"    ; Movement arrays initialization function
+                include "code\gameflow\battle\battlefield\getactionrange.asm"    ; Action (attack, cast spell, use item) range getter functions
+                include "code\gameflow\battle\ai\iscombatantconfused.asm"    ; Is combatant afflicted with Muddle 2 checker function
+                include "code\gameflow\battle\battlefield\buildactionrangegrids.asm"    ; Action range grids builder functions
+                include "data\stats\spells\spellranges.asm"    ; Spell range tables
+                include "code\gameflow\battle\battlefield\populatetargetslist.asm"    ; Populate targets list functions
+                include "code\gameflow\battle\battlefield\determineattackposition.asm"    ; Determine attack position function
+                include "code\gameflow\battle\battlefield\buildtargetsarray.asm"    ; Targets array builder functions
+                include "code\gameflow\battle\battlefield\updateoccupiedterrainfunctions.asm"    ; Occupied terrain update functions
+                include "code\gameflow\battle\battlefield\updatemovablegrid.asm"    ; Movable-grid array update function
+                include "code\gameflow\battle\ai\command\attack\prioritizetargets.asm"    ; Prioritize reachable targets functions
+                include "code\gameflow\battle\ai\command\heal\determinehealingspelllevel.asm"    ; Determine healing spell level function
+                include "code\gameflow\battle\ai\command\heal\calculatehealtargetpriority.asm"    ; Calculate heal target priority function
+                include "code\gameflow\battle\ai\command\attack\adjusttargetpriority.asm"    ; Adjust target priority function
+                include "code\gameflow\battle\battlefield\determineattackpositionformoveorder.asm"    ; Determine attack postion for move order function
+                include "code\gameflow\battle\ai\gethighestusablespelllevel.asm"    ; Highest usable spell level getter function
+                include "code\gameflow\battle\ai\unusedfunctions_CF0E.asm"    ; Unused AI engine functions
+                include "code\gameflow\battle\ai\getnextuseableaiaction.asm"    ; Usable AI actions getter functions
+                include "code\gameflow\battle\battlefield\getreachabletargets.asm"    ; Reachable targets getter functions
+                include "code\gameflow\battle\ai\command\heal\iscombatantatlessthanhalfhp.asm"    ; Is combatant at less than half HP checker function
+                include "code\gameflow\battle\ai\command\attack\targetprioritizationhelperfunctions.asm"    ; Target prioritization helper functions
+                include "code\gameflow\battle\ai\command\heal\doescombatantrequirehealing.asm"    ; Does combatant require healing checker function
+                include "code\gameflow\battle\ai\command\heal\unusedfunctions_D3CA.asm"    ; Unused AI engine functions
+                include "code\gameflow\battle\getdifficulty.asm"    ; Difficulty getter function
+                include "code\gameflow\battle\battlefield\getcurrentterraintypeformoveorder.asm"    ; Current terrain type for move order getter function
+                include "code\gameflow\battle\ai\command\support\prioritizetargetsforsupportspells.asm"    ; Populate priority list for spell functions
                 include "data\battles\global\landeffectsettingsandmovecosts.asm"    ; Land effect settings and move costs table
                 include "data\battles\global\aipriority.asm"    ; AI priority data
-                include "code\gameflow\battle\battlefield\battlefieldengine_7.asm"    ; Battlefield engine
+                include "code\gameflow\battle\battlefield\buildmovementarrays.asm"    ; Build movement arrays function
+                include "code\gameflow\battle\battlefield\buildmovestringfunctions.asm"    ; Move string builder functions
                 
                 ; AI engine
                 include "code\gameflow\battle\ai\startaicontrol.asm"    ; AI engine : preparatory phase
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
-                include "code\gameflow\battle\ai\handleaicommand.asm"    ; Handle AI Command function
-                include "code\gameflow\battle\ai\aicommandheal.asm"    ; AI command : Heal
-                include "code\gameflow\battle\ai\aicommandattack.asm"    ; AI command : Attack
-                include "code\gameflow\battle\ai\aicommandspecialmove.asm"    ; AI command : Special Move
-                include "code\gameflow\battle\ai\aicommandsupport.asm"    ; AI command : Support
-                include "code\gameflow\battle\ai\determineaibattleaction.asm"    ; Determine AI Battleaction function
-                include "code\gameflow\battle\ai\aicommandmove.asm"    ; AI command : Move
-                include "code\gameflow\battle\ai\aistandby.asm"    ; AI engine : standby movement
+                include "code\gameflow\battle\ai\executeaicommand.asm"    ; Handle AI Command function
+                include "code\gameflow\battle\ai\command\heal.asm"    ; AI command : Heal
+                include "code\gameflow\battle\ai\command\attack.asm"    ; AI command : Attack
+                include "code\gameflow\battle\ai\command\moveorder.asm"    ; AI command : Move order
+                include "code\gameflow\battle\ai\command\support.asm"    ; AI command : Support
+                include "code\gameflow\battle\ai\command\attack\determinebattleaction.asm"    ; AI engine : Determine AI Battleaction function
+                include "code\gameflow\battle\ai\command\move.asm"    ; AI command : Move
+                include "code\gameflow\battle\ai\determineaistandbymovement_1.asm"    ; AI engine : Determine standby movement function, part 1
+                include "data\battles\global\aistandbymovements.asm"    ; AI standby movements table
+                include "code\gameflow\battle\ai\command\moveorder\buildmovestringformoveorder.asm"    ; AI engine : Build move string for Move Order function
+                include "code\gameflow\battle\ai\determineaistandbymovement_2.asm"    ; AI engine : Determine standby movement function, part 2
                 include "data\battles\global\krakenmovecosts.asm"    ; Kraken move costs table
                 
                 include "data\stats\spells\spellnames.asm"    ; Spell names

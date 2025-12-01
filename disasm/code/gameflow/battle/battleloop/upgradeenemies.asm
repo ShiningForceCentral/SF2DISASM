@@ -151,7 +151,7 @@ UpgradeRandomBattleEnemies:
                 clr.w   d4
                 clr.l   d1
                 
-                ; Get pointer to enemy upgrade data based on move type -> A0
+                ; Get pointer to enemy upgrade data based on movetype -> a0
                 move.b  d5,d1
                 mulu.w  #ENEMYDEF_ENTRY_SIZE,d1
                 lea     table_EnemyDefinitions(pc), a1
@@ -160,78 +160,78 @@ UpgradeRandomBattleEnemies:
                 lsr.w   #NIBBLE_SHIFT_COUNT,d2 ; shift movetype upper nibble to lower position
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 
-                ; Check regular move type
-                cmpi.b  #MOVETYPE_LOWER_REGULAR,d2
+                ; Check regular movetype
+                cmpi.b  #MOVETYPE_REGULAR,d2
                 bne.s   @CheckCentaur
                 lea     table_MeleeTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckCentaur:
                 
-                cmpi.b  #MOVETYPE_LOWER_CENTAUR,d2
+                cmpi.b  #MOVETYPE_CENTAUR,d2
                 bne.s   @CheckStealth
                 lea     table_MeleeTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckStealth:
                 
-                cmpi.b  #MOVETYPE_LOWER_STEALTH,d2
+                cmpi.b  #MOVETYPE_STEALTH,d2
                 bne.s   @CheckGunner
                 lea     table_MeleeTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckGunner:
                 
-                cmpi.b  #MOVETYPE_LOWER_BRASS_GUNNER,d2
+                cmpi.b  #MOVETYPE_BRASS_GUNNER,d2
                 bne.s   @CheckFlying
                 lea     table_MeleeTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckFlying:
                 
-                cmpi.b  #MOVETYPE_LOWER_FLYING,d2
+                cmpi.b  #MOVETYPE_FLYING,d2
                 bne.s   @CheckHovering
                 lea     table_AirborneTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckHovering:
                 
-                cmpi.b  #MOVETYPE_LOWER_HOVERING,d2
+                cmpi.b  #MOVETYPE_HOVERING,d2
                 bne.s   @CheckArcher
                 lea     table_AirborneTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_ARCHER,d2
+                cmpi.b  #MOVETYPE_ARCHER,d2
                 bne.s   @CheckCentaurArcher
                 lea     table_RangedTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckCentaurArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_CENTAUR_ARCHER,d2
+                cmpi.b  #MOVETYPE_CENTAUR_ARCHER,d2
                 bne.s   @CheckStealthArcher
                 lea     table_RangedTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckStealthArcher:
                 
-                cmpi.b  #MOVETYPE_LOWER_STEALTH_ARCHER,d2
+                cmpi.b  #MOVETYPE_STEALTH_ARCHER,d2
                 bne.s   @CheckMage
                 lea     table_RangedTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckMage:
                 
-                cmpi.b  #MOVETYPE_LOWER_MAGE,d2
+                cmpi.b  #MOVETYPE_MAGE,d2
                 bne.s   @CheckHealer
                 lea     table_MageTypeEnemyUpgradeDefinition(pc), a0
                 nop
                 bra.w   @GetLeaderEffectiveLevel
 @CheckHealer:
                 
-                cmpi.b  #MOVETYPE_LOWER_HEALER,d2
+                cmpi.b  #MOVETYPE_HEALER,d2
                 bne.s   @Default1
                 lea     table_HealerTypeEnemyUpgradeDefinition(pc), a0
                 nop
@@ -239,7 +239,7 @@ UpgradeRandomBattleEnemies:
 @Default1:
                 
                 move.w  d5,d1
-                bra.w   @Done           ; no valid move type found, default to original enemy
+                bra.w   @Done           ; no valid movetype found, default to original enemy
 @GetLeaderEffectiveLevel:
                 
                 clr.w   d3

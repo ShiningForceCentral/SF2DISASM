@@ -341,52 +341,52 @@ SetCurrentExp:
 
 ; =============== S U B R O U T I N E =======================================
 
-; Set combined movetype and ai commandset when initializing an enemy.
+; Set combined movetype and AI commandset when initializing an enemy.
 
 
-SetMoveTypeAndAiCommandset:
+SetMovetypeAndAiCommandset:
                 
                 movem.l d7-a0,-(sp)
-                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI,d7
+                moveq   #COMBATANT_OFFSET_MOVETYPE_AND_AI_COMMANDSET,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d7-a0
                 rts
 
-    ; End of function SetMoveTypeAndAiCommandset
+    ; End of function SetMovetypeAndAiCommandset
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiSpecialMoveOrders:
+SetMoveOrders:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.w   #BYTE_SHIFT_COUNT,d1
                 andi.w  #BYTE_MASK,d2
                 or.w    d2,d1
-                moveq   #COMBATANT_OFFSET_AI_SPECIAL_MOVE_ORDERS,d7
+                moveq   #COMBATANT_OFFSET_MOVE_ORDERS,d7
                 bsr.w   SetCombatantWord
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetAiSpecialMoveOrders
+    ; End of function SetMoveOrders
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-SetAiRegion:
+SetTriggerRegions:
                 
                 movem.l d1-d2/d7-a0,-(sp)
                 lsl.b   #NIBBLE_SHIFT_COUNT,d1
                 andi.b  #BYTE_LOWER_NIBBLE_MASK,d2
                 or.b    d2,d1
-                moveq   #COMBATANT_OFFSET_AI_REGION,d7
+                moveq   #COMBATANT_OFFSET_TRIGGER_REGIONS,d7
                 bsr.w   SetCombatantByte
                 movem.l (sp)+,d1-d2/d7-a0
                 rts
 
-    ; End of function SetAiRegion
+    ; End of function SetTriggerRegions
 
 
 ; =============== S U B R O U T I N E =======================================

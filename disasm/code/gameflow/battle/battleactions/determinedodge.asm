@@ -49,23 +49,23 @@ battlesceneScript_DetermineDodge:
                 
                 ; Check if target is either flying or hovering
                 move.b  (a5),d0
-                jsr     GetMoveType     
-                cmpi.w  #MOVETYPE_LOWER_FLYING,d1 ; HARDCODED airborne movetypes
+                jsr     GetMovetype     
+                cmpi.w  #MOVETYPE_FLYING,d1 ; HARDCODED airborne movetypes
                 beq.w   @CheckIfAttackerIsAnArcher
-                cmpi.w  #MOVETYPE_LOWER_HOVERING,d1
+                cmpi.w  #MOVETYPE_HOVERING,d1
                 beq.w   @CheckIfAttackerIsAnArcher
                 bra.w   @CheckDebugDodge
 @CheckIfAttackerIsAnArcher:
                 
                 move.b  (a4),d0
-                jsr     GetMoveType     
-                cmpi.w  #MOVETYPE_LOWER_BRASS_GUNNER,d1 ; HARDCODED archer movetypes
+                jsr     GetMovetype     
+                cmpi.w  #MOVETYPE_BRASS_GUNNER,d1 ; HARDCODED archer movetypes
                 beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_ARCHER,d1
+                cmpi.w  #MOVETYPE_ARCHER,d1
                 beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_CENTAUR_ARCHER,d1
+                cmpi.w  #MOVETYPE_CENTAUR_ARCHER,d1
                 beq.w   @CheckDebugDodge
-                cmpi.w  #MOVETYPE_LOWER_STEALTH_ARCHER,d1
+                cmpi.w  #MOVETYPE_STEALTH_ARCHER,d1
                 beq.w   @CheckDebugDodge
                 moveq   #CHANCE_TO_DODGE_FOR_AIRBORNE_TARGET,d2 ; 1/8 chance to dodge if target is flying or hovering, and if attacker is not an archer
 @CheckDebugDodge:

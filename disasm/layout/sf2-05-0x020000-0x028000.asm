@@ -33,11 +33,11 @@
                 include "code\gameflow\exploration\explorationfunctions_0.asm"    ; Exploration functions
                 include "data\stats\items\chestgoldamounts.asm"    ; Chest gold amounts
                 include "code\gameflow\exploration\explorationfunctions_1.asm"    ; Exploration functions
-                include "code\gameflow\battle\battlefunctions\battleloop_1.asm"    ; Battle loop main, part 1
+                include "code\gameflow\battle\battleloop_1.asm"    ; Battle loop main, part 1
                 include "code\gameflow\battle\battleloop\killallenemies.asm"    ; Battle loop function
                 include "code\gameflow\battle\battleloop\heallivingandimmortalallies.asm"    ; Battle loop function
                 include "code\gameflow\battle\battleloop\countremainingcombatants.asm"    ; Battle loop function
-                include "code\gameflow\battle\battlefunctions\battleloop_2.asm"    ; Battle loop main, part 2
+                include "code\gameflow\battle\battleloop_2.asm"    ; Battle loop main, part 2
                 include "code\gameflow\battle\battlefunctions\battlefunctions_1.asm"    ; Battle functions
                 include "code\gameflow\battle\battleloop\getegresspositionforbattle.asm"    ; Battle loop : Get Egress Position For Battle function
                 include "code\gameflow\battle\battlefunctions\executeindividualturn.asm"    ; Execute Individual Turn function
@@ -46,9 +46,9 @@
                 include "code\gameflow\battle\battleloop\cleardeadcombatantslist.asm"    ; Battle loop functions
                 include "code\gameflow\battle\battleloop\processkilledcombatants.asm"    ; Battle loop functions
                 include "code\gameflow\battle\battlefunctions\battlefunctions_2.asm"    ; Battle functions
-                include "code\gameflow\battle\battleloop\updateenemyai.asm"    ; Battle loop : Enemy AI update functions
+                include "code\gameflow\battle\battleloop\activateenemies.asm"    ; Battle loop : Enemy AI update functions
                 include "code\gameflow\battle\battleloop\turnorderfunctions.asm"    ; Battle loop : Turn order functions
-                include "code\gameflow\battle\battlefunctions\loadBattle.asm"    ; Battle data loading function
+                include "code\gameflow\battle\battlefunctions\loadbattle.asm"    ; Battle data loading function
                 include "code\gameflow\battle\battlefunctions\battlefunctions_3.asm"    ; Battle functions
                 include "code\gameflow\battle\battleloop\printdefcons.asm"    ; Battle loop : Debug messages
                 include "code\gameflow\battle\battlefunctions\setmovesfx.asm"    ; Set Move Sfx function

@@ -97,19 +97,19 @@ table_1EC9A:    vdpSpell 0, 0, SPELLTILE1, V4|H4|VALUE2
 table_1ECAA:    dc.w 5
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 16
-				
+                
                 dc.w 8
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 32
-				
+                
                 dc.w 11
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 48
-				
+                
 table_1ECBC:    dc.w 5
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 68
-				
+                
                 dc.w 8
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H2
                 dc.w 72

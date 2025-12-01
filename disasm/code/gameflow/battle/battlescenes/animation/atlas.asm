@@ -15,13 +15,13 @@ spellanimationSetup_Atlas:
                 moveq   #1,d1
                 bsr.w   LoadInvocationSpriteFrameToVram
                 lea     ((byte_FFB532-$1000000)).w,a0
-				
+                
                 move.w  #$900,(a0)+
                 move.w  #$A00,(a0)+
-				
+                
                 move.w  #-$900,(a0)+
                 move.w  #$A00,(a0)+
-				
+                
                 move.w  #$50,(a0) 
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

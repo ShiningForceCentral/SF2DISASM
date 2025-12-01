@@ -104,8 +104,8 @@ table_EnemyGold:dc.w 10                 ; OOZE
                 dc.w 220                ; MASTER MAGE
                 dc.w 520                ; NECROMANCER
                 dc.w 860                ; BLUE SHAMAN
-				
-				; unused
+                
+                ; unused
                 dc.w 1
                 dc.w 17922
                 dc.w 16643

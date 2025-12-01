@@ -55,11 +55,11 @@ j_InitializeEnemyList:
 ; =============== S U B R O U T I N E =======================================
 
 
-j_GetAiSpecialMoveOrderCoordinates:
+j_GetMoveOrderPosition:
                 
-                jmp     GetAiSpecialMoveOrderCoordinates(pc)
+                jmp     GetMoveOrderPosition(pc)
 
-    ; End of function j_GetAiSpecialMoveOrderCoordinates
+    ; End of function j_GetMoveOrderPosition
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -97,11 +97,11 @@ j_GetCombatantStartingPosition:
 ; AI-related
 
 
-sub_1AC024:
+j_DetermineMoveOrderQuadrant:
                 
-                jmp     sub_1AC38E(pc)  
+                jmp     DetermineMoveOrderQuadrant(pc)  
 
-    ; End of function sub_1AC024
+    ; End of function j_DetermineMoveOrderQuadrant
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -109,41 +109,41 @@ sub_1AC024:
 ; AI-related
 
 
-sub_1AC028:
+j_ApplyQuadrantTerrainMarking:
                 
-                jmp     sub_1AC69A(pc)  
+                jmp     ApplyQuadrantTerrainMarking(pc)  
 
-    ; End of function sub_1AC028
+    ; End of function j_ApplyQuadrantTerrainMarking
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1:
+j_BlockNonMovableSpacesAroundDestination:
                 
-                jmp     AdjustObstructionFlagsForAiWithSecondaryCharacteristic1(pc)
+                jmp     BlockNonMovableSpacesAroundDestination(pc)
 
-    ; End of function j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic1
+    ; End of function j_BlockNonMovableSpacesAroundDestination
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2:
+j_BlockAndCarveAroundDestination:
                 
-                jmp     AdjustObstructionFlagsForAiWithSecondaryCharacteristic2(pc)
+                jmp     BlockAndCarveAroundDestination(pc)
 
-    ; End of function j_AdjustObstructionFlagsForAiWithSecondaryCharacteristic2
+    ; End of function j_BlockAndCarveAroundDestination
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-j_ClearBattleTerrainArrayObstructionFlags:
+j_ClearAllTemporaryObstructionFlags:
                 
-                jmp     ClearBattleTerrainArrayObstructionFlags(pc)
+                jmp     ClearAllTemporaryObstructionFlags(pc)
 
-    ; End of function j_ClearBattleTerrainArrayObstructionFlags
+    ; End of function j_ClearAllTemporaryObstructionFlags
 
 
 ; =============== S U B R O U T I N E =======================================

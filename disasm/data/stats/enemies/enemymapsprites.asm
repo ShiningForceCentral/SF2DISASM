@@ -102,7 +102,7 @@ table_EnemyMapsprites:
                 mapsprite RED_BARON     ; 94: RED BARON
                 mapsprite GESHP         ; 95: GESHP
                 mapsprite ODD_EYE       ; 96: ODD EYE
-                mapsprite GALAM_EVIL    ; 97: GALAM
+                mapsprite EVIL_GALAM    ; 97: GALAM
                 mapsprite ZEON          ; 98: ZEON
                 mapsprite JARO_SPECIAL  ; 99: JAR
                 mapsprite MASTER_MAGE   ; 100: MASTER MAGE
@@ -123,51 +123,51 @@ table_EnemyMapsprites:
                 mapsprite OBJECT2
                 mapsprite OBJECT3
                 mapsprite OBJECT4
-                mapsprite CHICK_FLYING
+                mapsprite FLYING_CHICK
                 mapsprite EFFECT4
                 mapsprite POSE5
-                mapsprite ZELOT
+                mapsprite MONK
                 mapsprite EFFECT5
                 mapsprite EFFECT6
-                mapsprite DESKTOP_KING
-                mapsprite WOMAN3
+                mapsprite KING_PONPEI
+                mapsprite OLD_WOMAN
                 mapsprite BLUE_FLAME
                 mapsprite FILLER10
                 mapsprite PRIEST
-                mapsprite SAILOR
-                mapsprite MAN1
-                mapsprite WOMAN1
-                mapsprite MAN2
-                mapsprite WOMAN2
-                mapsprite MAN3
-                mapsprite WOMAN3
+                mapsprite MERCHANT
+                mapsprite MAN
+                mapsprite WOMAN
+                mapsprite YOUNG_MAN
+                mapsprite YOUNG_WOMAN
+                mapsprite OLD_MAN
+                mapsprite OLD_WOMAN
                 mapsprite BOY
                 mapsprite GIRL
                 mapsprite WORKER
-                mapsprite GRANSEAL_KING
+                mapsprite KING_GRANSEAL
                 mapsprite ELIS
                 mapsprite MINISTER
-                mapsprite SOLDIER1
-                mapsprite SOLDIER2
+                mapsprite GUARD
+                mapsprite SOLDIER
                 mapsprite MAID
                 mapsprite ASTRAL
                 mapsprite CAT
-                mapsprite BOAT
+                mapsprite SHIP
                 mapsprite CREED
                 mapsprite ODDLER
-                mapsprite GALAM_KING
+                mapsprite KING_GALAM
                 mapsprite MITULA
                 mapsprite POSE6
                 mapsprite POSE7
                 mapsprite DUCK
                 mapsprite FAIRY
                 mapsprite BEASTMAN1
-                mapsprite TURTLE
+                mapsprite KAPPA
                 mapsprite BEASTMAN2
-                mapsprite ELF_BOY
-                mapsprite ELF_GIRL
-                mapsprite VIKING
+                mapsprite ELF_MALE
+                mapsprite ELF_FEMALE
+                mapsprite WARRIOR
                 mapsprite DWARF
-                mapsprite BEDOE_KING
-                mapsprite BEDOE_MINISTER
-                mapsprite BEDOE_SOLDIER
+                mapsprite KING_BEDOE
+                mapsprite BIRDWOMAN
+                mapsprite BEDRIDDEN_BIRDMAN

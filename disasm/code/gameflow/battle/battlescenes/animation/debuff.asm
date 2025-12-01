@@ -61,7 +61,7 @@ spellanimationSetup_Debuff:
                 lea     ((byte_FFB532-$1000000)).w,a0
                 btst    #SPELLANIMATION_BIT_MIRRORED,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 bne.s   @Mirror
-				
+                
                 move.w  #$40,(a0)+ ; x parameter
                 move.w  #$20,(a0)  ; y parameter
                 bra.s   @loc_2

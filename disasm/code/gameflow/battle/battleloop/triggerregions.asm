@@ -745,58 +745,59 @@ TriggerRegionsAndActivateEnemies:
                 ; ------------------------------------------------------------
                 
                 move.w  d7,d0           ; restore combatant index
-                jsr     j_GetAiRegion
-                cmpi.w  #15,d1
-                bne.s   @CheckActivationRegion1
-                cmpi.w  #15,d2
-                bne.s   @CheckActivationRegion1
+                jsr     j_GetTriggerRegions
+                cmpi.w  #AI_TRIGGER_REGION_NONE,d1
+                bne.s   @CheckPrimaryTriggerRegion
+                
+                cmpi.w  #AI_TRIGGER_REGION_NONE,d2
+                bne.s   @CheckPrimaryTriggerRegion
                 bra.w   @Done
-@CheckActivationRegion1:
+@CheckPrimaryTriggerRegion:
                 
                 move.b  d0,d7           ; save combatant index
                 move.b  d2,d6           ; save AI activation region 2
                 move.b  d1,d5           ; save AI activation region 1
-                cmpi.b  #15,d5
-                bne.s   @IsActivationRegion1Triggered
-                bra.w   @CheckActivationRegion2
-@IsActivationRegion1Triggered:
+                cmpi.b  #AI_TRIGGER_REGION_NONE,d5
+                bne.s   @IsPrimaryRegionTriggered
+                bra.w   @CheckSecondaryTriggerRegion
+@IsPrimaryRegionTriggered:
                 
                 clr.w   d1
                 move.b  d5,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.s   @ActivateAi1
-                bra.w   @CheckActivationRegion2
-@ActivateAi1:
+                bne.s   @ActivatePrimaryAi
+                bra.w   @CheckSecondaryTriggerRegion
+@ActivatePrimaryAi:
                 
                 clr.w   d0
                 move.w  d7,d0
                 jsr     j_GetActivationBitfield
-                andi.w  #($FFFF-1),d1
-                bset    #0,d1
+                andi.w  #($FFFF-AIBITFIELD_PRIMARY_ACTIVE),d1
+                bset    #AIBITFIELD_BIT_PRIMARY_ACTIVE,d1
                 jsr     j_SetActivationBitfield
                 bra.w   @Done
-@CheckActivationRegion2:
+@CheckSecondaryTriggerRegion:
                 
-                cmpi.b  #15,d6
-                bne.s   @IsActivationRegion2Triggered
+                cmpi.b  #AI_TRIGGER_REGION_NONE,d6
+                bne.s   @IsSecondaryRegionTriggered
                 bra.w   @Done
-@IsActivationRegion2Triggered:
+@IsSecondaryRegionTriggered:
                 
                 clr.w   d1
                 move.b  d6,d1
                 addi.w  #BATTLE_REGION_FLAGS_START,d1
                 jsr     j_CheckFlag
-                bne.s   @ActivateAi2
+                bne.s   @ActivateSecondaryAi
                 bra.w   @Done
-@ActivateAi2:
+@ActivateSecondaryAi:
                 
                 clr.w   d0
                 move.w  d7,d0
                 jsr     j_GetActivationBitfield
-                andi.w  #($FFFF-%11),d1
-                bset    #0,d1
-                bset    #1,d1
+                andi.w  #($FFFF-AIBITFIELD_PRIMARY_ACTIVE|AIBITFIELD_SECONDARY_ACTIVE),d1
+                bset    #AIBITFIELD_BIT_PRIMARY_ACTIVE,d1
+                bset    #AIBITFIELD_BIT_SECONDARY_ACTIVE,d1
                 jsr     j_SetActivationBitfield
 @Done:
                 

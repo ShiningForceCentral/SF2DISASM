@@ -226,7 +226,7 @@ battlesceneScript_DetermineTargetsByAction:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
-                jsr     PopulateTargetableGrid_CastSpell
+                jsr     PopulateTargetsListForSpell
                 bra.s   @Done
 @IsUseItem:
                 
@@ -235,7 +235,7 @@ battlesceneScript_DetermineTargetsByAction:
                 
                 move.w  BATTLEACTION_OFFSET_ITEM_OR_SPELL(a3),d1
                 move.w  BATTLEACTION_OFFSET_TARGET(a3),d0
-                jsr     PopulateTargetableGrid_UseItem
+                jsr     PopulateTargetsListForItemUse
                 bra.s   @Done
 @IsBurstRock:
                 
@@ -244,7 +244,7 @@ battlesceneScript_DetermineTargetsByAction:
                 
                 move.b  (a4),d0
                 move.w  #SPELL_B_ROCK,d1
-                jsr     PopulateTargetableGrid_CastSpell
+                jsr     PopulateTargetsListForSpell
                 bra.s   @Done
 @IsMuddled:
                 
@@ -257,7 +257,7 @@ battlesceneScript_DetermineTargetsByAction:
                 
                 cmpi.w  #BATTLEACTION_PRISM_LASER,(a3)
                 bne.w   @Done
-                jsr     PopulateTargetsArrayWithAllCombatants
+                jsr     BuildTargetsArrayWithAllCombatants
                 move.b  #-1,((TARGETS_LIST-$1000000)).w
                 move.b  (a4),d0
                 jsr     j_GetLaserFacing

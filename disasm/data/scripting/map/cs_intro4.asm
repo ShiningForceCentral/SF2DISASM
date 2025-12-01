@@ -357,9 +357,9 @@ IntroCutscene4: textCursor 4233
                 fadeOutToBlackHalf
                 csc_end
 ce_48FAA:       mainEntity 63,63,UP
-                entity 12,6,DOWN,MAPSPRITE_GRANSEAL_KING,eas_Init
+                entity 12,6,DOWN,MAPSPRITE_KING_GRANSEAL,eas_Init
                 entity 10,7,DOWN,MAPSPRITE_MINISTER,eas_Init
-                entity 63,63,RIGHT,MAPSPRITE_SOLDIER1,eas_Init
+                entity 63,63,RIGHT,MAPSPRITE_GUARD,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_GESHP,eas_Init
                 entity 63,63,UP,MAPSPRITE_EFFECT6,eas_Init
                 entity 63,63,DOWN,MAPSPRITE_EFFECT4,eas_Init

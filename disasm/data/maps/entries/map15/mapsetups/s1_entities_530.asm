@@ -7,10 +7,10 @@ ms_map15_flag530_Entities:
                 msWalkingEntity 14, 28, DOWN, MAPSPRITE_BEASTMAN1, 14, 28, 1
                 msFixedEntity 31, 12, LEFT, MAPSPRITE_BEASTMAN2, eas_Init
                 msFixedEntity 20, 14, DOWN, MAPSPRITE_DWARF, eas_Init
-                msWalkingEntity 22, 19, DOWN, MAPSPRITE_TURTLE, 22, 19, 1
-                msFixedEntity 10, 25, DOWN, MAPSPRITE_ELF_GIRL, eas_Init
-                msWalkingEntity 15, 6, DOWN, MAPSPRITE_VIKING, 15, 6, 2
-                msWalkingEntity 3, 23, DOWN, MAPSPRITE_SAILOR, 3, 23, 1
+                msWalkingEntity 22, 19, DOWN, MAPSPRITE_KAPPA, 22, 19, 1
+                msFixedEntity 10, 25, DOWN, MAPSPRITE_ELF_FEMALE, eas_Init
+                msWalkingEntity 15, 6, DOWN, MAPSPRITE_WARRIOR, 15, 6, 2
+                msWalkingEntity 3, 23, DOWN, MAPSPRITE_MERCHANT, 3, 23, 1
                 msFixedEntity 12, 15, DOWN, MAPSPRITE_PRIEST, eas_Init
-                msFixedEntity 2, 23, DOWN, MAPSPRITE_SAILOR, eas_Init
+                msFixedEntity 2, 23, DOWN, MAPSPRITE_MERCHANT, eas_Init
                 msEntitiesEnd

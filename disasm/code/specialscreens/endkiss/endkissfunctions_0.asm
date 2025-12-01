@@ -61,7 +61,7 @@ loc_2C604:
                 andi.l  #$EEE0EEE,d0  ; darken palette 1
                 move.l  d0,(a0)+
                 dbf     d7,loc_2C604
-				
+                
                 lea     (PALETTE_3_BASE).l,a0
                 moveq   #$F,d7
 loc_2C61C:
@@ -71,7 +71,7 @@ loc_2C61C:
                 andi.l  #$EEE0EEE,d0  ; darken palettes 3/4
                 move.l  d0,(a0)+
                 dbf     d7,loc_2C61C
-				
+                
                 lea     (PALETTE_1_BASE).l,a0
                 clr.b   (FADING_TIMER_BYTE).l
                 jsr     (UpdateBasePalettesAndBackupCurrent).w
@@ -92,7 +92,7 @@ loc_2C64C:
                 
                 clr.l   (a2)+
                 dbf     d7,loc_2C64C
-				
+                
                 lea     (FF0000_RAM_START).l,a2
                 lea     table_EndingKissPixelFillingData(pc), a3
                 moveq   #$3F,d7 
@@ -131,7 +131,7 @@ loc_2C6A4:
                 or.b    d2,(a2,d0.w)
                 dbf     d5,loc_2C664
                 dbf     d6,loc_2C660
-				
+                
                 movem.l d0-a3,-(sp)
                 lea     (FF0000_RAM_START).l,a0
                 move.w  #$600,d0
