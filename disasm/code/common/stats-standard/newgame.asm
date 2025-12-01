@@ -163,10 +163,10 @@ InitializeAllyCombatantEntry:
                 adda.w  d1,a1
                 getPointer p_table_AllyNames, a0
                 move.w  d0,d1
+                clr.w   d2
                 bra.s   @FindName
                 
-@FindName_Loop: clr.w   d2
-                move.b  (a0)+,d2
+@FindName_Loop: move.b  (a0)+,d2
                 lea     (a0,d2.w),a0
 @FindName:      dbf     d1,@FindName_Loop
                 
@@ -192,6 +192,7 @@ InitializeAllyCombatantEntry:
                 suba.w  #(ALLYNAME_MAX_LENGTH*SAVED_DATA_BYTE_SIZE),a1
                 move.b  (a0)+,d2
                 move.b  d2,COMBATANT_OFFSET_CLASS(a1)
+                clr.w   d4
                 move.b  (a0)+,d4
             if (ALL_ALLIES_JOINED=1)
                 moveq   #1,d4
