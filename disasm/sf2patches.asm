@@ -118,6 +118,7 @@ TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock dama
 ; Special screens
 CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
 CONFIGURATION_SCREEN:               equ 1       ; Re-implements the configuration screen featured in Final Conflict.
+SCROLLING_TEXT_INTRODUCTION:        equ 0       ; An example for adding a scrolling text introduction between the SEGA logo and the introduction cutscene. Text extracted from SFC's translation of Shining Force : Final Conflict.
 
 
 ; AI enhancements (experimental)

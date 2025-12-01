@@ -28,6 +28,9 @@
                 includeIfStandard "code\specialscreens\chapter\graphics.asm"
                 alignIfStandard
             endif
+            if (SCROLLING_TEXT_INTRODUCTION=1)
+                includeIfStandard "code\gameflow\start-standard\textintro.asm"
+            endif
                 
                 includeIfVanilla "data\graphics\battles\backgrounds\entries.asm"    ; Battlescene Backgrounds
                 includeIfVanilla "data\graphics\battles\spells\invocations\entries.asm"    ; Invocation sprites

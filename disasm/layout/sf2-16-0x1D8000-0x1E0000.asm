@@ -44,6 +44,9 @@
                 includeIfStandard "data\stats\allies\classes\fullclassnames-standard.asm"   ; Fully spelled out class names, used in standard build for dialogue and enhanced menus
                 alignIfStandard
                 includeIfStandard "code\common\tech\incbins\s06_incbins_graphics.asm"    ; Game Section 06 Incbin Directives, part 1
+            if (SCROLLING_TEXT_INTRODUCTION=1)
+                includeIfStandard "data\scripting\introtext-standard.asm"
+            endif
                 includeIfStandard "data\scripting\gamestaff.asm"    ; Game Staff
                 alignIfStandard
                 includeIfStandard "data\graphics\maps\mappalettes\entries.asm"    ; Map palettes
