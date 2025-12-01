@@ -487,7 +487,7 @@ caravanDepotSubmenu_Derive:
                 pea     caravanDepotSubmenu_Derive(pc)
                 jmp     DisplayCaravanMessageWithPortrait(pc)
                 
-@Exchange:      move.w  targetMember(a6),d1
+@Exchange:      move.w  targetMember(a6),d0
                 move.w  targetItemSlot(a6),d1
                 bsr.w   IsItemInSlotEquippedAndCursed
                 bcs.w   caravanDepotSubmenu_Derive
