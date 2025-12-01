@@ -1,3 +1,7 @@
+[The SF2 Disassembly Super Thread](https://forums.shiningforcecentral.com/viewtopic.php?f=5&t=41303)
+[sf2hack Discord Server][(https://discord.gg/uCDgqhc)
+
+
 SF2DISASM
 =========
 
