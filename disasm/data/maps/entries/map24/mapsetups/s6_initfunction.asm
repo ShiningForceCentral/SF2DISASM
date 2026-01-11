@@ -18,11 +18,11 @@ ms_map24_InitFunction:
                 txt     469             ; "Now, set a new record.{W2}"
             if (STANDARD_BUILD=1)
                 loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
-                getSavedWord a0, d0
+                getSavedLong a0, d0
             else
                 move.l  ((SPECIAL_BATTLE_RECORD-$1000000)).w,d0
             endif
-                divs.w  #$3C,d0 
+                divs.w  #60,d0 
                 move.w  d0,d1
                 ext.l   d1
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
@@ -68,7 +68,7 @@ loc_59CB2:
                 txt     476             ; "{DICT} {#} sec.{W2}"
             if (STANDARD_BUILD=1)
                 loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
-                getSavedWord a0, d0
+                getSavedLong a0, d0
                 cmp.l   ((SPECIAL_BATTLE_TIME-$1000000)).w,d0
                 blo.s   byte_59CF0  
             else
@@ -81,7 +81,7 @@ loc_59CB2:
                 
             if (STANDARD_BUILD=1)
                 loadSavedDataAddress SPECIAL_BATTLE_RECORD, a0
-                setSavedWord d0, a0
+                setSavedLong d0, a0
             else
                 move.l  d0,((SPECIAL_BATTLE_RECORD-$1000000)).w
             endif
