@@ -400,7 +400,7 @@ RESISTANCESETTING_IMMUNITY: equ 3 ; immune to status effects
 
 ; ---------------------------------------------------------------------------
 
-; enum Movetypes
+; enum MoveType (bitfield)
 MOVETYPE_UNRESTRICTED: equ 0
 MOVETYPE_REGULAR: equ 1
 MOVETYPE_CENTAUR: equ 2
@@ -417,7 +417,7 @@ MOVETYPE_HEALER: equ 12
 
 ; ---------------------------------------------------------------------------
 
-; enum MovetypeProperties
+; enum MoveTypeProperties
 MOVETYPES_NUMBER: equ 13
 
 ; ---------------------------------------------------------------------------
@@ -3653,7 +3653,7 @@ MAPSPRITE_BIRDMAN: equ 236
 MAPSPRITE_FREE_SPOT1: equ 237
 MAPSPRITE_FREE_SPOT2: equ 238
 MAPSPRITE_FREE_SPOT3: equ 239
-MAPSPRITE_SPECIAL15: equ 240    ; special sprites 10-15 are free to use as regular sprites in a standard build
+MAPSPRITE_SPECIAL15: equ 240    ; special sprites 10-15 are free to use as regular sprites if MAPSPRITES_SPECIALS_START value is changed to 246
 MAPSPRITE_SPECIAL14: equ 241
 MAPSPRITE_SPECIAL13: equ 242
 MAPSPRITE_SPECIAL12: equ 243
@@ -3678,16 +3678,9 @@ MAPSPRITE_DEFAULT: equ 0
 ; ---------------------------------------------------------------------------
 
 ; enum Mapsprites_Properties
-
-specialMapspritesStart = 240
-
-    if (STANDARD_BUILD=1)
-specialMapspritesStart = 246
-    endif
-
 MAPSPRITES_ENEMIES_START: equ 64
 MAPSPRITES_NPCS_START: equ 170
-MAPSPRITES_SPECIALS_START: equ specialMapspritesStart
+MAPSPRITES_SPECIALS_START: equ 240 ; change to 246 to make slots 240-245 available as regular sprites
 MAPSPRITES_SPECIALS_END: equ 255
 MAPSPRITE_MASK: equ 255
 
