@@ -318,6 +318,7 @@ DetermineRandomAttackSpell:
 ; Load battlescene music index for combatant d0.w
 
 LoadBattlesceneMusicIndex:
+				
                 movem.l d1-d2/a0,-(sp)
                 tst.b   d0
                 bmi.s   @Enemy
