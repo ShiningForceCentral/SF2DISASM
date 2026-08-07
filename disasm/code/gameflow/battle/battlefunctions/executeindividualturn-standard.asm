@@ -318,15 +318,57 @@ DetermineRandomAttackSpell:
 ; Load battlescene music index for combatant d0.w
 
 LoadBattlesceneMusicIndex:
-                
                 movem.l d1-d2/a0,-(sp)
                 tst.b   d0
                 bmi.s   @Enemy
+
+                if (ENABLE_ALLY_SUPPORT_MUSIC=1)
+                    ; Ignore muddled Force members for support music check
+                    jsr     GetStatusEffects
+                    move.w  d1,statusEffects(a6)
+                    andi.w  #STATUSEFFECT_MUDDLE,d1
+                    bne.s   @SupportMusicDisabled
+
+                    ; Check if there is a monster target
+                    clr.w   d2
+                    move.b  ((BATTLESCENE_FIRST_ENEMY-$1000000)).w,d2
+                    cmpi.b  #-1,d2
+                    beq.s   @SupportMusic ; No monster target in the battlescene and not muddled: go ahead with support music
+@SupportMusicDisabled:
+                endif
+
+                if (ENABLE_ALLY_SPELL_MUSIC=1)
+                    ; Check if battle action is a spell or item
+                    move.w  ((CURRENT_BATTLEACTION-$1000000)).w,d2
+                    cmpi.w  #BATTLEACTION_CAST_SPELL,d2
+                    beq.s   @SpellOrItemMusic
+                    cmpi.w  #BATTLEACTION_USE_ITEM,d2
+                    beq.s   @SpellOrItemMusic
+                endif
+
                 move.b  #MUSIC_ATTACK,d3
                 jsr     GetClassType
                 beq.s   @LoadIndex
                 move.b  #MUSIC_PROMOTED_ATTACK,d3
                 bra.s   @LoadIndex
+
+                if (ENABLE_ALLY_SUPPORT_MUSIC=1)
+@SupportMusic:
+                    move.b  #ALLY_SUPPORT_MUSIC,d3
+                    jsr     GetClassType
+                    beq.s   @LoadIndex
+                    move.b  #ALLY_SUPPORT_PROMOTED_MUSIC,d3
+                    bra.s   @LoadIndex
+                endif
+                if (ENABLE_ALLY_SPELL_MUSIC=1)
+@SpellOrItemMusic:
+                    move.b  #ALLY_SPELL_MUSIC,d3
+                    jsr     GetClassType
+                    beq.s   @LoadIndex
+                    move.b  #ALLY_SPELL_PROMOTED_MUSIC,d3
+                    bra.s   @LoadIndex
+                endif
+
 @Enemy:         move.b  #MUSIC_ENEMY_ATTACK,d3
                 lea     table_EnemyBattlesceneMusics(pc), a0
                 jsr     GetEnemy
