@@ -334,14 +334,14 @@ LoadBattlesceneMusicIndex:
 					beq.s   @SpecialMusicUnpromoted
 					
 					; Promoted
-					lea     table_AllyBattlesceneMusics_Promoted, a0
+					lea		table_AllyBattlesceneMusics_Promoted(pc),a0
 					bra.s	@SpecialMusicTest
 @SpecialMusicUnpromoted:
-					lea     table_AllyBattlesceneMusics_Unpromoted, a0
+					lea		table_AllyBattlesceneMusics_Unpromoted(pc),a0
 @SpecialMusicTest:
-					add		d0, a0
+					adda.w  d0,a0
                     move.b  (a0),d3
-					cmpi.b  #-1,d3
+					cmpi.b  #0,d3
                     beq.s   @SpecialMusicDisabled ; No special music defined for this Force member
                     bra	    @LoadIndex ; Submit the special music
 @SpecialMusicDisabled:

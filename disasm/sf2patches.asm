@@ -113,10 +113,14 @@ SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 1       ; If character inventory is full
 SPELLS_REFRESH_STATUS_COUNTERS:     equ 1       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
 TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
-ENABLE_ALLY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item on self or other ally units (e.g: healing and buff spells), doesn't apply if affected by Muddle
-ENABLE_ALLY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
-ENABLE_ENEMY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
-ENABLE_ENEMY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+
+
+; Music features
+ENABLE_ALLY_SPECIAL_MUSIC:			equ 1		; Enable specific battlescene music to play for specific characters (behave like boss music, but doesn't play when using items), defined in 'allybattlescenemusics-standard.asm' file, has highest priority
+ENABLE_ALLY_SUPPORT_MUSIC:			equ 1		; Enable specific battlescene music to play when ally unit uses a spell/item on self or other ally units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ALLY_SPELL_MUSIC:			equ 1		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_ENEMY_SUPPORT_MUSIC:			equ 1		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ENEMY_SPELL_MUSIC:			equ 1		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
 
 
 ; Support/spell patch music selector (note: this patch works best if you add new custom musics)
