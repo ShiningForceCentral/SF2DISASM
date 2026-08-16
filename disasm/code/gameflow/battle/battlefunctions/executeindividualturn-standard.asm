@@ -370,13 +370,53 @@ LoadBattlesceneMusicIndex:
                     bra.s   @LoadIndex
                 endif
 
-@Enemy:         move.b  #MUSIC_ENEMY_ATTACK,d3
+@Enemy:			; Check for special music assigned to this monster
                 lea     table_EnemyBattlesceneMusics(pc), a0
                 jsr     GetEnemy
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @LoadIndex
-                move.b  (a0),d3
+                bcs.s   @EnemyNotSpecial ; Special music not found: go to default enemy music selection logic
+                move.b  (a0),d3 ; Special music found
+                bra.s   @LoadIndex ; Load the special music
+@EnemyNotSpecial:
+                if (ENABLE_ENEMY_SUPPORT_MUSIC=1)
+                    ; Ignore muddled monsters for support music check
+                    jsr     GetStatusEffects
+                    move.w  d1,statusEffects(a6)
+                    andi.w  #STATUSEFFECT_MUDDLE,d1
+                    bne.s   @EnemySupportMusicDisabled
+
+                    ; Check if there is a Force member target
+                    clr.w   d2
+                    move.b  ((BATTLESCENE_FIRST_ALLY-$1000000)).w,d2
+                    cmpi.b  #-1,d2
+                    beq.s   @EnemySupportMusic ; No Force member target in the battlescene and not muddled: go ahead with support music
+@EnemySupportMusicDisabled:
+                endif
+                if (ENABLE_ENEMY_SPELL_MUSIC=1)
+                    ; Check if battle action is a spell or item
+                    move.w  ((CURRENT_BATTLEACTION-$1000000)).w,d2
+                    cmpi.w  #BATTLEACTION_CAST_SPELL,d2
+                    beq.s   @EnemySpellOrItemMusic
+                    cmpi.w  #BATTLEACTION_USE_ITEM,d2
+                    beq.s   @EnemySpellOrItemMusic
+                endif
+				
+				; Use normal monster music we all know and love
+				move.b  #MUSIC_ENEMY_ATTACK,d3
+                bra.s   @LoadIndex
+				
+                if (ENABLE_ENEMY_SUPPORT_MUSIC=1)
+@EnemySupportMusic:
+                    move.b  #ENEMY_SUPPORT_MUSIC,d3
+                    bra.s   @LoadIndex
+				endif
+                if (ENABLE_ENEMY_SPELL_MUSIC=1)
+@EnemySpellOrItemMusic:
+                    move.b  #ENEMY_SPELL_MUSIC,d3
+                    bra.s   @LoadIndex
+				endif
+
 @LoadIndex:     move.b  d3,((BATTLESCENE_MUSIC_INDEX-$1000000)).w
                 movem.l (sp)+,d1-d2/a0
                 rts
