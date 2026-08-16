@@ -321,8 +321,31 @@ LoadBattlesceneMusicIndex:
 				
                 movem.l d1-d2/a0,-(sp)
                 tst.b   d0
-                bmi.s   @Enemy
+                bmi     @Enemy
 
+				if (ENABLE_ALLY_SPECIAL_MUSIC=1)
+                    ; Check if battle action is an item and skip special music if so
+                    move.w  ((CURRENT_BATTLEACTION-$1000000)).w,d2
+                    cmpi.w  #BATTLEACTION_USE_ITEM,d2
+                    beq.s   @SpecialMusicDisabled
+					
+					; Verify which table to use
+					jsr     GetClassType
+					beq.s   @SpecialMusicUnpromoted
+					
+					; Promoted
+					lea     table_AllyBattlesceneMusics_Promoted, a0
+					bra.s	@SpecialMusicTest
+@SpecialMusicUnpromoted:
+					lea     table_AllyBattlesceneMusics_Unpromoted, a0
+@SpecialMusicTest:
+					add		d0, a0
+                    move.b  (a0),d3
+					cmpi.b  #-1,d3
+                    beq.s   @SpecialMusicDisabled ; No special music defined for this Force member
+                    bra	    @LoadIndex ; Submit the special music
+@SpecialMusicDisabled:
+				endif
                 if (ENABLE_ALLY_SUPPORT_MUSIC=1)
                     ; Ignore muddled Force members for support music check
                     jsr     GetStatusEffects
@@ -417,7 +440,9 @@ LoadBattlesceneMusicIndex:
                     bra.s   @LoadIndex
 				endif
 
-@LoadIndex:     move.b  d3,((BATTLESCENE_MUSIC_INDEX-$1000000)).w
+				nop ; To avoid the assembler being angry with trivial branch when all patches are disabled
+@LoadIndex:
+				move.b  d3,((BATTLESCENE_MUSIC_INDEX-$1000000)).w
                 movem.l (sp)+,d1-d2/a0
                 rts
 
