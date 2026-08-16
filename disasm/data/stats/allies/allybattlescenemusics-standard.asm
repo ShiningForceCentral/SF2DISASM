@@ -10,7 +10,7 @@ table_AllyBattlesceneMusics_Unpromoted:
 	dc.b	0	; Ally 4 - KAZIN
 	dc.b	0	; Ally 5 - SLADE
 	dc.b	0	; Ally 6 - KIWI
-	dc.b	MUSIC_BOSS_ATTACK	; Ally 7 - PETER
+	dc.b	MUSIC_BOSS_ATTACK	; Ally 7 - PETER	(I'm sure you understand the joke here ;))
 	dc.b	0	; Ally 8 - MAY
 	dc.b	0	; Ally 9 - GERHALT
 	dc.b	0	; Ally 10 - LUKE

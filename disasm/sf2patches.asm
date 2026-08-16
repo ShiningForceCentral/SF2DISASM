@@ -116,11 +116,11 @@ TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock dama
 
 
 ; Music features
-ENABLE_ALLY_SPECIAL_MUSIC:			equ 1		; Enable specific battlescene music to play for specific characters (behave like boss music, but doesn't play when using items), defined in 'allybattlescenemusics-standard.asm' file, has highest priority
-ENABLE_ALLY_SUPPORT_MUSIC:			equ 1		; Enable specific battlescene music to play when ally unit uses a spell/item on self or other ally units (e.g: healing and buff spells), doesn't apply if affected by Muddle
-ENABLE_ALLY_SPELL_MUSIC:			equ 1		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
-ENABLE_ENEMY_SUPPORT_MUSIC:			equ 1		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
-ENABLE_ENEMY_SPELL_MUSIC:			equ 1		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_ALLY_SPECIAL_MUSIC:			equ 0		; Enable specific battlescene music to play for specific characters (behave like boss music, but doesn't play when using items), defined in 'allybattlescenemusics-standard.asm' file, has highest priority
+ENABLE_ALLY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item on self or other ally units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ALLY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_ENEMY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ENEMY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
 
 
 ; Support/spell patch music selector (note: this patch works best if you add new custom musics)
