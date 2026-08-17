@@ -5,6 +5,5 @@
 ; Tip: add all musics with long, rewarding buildups and exclude musics that are intense from the start.
 
 table_ResumingBattlesceneMusics:
-	dc.b	MUSIC_TOWN
-	dc.b	MUSIC_ENEMY_ATTACK
+	;dc.b	MUSIC_ENEMY_ATTACK
 	dc.b	0	; End
