@@ -27,7 +27,7 @@
                 includeIfStandard "code\common\stats-standard\caravaninventory.asm"    ; Caravan inventory management functions
                 includeIfStandard "data\stats\allies\newgameallies-standard.asm"
                 includeIfStandard "data\stats\allies\allieswithbetterdouble-standard.asm"
-                
+				
                 ; Stats engine
                 includeIfVanilla "code\common\stats\combatantstats_1.asm"    ; Read combatant stats
                 includeIfVanilla "code\common\stats\getcombatanttype.asm"    ; Combatant type getter function

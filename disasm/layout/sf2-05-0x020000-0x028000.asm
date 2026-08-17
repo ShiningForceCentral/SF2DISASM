@@ -47,6 +47,13 @@
                 includeIfStandard "code\gameflow\battle\battleloop-standard\getegresspositionforbattle.asm"
                 
                 ; Battle functions
+            if (ENABLE_ALLY_SPECIAL_MUSIC=1)
+                includeIfStandard "data\stats\allies\allybattlescenemusics-standard.asm"	; Per-character battlescene music override
+            endif
+			if (ENABLE_UNINTERRUPTIBLE_MUSIC=1)
+				includeIfStandard "data\uninterruptiblemusics-standard.asm"
+                alignIfStandard
+			endif
                 includeIfStandard "code\gameflow\battle\battlefunctions\executeindividualturn-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlefunctions\setmovesfx-standard.asm"
                 includeIfStandard "code\gameflow\battle\battlefunctions\resetaijaro-standard.asm"

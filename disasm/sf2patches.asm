@@ -115,6 +115,24 @@ TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle 
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
 
 
+; Music features
+ENABLE_ALLY_SPECIAL_MUSIC:			equ 0		; Enable specific battlescene music to play for specific characters (behave like boss music, but doesn't play when using items), defined in 'allybattlescenemusics-standard.asm' file, has highest priority
+ENABLE_ALLY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item on self or other ally units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ALLY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_ENEMY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
+ENABLE_ENEMY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_UNINTERRUPTIBLE_MUSIC:		equ 0       ; Keep playing battle map music in battlescenes if the battle map music is present in 'uninterruptiblemusics-standard.asm' list
+
+
+; Support/spell patch music selector (note: this patch works best if you add new custom musics)
+ALLY_SUPPORT_MUSIC:   				equ MUSIC_SHRINE		; Requires ENABLE_ALLY_SUPPORT_MUSIC patch to be enabled
+ALLY_SUPPORT_PROMOTED_MUSIC:   		equ MUSIC_ELVEN_TOWN	; Requires ENABLE_ALLY_SUPPORT_MUSIC patch to be enabled
+ALLY_SPELL_MUSIC:   				equ MUSIC_WITCH			; Requires ENABLE_ALLY_SPELL_MUSIC patch to be enabled
+ALLY_SPELL_PROMOTED_MUSIC:   		equ MUSIC_INTRO			; Requires ENABLE_ALLY_SPELL_MUSIC patch to be enabled
+ENEMY_SUPPORT_MUSIC:   				equ MUSIC_SUSPEND		; Requires ENABLE_ENEMY_SUPPORT_MUSIC patch to be enabled
+ENEMY_SPELL_MUSIC:   				equ MUSIC_BOSS_ATTACK	; Requires ENABLE_ENEMY_SPELL_MUSIC patch to be enabled
+
+
 ; Special screens
 CHAPTER_SCREEN:                     equ 0       ; Patch implementation with template SFCD screen as applicable example.
 CONFIGURATION_SCREEN:               equ 1       ; Re-implements the configuration screen featured in Final Conflict.
@@ -162,15 +180,8 @@ SECOND_MEMBERS_LIST_PAGE: equ secondMembersListPage
 
 
 ; Sound driver
-MUSIC_RESUMING:                     equ 1       ; 
-RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 1       ; Do not resume battlescene music.
+MUSIC_RESUMING:                     equ 1       ; Enable music resuming (musics only resume in battlescenes if they are added to 'resumingbattlescenemusics-standard.asm' list)
 RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 1       ; Resume background music after playing a "Joined the Force" jingle.
-
-resumeBattlesceneMusic = 1
-    if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
-resumeBattlesceneMusic = 0
-    endif
-RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
 
 
 ; Data expansions
