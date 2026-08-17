@@ -121,6 +121,7 @@ ENABLE_ALLY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play 
 ENABLE_ALLY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when ally unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
 ENABLE_ENEMY_SUPPORT_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item on self or other enemy units (e.g: healing and buff spells), doesn't apply if affected by Muddle
 ENABLE_ENEMY_SPELL_MUSIC:			equ 0		; Enable specific battlescene music to play when enemy unit uses a spell/item (restricted to damage and debuff spells if support music patch is also enabled)
+ENABLE_UNINTERRUPTIBLE_MUSIC:		equ 0       ; Keep playing battle map music in battlescenes if the battle map music is present in 'uninterruptiblemusics-standard.asm' list
 
 
 ; Support/spell patch music selector (note: this patch works best if you add new custom musics)

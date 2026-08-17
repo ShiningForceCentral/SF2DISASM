@@ -44,8 +44,16 @@ GetAllyGraphicsInformation:
 InitializeBattlescene:
                 
                 bsr.w   FadeOutToBlackForBattlescene
+				
+				; Verify if we should fade out music
+                move.w  d0,-(sp)
+				jsr		ShouldPlayBattlesceneMusic		; d0 = 0 don't play, 1 play
+				cmp.b	#0,d0
+				beq.s	@SkipMusicFadeOut
                 sndCom  SOUND_COMMAND_FADE_OUT
-                
+@SkipMusicFadeOut:
+                move.w  (sp)+,d0
+				
                 ; Clear battlescene data table in RAM
                 lea     ((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w,a0
                 move.l  #((BATTLESCENE_DATA_END-BATTLESCENE_BACKGROUND_MODIFICATION_POINTER)/4)-1,d2 ; battle scene data longwords counter
@@ -315,6 +323,11 @@ alt_InitializeBattlescene:
                 
                 jsr     (WaitForVInt).w
                 bsr.w   FadeInFromBlackIntoBattlescene
+				
+				jsr		ShouldPlayBattlesceneMusic		; d0 = 0 don't play, 1 play
+				cmp.b	#0,d0
+				beq.s	@SkipPlayMusic
+
                 clr.w   d0
                 move.b  (BATTLESCENE_MUSIC_INDEX).l,d0
             if (MUSIC_RESUMING=1)
@@ -329,6 +342,7 @@ alt_InitializeBattlescene:
             endif
 			
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
+@SkipPlayMusic:
                 moveq   #21,d0
 @MoveActorsToPosition_Loop:
                 
