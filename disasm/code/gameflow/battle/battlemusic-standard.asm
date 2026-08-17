@@ -13,7 +13,7 @@ PlayMapMusic:
                 compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   @Continue
                 
-            if (MUSIC_RESUMING&RESUME_BATTLEFIELD_MUSIC_ONLY=1)
+            if (MUSIC_RESUMING=1)
                 activateMusicResuming
             endif
                 lea     table_ExplorationToBattleMusics(pc), a0

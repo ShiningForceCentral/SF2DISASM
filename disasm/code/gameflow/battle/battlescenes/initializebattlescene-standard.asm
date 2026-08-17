@@ -315,11 +315,19 @@ alt_InitializeBattlescene:
                 
                 jsr     (WaitForVInt).w
                 bsr.w   FadeInFromBlackIntoBattlescene
-            if (MUSIC_RESUMING&RESUME_BATTLEFIELD_MUSIC_ONLY=1)
-                deactivateMusicResuming
-            endif
                 clr.w   d0
                 move.b  (BATTLESCENE_MUSIC_INDEX).l,d0
+            if (MUSIC_RESUMING=1)
+				lea		table_ResumingBattlesceneMusics(pc),a0
+@TestNextTableIndex:
+				cmp.b	(a0),d0
+				beq.s	@KeepMusicResuming ; Hit music number in table -> resume
+				cmp.b	#0,(a0)+
+				bne.s	@TestNextTableIndex ; Keep browsing the table
+                deactivateMusicResuming ; End of table reached -> no resume (note: d0 is unchanged by snd cmd)
+@KeepMusicResuming:
+            endif
+			
                 sndCom  SOUND_COMMAND_GET_D0_PARAMETER
                 moveq   #21,d0
 @MoveActorsToPosition_Loop:

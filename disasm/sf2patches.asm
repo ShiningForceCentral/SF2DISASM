@@ -179,15 +179,8 @@ SECOND_MEMBERS_LIST_PAGE: equ secondMembersListPage
 
 
 ; Sound driver
-MUSIC_RESUMING:                     equ 1       ; 
-RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 1       ; Do not resume battlescene music.
+MUSIC_RESUMING:                     equ 1       ; Enable music resuming (musics only resume in battlescenes if they are added to 'resumingbattlescenemusics-standard.asm' list)
 RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 1       ; Resume background music after playing a "Joined the Force" jingle.
-
-resumeBattlesceneMusic = 1
-    if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
-resumeBattlesceneMusic = 0
-    endif
-RESUME_BATTLESCENE_MUSIC: equ resumeBattlesceneMusic
 
 
 ; Data expansions

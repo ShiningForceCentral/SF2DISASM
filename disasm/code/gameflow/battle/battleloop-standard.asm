@@ -21,7 +21,7 @@ BattleLoop:
                 dbf     d7,@ClearAiMemory_Loop
                 
                 clearSavedByte PLAYER_TYPE
-            if (MUSIC_RESUMING&RESUME_BATTLESCENE_MUSIC=1)
+            if (MUSIC_RESUMING=1)
                 activateMusicResuming
             endif
                 
