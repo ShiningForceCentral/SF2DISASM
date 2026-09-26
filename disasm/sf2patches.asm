@@ -2,7 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Initial configuration settings
-ALL_ALLIES_JOINED:          equ 0       ; All allies join from the beginning at level 1.
+ALL_ALLIES_JOINED:          equ 0       ; All allies join from the beginning at level 1 (keep in mind this will affect story event flow, Sarah will be excluded to avoid "Astral missing in school basement" softlock)
 INITIAL_SPECIAL_TURBO:      equ -1      ; -1 = toggle ON
 INITIAL_DEBUG_MODE:         equ 0       ; -1 = toggle ON
 INITIAL_CONTROL_OPPONENT:   equ 0       ; -1 = toggle ON
@@ -17,7 +17,7 @@ INITIAL_NO_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 ;   This is determined by whether standard.bat or standard-test.bat is used when building.
 
 ; Test build configuration settings
-TEST_BUILD_ALL_ALLIES_JOINED:           equ 1
+TEST_BUILD_ALL_ALLIES_JOINED:           equ 1		; All allies join from the beginning (keep in mind this will affect story event flow, Sarah will be excluded to avoid "Astral missing in school basement" softlock)
 TEST_BUILD_ALLIES_START_LEVEL:          equ 40      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
 TEST_BUILD_INITIAL_SPECIAL_TURBO:       equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_DEBUG_MODE:          equ -1      ; -1 = toggle ON
