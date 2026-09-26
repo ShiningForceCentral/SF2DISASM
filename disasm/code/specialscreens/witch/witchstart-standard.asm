@@ -207,6 +207,12 @@ witchMenuAction_New:
 @loc_15:        addi.w  #233,d0 ; HARDCODED text index for difficulty choice reactions
                 jsr     (DisplayText).w
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
+                
+            if (ALL_ALLIES_JOINED|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED)=1)
+				; Clear Sarah joined flag, in case "all allies joined" patch is in effect (otherwise Astral will be missing the school basement = playthrough softlocked)
+				clrFlg  1
+			endif
+				
                 getCurrentSaveSlot d0
                 setSavedByte #GAMESTART_MAP, CURRENT_MAP
                 setSavedByte #GAMESTART_MAP, EGRESS_MAP
