@@ -1,0 +1,1 @@
+SELL_BEFORE_BUY:                    equ 1       ; When buying a weapon, adds an option to first sell the currently equipped weapon (before checking if item slots are full).
