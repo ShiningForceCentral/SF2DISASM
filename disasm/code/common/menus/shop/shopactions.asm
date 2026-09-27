@@ -98,7 +98,7 @@ byte_2013C:
                 lea     ((TARGETS_LIST-$1000000)).w,a0
                 lea     ((GENERIC_LIST-$1000000)).w,a1
                 move.w  ((TARGETS_LIST_LENGTH-$1000000)).w,d7
-                subq.b  #1,d7                
+                subq.b  #1,d7
 loc_2015E:
                 
                 move.b  (a0)+,(a1)+
