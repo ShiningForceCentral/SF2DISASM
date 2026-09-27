@@ -210,13 +210,14 @@ witchMenuAction_New:
                 
 			if (FIX_ALL_ALLIES_JOINED_STORY_FLOW=1)
             if (ALL_ALLIES_JOINED|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED)=1)
-				; Clear Sarah flags in case "all allies joined" patch is in effect (otherwise Astral will be missing the school basement = playthrough softlocked)
-				; Jaha must also be removed from the party because he must join to unlock properly the 2nd battle when exiting the starting town (not a blocking issue, but still very noticeable)
-				; Chaz/Lemon must also be removed from the party because the incorrect Yeel setup will trigger otherwise (with the piano scene) and Kazin scene with the old man will be broken
-				clrFlg  1
-				clrFlg  3
-				clrFlg  27
-				clrFlg  28
+				clrFlg  1 ; Sarah must be removed otherwise Astral will be missing in the school basement
+				clrFlg  3 ; Jaha must be removed otherwise Battle 2 won't happen when exiting the starting town (not a blocking issue, but still very noticeable)
+				clrFlg  8 ; May must be removed otherwise the unfriendly village scene will break
+				clrFlg  10 ; Luke must be removed otherwise the Kraken battle won't happen
+				clrFlg  13 ; Elric must be removed to have the bond scene happen correctly
+				clrFlg  22 ; Frayja must be removed as he is the trigger for Oddler recovering from memory loss
+				clrFlg  27 ; Lemon must be removed otherwise the incorrect Yeel setup will trigger (with the piano scene) and Kazin scene with the old man will be broken
+				clrFlg  28 ; Chaz: same reason, for correct Yeel sequence
 			endif
 			endif
 				
