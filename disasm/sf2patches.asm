@@ -71,7 +71,7 @@ FIX_SLADE_EXPLODES_AFTER_BATTLE_5:   equ 1   ; Fixes the bug where at the end of
 FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
 FIX_TIMER_WINDOW_POSITION:           equ 1   ; Re-positions the timer window displayed during the Fairy Woods special stage battle to perfectly overlap the gold window when viewing the member status screen.
 FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
-FIX_ALL_ALLIES_JOINED_STORY_FLOW:    equ 1   ; When starting a ALL_ALLIES_JOINED playthrough the normal way (with witch menu "New" command), remove Sarah/Jaha/Chaz from the party to avoid the most disruptive story flow issues (Astral missing in school and empty Yael).
+FIX_ALL_ALLIES_JOINED_STORY_FLOW:    equ 1   ; When starting a ALL_ALLIES_JOINED playthrough the normal way (with witch menu "New" command), remove Sarah/Jaha/Chaz/Lemon from the party to avoid the most disruptive story flow issues (Astral missing in school and empty Yael).
 
 
 ; Quality of life features

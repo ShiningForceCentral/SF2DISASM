@@ -212,9 +212,10 @@ witchMenuAction_New:
             if (ALL_ALLIES_JOINED|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED)=1)
 				; Clear Sarah flags in case "all allies joined" patch is in effect (otherwise Astral will be missing the school basement = playthrough softlocked)
 				; Jaha must also be removed from the party because he must join to unlock properly the 2nd battle when exiting the starting town (not a blocking issue, but still very noticeable)
-				; Chaz must also be removed from the party because the incorrect Yeel setup will trigger otherwise (with the piano scene) and Kazin scene with the old man will be broken
+				; Chaz/Lemon must also be removed from the party because the incorrect Yeel setup will trigger otherwise (with the piano scene) and Kazin scene with the old man will be broken
 				clrFlg  1
 				clrFlg  3
+				clrFlg  27
 				clrFlg  28
 			endif
 			endif
