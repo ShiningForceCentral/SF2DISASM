@@ -2,7 +2,7 @@
 ; 0 = OFF, 1 = ON
 
 ; Initial configuration settings
-ALL_ALLIES_JOINED:          equ 0       ; All allies join from the beginning at level 1 (keep in mind this will affect story event flow, Sarah will be excluded to avoid "Astral missing in school basement" softlock)
+ALL_ALLIES_JOINED:          equ 0       ; All allies join from the beginning at level 1 (keep in mind this will affect or even break story events flow, see FIX_ALL_ALLIES_JOINED_STORY_FLOW below)
 INITIAL_SPECIAL_TURBO:      equ -1      ; -1 = toggle ON
 INITIAL_DEBUG_MODE:         equ 0       ; -1 = toggle ON
 INITIAL_CONTROL_OPPONENT:   equ 0       ; -1 = toggle ON
@@ -17,7 +17,7 @@ INITIAL_NO_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 ;   This is determined by whether standard.bat or standard-test.bat is used when building.
 
 ; Test build configuration settings
-TEST_BUILD_ALL_ALLIES_JOINED:           equ 1		; All allies join from the beginning (keep in mind this will affect story event flow, Sarah will be excluded to avoid "Astral missing in school basement" softlock)
+TEST_BUILD_ALL_ALLIES_JOINED:           equ 1		; All allies join from the beginning (keep in mind this will affect or even break story events flow, see FIX_ALL_ALLIES_JOINED_STORY_FLOW below)
 TEST_BUILD_ALLIES_START_LEVEL:          equ 40      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
 TEST_BUILD_INITIAL_SPECIAL_TURBO:       equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_DEBUG_MODE:          equ -1      ; -1 = toggle ON
@@ -71,6 +71,7 @@ FIX_SLADE_EXPLODES_AFTER_BATTLE_5:   equ 1   ; Fixes the bug where at the end of
 FIX_SPELL_LEARNING_PROMO_CHECK:      equ 1   ; Correctly determine whether a character is promoted when learning spells.
 FIX_TIMER_WINDOW_POSITION:           equ 1   ; Re-positions the timer window displayed during the Fairy Woods special stage battle to perfectly overlap the gold window when viewing the member status screen.
 FIX_USABLE_ITEM_VALIDATION:          equ 1   ; Compares an item's Use Spell index to the "No spell" index $3F instead of $FF.
+FIX_ALL_ALLIES_JOINED_STORY_FLOW:    equ 1   ; When starting a ALL_ALLIES_JOINED playthrough the normal way (with witch menu "New" command), remove Sarah/Jaha/Chaz from the party to avoid the most disruptive story flow issues (Astral missing in school and empty Yael).
 
 
 ; Quality of life features
