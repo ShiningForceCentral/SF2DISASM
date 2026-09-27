@@ -1,18 +1,7 @@
 echo off
 cls
-for /f %%x in ('wmic path win32_localtime get /format:list ^| findstr "="') do set %%x
-set month=0%Month%
-set month=%month:~-2%
-set day=0%Day%
-set day=%day:~-2%
-set today=%Year%%month%%day%
-set hour=%Hour%
-set hour=0%hour%
-set hour=%hour:~-2%
-set minutes=0%Minute%
-set minutes=%minutes:~-2%
-set seconds=0%Second%
-set seconds=%seconds:~-2%
+rem WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
+for /f "usebackq delims=" %%i in (`powershell -noprofile -c "(Get-Date -Format 'yyyyMMdd-HHmmss')"`) do set timestamp=%%i
 echo -------------------------------------------------------------
 echo Start of assembly
 echo Checking sound binaries ...
@@ -30,7 +19,7 @@ echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
 cd ../../../
 echo Assembling game ...
-SET "buildname=sf2build-%today%-%hour%%minutes%%seconds%"
+SET "buildname=sf2build-%timestamp%"
 @"../tools/asm68k" /e VANILLA_BUILD=1 /e STANDARD_BUILD=0 /e TEST_BUILD=0 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 
