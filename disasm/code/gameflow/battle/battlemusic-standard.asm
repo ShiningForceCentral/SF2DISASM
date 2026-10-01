@@ -21,12 +21,21 @@ PlayMapMusic:
 ; =============== S U B R O U T I N E =======================================
 
 
-GetMapMusic:	
-                movem.l d1-d2/a0,-(sp)
+GetMapMusic:	; This routine computes the current map music (depending on whether we are in battle)
+                movem.l d1-d3/a0,-(sp)
                 clr.w   d0
                 move.b  ((MAP_AREA_MUSIC_INDEX-$1000000)).w,d0
                 compareToSavedByte #NOT_CURRENTLY_IN_BATTLE, CURRENT_BATTLE
                 beq.s   @Continue
+                
+				getSavedByte CURRENT_BATTLE, d3
+                lea     table_BattleNumbersToBattleMusics(pc), a0
+                move.w  d3,d1
+                moveq   #1,d2
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                bcs.s   @Continue
+                move.b  (a0),d0		
+				bra.s   @Continue	; Battle number table has the final say
                 
                 lea     table_ExplorationToBattleMusics(pc), a0
                 move.w  d0,d1
@@ -36,7 +45,7 @@ GetMapMusic:
                 move.b  (a0),d0
                 
 @Continue:      
-                movem.l (sp)+,d1-d2/a0
+                movem.l (sp)+,d1-d3/a0
                 rts						; d0 = current map music
 
 

@@ -102,6 +102,7 @@
                 includeIfStandard "data\stats\enemies\enemybattlescenemusics-standard.asm"
                 includeIfStandard "data\stats\items\movesfxforequippedring-standard.asm"
                 includeIfStandard "data\battles\global\explorationtobattlemusics-standard.asm"
+				includeIfStandard "data\battles\global\battlenumberstobattlemusics-standard.asm"
                 includeIfStandard "data\stats\specialsprites-standard.asm"
                 alignIfStandard
                 
