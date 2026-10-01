@@ -339,10 +339,11 @@ LoadBattlesceneMusicIndex:
 @SpecialMusicUnpromoted:
 					lea		table_AllyBattlesceneMusics_Unpromoted(pc),a0
 @SpecialMusicTest:
-					adda.w  d0,a0
-                    move.b  (a0),d3
-					cmpi.b  #0,d3
-                    beq.s   @SpecialMusicDisabled ; No special music defined for this Force member
+					move.w  d0,d1
+					moveq   #1,d2
+					jsr     (FindSpecialPropertyBytesAddressForObject).w
+					bcs.s   @SpecialMusicDisabled ; No special music defined for this Force member
+					move.b  (a0),d3
                     bra	    @LoadIndex ; Submit the special music
 @SpecialMusicDisabled:
 				endif
