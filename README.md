@@ -1,7 +1,8 @@
 [![License](https://img.shields.io/badge/License-CC_BY--NC_4.0-green)](https://github.com/ShiningForceCentral/SF2DISASM#license)
 
-![The SF2 Disassembly Super Thread](https://forums.shiningforcecentral.com/viewtopic.php?f=5&t=41303)
-![sf2hack Discord Server][(https://discord.gg/uCDgqhc)
+[The SF2 Disassembly Super Thread](https://forums.shiningforcecentral.com/viewtopic.php?f=5&t=41303)
+
+[<img height="20" src="https://thesvg.org/icons/discord/default.svg"> sf2hack Discord Server](https://discord.gg/uCDgqhc)
 
 SF2DISASM
 =========
