@@ -2,43 +2,43 @@
 ; as well as more space for music resuming feature.
 ; See doc/channel_data.txt for content details.
 
-    db  "MSCYM1"  
+    db  "MUSICYM1"  
     align  10h, 0
 MUSIC_CHANNEL_YM1:
     align  30h,0
-    db  "MUCYM2"
+    db  "MUSICYM2"
     align  10h,0    
 MUSIC_CHANNEL_YM2:
     align  30h,0
-    db  "MSCYM3"    
+    db  "MUSICYM3"    
     align  10h,0      
 MUSIC_CHANNEL_YM3:
     align  30h,0
-    db  "MSCYM4"  
+    db  "MUSICYM4"  
     align  10h,0  
 MUSIC_CHANNEL_YM4:
     align  30h,0
-    db  "MSCYM5"    
+    db  "MUSICYM5"    
     align  10h,0  
 MUSIC_CHANNEL_YM5:
     align  30h,0
-    db  "MSCYM6"
+    db  "MUSICYM6"
     align  10h,0      
 MUSIC_CHANNEL_YM6:
     align  30h,0
-    db  "MSCTN1"  
+    db  "MUSICTN1"  
     align  10h,0      
 MUSIC_CHANNEL_PSG1:
     align  30h,0
-    db  "MSCTN2"
+    db  "MUSICTN2"
     align  10h,0
 MUSIC_CHANNEL_PSG2:
     align  30h,0
-    db  "MSCTN3"  
+    db  "MUSICTN3"  
     align  10h,0
 MUSIC_CHANNEL_PSG3:
     align  30h,0  
-    db  "MSCNOI"      
+    db  "MUSICNOI"      
     align  10h,0
 MUSIC_CHANNEL_NOISE:
     align  30h,0
@@ -111,46 +111,46 @@ SFX_CHANNEL_NOISE:
     align  10h,0  
 SAVED_MUSIC_CHANNEL_YM1:
     align  30h,0
-    db  "BKPYM2"  
+    db  "SAVEDYM2"  
     align  30h,0
-    db  "BKPYM3"  
+    db  "SAVEDYM3"  
     align  30h,0
-    db  "BKPYM4"
+    db  "SAVEDYM4"
     align  30h,0
-    db  "BKPYM5"
+    db  "SAVEDYM5"
     align  30h,0
-    db  "BKPYM6"
+    db  "SAVEDYM6"
     align  30h,0
-    db  "BKPTN1"  
+    db  "SAVEDTN1"  
     align  30h,0
-    db  "BKPTN2"
+    db  "SAVEDTN2"
     align  30h,0
-    db  "BKPTN3"
+    db  "SAVEDTN3"
     align  30h,0
-    db  "BKPNOI"  
+    db  "SAVEDNOI"  
     align  30h,0
 ; Temporary copy space for swapping of music/saved channels when resuming
-    db  "TMPYM1"
+    db  "TEMPYM1"
     align  10h,0  
 TMPCPY_MUSIC_CHANNEL_YM1:
     align  30h,0
-    db  "TMPYM2"  
+    db  "TEMPYM2"  
     align  30h,0
-    db  "TMPYM3"  
+    db  "TEMPYM3"  
     align  30h,0
-    db  "TMPYM4"
+    db  "TEMPYM4"
     align  30h,0
-    db  "TMPYM5"  
+    db  "TEMPYM5"  
     align  30h,0
-    db  "TMPYM6"  
+    db  "TEMPYM6"  
     align  30h,0
-    db  "TMPTN1"  
+    db  "TEMPTN1"  
     align  30h,0
-    db  "TMPTN2"
+    db  "TEMPTN2"
     align  30h,0
-    db  "TMPTN3"
+    db  "TEMPTN3"
     align  30h,0
-    db  "TMPNOI"
+    db  "TEMPNOI"
     align  30h,0    
 TMPCPY_MUSIC_BANK: 
     db  0    

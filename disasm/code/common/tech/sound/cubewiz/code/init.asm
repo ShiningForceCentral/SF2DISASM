@@ -12,5 +12,5 @@
     call  ActivateResuming
     ld  a, 20h                  ; initialize music channels with void music entry $20
     call  ProcessNewCommand
-    ld  a, (DAC_BANK)
+    ld  a, (PCM_BANK)
     call  LoadBank

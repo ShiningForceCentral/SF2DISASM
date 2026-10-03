@@ -1,74 +1,13 @@
+; Bank table in banfdefs.asm
+BANK_START_INDEX               equ 0
+BANK_INDEX                     equ 2
+BANK_OFFSET                    equ 4
+BANK_TYPE                      equ 6
+BANK_TYPE_MUSIC                equ 0
+BANK_TYPE_SFX                  equ 1
+BANK_ENTRY_SIZE                equ 8
 
-; 68K ROM offsets
-SFX_ROM_OFFSET                 equ 01EE000h
-DAC_BANK_1_ROM_OFFSET          equ 01E0000h
-DAC_BANK_2_ROM_OFFSET          equ 01E8000h
-YM_INSTRUMENTS_BANK_ROM_OFFSET equ 01EB000h
-MUSIC_BANK_2_ROM_OFFSET        equ 01F0000h
-MUSIC_BANK_1_ROM_OFFSET        equ 01F8000h
-
-; Banks defined by 32kB slot position in ROM, 
-; and then pointers to mapped range 0x8000..0xFFFF when needed
-SFX_BANK                       equ SFX_ROM_OFFSET/08000h
-SFX_BANK_OFFSET                equ SFX_ROM_OFFSET#08000h+08000h
-DAC_BANK_1                     equ DAC_BANK_1_ROM_OFFSET/08000h
-DAC_BANK_2                     equ DAC_BANK_2_ROM_OFFSET/08000h
-MUSIC_BANK_1                   equ MUSIC_BANK_1_ROM_OFFSET/08000h
-MUSIC_BANK_2                   equ MUSIC_BANK_2_ROM_OFFSET/08000h
-YM_INSTRUMENTS_BANK            equ YM_INSTRUMENTS_BANK_ROM_OFFSET/08000h
-YM_INSTRUMENTS_BANK_OFFSET     equ YM_INSTRUMENTS_BANK_ROM_OFFSET#08000h+08000h
-
-; Z80 RAM offsets
-STACK_START                    equ 1FE0h
-SAVED_MUSIC_BANK               equ 1FE0h
-PREVIOUS_MUSIC                 equ 1FE1h
-SAVED_YM_TIMER_VALUE           equ 1FE2h
-SAVED_MUSIC_YM6_FM_MODE        equ 1FE3h
-NEW_SAMPLE                     equ 1FE4h
-DAC_LAST_OFFSET                equ 1FE5h
-TEMP_FREQUENCY                 equ 1FE6h ; 2 bytes
-RESUMING_DEACTIVATED           equ 1FE8h
-CURRENT_PSG_CHANNEL            equ 1FE9h
-CURRENT_CHANNEL                equ 1FEAh
-FADE_OUT_LENGTH                equ 1FEBh
-FADE_OUT_TIMER                 equ 1FECh
-FADE_OUT_COUNTER               equ 1FEDh
-CURRENTLY_FADING_OUT           equ 1FEEh
-COMMANDS_COUNTER               equ 1FEFh
-MUSIC_BANK                     equ 1FF0h
-CURRENT_MUSIC                  equ 1FF1h
-YM_TIMER_VALUE                 equ 1FF2h
-MUSIC_YM6_FM_MODE              equ 1FF3h
-DAC_BANK                       equ 1FF4h
-DAC_REMAINING_LENGTH           equ 1FF5h ; 2 bytes
-PROCESSING_SFX                 equ 1FF7h
-CALL_YM_PART2                  equ 1FF8h
-CURRENTLY_MANAGING_SFX_TYPE_2  equ 1FF9h
-TEMP_REGISTER                  equ 1FFAh
-FADE_IN_TIMER                  equ 1FFBh
-FADE_IN_PARAMS                 equ 1FFCh ; nibble 1 : fade in  speed. nibble 2 : fade in start level.
-OUTPUT_LEVEL                   equ 1FFDh ; general output level set from 68k
-LAST_COMMAND                   equ 1FFEh
-NEW_COMMAND                    equ 1FFFh
-          
-; Registers
-YM1_REGISTER                   equ 4000h
-YM1_DATA                       equ 4001h
-YM2_REGISTER                   equ 4002h
-YM2_DATA                       equ 4003h
-BANK_REGISTER                  equ 6000h
-PSG_PORT                       equ 7F11h
-
-; YM registers
-YMREG_TIMER_B                  equ 26h
-YMREG_KEY_ON_OFF               equ 28h
-YMREG_DAC_OUTPUT               equ 2Ah
-YMREG_DAC_ENABLE               equ 2Bh
-YMREG_MUL_DT                   equ 30h
-YMREG_TOTAL_LEVEL              equ 40h
-YMREG_PANNING                  equ 0B4h
-
-; Channel data offsets
+; Channel data in data/channel_data.asm
 CHANNEL_DATA_SIZE              equ 30h
 DATA_CURSOR                    equ 00h     ; $00-$01 Data cursor
 TIME_COUNTER                   equ 02h     ; $02     Time counter for note/sample play length
@@ -99,5 +38,55 @@ FREQUENCY_SHIFT                equ 1Dh     ; $1D     Frequency shift value
 STEREO_PANNING                 equ 1Eh     ; $1E     YM Stereo Output setup
 KEY_RELEASED                   equ 1Eh     ; $1E     PSG Key Released
 SLIDE_SPEED                    equ 1Fh     ; $1F     Slide speed
+
+; Z80 RAM offsets
+STACK_START                    equ 1FE0h
+SAVED_MUSIC_BANK               equ 1FE0h
+PREVIOUS_MUSIC                 equ 1FE1h
+SAVED_YM_TIMER_VALUE           equ 1FE2h
+SAVED_MUSIC_YM6_FM_MODE        equ 1FE3h
+NEW_SAMPLE                     equ 1FE4h
+DAC_LAST_OFFSET                equ 1FE5h
+TEMP_FREQUENCY                 equ 1FE6h ; 2 bytes
+RESUMING_DEACTIVATED           equ 1FE8h
+CURRENT_PSG_CHANNEL            equ 1FE9h
+CURRENT_CHANNEL                equ 1FEAh
+FADE_OUT_LENGTH                equ 1FEBh
+FADE_OUT_TIMER                 equ 1FECh
+FADE_OUT_COUNTER               equ 1FEDh
+CURRENTLY_FADING_OUT           equ 1FEEh
+COMMANDS_COUNTER               equ 1FEFh
+MUSIC_BANK                     equ 1FF0h
+CURRENT_MUSIC                  equ 1FF1h
+YM_TIMER_VALUE                 equ 1FF2h
+MUSIC_YM6_FM_MODE              equ 1FF3h
+PCM_BANK                       equ 1FF4h
+DAC_REMAINING_LENGTH           equ 1FF5h ; 2 bytes
+PROCESSING_SFX                 equ 1FF7h
+CALL_YM_PART2                  equ 1FF8h
+CURRENTLY_MANAGING_SFX_TYPE_2  equ 1FF9h
+TEMP_REGISTER                  equ 1FFAh
+FADE_IN_TIMER                  equ 1FFBh
+FADE_IN_PARAMS                 equ 1FFCh ; nibble 1 : fade in  speed. nibble 2 : fade in start level.
+OUTPUT_LEVEL                   equ 1FFDh ; general output level set from 68k
+LAST_COMMAND                   equ 1FFEh
+NEW_COMMAND                    equ 1FFFh
+          
+; Registers
+YM1_REGISTER                   equ 4000h
+YM1_DATA                       equ 4001h
+YM2_REGISTER                   equ 4002h
+YM2_DATA                       equ 4003h
+BANK_REGISTER                  equ 6000h
+PSG_PORT                       equ 7F11h
+
+; YM registers
+YMREG_TIMER_B                  equ 26h
+YMREG_KEY_ON_OFF               equ 28h
+YMREG_DAC_OUTPUT               equ 2Ah
+YMREG_DAC_ENABLE               equ 2Bh
+YMREG_MUL_DT                   equ 30h
+YMREG_TOTAL_LEVEL              equ 40h
+YMREG_PANNING                  equ 0B4h
 
 

@@ -16,7 +16,7 @@ SendDacByte:
     or  e
     jp  z, $$return
 
-    ld  a, (DAC_BANK)
+    ld  a, (PCM_BANK)
     call  LoadBank        
     ld  a, (DAC_LAST_OFFSET)
     ld  h, a    
@@ -51,7 +51,7 @@ $$ymRequestLoop:
     call  LoadBank
     jp  $$return
 $$loadSfxBank:    
-    ld  a, SFX_BANK
+    ld  a, SFX_BANK_INDEX
     call  LoadBank    
 $$return:
     pop  hl

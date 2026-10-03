@@ -1,14 +1,9 @@
-
-ProcessNewCommand:          
-    push  af
-    xor  a
-    ld  (NEW_COMMAND), a
-    ld  a, (COMMANDS_COUNTER)
-    add  a, 1
-    ld  (COMMANDS_COUNTER), a    
-    pop  af
-
-    ld  (LAST_COMMAND), a 
+ProcessNewCommand:         
+    ld  ix, NEW_COMMAND
+    ld  (ix), 0
+    ld  ix, COMMANDS_COUNTER
+    inc (ix) 
+    ld  (LAST_COMMAND), a    
     cp  0FFh
     jp  z, MuteSound
     cp  0FEh
@@ -27,70 +22,69 @@ ProcessNewCommand:
     jp  z, SetYmTimer
     cp  0F0h
     jp  z, ApplyOutputLevel
+    ; use BANK_TABLE to find bank type, based on music/sfx index
+    ; ix then contains table entry offset for usage in LoadMusic/LoadSfx : 
+    ; starting index to substract, bank index to load, bank offset to reach pointer table
+    ld  bc, BANK_ENTRY_SIZE
+    ld  ix, BANK_TABLE
+$$findBank:
+    cp  (ix+BANK_ENTRY_SIZE+BANK_START_INDEX)
+    jr  nc, $$checkNextBank
+$$bankFound:
+    ld  b, a
+    ld  a, (ix+BANK_TYPE)
+    or  a
+    ld  a, b
+    jp  nz, LoadSfx 
+    jp  LoadMusic
+$$checkNextBank:
+    add ix,bc
+    jp  $$findBank
 
-    ; Music ids from 1 to 40h, SFX ids from 41h
-    cp  41h
-    jp  nc, $$loadSfx  
-    ld  ix, PREVIOUS_MUSIC
-    cp  (ix)
-    jp  nz, $$loadNewMusic
-
-    ; resume music
-    ; if saved music was finished, just load it again
+LoadMusic:
+    ; check music resuming conditions
+    ld  iy, PREVIOUS_MUSIC
+    cp  (iy)
+    jp  nz, $$noResuming
     push  af
     ld  a, (SAVED_MUSIC_CHANNEL_YM1+CHANNEL_FREE)    
-    cp  01h
+    cp  1
     jp  nz, $$checkResuming
     pop  af
-    jp  $$loadNewMusic
+    jp  $$noResuming
 $$checkResuming:
     ld  a, (RESUMING_DEACTIVATED)    
     cp  0FFh
     jp  nz, $$resume
     pop  af
-    jp  $$loadNewMusic
+    jp  $$noResuming
 $$resume:    
     ld  a, (CURRENT_MUSIC)
     ld  (PREVIOUS_MUSIC), a  
     pop  af
     ld  (CURRENT_MUSIC), a
     jp  ResumeMusic    
-
-$$loadNewMusic:    
+$$noResuming:   
     push  hl
     push  de
     push  af
     ld  a, (MUSIC_BANK)
     ld  (SAVED_MUSIC_BANK), a  
+    ld  a, 0Fh
+    ld  (FADE_IN_PARAMS), a
     pop  af
     push  af
-    cp  21h
-    jr  nc, $$loadMusicFromBank2
-    ; id from 1 to $20
-    ld  a, MUSIC_BANK_1
+    ld  a, (ix+BANK_INDEX)
     ld  (MUSIC_BANK), a
     call  LoadBank
     ld  a, (CURRENT_MUSIC)  
     ld  (PREVIOUS_MUSIC), a
     pop  af
     ld  (CURRENT_MUSIC), a
-    ld  de, 8000h
-    jp  $$loadMusicEntry
-
-$$loadMusicFromBank2:
-    ; id from $21 to $40
-    ld  a, MUSIC_BANK_2  
-    ld  (MUSIC_BANK), a
-    call  LoadBank
-    ld  a, (CURRENT_MUSIC)  
-    ld  (PREVIOUS_MUSIC), a
-    pop  af
-    ld  (CURRENT_MUSIC), a
-    ld  de, 8000h
-    sub  20h
-
+    ld  e, (ix+BANK_OFFSET)
+    ld  d, (ix+BANK_OFFSET+1)
 $$loadMusicEntry:
-    dec  a    ; decrement music/sound index (no $00 entry)
+    sub  (ix+BANK_START_INDEX)
     add  a, a
     ld  h, 0
     ld  l, a
@@ -101,15 +95,13 @@ $$loadMusicEntry:
     ld  l, a
     ld  a, (hl)
     or  a
-    jp  nz, $$loadSfx  ; if byte 0 of music data != 0, load it as an SFX instead
+    jp  nz, LoadSfx  ; if byte 0 of music data != 0, load it as an SFX instead
     ld  a, (FADE_IN_PARAMS)
     and  0Fh
     ld  (OUTPUT_LEVEL), a
     xor  a
     ld  (FADE_IN_TIMER), a
-    
     call  SaveMusic
-    
     call  StopMusic  ; stop currently playing music if there was one
     inc  hl
     ld  a, (hl)    ; get music data byte 1 : indicates if YM Channel 6 uses FM mode
@@ -124,7 +116,6 @@ $$loadMusicEntry:
     ld  (FADE_OUT_COUNTER), a
     ld  a, 63h
     ld  (FADE_OUT_TIMER), a
-
     inc  hl    ; Channel 1 data pointer
     ld  b, 0Ah
     ld  ix, MUSIC_CHANNEL_YM1
@@ -158,7 +149,6 @@ $$skipMusicChannelInit:
     ld  de, CHANNEL_DATA_SIZE
     add  ix, de
     djnz  $$initMusicChannelsLoop
-
     ld  b, 2    ; loop two times
 $$activateStereoOutputsLoop:
     push  bc
@@ -173,7 +163,6 @@ $$activateStereoOutputsLoop:
     call  ApplyYmInput
     pop  bc
     djnz  $$activateStereoOutputsLoop
-    
     ld  a, 0C0h
     ld  (MUSIC_CHANNEL_YM1+STEREO_PANNING), a
     ld  (MUSIC_CHANNEL_YM2+STEREO_PANNING), a
@@ -184,23 +173,19 @@ $$activateStereoOutputsLoop:
     ld  a, 0FEh  ; DAC playback init command
     ld  (NEW_SAMPLE), a
     call  LoadYmTimerB
+    jp  ReturnToMainLoop
 
-$$returnToMainLoop:        
-    pop  de
-    pop  hl
-    ld  a, (DAC_BANK)
-    jp  LoadBank
-
-$$loadSfx:
+LoadSfx:
     push  hl
     push  de
-    sub  41h
+    sub  (ix+BANK_START_INDEX)
     ld  h, 0
     ld  l, a
-    ld  a, SFX_BANK
+    ld  a, (ix+BANK_INDEX)
     call  LoadBank    
     add  hl, hl
-    ld  de, SFX_BANK_OFFSET
+    ld  e, (ix+BANK_OFFSET)
+    ld  d, (ix+BANK_OFFSET+1)
     add  hl, de  
     ld  a, (hl)
     inc  hl
@@ -214,7 +199,6 @@ $$loadSfx:
     inc  hl    ; hl points to byte 1 of sfx data
     cp  1
     jr  nz, $$loadSfxType2
-
     ld  b, 0Ah ; loop 10 times
     ld  ix, SFX_CHANNEL_YM1
 $$initSfxType1ChannelsLoop:
@@ -230,8 +214,7 @@ $$skipSfxType1ChannelInit:
     ld  de, CHANNEL_DATA_SIZE
     add  ix, de
     djnz  $$initSfxType1ChannelsLoop
-    jr  $$returnToMainLoop  
-
+    jr  ReturnToMainLoop  
 $$loadSfxType2:
     ld  bc, 304h  ; loop 3 times, starting from YM channel 4
     ld  ix, SFX_CHANNEL_YM4
@@ -258,4 +241,9 @@ $$skipSfxType2ChannelInit:
     pop  bc
     inc  c
     djnz  $$initSfxType2ChannelsLoop
-    jp  $$returnToMainLoop 
+
+ReturnToMainLoop:        
+    pop  de
+    pop  hl
+    ld  a, (PCM_BANK)
+    jp  LoadBank

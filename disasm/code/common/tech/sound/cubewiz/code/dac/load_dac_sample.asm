@@ -21,7 +21,7 @@ $$doLoad:
     inc  hl    ; byte  2 : bank to load
     ld  (DacLoop+1), a  ; change loop operand to change DAC playback time period
     ld  a, (hl) 
-    ld  (DAC_BANK), a
+    ld  (PCM_BANK), a
     inc  hl
     inc  hl
     ld  e, (hl)
@@ -34,6 +34,6 @@ $$doLoad:
     ld  l, a    ; bytes 7-6 : sample pointer
     xor  a
     ld  (NEW_SAMPLE), a
-    ld  a, (DAC_BANK)
+    ld  a, (PCM_BANK)
     call  LoadBank
     ret
