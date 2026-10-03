@@ -1,6 +1,7 @@
-[The SF2 Disassembly Super Thread](https://forums.shiningforcecentral.com/viewtopic.php?f=5&t=41303)
-[sf2hack Discord Server][(https://discord.gg/uCDgqhc)
+[![License](https://img.shields.io/badge/License-CC_BY--NC_4.0-green)](https://github.com/ShiningForceCentral/SF2DISASM#license)
 
+![The SF2 Disassembly Super Thread](https://forums.shiningforcecentral.com/viewtopic.php?f=5&t=41303)
+![sf2hack Discord Server][(https://discord.gg/uCDgqhc)
 
 SF2DISASM
 =========
@@ -13,6 +14,11 @@ The purpose of this project will be to provide a disassembly of Shining Force II
 - Being able to re-assemble the game and obtain the same rom file as the original game.
 - Giving fan-projects the ability to start from this disassembly by editing the game's code and assets.
 
+## License
+This work is licensed under the [CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/)   <img src="http://i.creativecommons.org/l/by-nc/4.0/88x31.png">
+
+The hard work of many people that have made this kind of project possible so please attribute appropriately.
+This work cannot be used for any commercial or for-profit purposes.
 
 ## Documentation : 
 
