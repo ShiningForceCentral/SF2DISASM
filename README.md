@@ -20,6 +20,10 @@ This work is licensed under the [CC BY-NC 4.0 license](https://creativecommons.o
 The hard work of many people that have made this kind of project possible so please attribute appropriately.
 This work cannot be used for any commercial or for-profit purposes.
 
+## Attribution
+
+This project includes several tools from the ![SF2 Java Tool Suite](https://github.com/ShiningForceCentral/SF2JavaToolSuite) which is licensed under CC BY-NC 4.0.
+
 ## Documentation : 
 
 Providing documentation of the game will be done mainly in two ways : 
