@@ -33,6 +33,7 @@ Please confirm that the following standard tests have been performed. Then, list
 
 ## ✅ Checklist
 
+- [ ] This PR follows SF2DISASM's [Git Workflow Guidelines](https://github.com/ShiningForceCentral/SF2DISASM#git-workflow-guidelines-)
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my own code
 - [ ] I have commented my code, particularly in hard-to-understand areas
