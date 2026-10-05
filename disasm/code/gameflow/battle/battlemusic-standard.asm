@@ -33,10 +33,10 @@ GetMapMusic:	; This routine computes the current map music (depending on whether
                 move.w  d3,d1
                 moveq   #1,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Continue
+                bcs.s   @TryExplorationToBattleMusic
                 move.b  (a0),d0		
 				bra.s   @Continue	; Battle number table has the final say
-                
+@TryExplorationToBattleMusic:
                 lea     table_ExplorationToBattleMusics(pc), a0
                 move.w  d0,d1
                 moveq   #1,d2
