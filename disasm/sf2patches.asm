@@ -149,7 +149,7 @@ STATUS_EXP:							equ 15		; Amount of EXP given when applying or curing a status
 STATUS_BUFF_EXP:					equ 5		; Amount of EXP given when applying a positive status effect on a target (5 in the base game).
 EXP_CAP:							equ 49		; Maximum total amount of EXP earnable (49 in the base game) by performing a non-healing action (+/- 1 with randomness).
 EXP_CAP_HEALING:					equ 49		; Maximum total amount of EXP earnable (25 in the base game) by performing a healing action (+/- 1 with randomness).
-ENABLE_BONUS_EXPERIENCE:			equ 1		; [NOT IMPLEMENTED] 0 = OFF, 1 = ON    If enabled, underleveled characters compared to monsters (and story progress for healing/support) receive bonus experience points in battlescenes.
+ENABLE_BONUS_EXPERIENCE:			equ 1		; [NOT IMPLEMENTED] 0 = OFF, 1 = ON    If enabled, underleveled characters (compared to expected story progress) receive bonus experience points in battlescenes.
 
 
 ; SF1 mechanics
