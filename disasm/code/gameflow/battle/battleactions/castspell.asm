@@ -250,7 +250,11 @@ byte_B2B6:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
+            if (STANDARD_BUILD=1)
+                bsr.w   battlesceneScript_AddStatusEffectBuffSpellExp
+			else
                 bsr.w   battlesceneScript_AddStatusEffectSpellExp
+			endif
                 jsr     GetBaseAgi
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
@@ -394,7 +398,11 @@ byte_B3E2:
                 executeEnemyReaction #0,#0,d1,#2 ; HP change (signed), MP change (signed), Status Effects, Flags
 @BattleMessage:
                 
+            if (STANDARD_BUILD=1)
+                bsr.w   battlesceneScript_AddStatusEffectBuffSpellExp
+			else
                 bsr.w   battlesceneScript_AddStatusEffectSpellExp
+			endif
                 jsr     GetBaseAtt
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
@@ -988,7 +996,7 @@ byte_BA7C:
                 
                 displayMessage #MESSAGE_BATTLE_RECOVERED_MAGIC_POINTS,d0,#0,d6 
                                                         ; Message, Combatant, Item or Spell, Number
-                bsr.w   battlesceneScript_CalculateHealingExp
+                bsr.w   battlesceneScript_CalculateHealingExp	; Bug: this spell recovers MP but EXP will be calculated by comparing recovered MP to max HP (but this can give interesting results...)
                 rts
 
     ; End of function spellEffect_FairyTear
