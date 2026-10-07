@@ -133,6 +133,17 @@ DISABLE_TURN_ORDER_RANDOMIZATION:   equ 0       ; Combatants always act in the s
 EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, spawn region activated enemies, and play region activated cutscenes after each individual turn instead of at the start of a new round.
                                                 ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
 
+; Game pacing (leveling and exp)
+MIN_LEVEL_FOR_PROMOTION:			equ 21		; Minimal level required on unpromoted class before promotion is allowed (20 in the base game).
+MAX_UNPROMOTED_LEVEL:				equ 30		; Maximum level for unpromoted classes (40 in the base game, 30 is suggested if enabling SF1-style leveling patch).
+MAX_PROMOTED_LEVEL                  equ 79      ; Maximum level after promotion (99 in the base game). You may consider lowering it to 79 if you display the effective level (+20) in the status screen.
+KEEP_EXP_ON_PROMOTION:				equ 1		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
+KEEP_EXP_ON_OVERFLOW:				equ 1		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
+MONSTER_EXP_LEVEL_OFFSET:			equ -1		; [NYI] 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner, positive value x = later.
+HEALING_EXP_CAP_TARGETS             equ 2       ; [NYI] 0 = 0FF, x = ON    Give EXP for healing/support magic for up to x targets. This nerfs EXP gains for AoE Aura, Attack and so on.
+HEALING_EXP_BASE_VALUE_OFFSET       equ 5       ; [NYI] 0 = 0FF, x = ON    Increase (or decrease) by x the base EXP value for healing.
+ENABLE_BONUS_EXPERIENCE:			equ 1		; [NYI] 0 = OFF, 1 = ON    If enabled, underleveled characters compared to monsters (and story progress for healing/support) receive bonus experience points in battlescenes.
+
 
 ; SF1 mechanics
 SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.

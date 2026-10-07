@@ -77,6 +77,10 @@ FastLevelUp:
                 clr.b   (a1)+
                 clr.l   (a1)+
                 st      (a1)
+			if (STANDARD_BUILD&KEEP_EXP_ON_OVERFLOW=1)
+				move.w  #99,d1
+				jsr		SetCurrentExp
+			endif
                 bra.w   @Done
                 
 @CalculateStatGains:

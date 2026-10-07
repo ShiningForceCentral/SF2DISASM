@@ -525,8 +525,12 @@ ChurchMenu:
                 move.w  member(a6),d0
                 move.b  #1,d1
                 jsr     j_SetLevel
+            if (STANDARD_BUILD&KEEP_EXP_ON_PROMOTION=1)
+                ; Exp is retained
+            else
                 clr.w   d1
                 jsr     j_SetCurrentExp
+            endif
 @RestartPromo:
                 
                 bra.w   @StartPromo     
