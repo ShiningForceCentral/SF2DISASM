@@ -55,7 +55,7 @@ battlesceneScript_CalculateHealingExp:
 ; =============== S U B R O U T I N E =======================================
 
 
-battlesceneScript_CalculateDamageExp:
+battlesceneScript_CalculateDamageExp:	; d6 = damage dealt
                 
                 movem.l d0-d3/a0,-(sp)
                 btst    #COMBATANT_BIT_ENEMY,(a4)
@@ -66,7 +66,22 @@ battlesceneScript_CalculateDamageExp:
                 beq.w   @Skip           ; skip function to prevent division by zero error
                 bsr.w   battlesceneScript_GetKillExp
                 mulu.w  d6,d5
-                divu.w  d1,d5
+                divu.w  d1,d5			; damage EXP = kill EXP * damage dealt / max HP
+				
+			if (STANDARD_BUILD=1&DAMAGE_EXP_GUARANTEED_HP_PERCENT<>0)
+			    movem.l d5,-(sp)
+				bsr.w   battlesceneScript_GetKillExp	
+                mulu.w  #DAMAGE_EXP_GUARANTEED_HP_PERCENT,d5
+                divu.w  #100,d5			; minimum damage EXP = kill EXP * DAMAGE_EXP_GUARANTEED_HP_PERCENT / 100
+				move.w	d5,d1
+				movem.l (sp)+,d5
+				
+                cmp.w   d5,d1			
+                bge.w   @NoAdjust		; damage EXP >= minimum damage EXP
+				move.w  d1,d5
+@NoAdjust:
+			endif
+			
                 bsr.w   battlesceneScript_AddExpAndApplyPerActionCap
 @Skip:
                 
@@ -184,6 +199,9 @@ battlesceneScript_GetKillExp:
 @Continue:
                 
                 sub.w   d2,d1
+			if ((STANDARD_BUILD=1)&(DAMAGE_EXP_LEVEL_OFFSET<>0))
+				subi.w	#DAMAGE_EXP_LEVEL_OFFSET,d1
+			endif
                 moveq   #50,d5          ; HARDCODED EXP amounts
                 cmpi.b  #3,d1
                 bmi.w   @Done
