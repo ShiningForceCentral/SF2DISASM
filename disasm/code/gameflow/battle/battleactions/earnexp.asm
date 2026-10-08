@@ -83,17 +83,17 @@ battlesceneScript_CalculateDamageExp:	; d6 = damage dealt
                 beq.w   @Skip           ; skip function to prevent division by zero error
                 bsr.w   battlesceneScript_GetKillExp
                 mulu.w  d6,d5
-                divu.w  d1,d5			; damage EXP = kill EXP * damage dealt / max HP
+                divu.w  d1,d5			; d5 = damage EXP = kill EXP * damage dealt / max HP
 				
-			if (STANDARD_BUILD=1&DAMAGE_EXP_GUARANTEED_HP_PERCENT<>0)
+			if ((STANDARD_BUILD=1)&(DAMAGE_EXP_GUARANTEED_HP_PERCENT<>0))
 			    movem.l d5,-(sp)
-				bsr.w   battlesceneScript_GetKillExp	
-                mulu.w  #DAMAGE_EXP_GUARANTEED_HP_PERCENT,d5
-                divu.w  #100,d5			; minimum damage EXP = kill EXP * DAMAGE_EXP_GUARANTEED_HP_PERCENT / 100
-				move.w	d5,d1
+					bsr.w   battlesceneScript_GetKillExp	
+					mulu.w  #DAMAGE_EXP_GUARANTEED_HP_PERCENT,d5
+					divu.w  #100,d5
+					move.w	d5,d1		; d1 = minimum damage EXP = kill EXP * DAMAGE_EXP_GUARANTEED_HP_PERCENT / 100
 				movem.l (sp)+,d5
 				
-                cmp.w   d5,d1			
+                cmp.w   d1,d5
                 bge.w   @NoAdjust		; no adjust if damage EXP >= minimum damage EXP
 				move.w  d1,d5			; set damage EXP to minimum damage EXP
 @NoAdjust:
@@ -279,6 +279,7 @@ battlesceneScript_GetKillExp:
 battlesceneScript_DampenExp:
             if ((STANDARD_BUILD=1)&(EXP_DAMPENING<>0))
                 movem.l d0-d2/a0,-(sp)
+				clr		d2
 				
                 move.b  (a4),d0
                 jsr     CalculateEffectiveLevel		; d1 = actor effective level
@@ -313,8 +314,9 @@ battlesceneScript_DampenExp:
 CalculateBonusExp:
             if (STANDARD_BUILD&ENABLE_BONUS_EXPERIENCE=1)
                 movem.l d2/a0,-(sp)
+				clr		d2
 				
-                jsr     CalculateEffectiveLevel		; d1 = actor effective level
+                jsr     CalculateTotalLevel			; d1 = actor total levels
 				getSavedByte CURRENT_BATTLE, d2		; d2 = current battle
 				
                 lea     table_ExpectedLevelForBattles(pc), a0
@@ -325,17 +327,18 @@ CalculateBonusExp:
 				bmi.s	@NoBonus					; actor is above expected current battle level
 
 				cmp.w   #table_BonusExp_Length,d2
-				bpl.s	@Read
+				bmi.s	@Read
 				move.w  #(table_BonusExp_Length-1),d2	; d2 capped to avoid going out of bounds of table_BonusExp
 
 			@Read:
                 lea     table_BonusExp(pc), a0
                 adda.w  d2,a0
+				clr		d1
 				move.b  (a0),d1						; d1 = bonus EXP
 				bra.s   @Done
 				
 			@NoBonus:
-				clr.w	d1
+				clr		d1
 				
 			@Done:
                 movem.l (sp)+,d2/a0

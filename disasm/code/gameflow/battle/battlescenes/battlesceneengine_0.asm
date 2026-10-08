@@ -1545,29 +1545,41 @@ bsc0F_giveExp:
 			if (STANDARD_BUILD&ENABLE_BONUS_EXPERIENCE=1)
                 btst    #15,d1			; skip if for some reason EXP is negative (should never happen)
                 bne.s   loc_1910C
-                jsr     IncreaseExp
+				
+				move.l  d1,-(sp)
+				jsr     IncreaseExp		; save d1 before calling this subroutine
+				move.l  (sp)+,d1
 				
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     263             ; "{NAME} earned {#}{N}EXP. points.{D1}"
-			
-				move.w  #100,d0
-				sub.w   d1,d0			; d0 = maximum bonus EXP
-				bmi.s   loc_1910C		; maximum bonus EXP is negative, skip
 				
-				jsr		CalculateBonusExp  ; d1 = amount of bonus EXP
-				cmp.w   d1,d0
-				bpl.s   @NoCap
-				move.w  d0,d1			; cap bonus EXP if higher than maximum
-				
-			@NoCap:
-				tst.w   d1				; skip if zero bonus EXP
-				beq.w   loc_1910C
-				jsr     IncreaseExp
-				
-                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
-                txt     366             ; "{NAME} received {#}{N}bonus EXP. points!{D1}"
+				; Bonus EXP handling
+				move.l  d2,-(sp)
+					move.w  #100,d2
+					sub.w   d1,d2			; d2 = maximum bonus EXP
+					bmi.s   @NoBonusExp		; maximum bonus EXP is negative, skip
+					
+					jsr		CalculateBonusExp  ; d1 = amount of bonus EXP
+					cmp.w   d1,d2
+					bpl.s   @NoCap
+					move.w  d2,d1			; cap bonus EXP if higher than maximum
+					
+				@NoCap:
+					tst.w   d1				; skip if zero bonus EXP
+					beq.w   @NoBonusExp
+					
+					move.l  d1,-(sp)
+					jsr     IncreaseExp		; save d1 before calling this subroutine
+					move.l  (sp)+,d1
+
+					move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
+					txt     366             ; "{NAME} received {#}{N}bonus EXP. points!{D1}{D1}"
+					
+			@NoBonusExp:
+                move.l  (sp)+,d2
 			else
+				; Original game EXP routine!
                 move.l  d1,-(sp)
                 andi.w  #$7FFF,d1
                 jsr     j_IncreaseExp
