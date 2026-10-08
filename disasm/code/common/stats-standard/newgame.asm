@@ -98,23 +98,29 @@ NewGame:
                 moveq   #COMBATANT_ALLIES_COUNTER,d0
                 sub.w   d7,d0
                 bsr.s   InitializeAllyCombatantEntry
-                bcs.s   @Next           ; skip join if a dummy ally entry was encountered
+                bcs.s   @NotSupposedToJoin           ; skip join if a dummy ally entry was encountered
                 
                 lea     table_NewGameAllies(pc), a0
                 move.w  d0,d1
                 moveq   #0,d2
                 jsr     (FindSpecialPropertyBytesAddressForObject).w
-                bcs.s   @Next
+                bcs.s   @NotSupposedToJoin
                 
                 bsr.w   JoinForce
-            if (ALL_ALLIES_JOINED|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED)=1)
                 bra.s   @Continue
-                
-@Next:          bsr.w   JoinForceSkipBattleParty
-@Continue:      
+				
+            if (TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED&TEST_BUILD_FILL_BATTLE_PARTY=1)
+@NotSupposedToJoin:
+				bsr.w   JoinForce	; The character joins the battle party anyway in test build!
+			elseif ((ALL_ALLIES_JOINED=1)|(TEST_BUILD&TEST_BUILD_ALL_ALLIES_JOINED=1))
+@NotSupposedToJoin:
+				bsr.w   JoinForceSkipBattleParty	; The character joins but is not put in the battle party, player will need to unlock caravan in order to play them
             else
-@Next:          
+@NotSupposedToJoin:
+				; The caracter doesn't join
             endif
+			
+@Continue:
                 dbf     d7,@InitializeCombatants_Loop
                 
                 ; Set initial gold
@@ -201,7 +207,10 @@ InitializeAllyCombatantEntry:
                 bsr.w   GetClassType
                 beq.s   @LoadLevel
                 
-                subi.w  #CHAR_CLASS_EXTRALEVEL,d4 ; subtract 10 if character starts already promoted
+                subi.w  #CHAR_CLASS_EXTRALEVEL,d4 ; subtract 20 if character starts already promoted
+				tst.w   d4
+				bgt.w   @LoadLevel
+				move.w  #1,d4					  ; prevent negative value or we're in trouble
 @LoadLevel:
             endif
                 move.b  d4,COMBATANT_OFFSET_LEVEL(a1)

@@ -1634,8 +1634,12 @@ SetupBattleTestParty:
                 jsr     GetClassType
                 beq.s   @init
                 
-                ; Subtract 10 from new current level if the character starts promoted
+                ; Subtract 20 from new current level if the character starts promoted
                 sub.w   #CHAR_CLASS_EXTRALEVEL,d4
+				tst.w   d4
+				bgt.w   @init
+				move.w  #1,d4					  ; prevent negative value or we're in trouble
+				
 @init           moveq   #-1,d3                      ; set automatic promotion toggle
                 jsr     InitializeAllyStats
                 
