@@ -290,11 +290,9 @@ battlesceneScript_DampenExp:
 				addi.w	#EXP_DAMPENING,d2
 				
 			@Loop:
-				cmp.w	d1,d2
-				bpl.s	@Done
-				lsr.w	#1,d5						; divide d5 by 2
-				addi.w	#1,d2
-				bra.s	@Loop
+				sub.w	d2,d1						; d2 now contains how many levels above the cap the character is
+				bmi.s	@Done
+				lsr.w	d2,d5						; divide d5 by 2^d2
 				
 			@Done:
                 movem.l (sp)+,d0-d2/a0
