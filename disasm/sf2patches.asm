@@ -225,9 +225,9 @@ memoryMapper = 1
 MEMORY_MAPPER: equ memoryMapper
 SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
 
-; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, or LEARN_SPELLS_BASED_ON_TOTAL_LEVEL are enabled, expand saved data.
+; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, LEARN_SPELLS_BASED_ON_TOTAL_LEVEL or ENABLE_BONUS_EXPERIENCE are enabled, expand saved data.
 expandedSavedData = 0
-    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL)=1)
+    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL|ENABLE_BONUS_EXPERIENCE)=1)
 expandedSavedData = 1
     endif
 EXPANDED_SAVED_DATA: equ expandedSavedData
