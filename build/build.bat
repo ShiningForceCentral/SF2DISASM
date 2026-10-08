@@ -17,6 +17,9 @@ cd ../musicbank1/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
+cd ../../scripting/text/
+echo Assembling text banks ...
+java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%timestamp%"
