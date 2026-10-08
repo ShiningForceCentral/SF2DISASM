@@ -132,13 +132,14 @@ DISABLE_TURN_ORDER_RANDOMIZATION:   equ 0       ; Combatants always act in the s
 EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, spawn region activated enemies, and play region activated cutscenes after each individual turn instead of at the start of a new round.
                                                 ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
 
-; Game pacing (leveling and exp)
+; Game pacing (leveling, exp, money)
+GOLD_MULTIPLIER_PERCENT:			equ -50		; 0 = OFF, x = ON    Modify gold earned in battle from defeated monsters by +x% (x can be positive or negative, up to -100).
 MIN_LEVEL_FOR_PROMOTION:			equ 21		; Minimum level required on unpromoted class before promotion is allowed (20 in the base game).
 MAX_UNPROMOTED_LEVEL:				equ 30		; Maximum level for unpromoted classes (40 in the base game, 30 is suggested if enabling SF1-style leveling patch).
 MAX_PROMOTED_LEVEL:                 equ 79      ; Maximum level after promotion (99 in the base game). You may consider lowering it to 79 if you display the effective level (+20) in the status screen.
 KEEP_EXP_ON_PROMOTION:				equ 1		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
 KEEP_EXP_ON_OVERFLOW:				equ 1		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
-DAMAGE_EXP_LEVEL_OFFSET:			equ -1		; 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner (discourage grinding), positive value x = later (favor grinding).
+DAMAGE_EXP_LEVEL_OFFSET:			equ -1		; 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner (discourage grinding), positive value x = 1 EXP x levels later (favor grinding).
 DAMAGE_EXP_GUARANTEED_HP_PERCENT:	equ 20		; 0 = OFF, x = ON    Guarantees that at least [ x% of kill EXP ] will be given to a character, even if the character deals less than [ x% of max HP ] damage to the monster.
 HEALING_EXP_MUST_HEAL_ONE_HP:		equ 1		; 0 = OFF, 1 = ON    If enabled, healers will only get 1 EXP if healing full health targets.
 HEALING_EXP_AURA_FLAT_PENALTY:		equ 7		; 0 = OFF, x = ON    Subtract x EXP if the healing spell being cast is AURA (this penalty is applied on each target).
@@ -148,8 +149,9 @@ STATUS_EXP:							equ 15		; Amount of EXP given when applying or curing a status
 STATUS_BUFF_EXP:					equ 5		; Amount of EXP given when applying a positive status effect on a target (5 in the base game).
 EXP_CAP:							equ 49		; Maximum total amount of EXP earnable (49 in the base game) by performing a non-healing action (+/- 1 with randomness).
 EXP_CAP_HEALING:					equ 49		; Maximum total amount of EXP earnable (25 in the base game) by performing a healing action (+/- 1 with randomness).
-ENABLE_BONUS_EXPERIENCE:			equ 1		; [NOT IMPLEMENTED] 0 = OFF, 1 = ON    If enabled, underleveled characters (compared to expected story progress) receive bonus experience points in battlescenes.
-
+EXP_DAMPENING:						equ 4		; 0 = OFF, x = ON    If enabled, healing and status effect EXP (damage EXP is NOT affected) will be halved for each level above (x + current battle expected level).
+ENABLE_BONUS_EXPERIENCE:			equ 1		; 0 = OFF, 1 = ON    If enabled, underleveled characters (compared to current battle expected level) receive bonus experience points in battlescenes.
+												; Please also take a look at "expectedlevelforbattles-standard.asm", "bonusexp-standard.asm" and "halvedexpearnedbattles.asm" files.
 
 ; SF1 mechanics
 SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.

@@ -1537,11 +1537,37 @@ bsc0E_sleep:
 bsc0F_giveExp:
                 
                 moveq   #0,d1
-                move.w  (a6)+,d1
-                move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
+                move.w  (a6)+,d1							; d1 = amount of EXP
+                move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0	; d0 = combatant index
                 cmpi.w  #-1,d0
                 beq.w   return_191DE
                 
+			if (STANDARD_BUILD&ENABLE_BONUS_EXPERIENCE=1)
+                btst    #15,d1			; skip if for some reason EXP is negative (should never happen)
+                bne.s   loc_1910C
+                jsr     IncreaseExp
+				
+                move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
+                txt     263             ; "{NAME} earned {#}{N}EXP. points.{D1}"
+			
+				move.w  #100,d0
+				sub.w   d1,d0			; d0 = maximum bonus EXP
+				bmi.s   loc_1910C		; maximum bonus EXP is negative, skip
+				
+				bsr.w	CalculateBonusExp  ; d1 = amount of bonus EXP
+				cmp.w   d1,d0
+				bpl.s   @NoCap
+				move.w  d0,d1			; cap bonus EXP if higher than maximum
+				
+			@NoCap:
+				tst.w   d1				; skip if zero bonus EXP
+				beq.w   loc_1910C
+				jsr     IncreaseExp
+				
+                move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
+                txt     366             ; "{NAME} received {#}{N}bonus EXP. points!{D1}"
+			else
                 move.l  d1,-(sp)
                 andi.w  #$7FFF,d1
                 jsr     j_IncreaseExp
@@ -1551,6 +1577,8 @@ bsc0F_giveExp:
                 bne.s   loc_1910C
                 move.l  d1,((DIALOGUE_NUMBER-$1000000)).w
                 txt     263             ; "{NAME} earned {#}{N}EXP. points.{D1}"
+			endif
+			
 loc_1910C:
                 
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0

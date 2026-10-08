@@ -72,6 +72,10 @@ byte_A840:
                 @GiveExp:
                 giveEXP d1
                 move.w  ((BATTLESCENE_GOLD-$1000000)).w,d1
+			if ((STANDARD_BUILD=1)&(GOLD_MULTIPLIER_PERCENT<>0))
+                mulu.w  #(100 + GOLD_MULTIPLIER_PERCENT),d1
+                divu.w  #100,d1
+			endif
                 tst.w   d1
                 beq.s   @Done
                 displayMessage #MESSAGE_BATTLE_FOUND_GOLD_COINS,#0,#0,d1 
