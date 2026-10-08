@@ -103,7 +103,6 @@ AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proport
 DIAGONAL_LASERS:                    equ 0       ; Allows laser based enemies to fire in 8 directions (Up, Up-Left, Left, Down-Left, etc).
 DIFFICULTY_FACTORS:                 equ 0       ; Allows 4 distinct difficulties.
 EXPANDED_RANGES:                    equ 1       ; Weapons/spells can have ranges up to 7 and spell radii up to 4.
-LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
 MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256
 MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 = Max MP, 3 = Current MP, 4 = Base ATT, 5 = Current ATT, 6 = Base DEF, 7 = Current DEF, 8 = Base AGI, 9 = Current AGI
 ORIGINAL_TAROS_INVULNERABILITY:     equ 0       ; 0 = OFF, 1 = Japanese version behavior (i.e, Bowie must continually attack to keep invulnerability off), 2 = SFCD behavior (invulnerability stays off for the remainder of the battle)

@@ -177,10 +177,6 @@ FastLevelUp:
 
 CalculateStatGain:
                 
-            if (LEARN_SPELL_AT_PROMOTION=1)
-                tst.b   d5
-                beq.s   @Exit           ; exit if level = 0
-            endif
                 tst.b   d2
                 bne.s   @CheckProjectionLevel ; keep going if curve type other than None
                 
