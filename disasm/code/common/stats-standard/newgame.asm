@@ -117,7 +117,7 @@ NewGame:
 				bsr.w   JoinForceSkipBattleParty	; The character joins but is not put in the battle party, player will need to unlock caravan in order to play them
             else
 @NotSupposedToJoin:
-				; The caracter doesn't join
+				nop ; The caracter doesn't join
             endif
 			
 @Continue:
