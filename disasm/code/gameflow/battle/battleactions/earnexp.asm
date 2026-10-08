@@ -57,6 +57,14 @@ battlesceneScript_CalculateHealingExp:	; d6 = healing done
 			endif
 				
 @Add:
+			if ((STANDARD_BUILD=1)&(HEALING_EXP_PROMOTED_PENALTY<>0))
+                move.b  (a4),d0
+                bsr.w   GetClassType ; -> d1
+                beq.s   @NoPenalty
+				mulu.w  #(100-HEALING_EXP_PROMOTED_PENALTY),d5
+				divu.w  #100,d5
+@NoPenalty:
+			endif
             if ((STANDARD_BUILD=1)&(EXP_DAMPENING<>0))
                 bsr.w   battlesceneScript_DampenExp
 			endif
