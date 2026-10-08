@@ -139,6 +139,7 @@ MIN_LEVEL_FOR_PROMOTION:			equ 21		; Minimum level required on unpromoted class 
 MAX_UNPROMOTED_LEVEL:				equ 30		; Maximum level for unpromoted classes (40 in the base game, 30 is suggested if enabling SF1-style leveling patch).
 MAX_PROMOTED_LEVEL:                 equ 79      ; Maximum level after promotion (99 in the base game). You may consider lowering it to 79 if you display the effective level (+20) in the status screen.
 KEEP_EXP_ON_PROMOTION:				equ 1		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
+KEEP_EXP_ON_APPLE:					equ 1		; 0 = OFF, 1 = ON    Keep current experience points when leveling a character with a Brave Apple instead of doing a reset to zero.
 KEEP_EXP_ON_OVERFLOW:				equ 1		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
 DAMAGE_EXP_LEVEL_OFFSET:			equ -1		; 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner (discourage grinding), positive value x = 1 EXP x levels later (favor grinding).
 DAMAGE_EXP_GUARANTEED_HP_PERCENT:	equ 20		; 0 = OFF, x = ON    Guarantees that at least [ x% of kill EXP ] will be given to a character, even if the character deals less than [ x% of max HP ] damage to the monster.

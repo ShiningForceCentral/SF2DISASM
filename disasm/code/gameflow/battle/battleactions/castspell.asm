@@ -879,8 +879,12 @@ spellEffect_BraveApple:
                 
                 module
                 move.b  (a5),d0
+			if (STANDARD_BUILD&KEEP_EXP_ON_APPLE=1)
+				; Exp is retained
+			else
                 moveq   #0,d1
                 jsr     SetCurrentExp
+			endif
                 jsr     LevelUp         
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a1
                 cmpi.b  #-1,(a1)        ; check if target is able to level up
