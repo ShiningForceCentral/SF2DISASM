@@ -1555,7 +1555,7 @@ bsc0F_giveExp:
 				sub.w   d1,d0			; d0 = maximum bonus EXP
 				bmi.s   loc_1910C		; maximum bonus EXP is negative, skip
 				
-				bsr.w	CalculateBonusExp  ; d1 = amount of bonus EXP
+				jsr		CalculateBonusExp  ; d1 = amount of bonus EXP
 				cmp.w   d1,d0
 				bpl.s   @NoCap
 				move.w  d0,d1			; cap bonus EXP if higher than maximum
