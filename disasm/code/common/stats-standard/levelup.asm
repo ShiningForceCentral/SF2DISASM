@@ -268,6 +268,9 @@ InitializeAllyStats:
                 move.b  (a0)+,d1
                 bsr.w   SetBaseAgi
                 
+				moveq   #0,d1
+                bsr.w   SetCurrentExp
+                
                 moveq   #1,d1
                 bsr.w   SetLevel
                 bsr.s   IncreaseAllyBaseDouble
