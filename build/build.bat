@@ -1,4 +1,6 @@
 echo off
+rem For linux compatibility
+    SETLOCAL EnableDelayedExpansion
 cls
 rem WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
 for /f "usebackq delims=" %%i in (`powershell -noprofile -c "(Get-Date -Format 'yyyyMMdd-HHmmss')"`) do set timestamp=%%i
@@ -18,8 +20,18 @@ echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
 cd ../../scripting/text/
-echo Assembling text banks ...
-java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
+for /f "tokens=*" %%i in ('java -version 2^>^&1') do (
+    set "JAVA_VERSION=%%i"
+    goto :endJavaCheck
+)
+:endJavaCheck
+set "NO_JAVA=Can't recognize"
+if /i "!JAVA_VERSION:~0,15!"=="!NO_JAVA!" (
+    echo Warning: Java not installed so text banks will not be rebuilt. See https://github.com/ShiningForceCentral/SF2DISASM#editor-tool-requirements-
+) ELSE (
+    echo Assembling text banks ...
+    java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
+)
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%timestamp%"
