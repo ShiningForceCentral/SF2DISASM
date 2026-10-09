@@ -1,11 +1,12 @@
 echo off
-rem For linux compatibility
+REM For linux compatibility
     SETLOCAL EnableDelayedExpansion
 cls
-rem WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
+REM WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
 for /f "usebackq delims=" %%i in (`powershell -noprofile -c "(Get-Date -Format 'yyyyMMdd-HHmmss')"`) do set timestamp=%%i
 echo -------------------------------------------------------------
 echo Start of assembly
+REM Build music banks
 echo Checking sound binaries ...
 cd ../disasm/code/common/tech/sound/
 echo Assembling sound driver ...
@@ -19,6 +20,8 @@ cd ../musicbank1/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
+REM Build text banks
+echo Checking text banks ...
 cd ../../scripting/text/
 for /f "tokens=*" %%i in ('java -version 2^>^&1') do (
     set "JAVA_VERSION=%%i"
@@ -32,6 +35,7 @@ if /i "!JAVA_VERSION:~0,15!"=="!NO_JAVA!" (
     echo Assembling text banks ...
     java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
 )
+REM Assemble rom
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%timestamp%"
