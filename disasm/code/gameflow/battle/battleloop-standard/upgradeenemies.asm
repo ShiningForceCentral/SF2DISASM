@@ -180,6 +180,9 @@ UpgradeRandomBattleEnemies:
                 ; Get Bowie's effective level -> d2
                 jsr     CalculateEffectiveLevel
                 move.w  d1,d2
+			if (RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET<>0)
+				sub.w   #RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET,d2
+			endif
 @Continue:
                 
                 loadSavedDataAddress CURRENT_BATTLE, a1
@@ -190,7 +193,7 @@ UpgradeRandomBattleEnemies:
                                         ; to the current battle index
                 
                 ; Calculate upgrade multiplier
-                divu.w  #10,d2          ; d2 = bowie_level - battle_index / 10
+                divu.w  #10,d2          ; d2 = (bowie_level - battle_index) / 10
                 andi.l  #BYTE_MASK,d2
                 tst.w   d2
                 beq.s   @DefaultEnemy   ; default to original enemy if Bowie is less than 10 levels over current battle
