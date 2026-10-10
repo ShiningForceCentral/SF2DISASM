@@ -178,10 +178,11 @@ UpgradeRandomBattleEnemies:
                 clr.w   d0
                 
                 ; Get Bowie's effective level -> d2
+                clr.l   d2				; clear upper-word before using d2 for divu.w otherwise it will fail
                 jsr     CalculateEffectiveLevel
                 move.w  d1,d2
 			if (RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET<>0)
-				sub.w   #RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET,d2
+				add.w   #RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET,d2
 			endif
 @Continue:
                 

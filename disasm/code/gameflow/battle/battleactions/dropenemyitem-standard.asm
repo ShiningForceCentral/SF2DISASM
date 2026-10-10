@@ -75,7 +75,7 @@ battlesceneScript_DropEnemyItem:
                 cmp.b   (a0),d0
                 bhi.s   @Done
                 
-@DropItem:      clr.l   d0				; do clr.l instead of clr.w because we are about to execute divu instruction!
+@DropItem:      clr.l   d0		; do clr.l instead of clr.w because we are about to execute divu instruction and we're not sure about d0 upper-word state!
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
                 loadSavedDataAddress ENEMY_ITEM_DROPPED_FLAGS, a0
                 divu.w  #8,d0
