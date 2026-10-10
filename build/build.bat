@@ -1,9 +1,12 @@
 echo off
+REM For linux compatibility
+    SETLOCAL EnableDelayedExpansion
 cls
-rem WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
+REM WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
 for /f "usebackq delims=" %%i in (`powershell -noprofile -c "(Get-Date -Format 'yyyyMMdd-HHmmss')"`) do set timestamp=%%i
 echo -------------------------------------------------------------
 echo Start of assembly
+REM Build music banks
 echo Checking sound binaries ...
 cd ../disasm/code/common/tech/sound/
 echo Assembling sound driver ...
@@ -17,6 +20,7 @@ cd ../musicbank1/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
+REM Assemble rom
 cd ../../../
 echo Assembling game ...
 SET "buildname=sf2build-%timestamp%"
