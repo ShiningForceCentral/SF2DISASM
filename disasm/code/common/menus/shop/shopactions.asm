@@ -413,7 +413,7 @@ loc_2046C:
                 jsr     j_GetItemDefinitionAddress
                 move.w  ITEMDEF_OFFSET_PRICE(a0),itemPrice(a6)
                 move.w  itemPrice(a6),d0
-			if ((STANDARD_BUILD=1)&(ITEM_REPAIR_PERCENT<>0))
+			if ((STANDARD_BUILD=1)&(ITEM_REPAIR_PERCENT<>25))
                 mulu.w  #ITEM_REPAIR_PERCENT,d0
 				divu.w  #100,d0
 			else

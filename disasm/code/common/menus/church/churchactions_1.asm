@@ -257,7 +257,12 @@ ChurchMenu:
                 jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
+			if ((STANDARD_BUILD=1)&(ITEM_DECURSE_PERCENT<>25))
+                mulu.w  #ITEM_DECURSE_PERCENT,d0
+				divu.w  #100,d0
+			else
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price
+			endif
                 add.l   d4,d3
 @IsNextItemCursed:
                 
