@@ -135,11 +135,10 @@ EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, 
 GOLD_MULTIPLIER_PERCENT:			equ 0		; 0 = OFF, x = ON    Modify gold earned in battle from defeated monsters by +x% (x can be positive or negative, up to -100).
 ITEM_REPAIR_PERCENT:				equ 25		; Set the cost to repair items to x% of item buy value (25 in the base game).
 ITEM_DECURSE_PERCENT:				equ 25		; Set the cost to unequip a cursed item to x% of item buy value (25 in the base game).
-PROMOTION_FLAG_LOCK:				equ 0		; 0 = OFF, x = ON    Disallow promotion until the specified story flag x is set (hint: flag 802 is set after the event in the basement of Creed's Mansion...).
+PROMOTION_FLAG_LOCK:				equ 0		; 0 = OFF, x = ON    Disallow promotion until the specified story flag x is set (hint: flag 805 is set when Astral joins the party for the second half of the game).
 MIN_LEVEL_FOR_PROMOTION:			equ 20		; Minimum level required on unpromoted class before promotion is allowed (20 in the base game).
 MAX_UNPROMOTED_LEVEL:				equ 40		; Maximum level for unpromoted classes (40 in the base game, 30 is suggested if enabling SF1-style leveling patch).
 MAX_PROMOTED_LEVEL:                 equ 79      ; Maximum level after promotion (99 in the base game). You may consider lowering it to 79 if you display the effective level (+20) in the status screen.
-<<<<<<< Updated upstream
 KEEP_EXP_ON_PROMOTION:				equ 0		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
 KEEP_EXP_ON_APPLE:					equ 0		; 0 = OFF, 1 = ON    Keep current experience points when leveling a character with a Brave Apple instead of doing a reset to zero.
 KEEP_EXP_ON_OVERFLOW:				equ 0		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
@@ -149,17 +148,6 @@ DAMAGE_EXP_GUARANTEED_HP_PERCENT:	equ 0		; 0 = OFF, x = ON    Guarantees that at
 HEALING_EXP_MUST_HEAL_ONE_HP:		equ 0		; 0 = OFF, 1 = ON    If enabled, healers will only get 1 EXP if healing full health targets.
 HEALING_EXP_PROMOTED_PENALTY:		equ 0		; 0 = OFF, x = ON    Reduce EXP gains from healing for promoted healers by x%.
 HEALING_EXP_AURA_FLAT_PENALTY:		equ 0		; 0 = OFF, x = ON    Subtract x EXP if the healing spell being cast is AURA (this penalty is applied on each target).
-=======
-KEEP_EXP_ON_PROMOTION:				equ 1		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
-KEEP_EXP_ON_APPLE:					equ 1		; 0 = OFF, 1 = ON    Keep current experience points when leveling a character with a Brave Apple instead of doing a reset to zero.
-KEEP_EXP_ON_OVERFLOW:				equ 1		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
-RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET: equ 5		; 0 = OFF, x = ON    Adjust Bowie level by x levels (positive or negative) when figuring out if random battle enemies should be upgraded.
-DAMAGE_EXP_LEVEL_OFFSET:			equ -1		; 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner (discourage grinding), positive value x = 1 EXP x levels later (favor grinding).
-DAMAGE_EXP_GUARANTEED_HP_PERCENT:	equ 20		; 0 = OFF, x = ON    Guarantees that at least [ x% of kill EXP ] will be given to a character, even if the character deals less than [ x% of max HP ] damage to the monster.
-HEALING_EXP_MUST_HEAL_ONE_HP:		equ 1		; 0 = OFF, 1 = ON    If enabled, healers will only get 1 EXP if healing full health targets.
-HEALING_EXP_PROMOTED_PENALTY:		equ 35		; 0 = OFF, x = ON    Reduce EXP gains from healing for promoted healers by x%.
-HEALING_EXP_AURA_FLAT_PENALTY:		equ 7		; 0 = OFF, x = ON    Subtract x EXP if the healing spell being cast is AURA (this penalty is applied on each target).
->>>>>>> Stashed changes
 HEALING_EXP_MIN:            		equ 10      ; Guaranteed amount of EXP given to a healer (10 in the base game), regardless of HP amount recovered (except if MUST_HEAL_ONE_HP patch is enabled).
 HEALING_EXP_MAX:            		equ 25      ; Amount of EXP given to a healer (25 in the base game) if the target recovered 100% HP (max value can never happen because you can't heal 0% HP targets).
 STATUS_EXP:							equ 5		; Amount of EXP given when applying or curing a status effect on a target (5 in the base game).
