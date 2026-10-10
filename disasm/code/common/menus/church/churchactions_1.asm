@@ -311,6 +311,14 @@ ChurchMenu:
                 
                 cmpi.w  #2,d0
                 bne.w   @StartSave      
+                
+			if ((STANDARD_BUILD=1)&(PROMOTION_FLAG_LOCK<>0))
+				chkFlg  PROMOTION_FLAG_LOCK
+				bne.s	@PromoUnlocked
+                txt     367             ; "{CLEAR}Hmmm... The light has deemed{N}you are not worthy yet.{N}(Progress the story more!){W2}"
+				bra.w   @ExitSave
+@PromoUnlocked:
+			endif
                 txt     118             ; "Let me investigate all{N}of you.{W2}"
                 bsr.w   CountPromotableMembers
                 cmpi.w  #0,promotableMembersCount(a6)
