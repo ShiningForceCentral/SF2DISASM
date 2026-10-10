@@ -260,7 +260,11 @@ cs_5A8CA:       textCursor 1907
                 jumpIfFlagSet 89,cs_5A8E6 ; YES/NO prompt answer
                 nextSingleText $0,ALLY_ERIC ; "What a pity...then, I wish{N}happiness to all of you.{W1}"
                 csc_end
-cs_5A8E6:       join ALLY_ERIC
+cs_5A8E6:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_ERIC
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
             if (STANDARD_BUILD&RECRUIT_ALL_CREED_CHARACTERS=1)
                 ; do nothing
@@ -278,7 +282,11 @@ cs_5A90E:       textCursor 1920
                 jumpIfFlagSet 89,cs_5A92A ; YES/NO prompt answer
                 nextSingleText $0,ALLY_ERIC ; "No?  Then I'll continue my{N}search for the legendary{N}magic sword alone.{W1}"
                 csc_end
-cs_5A92A:       join ALLY_ERIC
+cs_5A92A:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_ERIC
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
                 addNewFollower ALLY_ERIC
                 csc_end
@@ -289,7 +297,11 @@ cs_5A93A:       textCursor 1910
                 jumpIfFlagSet 89,cs_5A956 ; YES/NO prompt answer
                 nextSingleText $0,ALLY_RANDOLF ; "Tut!  OK, I have a{N}comfortable life here.{W1}"
                 csc_end
-cs_5A956:       join ALLY_RANDOLF
+cs_5A956:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_RANDOLF
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
             if (STANDARD_BUILD&RECRUIT_ALL_CREED_CHARACTERS=1)
                 ; do nothing
@@ -307,7 +319,11 @@ cs_5A97E:       textCursor 1923
                 jumpIfFlagSet 89,cs_5A99A ; YES/NO prompt answer
                 nextSingleText $0,ALLY_RANDOLF ; "Fine!  I'll stay in this{N}mansion then.{W1}"
                 csc_end
-cs_5A99A:       join ALLY_RANDOLF
+cs_5A99A:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_RANDOLF
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
                 addNewFollower ALLY_RANDOLF
                 csc_end
@@ -318,7 +334,11 @@ cs_5A9AA:       textCursor 1913
                 jumpIfFlagSet 89,cs_5A9C6 ; YES/NO prompt answer
                 nextSingleText $0,ALLY_TYRIN ; "My magic could've been a{N}great help to you.{W1}"
                 csc_end
-cs_5A9C6:       join ALLY_TYRIN
+cs_5A9C6:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_TYRIN
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
             if (STANDARD_BUILD&RECRUIT_ALL_CREED_CHARACTERS=1)
                 ; do nothing
@@ -336,7 +356,11 @@ cs_5A9EE:       textCursor 1926
                 jumpIfFlagSet 89,cs_5AA0A ; YES/NO prompt answer
                 nextSingleText $0,ALLY_TYRIN ; "You may regret refusing me.{W1}"
                 csc_end
-cs_5AA0A:       join ALLY_TYRIN
+cs_5AA0A:
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_TYRIN
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
                 addNewFollower ALLY_TYRIN
                 csc_end
@@ -347,7 +371,11 @@ cs_5AA1A:       textCursor 1916
                 jumpIfFlagSet 89,cs_5AA36 ; YES/NO prompt answer
                 nextSingleText $0,ALLY_KARNA ; "You...snot nose!{W1}"
                 csc_end
-cs_5AA36:       join ALLY_KARNA
+cs_5AA36:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_KARNA
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
             if (STANDARD_BUILD&RECRUIT_ALL_CREED_CHARACTERS=1)
                 ; do nothing
@@ -365,7 +393,11 @@ cs_5AA5E:       textCursor 1929
                 jumpIfFlagSet 89,cs_5AA7A ; YES/NO prompt answer
                 nextSingleText $0,ALLY_KARNA ; "Why, how rude!{W1}"
                 csc_end
-cs_5AA7A:       join ALLY_KARNA
+cs_5AA7A:       
+			if (STANDARD_BUILD=1)
+				hideText
+			endif
+				join ALLY_KARNA
                 setF 787                ; Set after one of Creed's Mansion Force Members joins
                 addNewFollower ALLY_KARNA
                 csc_end
