@@ -49,9 +49,16 @@ cs_59656:       textCursor 1748
                 setPos ALLY_BOWIE,4,8,DOWN
                 setPos ALLY_PETER,3,7,DOWN
                 setPos FOLLOWER_B,5,7,DOWN
+			if (STANDARD_BUILD&MINIATURES_SHOP=1)
+				; Account for the added shopkeeper, otherwise we see funny things in this cutscene! (i.e: a pawn would be moved from the chessboard)
+                setPos 154,12,16,DOWN
+                setPos 155,11,15,DOWN
+                setPos 156,13,15,DOWN
+			else
                 setPos 153,12,16,DOWN
                 setPos 154,11,15,DOWN
                 setPos 155,13,15,DOWN
+			endif
                 removeShadow ALLY_BOWIE
                 removeShadow ALLY_PETER
                 removeShadow FOLLOWER_B
@@ -65,6 +72,21 @@ cs_59656:       textCursor 1748
                 entityActions FOLLOWER_B
                  moveDown 16
                 endActions
+			if (STANDARD_BUILD&MINIATURES_SHOP=1)
+				; Same as above
+                entityActions 154
+                 moveDownLeft 8
+                endActions
+                entityActions 155
+                 moveDownLeft 8
+                endActions
+                entityActionsWait 156
+                 moveDownLeft 8
+                endActions
+                hide 154
+                hide 155
+                hide 156
+			else
                 entityActions 153
                  moveDownLeft 8
                 endActions
@@ -77,6 +99,7 @@ cs_59656:       textCursor 1748
                 hide 153
                 hide 154
                 hide 155
+			endif
                 customActscriptWait ALLY_BOWIE
                  ac_motion OFF          ;   
                  ac_orientLeft          ;   
