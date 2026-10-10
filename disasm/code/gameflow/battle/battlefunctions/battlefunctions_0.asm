@@ -731,8 +731,8 @@ SetCursorDestinationToNextCombatant:
 
 
 ; Battle cursor/camera scrolling speed values
-cursor_speed = 64			; Game will break if value is > 112
-cursor_speed_turbo = 96		; Game will break if value is > 112
+cursor_speed = 64			; Game will break if value is > 96 (i.e: higher speed would require a more in-depth ASM patch)
+cursor_speed_turbo = 96		; Game will break if value is > 96
 add_speed = 16				; Scrolling speed scales with (distance to the target tile + this value)
 min_speed = 80				; Scrolling speed cannot be slower than this
 max_speed = 112				; Scrolling speed cannot be faster than this, shows glitched tiles if > 128
@@ -740,23 +740,14 @@ turbo_speed = 128			; Scrolling speed when turbo mode is enabled, shows glitched
 	if (STANDARD_BUILD=1)
 	if (BATTLE_CURSOR_SPEED=1)
 cursor_speed = 80
-cursor_speed_turbo = 104
 add_speed = 24
 min_speed = 88
 max_speed = 120
 	endif
 	if (BATTLE_CURSOR_SPEED=2)
-cursor_speed = 96
-cursor_speed_turbo = 112	; Max!
+cursor_speed = 96			; Max!
 add_speed = 32
 min_speed = 96
-max_speed = 128				; Max!
-	endif
-	if (BATTLE_CURSOR_SPEED=3)
-cursor_speed = 112			; Max!
-cursor_speed_turbo = 112	; Max!
-add_speed = 40
-min_speed = 104
 max_speed = 128				; Max!
 	endif
 	endif

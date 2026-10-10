@@ -94,7 +94,7 @@ SKIP_TITLE_SCREEN:                  equ 0
 SKIP_WITCH_DIALOGUE:                equ 0
 UNLOCK_RENAME_CHARACTERS:           equ 1       ; Hold Start while confirming the leader's name to rename all characters when starting a new game.
 UNLOCK_SOUND_TEST:                  equ 1       ; Hold Up while entering Configuration Mode; there is no need to have set Game Completed save flag.
-BATTLE_CURSOR_SPEED:				equ 0		; 0 = Normal    1 = 25% Faster    2 = 50% Faster    3 = 75% Faster    (special turbo mode cursor speed will also go a bit faster but not as much)
+BATTLE_CURSOR_SPEED:				equ 0		; 0 = Normal    1 = 25% Faster    2 = 50% Faster    (special turbo mode cursor speed is already at max speed)
 
 
 ; Misc. features
