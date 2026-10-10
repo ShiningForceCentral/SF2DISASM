@@ -20,21 +20,6 @@ cd ../musicbank1/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
-REM Build text banks
-echo Checking text banks ...
-cd ../../scripting/text/
-for /f "tokens=*" %%i in ('java -version 2^>^&1') do (
-    set "JAVA_VERSION=%%i"
-    goto :endJavaCheck
-)
-:endJavaCheck
-set "NO_JAVA=Can't recognize"
-if /i "!JAVA_VERSION:~0,15!"=="!NO_JAVA!" (
-    echo Warning: Java not installed so text banks will not be rebuilt. See https://github.com/ShiningForceCentral/SF2DISASM#editor-tool-requirements-
-) ELSE (
-    echo Assembling text banks ...
-    java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
-)
 REM Assemble rom
 cd ../../../
 echo Assembling game ...
