@@ -101,10 +101,19 @@ battlesceneScript_DropEnemyItem:
                 
                 move.w  d3,d1
             if (SEND_DROPPED_ITEMS_TO_CARAVAN=1)
+				; Has the Caravan been unlocked?
+				chkFlg  65
+				beq.s   @FailedAddItemToCaravan
                 ; Try adding item to the Caravan first, and continue adding to deals if there is no room
                 bsr.w   AddItemToCaravan
-                bcc.s   @Done
+                bcs.s   @FailedAddItemToCaravan
+                displayMessage #MESSAGE_BATTLE_DROPPED_ITEM,(a5),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
+                displayMessage #MESSAGE_BATTLE_STORED_ITEM,(a4),d1,#0 
+                                                        ; Message, Combatant, Item or Spell, Number
+				bra.s   @Done
             endif
+@FailedAddItemToCaravan:
                 bsr.w   GetItemDefinitionAddress
                 btst    #ITEMTYPE_BIT_RARE,ITEMDEF_OFFSET_TYPE(a0)
                 beq.s   @Done
