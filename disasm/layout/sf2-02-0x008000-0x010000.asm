@@ -171,6 +171,9 @@
                 include "code\gameflow\battle\ai\startaicontrol.asm"    ; AI engine : preparatory phase
                 include "data\battles\global\aicommandsets.asm"    ; AI commands data
                 include "data\battles\global\swarmbattles.asm"    ; Parameters for battles implementing swarm AI
+			if (STANDARD_BUILD&ENABLE_CUSTOM_AI_PROBABILITY=1)
+                include "data\battles\global\aiprobability-standard.asm"
+			endif
                 include "code\gameflow\battle\ai\executeaicommand.asm"    ; Handle AI Command function
             if (STANDARD_BUILD&HEALER_AI_ENHANCEMENTS=1)
                 include "code\gameflow\battle\ai\command\heal-aienhancements.asm"

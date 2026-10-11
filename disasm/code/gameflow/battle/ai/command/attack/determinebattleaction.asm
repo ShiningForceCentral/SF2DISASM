@@ -76,30 +76,23 @@ DetermineBattleactionForAttackAiCommand:
 @UseSpellOrItem:
                 
                 move.w  d4,d1
-                andi.b  #6,d1
+                andi.b  #6,d1			; examine spell and item usability flags
                 cmpi.b  #6,d1
-                beq.w   @loc_15
+                beq.w   @loc_15			; both spells and items are available
                 btst    #1,d4
-                beq.s   @loc_11
+                beq.s   @loc_11			; spell not available: we will roll to use item
                 lea     ((ATTACK_COMMAND_SPELL-$1000000)).w,a1
                 move.w  (a1),d1
-                cmpi.w  #SPELL_AQUA,d1	; Kraken always use AQUA
+                cmpi.w  #SPELL_AQUA,d1	; hardcoded rule for AQUA / Kraken always uses it
                 bne.s   @loc_6
                 bra.w   @loc_18
 @loc_6:
                 
-			if (STANDARD_BUILD&MAGES_CAST_MORE=1)
-                move.b  #5,d6			; 0..4 => that gives 80% chance of taking the spell usage branch
-                jsr     GetMovetype     
-                cmpi.w  #MOVETYPE_MAGE,d1
-				beq.s   @Roll
-			endif
-                move.b  #6,d6			; 0..5 => that gives 60% chance of taking the spell usage branch
-			@Roll:
+                move.b  #6,d6
                 jsr     (GenerateRandomNumber).w
                 cmpi.b  #2,d7
-                bne.s   @loc_7          ; if d7 = 0,2,4 then go to loc_EEFA
-                bra.w   @loc_18         ;  else go to loc_EEE0
+                bne.s   @loc_7          ; if d7 = 2,4 then go to loc_18
+                bra.w   @loc_18
 @loc_7:
                 
                 cmpi.b  #4,d7
@@ -107,23 +100,23 @@ DetermineBattleactionForAttackAiCommand:
                 bra.w   @loc_18
 @loc_8:
                 
-                btst    #0,d3
-                bne.s   @loc_9
-                bra.w   @loc_18
-                bra.s   @loc_10         ; not reachable
+                btst    #0,d3			
+                bne.s   @loc_9			; reachable by melee attack
+                bra.w   @loc_18			; unreachable by melee attack => cast spell
+                bra.s   @loc_10         ; code not reachable
 @loc_9:
                 
                 bra.w   @loc_17         
 @loc_10:
                 
-                bra.s   @loc_15         ; unnecessary
+                bra.s   @loc_15         ; unnecessary code
 @loc_11:
                 
                 move.b  #6,d6
                 jsr     (GenerateRandomNumber).w
                 cmpi.b  #3,d7
-                bne.s   @loc_12         ; if d7 = 1,3,5 then go to loc_EF14
-                bra.w   @loc_19         ;  else go to loc_EEE0
+                bne.s   @loc_12         ; if d7 = 3,5 then go to loc_19
+                bra.w   @loc_19
 @loc_12:
                 
                 cmpi.b  #5,d7
@@ -132,13 +125,13 @@ DetermineBattleactionForAttackAiCommand:
 @loc_13:
                 
                 btst    #0,d3
-                bne.s   @loc_14
-                bra.w   @loc_19
-                bra.s   @loc_15         ; not reachable
+                bne.s   @loc_14			; reachable by melee attack
+                bra.w   @loc_19			; unreachable by melee attack => use item
+                bra.s   @loc_15         ; code not reachable
 @loc_14:
                 
                 bra.w   @loc_17         
-@loc_15:
+@loc_15:								; spells and items are both available: 50% chance for spell, 50% chance for item
                 
                 move.b  #2,d6
             if (STANDARD_BUILD=1)
@@ -149,10 +142,10 @@ DetermineBattleactionForAttackAiCommand:
                 cmpi.b  #1,d7
                 bne.s   @loc_16
                 bra.w   @loc_19
-                bra.s   @loc_17         
+                bra.s   @loc_17        ; code not reachable      
 @loc_16:
                 
-                bra.w   @loc_18
+                bra.w   @loc_18         ; unnecessary code
 @loc_17:
                 
                 lea     ((FF8804_LOADING_SPACE-$1000000)).w,a0 ; physical -- # targets reachable by phsyical attack
