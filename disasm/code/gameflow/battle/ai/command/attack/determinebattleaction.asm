@@ -83,36 +83,14 @@ DetermineBattleactionForAttackAiCommand:
                 btst    #1,d4
                 beq.s   @HasItemOnly			; spell not available: we will roll to use item
 @HasSpellOnly:
-				move.b  #-1,-(sp)				; End marker
-				pea	    @ChooseSpell
-				move.b  #1,-(sp)				; S offset A/S
-				pea	    @ChooseAttack
-				move.b  #0,-(sp)				; A offset A/S
+				move.b  #0,d4					; d4 = A offset in A/S section
 				bra.s   @Evaluate
 @HasItemOnly:
-				move.b  #-1,-(sp)				; End marker
-				pea     @ChooseItem
-				move.b  #3,-(sp)				; I offset A/I
-				pea     @ChooseAttack
-				move.b  #2,-(sp)				; A offset A/I
+				move.b  #2,d4					; d4 = A offset in A/I section
 				bra.s   @Evaluate
 @HasSpellAndItem:
-				move.b  #-1,-(sp)				; End marker
-				pea     @ChooseItem
-				move.b  #6,-(sp)				; I offset A/S/I
-				pea     @ChooseSpell
-				move.b  #5,-(sp)				; S offset A/S/I
-				pea     @ChooseAttack
-				move.b  #4,-(sp)				; A offset A/S/I
+				move.b  #4,d4					; d4 = A offset in A/S/I section
 @Evaluate:
-				; disable ChooseAttack (at top of the stack) if target not reachable
-				btst    #0,d3
-				bne.s	@Evaluate_ReadTables
-				move.b  (sp)+,d1
-				move.b  #-2,d1
-				move.b  d1,-(sp)
-				
-@Evaluate_ReadTables:
                 jsr     GetEnemy     			; d1 = enemy type (-1 if not an enemy)
 				cmpi.w  #-1,d1
 				beq.s   @Evaluate_ReadMoveType
@@ -133,40 +111,41 @@ DetermineBattleactionForAttackAiCommand:
 				lea     table_AIProbabilityDefault(pc), a0
 @Evaluate_Ready:
 				; a0 = pointer to the start of probability data for the current attacker
+				; d4 = 0, 2 or 4 (offset to the attack threshold byte of the relevant probability data section)
 				clr.w   d1
                 move.b  #64,d6						; d6 = set roll range between 0..63
                 jsr     (GenerateRandomNumber).w	; d7 = random number between 0..63					
 				
-@Evaluate_PopStack:
-				move.b  (sp)+,d1					; d1 = threshold index
-				
-				cmpi.b  #-2,d1						; reached "disabled" special value
-				bne.s	@Evaluate_CheckEnd
-				move.l  (sp)+,a2					; a2 = unused
-				bra.s   @Evaluate_PopStack
-				
-@Evaluate_CheckEnd:
-				cmpi.b  #-1,d1
-				beq.s	@ChooseAttack				; reached "end" special value
-				
-				move.l  (sp)+,a1					; a1 = callback function
-				move.b  (a0,d1.w),d6				; d6 = threshold value
+				; Skip if target is not reachable with an attack
+				btst    #0,d3
+				beq.s	@Evaluate_AfterAttack
 
+				; Evaluate attack
+				move.b  (a0,d4.w),d6				; d6 = threshold value for attack
 				cmp.b   d6,d7
-				bpl.s   @Evaluate_PopStack			; random number >= threshold value -> no match
-
-@Evaluate_UnwindStack:
-				move.b  (sp)+,d1					; d1 = threshold index
-				cmpi.b  #-1,d1
-				beq.s	@Evaluate_Done				; reached "end" special value
+				bmi.s   @ChooseAttack				; random number < threshold value -> match
+@Evaluate_AfterAttack:
+				addi.w  #1,d4						; d4 = 1, 3 or 5
 				
-				move.l  (sp)+,a2					; a2 = unused
-				bra.s	@Evaluate_UnwindStack
+				; Evaluate spell/item (item if d4 = 3)
+				move.b  (a0,d4.w),d6				; d6 = threshold value for spell/item
+				cmp.b   d6,d7
+				bpl.s   @Evaluate_AfterSecond		; random number >= threshold value -> no match
 
-@Evaluate_Done:
-				move.l 	a1,-(sp)					; branch to the callback function
-				rts
+				cmpi.b  #3,d4						; select spell (!= 3) or item (= 3)
+				beq.s   @ChooseItem
+				bra.s   @ChooseSpell
 
+@Evaluate_AfterSecond:
+				cmpi.b  #5,d4
+				bne.s	@ChooseAttack				; if d4 != 5 (1 or 3), we reached the end
+
+				addi.w  #1,d4						; d4 = 6
+				move.b  (a0,d4.w),d6				; d6 = threshold value for item
+				cmp.b   d6,d7
+				bmi.s   @ChooseItem					; random number < threshold value -> match
+				; bra.s	@ChooseAttack				; we reached the end (branch omitted since it's zero length)
+				
 			else
 				; Original game logic here
 @UseSpellOrItem:
