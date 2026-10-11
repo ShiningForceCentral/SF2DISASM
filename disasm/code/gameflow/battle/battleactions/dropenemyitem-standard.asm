@@ -73,7 +73,7 @@ battlesceneScript_DropEnemyItem:
                 move.w  #256,d0
                 jsr     (GenerateRandomOrDebugNumber).w
                 cmp.b   (a0),d0
-                bhi.s   @Done
+                bhi.w   @Done
                 
 @DropItem:      clr.w   d0
                 move.b  ENEMYITEMDROP_OFFSET_FLAG(a1),d0
@@ -82,7 +82,7 @@ battlesceneScript_DropEnemyItem:
                 addToSavedBytePointer d0, a0
                 swap    d0
                 bset    d0,(a0)
-                bne.s   @Done           ; done if item dropped flag was already set
+                bne.w   @Done           ; done if item dropped flag was already set
                 move.b  (a5),d0
                 move.w  d4,d1
                 bsr.w   RemoveItemBySlot
@@ -90,7 +90,8 @@ battlesceneScript_DropEnemyItem:
                 bsr.w   GetCurrentHp
                 beq.s   @AddRareItemToDeals
                 move.w  d3,d1
-                bsr.w   AddItem
+                bsr.w   AddItem			; d2 = 0 on success
+				tst.w	d2
                 bne.s   @AddRareItemToDeals ; add rare item to deals section if character is unable to pick it up
                 displayMessage #MESSAGE_BATTLE_DROPPED_ITEM,(a5),d1,#0 
                                                         ; Message, Combatant, Item or Spell, Number
