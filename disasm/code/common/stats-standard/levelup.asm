@@ -126,6 +126,10 @@ FastLevelUp:
                 addq.w  #1,d5
                 move.w  d5,d1
                 bsr.w   SetLevel
+			if (SHOW_EFFECTIVE_LEVEL=1)
+                bsr.w   CalculateEffectiveLevel		; d1 = effective level
+                move.w  d1,d5
+			endif
                 move.b  d5,(a1)
                 
                 ; Skip learning new spell if fast level up
