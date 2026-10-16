@@ -83,13 +83,13 @@ DetermineBattleactionForAttackAiCommand:
                 btst    #1,d4
                 beq.s   @HasItemOnly			; spell not available: we will roll to use item
 @HasSpellOnly:
-				move.b  #0,d4					; d4 = A offset in A/S section
+				move.l  #0,d4					; d4 = A offset in A/S section
 				bra.s   @Evaluate
 @HasItemOnly:
-				move.b  #2,d4					; d4 = A offset in A/I section
+				move.l  #2,d4					; d4 = A offset in A/I section
 				bra.s   @Evaluate
 @HasSpellAndItem:
-				move.b  #4,d4					; d4 = A offset in A/S/I section
+				move.l  #4,d4					; d4 = A offset in A/S/I section
 @Evaluate:
                 jsr     GetEnemy     			; d1 = enemy type (-1 if not an enemy)
 				cmpi.w  #-1,d1
@@ -113,8 +113,8 @@ DetermineBattleactionForAttackAiCommand:
 				; a0 = pointer to the start of probability data for the current attacker
 				; d4 = 0, 2 or 4 (offset to the attack threshold byte of the relevant probability data section)
 				clr.w   d1
-                move.b  #64,d6						; d6 = set roll range between 0..63
-                jsr     (GenerateRandomNumber).w	; d7 = random number between 0..63					
+                move.w  #64,d6						; d6.w = set roll range between 0..63
+                jsr     (GenerateRandomNumber).w	; d7.w = random number between 0..63					
 				
 				; Skip if target is not reachable with an attack
 				btst    #0,d3
@@ -122,14 +122,14 @@ DetermineBattleactionForAttackAiCommand:
 
 				; Evaluate attack
 				move.b  (a0,d4.w),d6				; d6 = threshold value for attack
-				cmp.b   d6,d7
+				cmp.w   d6,d7
 				bmi.s   @ChooseAttack				; random number < threshold value -> match
 @Evaluate_AfterAttack:
 				addi.w  #1,d4						; d4 = 1, 3 or 5
 				
 				; Evaluate spell/item (item if d4 = 3)
 				move.b  (a0,d4.w),d6				; d6 = threshold value for spell/item
-				cmp.b   d6,d7
+				cmp.w   d6,d7
 				bpl.s   @Evaluate_AfterSecond		; random number >= threshold value -> no match
 
 				cmpi.b  #3,d4						; select spell (!= 3) or item (= 3)
@@ -142,7 +142,7 @@ DetermineBattleactionForAttackAiCommand:
 
 				addi.w  #1,d4						; d4 = 6
 				move.b  (a0,d4.w),d6				; d6 = threshold value for item
-				cmp.b   d6,d7
+				cmp.w   d6,d7
 				bmi.s   @ChooseItem					; random number < threshold value -> match
 				; bra.s	@ChooseAttack				; we reached the end (branch omitted since it's zero length)
 				
