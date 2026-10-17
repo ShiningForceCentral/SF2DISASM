@@ -1561,7 +1561,7 @@ loc_88E:				; CODE XREF: YM2_ParseData+64j
 		ld	b, 0
 		ld	c, (ix+1Dh)
 		add	hl, bc
-		ld	a, (loc_774+1)
+		ld	a, (loc_9CE+1)
 		ld	b, a
 		ld	c, h
 		ld	(ix+12h), c
@@ -1574,7 +1574,7 @@ loc_88E:				; CODE XREF: YM2_ParseData+64j
 
 loc_8C0:				; CODE XREF: YM2_ParseData+126j
 		call	YM2_ConditionalInput
-		ld	a, (loc_77D+1)	; dynamically changed :	1st frequency register to use corresponding to current channel
+		ld	a, (loc_9D7+1)	; dynamically changed :	1st frequency register to use corresponding to current channel
 		ld	b, a
 		ld	c, l
 		ld	(ix+11h), c
