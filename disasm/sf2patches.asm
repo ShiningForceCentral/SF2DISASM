@@ -149,7 +149,7 @@ BOOST_DIVIDER						equ 8		; Modify this value to adjust the power of Boost (8 in
 SLOW_DIVIDER						equ 8		; Modify this value to adjust the power of Slow (8 in the base game). As a reminder, first turn Slow decreases DEF/AGI stats by [3 * (100 / DIVIDER)]%.
 ARCHER_DAMAGE_BONUS_IGNORE_DEF:		equ 0		; 0 = OFF, 1 = ON   Change the Archer 25% damage bonus against Flying/Hovering characters to ignore DEF.
 PLAY_CONSUMABLE_ITEM_ANIMATION:		equ 0		; 0 = OFF, 1 = ON   If enabled, play spell animation attached to a consumable item.
-ENABLE_CUSTOM_AI_PROBABILITY:		equ 0		; 0 = OFF, 1 = ON   Enable per enemy type and per move type custom probability for the AI to attack/cast spell/use item. See aiprobability-standard.asm file!
+ENABLE_CUSTOM_AI_PROBABILITY:		equ 0		; [DO NOT USE FOR NOW, it can cause the game to freeze] 0 = OFF, 1 = ON   Enable per enemy type and per move type custom probability for the AI to attack/cast spell/use item. See aiprobability-standard.asm file!
 
 
 ; Menu enhancements
