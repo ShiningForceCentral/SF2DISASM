@@ -541,7 +541,7 @@ $$checkSilence:
     ld  b, 0
     ld  c, (ix+FREQUENCY_SHIFT)
     add  hl, bc
-    ld  a, (LoadYm1FrequencyRegister2+1)
+    ld  a, (LoadYm2FrequencyRegister2+1)
     ld  b, a
     ld  c, h
     ld  (ix+YM_TARGET_FREQUENCY+1), c
@@ -554,7 +554,7 @@ $$checkSilence:
 
 $$applyFrequency2:
     call  ApplyYm2ConditionalInput
-    ld  a, (LoadYm1FrequencyRegister1+1)  ; dynamically changed :  1st frequency register to use corresponding to current channel
+    ld  a, (LoadYm2FrequencyRegister1+1)  ; dynamically changed :  1st frequency register to use corresponding to current channel
     ld  b, a
     ld  c, l
     ld  (ix+YM_TARGET_FREQUENCY), c

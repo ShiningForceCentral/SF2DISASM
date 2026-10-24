@@ -3,7 +3,7 @@
 
 LoadYm1Instrument:
     push  af
-    ld  a, YM_INSTRUMENTS_BANK
+    ld  a, FM_INSTRUMENTS_BANK_INDEX
     call  LoadBank
     pop  af
     ld  (ix+LEVEL),  a
@@ -42,7 +42,7 @@ $$getInstrumentOffset:
     add  hl, de
     pop  de
     add  hl, de
-    ld  de, YM_INSTRUMENTS_BANK_OFFSET
+    ld  de, FM_INSTRUMENTS_BANK_OFFSET
     add  hl, de
     push  hl
     ld  de, 1Ch    ; instrument algorithm byte
@@ -134,7 +134,7 @@ $$mainValueCopyLoop:
     ld  a, (MUSIC_BANK)
     jr  $$loadBank
 $$loadSfxBank:
-    ld  a, SFX_BANK
+    ld  a, SFX_BANK_INDEX
 $$loadBank:    
     call  LoadBank
     ret

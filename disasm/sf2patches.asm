@@ -88,6 +88,7 @@ NO_DARKNESS_IN_CAVES:               equ 0       ; The darkness gimmick in caves 
 NO_DEFEAT_ON_LEADER_DEATH:          equ 0       ; Death of the Force Leader character does not cause defeat.
 NO_RANDOM_BATTLES:                  equ 1       ; 0 = Battles    1 = No Battles
 RECRUIT_ALL_CREED_CHARACTERS:       equ 1       ; lets you recruit all four of them at any time after leaving Floor World.
+SELL_BEFORE_BUY:                    equ 1       ; When buying a weapon, adds an option to first sell the currently equipped weapon (before checking if item slots are full).
 SKIP_SEGA_LOGO:                     equ 0
 SKIP_GAME_INTRO:                    equ 0
 SKIP_TITLE_SCREEN:                  equ 0
