@@ -1464,3 +1464,14 @@ vdpSpell:  macro
                 vdpTile \3 ; starting tile
                 defineBitfield.w VDPSPELLPROP_,\4
             endm
+
+
+; Attack / Boost / Slow drop-in replacement for original divide by 8
+
+buffDivide8: macro
+            if ((STANDARD_BUILD=1)&(\1<>8))
+				divu.w	#\1,\2
+            else
+                lsr.l   #3,\2
+            endif
+        endm

@@ -218,7 +218,7 @@ fieldItem_IncreaseHp:
                 
                 moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #STAT_BOOST_MIN,d7
+                addq.w  #(STAT_BOOST_MIN+STAT_BOOST_HP_BONUS),d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w
@@ -243,7 +243,7 @@ fieldItem_IncreaseMp:
                 beq.s   byte_22BBC      
                 moveq   #STAT_BOOST_MAX-STAT_BOOST_MIN+1,d6
                 jsr     (GenerateRandomNumber).w
-                addq.w  #STAT_BOOST_MIN,d7
+                addq.w  #(STAT_BOOST_MIN+STAT_BOOST_MP_BONUS),d7
                 clr.l   d1
                 move.w  d7,d1
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w

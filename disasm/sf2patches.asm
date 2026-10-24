@@ -140,6 +140,18 @@ SF1_LEVELUP_RNG_CAP:                equ 8       ; Caps the randomization range t
 LEARN_SPELLS_BASED_ON_TOTAL_LEVEL:  equ 1       ; Considers promoted at level when learning spells from the first list (i.e., the base class's.)
 
 
+; Combat mechanics
+RESISTANCE_MINOR_PERCENT:			equ 25		; Minor resistance will adjust spell damage by -x% (25 in the base game).
+RESISTANCE_MAJOR_PERCENT:			equ 50		; Major resistance will adjust spell damage by -x% (50 in the base game).
+RESISTANCE_WEAKNESS_PERCENT:		equ 25		; Weakness will adjust spell damage by +x% (25 in the base game).
+RESISTANCE_CRITICAL_PERCENT:		equ 25		; Critical hit will adjust spell damage by +x% (25 in the base game). This stacks ADDITIVELY with resistance %.
+ATTACK_DIVIDER						equ 8		; Modify this value to adjust the power of Attack (8 in the base game). As a reminder, first turn Attack increases ATT stat by [3 * (100 / DIVIDER)]%.
+BOOST_DIVIDER						equ 8		; Modify this value to adjust the power of Boost (8 in the base game). As a reminder, first turn Boost increases DEF/AGI stats by [3 * (100 / DIVIDER)]%.
+SLOW_DIVIDER						equ 8		; Modify this value to adjust the power of Slow (8 in the base game). As a reminder, first turn Slow decreases DEF/AGI stats by [3 * (100 / DIVIDER)]%.
+ARCHER_DAMAGE_BONUS_IGNORE_DEF:		equ 0		; 0 = OFF, 1 = ON   Change the Archer 25% damage bonus against Flying/Hovering characters to ignore DEF.
+PLAY_CONSUMABLE_ITEM_ANIMATION:		equ 0		; 0 = OFF, 1 = ON   If enabled, play spell animation attached to a consumable item.
+
+
 ; Menu enhancements
 ACCURATE_LAND_EFFECT_DISPLAY:       equ 1       ; Reads values to be displayed from a table. Damage multipliers are converted to reduction percent values during assembly through a macro.
 ALTERNATE_JEWEL_ICONS_DISPLAY:      equ 1       ; 0 = OFF, 1 = small icons in top right corner of the K/D window, 2 = no display.

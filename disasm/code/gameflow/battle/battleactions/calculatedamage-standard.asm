@@ -40,10 +40,15 @@ battlesceneScript_CalculateDamage:
                 bcs.s   @Return
                 
                 ; Inflict an additional 25% points of damage if archer damage bonus against airborne target is applicable
+			if (ARCHER_DAMAGE_BONUS_IGNORE_DEF=1)
+                bsr.w   GetCurrentAtt
+                lsr.w   #2,d1
+                add.w   d1,d6
+			else
                 move.w  d6,d0
                 lsr.w   #2,d0
                 add.w   d0,d6           
-                
+            endif
 @Return:        rts
 
     ; End of function battlesceneScript_CalculateDamage
