@@ -320,6 +320,10 @@ Promote:
                 move.b  d1,(a0)
                 move.w  (sp)+,d0
             endif
+				; We need to reset level to 1 before calling UpdateCombatantStats otherwise the player will briefly see an incorrect list of spells learned!
+				; That's because UpdateCombatantStats regenerates learned spells from scratch, so current level must be correct before calling it.
+                moveq   #1,d1
+                bsr.w   SetLevel
                 bra.w   UpdateCombatantStats
 
     ; End of function Promote

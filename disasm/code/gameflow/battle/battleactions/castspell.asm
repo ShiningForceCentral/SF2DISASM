@@ -926,10 +926,20 @@ byte_B93A:
                                                         ; Message, Combatant, Item or Spell, Number
 @EvaluateLearnedSpell:
                 
+			if (STANDARD_BUILD=1)
+                txt     MESSAGE_DELAY   ; Shows "{D1}" so the last stat up message has a little time to breathe! 
+			endif
+			
                 move.b  (a1)+,d1
                 cmpi.b  #-1,d1
                 beq.s   @Return
                 
+			if (STANDARD_BUILD=1)
+			if (SPELL_LEARNING_SOUND_EFFECT>=1)
+				sndCom	SPELL_LEARNING_SOUND_EFFECT
+			endif
+			endif
+
                 move.w  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1

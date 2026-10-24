@@ -126,6 +126,10 @@ FastLevelUp:
                 addq.w  #1,d5
                 move.w  d5,d1
                 bsr.w   SetLevel
+			if (SHOW_EFFECTIVE_LEVEL=1)
+                bsr.w   CalculateEffectiveLevel		; d1 = effective level
+                move.w  d1,d5
+			endif
                 move.b  d5,(a1)
                 
                 ; Skip learning new spell if fast level up
@@ -134,12 +138,13 @@ FastLevelUp:
                 
                 ; Find next learnable spell
                 st      6(a1)
-                bsr.w   CalculateEffectiveLevel
+                bsr.w   CalculateEffectiveLevel		; d1 = effective level
                 move.w  d1,d5
-                bsr.w   FindNextLearnableSpell  
+				bsr.w	GetAllySpellListFirstEntry	; a0 = pointer to first spell entry
+                bsr.w   FindNextLearnableSpell		; d1 = learned spell if successful, d2 = success if 0
                 tst.w   d2
                 bne.s   @Done
-                move.b  d1,6(a1)
+                move.b  d1,6(a1)					; inform the presentation layer spell d1 has been learned
 @Done:          movem.l (sp)+,d0-a1
                 rts
 
@@ -289,8 +294,6 @@ InitializeAllyStats:
                 bsr.w   GetClass
                 bsr.s   FindRegularPromoClass ; Out: d1.w = new class, d2.w = current class
                 bsr.w   Promote
-                moveq   #1,d1
-                bsr.w   SetLevel
                 
 @Next:          dbf     d4,@LevelUp_Loop
                 
