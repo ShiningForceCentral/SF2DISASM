@@ -1,20 +1,12 @@
 echo off
+REM For linux compatibility
+    SETLOCAL EnableDelayedExpansion
 cls
-for /f %%x in ('wmic path win32_localtime get /format:list ^| findstr "="') do set %%x
-set month=0%Month%
-set month=%month:~-2%
-set day=0%Day%
-set day=%day:~-2%
-set today=%Year%%month%%day%
-set hour=%Hour%
-set hour=0%hour%
-set hour=%hour:~-2%
-set minutes=0%Minute%
-set minutes=%minutes:~-2%
-set seconds=0%Second%
-set seconds=%seconds:~-2%
+REM WMIC has been removed in the latest Win11 releases, using Powershell now to get a nice timestamp
+for /f "usebackq delims=" %%i in (`powershell -noprofile -c "(Get-Date -Format 'yyyyMMdd-HHmmss')"`) do set timestamp=%%i
 echo -------------------------------------------------------------
 echo Start of assembly
+REM Build music banks
 echo Checking sound binaries ...
 cd ../disasm/code/common/tech/sound/cubewiz/
 echo Assembling CUBEWIZ driver ...
@@ -32,9 +24,25 @@ cd ../sfxbank/
 echo Assembling SFX bank ...
     ..\..\..\..\tools\asw\asw.exe .\sfxbank.asm
     ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $E000-$ffff
+REM Build text banks
+echo Checking text banks ...
+cd ../../scripting/text/
+for /f "tokens=*" %%i in ('java -version 2^>^&1') do (
+    set "JAVA_VERSION=%%i"
+    goto :endJavaCheck
+)
+:endJavaCheck
+set "NO_JAVA=Can't recognize"
+if /i "!JAVA_VERSION:~0,15!"=="!NO_JAVA!" (
+    echo Warning: Java not installed so text banks will not be rebuilt. See https://github.com/ShiningForceCentral/SF2DISASM#editor-tool-requirements-
+) ELSE (
+    echo Assembling text banks ...
+    java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript-standard.txt -e ./
+)
+REM Assemble rom
 cd ../../../
 echo Assembling game ...
-SET "buildname=sf2standard-%today%-%hour%%minutes%%seconds%"
+SET "buildname=sf2standard-%timestamp%"
 @"../tools/asm68k" /e VANILLA_BUILD=0 /e STANDARD_BUILD=1 /e TEST_BUILD=0 /k /m /o ae-,e+,w+ /p sf2.asm, "../build/%buildname%.bin", ../build/%buildname%.sym, ../build/%buildname%.lst > ../build/output.log
 echo End of assembly, produced %buildname%.bin
 
