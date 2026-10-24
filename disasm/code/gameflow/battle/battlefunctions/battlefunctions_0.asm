@@ -730,6 +730,29 @@ SetCursorDestinationToNextCombatant:
 ; In: d2.w, d3.w = entity X,Y coordinates
 
 
+; Battle cursor/camera scrolling speed values
+cursor_speed = 64			; Game will break if value is > 96 (i.e: higher speed would require a more in-depth ASM patch)
+cursor_speed_turbo = 96		; Game will break if value is > 96
+add_speed = 16				; Scrolling speed scales with (distance to the target tile + this value)
+min_speed = 80				; Scrolling speed cannot be slower than this
+max_speed = 112				; Scrolling speed cannot be faster than this, shows glitched tiles if > 128
+turbo_speed = 128			; Scrolling speed when turbo mode is enabled, shows glitched tiles if > 128
+	if (STANDARD_BUILD=1)
+	if (BATTLE_CURSOR_SPEED=1)
+cursor_speed = 80
+add_speed = 24
+min_speed = 88
+max_speed = 120
+	endif
+	if (BATTLE_CURSOR_SPEED=2)
+cursor_speed = 96			; Max!
+add_speed = 32
+min_speed = 96
+max_speed = 128				; Max!
+	endif
+	endif
+
+
 SetCursorDestinationToNextBattleEntity:
                 
                 jsr     (WaitForVInt).w
@@ -754,12 +777,12 @@ SetCursorDestinationToNextBattleEntity:
                 move.w  d5,ENTITYDEF_OFFSET_Y(a0)
                 move.w  d2,ENTITYDEF_OFFSET_XDEST(a0)
                 move.w  d3,ENTITYDEF_OFFSET_YDEST(a0)
-                move.b  #64,ENTITYDEF_OFFSET_XSPEED(a0)
-                move.b  #64,ENTITYDEF_OFFSET_YSPEED(a0)
+                move.b  #cursor_speed,ENTITYDEF_OFFSET_XSPEED(a0)
+                move.b  #cursor_speed,ENTITYDEF_OFFSET_YSPEED(a0)
                 tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23328
-                move.b  #96,ENTITYDEF_OFFSET_XSPEED(a0)
-                move.b  #96,ENTITYDEF_OFFSET_YSPEED(a0)
+                move.b  #cursor_speed_turbo,ENTITYDEF_OFFSET_XSPEED(a0)
+                move.b  #cursor_speed_turbo,ENTITYDEF_OFFSET_YSPEED(a0)
 loc_23328:
                 
                 bsr.w   sub_23414
@@ -767,32 +790,32 @@ loc_23328:
                 move.w  ENTITYDEF_OFFSET_YTRAVEL(a0),d1
                 lsr.w   #7,d0
                 lsr.w   #7,d1
-                addi.w  #$10,d0
-                addi.w  #$10,d1
-                cmpi.w  #$50,d0 
+                addi.w  #add_speed,d0
+                addi.w  #add_speed,d1
+                cmpi.w  #min_speed,d0 
                 bge.s   loc_2334A
-                move.w  #$50,d0 
+                move.w  #min_speed,d0 
 loc_2334A:
                 
-                cmpi.w  #$70,d0 
+                cmpi.w  #max_speed,d0 
                 ble.s   loc_23354
-                move.w  #$70,d0 
+                move.w  #max_speed,d0 
 loc_23354:
                 
-                cmpi.w  #$50,d1 
+                cmpi.w  #min_speed,d1 
                 bge.s   loc_2335E
-                move.w  #$50,d1 
+                move.w  #min_speed,d1 
 loc_2335E:
                 
-                cmpi.w  #$70,d1 
+                cmpi.w  #max_speed,d1 
                 ble.s   loc_23368
-                move.w  #$70,d1 
+                move.w  #max_speed,d1 
 loc_23368:
                 
                 tst.b   ((SPECIAL_TURBO_TOGGLE-$1000000)).w
                 beq.s   loc_23376
-                move.w  #$80,d0 
-                move.w  #$80,d1 
+                move.w  #turbo_speed,d0 
+                move.w  #turbo_speed,d1 
 loc_23376:
                 
                 tst.b   ((MAP_AREA_LAYER1_AUTOSCROLL_X-$1000000)).w
