@@ -49,9 +49,16 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                  faceDown 1
                  moveDown 1
                 endActions
+			if (STANDARD_BUILD&MINIATURES_SHOP=1)
+				; Need to account for the added shopkeeper. Otherwise... he would be used as parachute! XD
+                setPos 138,36,25,UP
+                setPos 139,37,24,UP
+                setPos 140,35,24,UP
+			else
                 setPos 137,36,25,UP
                 setPos 138,37,24,UP
                 setPos 139,35,24,UP
+			endif
                 stopEntity ALLY_BOWIE
                 stopEntity ALLY_PETER
                 stopEntity FOLLOWER_B
@@ -67,6 +74,21 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
+			if (STANDARD_BUILD&MINIATURES_SHOP=1)
+				; Same as above
+                customActscriptWait 138
+                 ac_setSpeed 10,10      ;   
+                 ac_jump eas_Idle       ;   
+                ac_end
+                customActscriptWait 139
+                 ac_setSpeed 10,10      ;   
+                 ac_jump eas_Idle       ;   
+                ac_end
+                customActscriptWait 140
+                 ac_setSpeed 10,10      ;   
+                 ac_jump eas_Idle       ;   
+                ac_end
+			else
                 customActscriptWait 137
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
@@ -79,6 +101,7 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                  ac_setSpeed 10,10      ;   
                  ac_jump eas_Idle       ;   
                 ac_end
+			endif
                 entityActions ALLY_BOWIE
                  moveDown 6
                 endActions
@@ -88,6 +111,18 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                 entityActions FOLLOWER_B
                  moveDown 6
                 endActions
+			if (STANDARD_BUILD&MINIATURES_SHOP=1)
+				; Same as above
+                entityActions 138
+                 moveDown 6
+                endActions
+                entityActions 139
+                 moveDown 6
+                endActions
+                entityActionsWait 140
+                 moveDown 6
+                endActions
+			else
                 entityActions 137
                  moveDown 6
                 endActions
@@ -97,5 +132,6 @@ cs_599B2:       setActscriptWait ALLY_BOWIE,eas_Init
                 entityActionsWait 139
                  moveDown 6
                 endActions
+			endif
                 warp MAP_FLOOR_WORLD,26,8,DOWN
                 csc_end

@@ -269,8 +269,12 @@ byte_22BBC:
 
 fieldItem_LevelUp:
                 
+			if (STANDARD_BUILD&KEEP_EXP_ON_APPLE=1)
+				; Exp is retained
+			else
                 moveq   #0,d1
                 jsr     j_SetCurrentExp
+			endif
                 jsr     j_LevelUp
                 lea     ((LEVELUP_ARGUMENTS-$1000000)).w,a5
                 move.w  d0,((DIALOGUE_NAME_INDEX_1-$1000000)).w

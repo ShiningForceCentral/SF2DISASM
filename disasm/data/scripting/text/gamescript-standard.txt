@@ -364,8 +364,8 @@
 016B={LEADER} is exhausted.{W1}
 016C={NAME}'s level increased!{N}{NAME} became level {#}.{W2}
 016D=Attack increased by {#}.{W2}
-016E=Defense increased by {#}.{W2}
-016F=Agility increased by {#}.{W2}
+016E={NAME} received {#}{N}bonus EXP. points!{D1}{D1}
+016F={CLEAR}Hmmm... The light has deemed{N}you are not worthy yet.{N}(Progress the story more!){W2}
 0170=Max. HP increased by {#}.{W2}
 0171=Max. MP increased by {#}.{W2}
 0172=And learned a{N}new magic spell, {SPELL}.{W2}

@@ -72,6 +72,10 @@
                 include "code\gameflow\battle\battleactions\animateaction.asm"    ; Battlescene animation functions
                 include "code\gameflow\battle\battleactions\giveexpandgold.asm"    ; Give EXP and gold function
                 include "data\battles\global\halvedexpearnedbattles.asm"    ; Halved EXP earned battles table
+				includeIfStandard "data\battles\global\expectedlevelforbattles-standard.asm"	; Expected level per battle table
+            if (ENABLE_BONUS_EXPERIENCE=1)
+				includeIfStandard "data\battles\global\bonusexp-standard.asm"	; Bonus EXP table
+			endif
                 align
                 include "code\gameflow\battle\battleactions\earnexp.asm"    ; EXP earning functions
                 include "code\gameflow\battle\battleactions\sorttargets.asm"    ; Sort targets list function

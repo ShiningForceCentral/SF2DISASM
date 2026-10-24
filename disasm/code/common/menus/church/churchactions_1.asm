@@ -257,7 +257,12 @@ ChurchMenu:
                 jsr     j_GetItemDefinitionAddress
                 clr.l   d4
                 move.w  ITEMDEF_OFFSET_PRICE(a0),d4
+			if ((STANDARD_BUILD=1)&(ITEM_DECURSE_PERCENT<>25))
+                mulu.w  #ITEM_DECURSE_PERCENT,d4
+				divu.w  #100,d4
+			else
                 lsr.w   #2,d4           ; cure curse cost = 25% of item price
+			endif
                 add.l   d4,d3
 @IsNextItemCursed:
                 
@@ -306,6 +311,14 @@ ChurchMenu:
                 
                 cmpi.w  #2,d0
                 bne.w   @StartSave      
+                
+			if ((STANDARD_BUILD=1)&(PROMOTION_FLAG_LOCK<>0))
+				chkFlg  PROMOTION_FLAG_LOCK
+				bne.s	@PromoUnlocked
+                txt     367             ; "{CLEAR}Hmmm... The light has deemed{N}you are not worthy yet.{N}(Progress the story more!){W2}"
+				bra.w   @ExitSave
+@PromoUnlocked:
+			endif
                 txt     118             ; "Let me investigate all{N}of you.{W2}"
                 bsr.w   CountPromotableMembers
                 cmpi.w  #0,promotableMembersCount(a6)
@@ -525,8 +538,12 @@ ChurchMenu:
                 move.w  member(a6),d0
                 move.b  #1,d1
                 jsr     j_SetLevel
+            if (STANDARD_BUILD&KEEP_EXP_ON_PROMOTION=1)
+                ; Exp is retained
+            else
                 clr.w   d1
                 jsr     j_SetCurrentExp
+            endif
 @RestartPromo:
                 
                 bra.w   @StartPromo     

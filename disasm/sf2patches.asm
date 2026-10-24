@@ -19,6 +19,7 @@ INITIAL_NO_BATTLE_MESSAGES: equ 0       ; 1 = no battle messages display ON
 ; Test build configuration settings
 TEST_BUILD_ALL_ALLIES_JOINED:           equ 1
 TEST_BUILD_ALLIES_START_LEVEL:          equ 40      ; Starting level for all characters if TEST_BUILD_ALL_ALLIES_JOINED is ON
+TEST_BUILD_FILL_BATTLE_PARTY:			equ 0		;  0 = Bowie is the only character in the battle party		1 = Battle party is filled from top to bottom
 TEST_BUILD_INITIAL_SPECIAL_TURBO:       equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_DEBUG_MODE:          equ -1      ; -1 = toggle ON
 TEST_BUILD_INITIAL_CONTROL_OPPONENT:    equ 0       ; -1 = toggle ON
@@ -102,7 +103,6 @@ AGILITY_AFFECTS_CHANCE_TO_DODGE:    equ 0       ; Adjust chance to dodge proport
 DIAGONAL_LASERS:                    equ 0       ; Allows laser based enemies to fire in 8 directions (Up, Up-Left, Left, Down-Left, etc).
 DIFFICULTY_FACTORS:                 equ 0       ; Allows 4 distinct difficulties.
 EXPANDED_RANGES:                    equ 1       ; Weapons/spells can have ranges up to 7 and spell radii up to 4.
-LEARN_SPELL_AT_PROMOTION:           equ 0       ; Allow learning 1 spell immediately upon promotion.
 MUSCLE_MAGIC:                       equ 0       ; 0 = OFF, 1-256 = spell power increased by (muscleMagicStat * n) / 256
 MUSCLE_MAGIC_STAT:                  equ 5       ; 0 = Max HP, 1 = Current HP, 2 = Max MP, 3 = Current MP, 4 = Base ATT, 5 = Current ATT, 6 = Base DEF, 7 = Current DEF, 8 = Base AGI, 9 = Current AGI
 ORIGINAL_TAROS_INVULNERABILITY:     equ 0       ; 0 = OFF, 1 = Japanese version behavior (i.e, Bowie must continually attack to keep invulnerability off), 2 = SFCD behavior (invulnerability stays off for the remainder of the battle)
@@ -132,6 +132,32 @@ DISABLE_TURN_ORDER_RANDOMIZATION:   equ 0       ; Combatants always act in the s
 EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, spawn region activated enemies, and play region activated cutscenes after each individual turn instead of at the start of a new round.
                                                 ; Also, partially regenerates the turn order table after each turn for combatants waiting to act in order for the BOOST and SLOW spells to have an impact on the current round.
 
+; Game pacing (leveling, exp, money)
+GOLD_MULTIPLIER_PERCENT:			equ 0		; 0 = OFF, x = ON    Modify gold earned in battle from defeated monsters by +x% (x can be positive or negative, up to -100).
+ITEM_REPAIR_PERCENT:				equ 25		; Set the cost to repair items to x% of item buy value (25 in the base game).
+ITEM_DECURSE_PERCENT:				equ 25		; Set the cost to unequip a cursed item to x% of item buy value (25 in the base game).
+PROMOTION_FLAG_LOCK:				equ 0		; 0 = OFF, x = ON    Disallow promotion until the specified story flag x is set (hint: flag 805 is set when Astral joins the party for the second half of the game).
+MIN_LEVEL_FOR_PROMOTION:			equ 20		; Minimum level required on unpromoted class before promotion is allowed (20 in the base game).
+MAX_UNPROMOTED_LEVEL:				equ 40		; Maximum level for unpromoted classes (40 in the base game, 30 is suggested if enabling SF1-style leveling patch).
+MAX_PROMOTED_LEVEL:                 equ 79      ; Maximum level after promotion (99 in the base game). You may consider lowering it to 79 if you display the effective level (+20) in the status screen.
+KEEP_EXP_ON_PROMOTION:				equ 0		; 0 = OFF, 1 = ON    Keep current experience points when promoting instead of doing a reset to zero.
+KEEP_EXP_ON_APPLE:					equ 0		; 0 = OFF, 1 = ON    Keep current experience points when leveling a character with a Brave Apple instead of doing a reset to zero.
+KEEP_EXP_ON_OVERFLOW:				equ 0		; 0 = OFF, 1 = ON	 Keep 99 experience points when a character triggers a level up that would cause the character to go over the level cap.
+RANDOM_BATTLE_UPGRADE_LEVEL_OFFSET: equ 0		; 0 = OFF, x = ON    Adjust Bowie level by x levels (positive or negative) when figuring out if random battle enemies should be upgraded.
+DAMAGE_EXP_LEVEL_OFFSET:			equ 0		; 0 = OFF, x = ON    Negative value x = monsters will start giving 1 EXP x levels sooner (discourage grinding), positive value x = 1 EXP x levels later (favor grinding).
+DAMAGE_EXP_GUARANTEED_HP_PERCENT:	equ 0		; 0 = OFF, x = ON    Guarantees that at least [ x% of kill EXP ] will be given to a character, even if the character deals less than [ x% of max HP ] damage to the monster.
+HEALING_EXP_MUST_HEAL_ONE_HP:		equ 0		; 0 = OFF, 1 = ON    If enabled, healers will only get 1 EXP if healing full health targets.
+HEALING_EXP_PROMOTED_PENALTY:		equ 0		; 0 = OFF, x = ON    Reduce EXP gains from healing for promoted healers by x%.
+HEALING_EXP_AURA_FLAT_PENALTY:		equ 0		; 0 = OFF, x = ON    Subtract x EXP if the healing spell being cast is AURA (this penalty is applied on each target).
+HEALING_EXP_MIN:            		equ 10      ; Guaranteed amount of EXP given to a healer (10 in the base game), regardless of HP amount recovered (except if MUST_HEAL_ONE_HP patch is enabled).
+HEALING_EXP_MAX:            		equ 25      ; Amount of EXP given to a healer (25 in the base game) if the target recovered 100% HP (max value can never happen because you can't heal 0% HP targets).
+STATUS_EXP:							equ 5		; Amount of EXP given when applying or curing a status effect on a target (5 in the base game).
+STATUS_BUFF_EXP:					equ 5		; Amount of EXP given when applying a positive status effect on a target (5 in the base game).
+EXP_CAP:							equ 49		; Maximum total amount of EXP earnable (49 in the base game) by performing a non-healing action (+/- 1 with randomness).
+EXP_CAP_HEALING:					equ 25		; Maximum total amount of EXP earnable (25 in the base game) by performing a healing action (+/- 1 with randomness).
+EXP_DAMPENING:						equ 0		; 0 = OFF, x = ON    If enabled, healing and status effect EXP (damage EXP is NOT affected) will be halved for each level above (x + current battle expected level).
+ENABLE_BONUS_EXPERIENCE:			equ 0		; 0 = OFF, 1 = ON    If enabled, underleveled characters (compared to current battle expected level) receive bonus experience points in battlescenes.
+												; Please also take a look at "expectedlevelforbattles-standard.asm", "bonusexp-standard.asm" and "halvedexpearnedbattles.asm" files.
 
 ; SF1 mechanics
 SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.
@@ -204,9 +230,9 @@ memoryMapper = 1
 MEMORY_MAPPER: equ memoryMapper
 SSF_SYSTEM_ID: equ 0    ; Put "SEGA SSF" string in ROM header to activate memory mapper on Mega EverDrive cartridges.
 
-; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, or LEARN_SPELLS_BASED_ON_TOTAL_LEVEL are enabled, expand saved data.
+; If standard build, and either SAVED_DATA_EXPANSION, SF1_LEVELUP, LEARN_SPELLS_BASED_ON_TOTAL_LEVEL or ENABLE_BONUS_EXPERIENCE are enabled, expand saved data.
 expandedSavedData = 0
-    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL)=1)
+    if (STANDARD_BUILD&(SAVED_DATA_EXPANSION|SF1_LEVELUP|LEARN_SPELLS_BASED_ON_TOTAL_LEVEL|ENABLE_BONUS_EXPERIENCE)=1)
 expandedSavedData = 1
     endif
 EXPANDED_SAVED_DATA: equ expandedSavedData
