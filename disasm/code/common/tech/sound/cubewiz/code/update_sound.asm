@@ -118,7 +118,7 @@ $$doUpdate:
     call  SendDacByte
     
     ; SFX Update
-    ld  a, SFX_BANK
+    ld  a, SFX_BANK_INDEX
     call  LoadBank    
     ld  a, 1
     ld  (PROCESSING_SFX), a
@@ -152,7 +152,7 @@ $$doUpdate:
     ld  (PROCESSING_SFX), a
 
 $$return:
-    ld  a, (DAC_BANK)
+    ld  a, (PCM_BANK)
     call  LoadBank
     pop  hl
     pop  de
