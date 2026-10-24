@@ -207,7 +207,6 @@ witchMenuAction_New:
 @loc_15:        addi.w  #233,d0 ; HARDCODED text index for difficulty choice reactions
                 jsr     (DisplayText).w
                 txt     224             ; "Now, good luck!{N}You have no time to waste!{W1}"
-                
                 getCurrentSaveSlot d0
                 setSavedByte #GAMESTART_MAP, CURRENT_MAP
                 setSavedByte #GAMESTART_MAP, EGRESS_MAP
