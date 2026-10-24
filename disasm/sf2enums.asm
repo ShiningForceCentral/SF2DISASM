@@ -4279,6 +4279,9 @@ GAMESTART_NO_BATTLE_MESSAGES:   equ gamestartNoBattleMessages ; used in standard
 ; enum SoundDriverProperties
 
 soundDriverByteSize = 8064
+    if (STANDARD_BUILD=1)
+soundDriverByteSize = $1FC8
+    endif
 
 SOUND_DRIVER_LONG_SIZE: equ soundDriverByteSize/4
 SOUND_DRIVER_BYTE_SIZE: equ soundDriverByteSize

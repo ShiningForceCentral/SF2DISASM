@@ -55,12 +55,12 @@ wait	macro
 	endm	
 	
 noteL	macro arg0,arg1
-	db arg0+080h-24
+	db arg0+080h
 	db arg1
 	endm	
 	
 note	macro arg0
-	db arg0-24
+	db arg0
 	endm	
 	
 sampleL	macro arg0,arg1
