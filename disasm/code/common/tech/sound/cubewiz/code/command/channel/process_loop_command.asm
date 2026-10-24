@@ -19,7 +19,7 @@ ParseLoopCommand:
 $$checkVoltaStart:
     cp  1
     jr  nz, $$checkVoltaSection1Start
-    ; F8 20 : Volta Start
+    ; F8 20 : Volta Start -> Load start pointer, clear end flags
     ld  (ix+VOLTA_START_POINTER), e 
     ld  (ix+VOLTA_START_POINTER+1), d
     xor  a
@@ -30,7 +30,7 @@ $$checkVoltaStart:
 $$checkVoltaSection1Start:
     cp  2
     jr  nz, $$checkVoltaSection2Start
-    ; F8 40 : Volta Section 1 Start
+    ; F8 40 : Volta Section 1 Start -> Conditional skip to Volta section 2, set section 1 end flag
     ld  a, (ix+VOLTA_END_1_DONE)
     or  a
     jr  nz, $$goToVoltaSection2
@@ -69,7 +69,7 @@ $$voltaReturn:
 $$checkVoltaSection2Start:
     cp  3
     jr  nz, $$checkVoltaSection3Start
-    ; F8 60 : Volta Section 2 Start
+    ; F8 60 : Volta Section 2 Start -> Conditional skip to Volta section 3, set section 2 end flag
     ld  a, (ix+VOLTA_END_2_DONE)
     or  a
     jr  nz, $$goToVoltaSection3
@@ -112,7 +112,7 @@ $$checkVoltaSectionEnd:
     jr  nz, $$checkCountedLoopStart
     bit  0, b
     jr  nz, $$infiniteLoopEnd
-    ; F8 A0 : Volta Section End, return to Volta Start
+    ; F8 A0 : Volta Section End -> Return to Volta Start
     ld  e, (ix+VOLTA_START_POINTER)
     ld  d, (ix+VOLTA_START_POINTER+1)
     ret
