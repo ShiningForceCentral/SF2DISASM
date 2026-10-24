@@ -37,6 +37,9 @@
                 include "code\common\scripting\map\debugmapscripts.asm"    ; Debug mapscript function
                 include "code\common\scripting\map\nullsub_4712A.asm"    ; Unused empty function
                 include "code\common\scripting\map\mapscriptengine_2.asm"    ; Mapscript engine, part 2
+			if (NO_RANDOM_BATTLES=3)
+				includeIfStandard "data\battles\global\mandatoryrandombattles-standard.asm"
+			endif
                 include "code\common\scripting\map\mapsetupsfunctions_1.asm"    ; Map setups functions
                 include "code\common\scripting\map\resetalliesstats.asm"    ; CSC 55 function
                 include "code\common\scripting\map\headquartersfunctions.asm"    ; Headquarters functions
