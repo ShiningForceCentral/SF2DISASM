@@ -21,36 +21,36 @@ Music_18_Channel_0:
 		  vol 0Bh
 		  setRelease 01h
 		  vibrato 02Ch
-		        noteL Gs4,12
-		        noteL G4,6
+		        noteL Gs3,12
+		        noteL G3,6
 		  vol 08h
-		        note  G4
+		        note  G3
 		  inst 3
 		countedLoopStart 1
 		  vol 0Dh
-		        noteL E3,6
+		        noteL E2,6
 		  vol 09h
-		        note  E3
+		        note  E2
 		  vol 0Dh
-		        note  E3
-		        note  E3
+		        note  E2
+		        note  E2
 		countedLoopEnd
-		        noteL B3,12
-		        noteL C4,6
+		        noteL B2,12
+		        noteL C3,6
 		  vol 09h
-		        note  C4
+		        note  C3
 		  vol 0Dh
-		        note  F3
+		        note  F2
 		  vol 09h
-		        note  F3
+		        note  F2
 		  vol 0Dh
-		        noteL A3,18
+		        noteL A2,18
 		  vol 09h
-		        noteL A3,9
+		        noteL A2,9
 		  vol 06h
-		        note  A3
+		        note  A2
 		  vol 0Dh
-		        noteL A2,78
+		        noteL A1,78
 		        waitL 12
 		channel_end
 Music_18_Channel_1:
@@ -59,36 +59,36 @@ Music_18_Channel_1:
 		  vol 0Ch
 		  setRelease 01h
 		  vibrato 02Ch
-		        noteL A5,12
-		        noteL As5,6
+		        noteL A4,12
+		        noteL As4,6
 		  vol 09h
-		        note  As5
+		        note  As4
 		  vol 07h
-		        note  As5
+		        note  As4
 		  inst 56
 		  vol 0Bh
+		        note  Cs4
+		  vol 08h
+		        note  Cs4
+		  vol 0Bh
+		        note  F4
+		  vol 08h
+		        note  F4
+		  vol 0Bh
+		        note  A4
+		  vol 08h
+		        note  A4
+		  vol 0Bh
 		        note  Cs5
-		  vol 08h
-		        note  Cs5
-		  vol 0Bh
-		        note  F5
-		  vol 08h
-		        note  F5
-		  vol 0Bh
-		        note  A5
-		  vol 08h
-		        note  A5
-		  vol 0Bh
-		        note  Cs6
 		  inst 20
 		  vol 0Ch
-		        noteL E5,12
-		        noteL F5,6
+		        noteL E4,12
+		        noteL F4,6
 		  vol 09h
-		        note  F5
+		        note  F4
 		        waitL 12
 		  vol 0Ch
-		        noteL Cs5,114
+		        noteL Cs4,114
 		        waitL 12
 		channel_end
 Music_18_Channel_2:
@@ -97,43 +97,43 @@ Music_18_Channel_2:
 		  vol 0Bh
 		  setRelease 01h
 		  vibrato 02Ch
-		        noteL F5,12
-		        noteL Fs5,6
+		        noteL F4,12
+		        noteL Fs4,6
 		  vol 08h
-		        note  Fs5
+		        note  Fs4
 		  vol 06h
-		        note  Fs5
+		        note  Fs4
 		  inst 56
 		  vol 0Ah
+		        note  B3
+		  vol 07h
+		        note  B3
+		  vol 0Ah
+		        note  Ds4
+		  vol 07h
+		        note  Ds4
+		  vol 0Ah
+		        note  G4
+		  vol 07h
+		        note  G4
+		  vol 0Ah
 		        note  B4
-		  vol 07h
-		        note  B4
-		  vol 0Ah
-		        note  Ds5
-		  vol 07h
-		        note  Ds5
-		  vol 0Ah
+		        note  Gs5
 		        note  G5
-		  vol 07h
-		        note  G5
-		  vol 0Ah
-		        note  B5
-		        note  Gs6
-		        note  G6
-		        note  Fs6
-		        note  F6
-		        note  E6
-		        note  C6
-		        note  Cs6
-		        note  A5
+		        note  Fs5
+		        note  F5
+		        note  E5
+		        note  C5
+		        note  Cs5
+		        note  A4
 		  vol 0Bh
-		        noteL Gs5,4
-		        note  C6
-		        noteL E6,5
-		        note  F6
+		        noteL Gs4,4
+		        note  C5
+		        noteL E5,5
+		        note  F5
 		  vol 0Ch
-		        noteL A6,6
-		        noteL Gs6,78
+		        noteL A5,6
+		        noteL Gs5,78
 		        waitL 12
 		channel_end
 Music_18_Channel_3:
@@ -142,48 +142,48 @@ Music_18_Channel_3:
 		  vol 0Bh
 		  setRelease 01h
 		  vibrato 02Ch
-		        noteL B4,12
-		        noteL B4,6
+		        noteL B3,12
+		        noteL B3,6
 		  vol 08h
-		        note  B4
+		        note  B3
 		  vol 06h
-		        note  B4
+		        note  B3
 		  inst 56
 		  vol 0Ah
+		        note  F3
+		  vol 07h
+		        note  F3
+		  vol 0Ah
+		        note  A3
+		  vol 07h
+		        note  A3
+		  vol 0Ah
+		        note  Cs4
+		  vol 07h
+		        note  Cs4
+		  vol 0Ah
 		        note  F4
-		  vol 07h
-		        note  F4
-		  vol 0Ah
-		        note  A4
-		  vol 07h
-		        note  A4
-		  vol 0Ah
-		        note  Cs5
-		  vol 07h
-		        note  Cs5
-		  vol 0Ah
-		        note  F5
 		        wait
 		  stereo 080h
 		  shifting 010h
 		  vol 09h
-		        note  Gs6
-		        note  G6
-		        note  Fs6
-		        note  F6
-		        note  E6
-		        note  C6
-		        note  Cs6
-		        note  A5
+		        note  Gs5
+		        note  G5
+		        note  Fs5
+		        note  F5
+		        note  E5
+		        note  C5
+		        note  Cs5
+		        note  A4
 		  vol 0Ah
-		        noteL Gs5,4
-		        note  C6
-		        note  E6
+		        noteL Gs4,4
+		        note  C5
+		        note  E5
 		  stereo 0C0h
 		  shifting 00h
 		  vol 0Bh
-		        noteL F6,6
-		        noteL F6,78
+		        noteL F5,6
+		        noteL F5,78
 		        waitL 12
 		channel_end
 Music_18_Channel_4:
@@ -194,35 +194,35 @@ Music_18_Channel_4:
 		  vol 0Bh
 		  setRelease 01h
 		  vibrato 02Ch
-		        noteL A5,12
-		        noteL As5,6
+		        noteL A4,12
+		        noteL As4,6
 		  vol 08h
-		        note  As5
+		        note  As4
 		        waitL 3
 		  inst 56
 		  vol 0Ah
-		        noteL Cs5,6
+		        noteL Cs4,6
 		  vol 07h
-		        note  Cs5
+		        note  Cs4
 		  vol 0Ah
-		        note  F5
+		        note  F4
 		  vol 07h
-		        note  F5
+		        note  F4
 		  vol 0Ah
-		        note  A5
+		        note  A4
 		  vol 07h
-		        note  A5
+		        note  A4
 		  vol 0Ah
-		        noteL Cs6,9
+		        noteL Cs5,9
 		  inst 20
 		  vol 0Bh
-		        noteL E5,12
-		        noteL F5,6
+		        noteL E4,12
+		        noteL F4,6
 		  vol 08h
-		        note  F5
+		        note  F4
 		        waitL 12
 		  vol 0Bh
-		        noteL Cs5,114
+		        noteL Cs4,114
 		        waitL 6
 		channel_end
 Music_18_Channel_5:
@@ -251,13 +251,13 @@ Music_18_Channel_6:
 		  psgInst 00h
 		        waitL    72
 		  psgInst 0Dh
-		        psgNoteL Gs2,12
-		        psgNoteL A2,6
+		        psgNoteL Gs3,12
+		        psgNoteL A3,6
 		        wait
 		  psgInst 00h
 		        waitL    12
 		  psgInst 0Dh
-		        psgNoteL Gs2,114
+		        psgNoteL Gs3,114
 		  psgInst 00h
 		        waitL    12
 		channel_end
@@ -267,13 +267,13 @@ Music_18_Channel_7:
 		  psgInst 00h
 		        waitL    72
 		  psgInst 0Dh
-		        psgNoteL F2,12
-		        psgNoteL Fs2,6
+		        psgNoteL F3,12
+		        psgNoteL Fs3,6
 		        wait
 		  psgInst 00h
 		        waitL    12
 		  psgInst 0Dh
-		        psgNoteL F2,114
+		        psgNoteL F3,114
 		  psgInst 00h
 		        waitL    12
 		channel_end
