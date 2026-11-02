@@ -1725,7 +1725,18 @@ EndBattlescene:
                 dbf     d0,@WaitForInput
 byte_19266:
                 
+			if (STANDARD_BUILD&ENABLE_UNINTERRUPTIBLE_MUSIC=1)
+				; Verify if we should fade out music
+                move.w  d0,-(sp)
+				jsr		ShouldPlayBattlesceneMusic		; d0 = 0 don't play, 1 play
+				cmp.b	#0,d0
+				beq.s	@SkipMusicFadeOut
                 sndCom  SOUND_COMMAND_FADE_OUT
+@SkipMusicFadeOut:
+                move.w  (sp)+,d0
+			else
+                sndCom  SOUND_COMMAND_FADE_OUT
+			endif
                 move.w  ((BATTLESCENE_ALLY-$1000000)).w,d0
                 cmpi.w  #-1,d0
                 beq.s   @Enemy
