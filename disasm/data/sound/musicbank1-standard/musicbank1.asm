@@ -1,0 +1,30 @@
+
+   cpu z80
+   listing off
+   phase	0
+   include "..\macros.asm"
+   include "..\enums.asm"
+   org 08000h
+
+		dw Music_33
+		dw Music_34
+		dw Music_35
+		dw Music_36
+		dw Music_37
+		dw Music_38
+		dw Music_39
+		dw Music_40
+		dw Music_41
+		dw Music_44
+		dw Music_44
+		dw Music_44
+		include "music33.asm"
+		include "music34.asm"
+		include "music35.asm"
+		include "music36.asm"
+		include "music37.asm"
+		include "music38.asm"
+		include "music39.asm"
+		include "music40.asm"
+		include "music41.asm"
+		include "music44.asm"

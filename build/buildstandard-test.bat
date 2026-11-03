@@ -12,18 +12,34 @@ cd ../disasm/code/common/tech/sound/cubewiz/
 echo Assembling CUBEWIZ driver ...
     ..\..\..\..\..\..\tools\asw\asw.exe .\cubewiz.asm
     ..\..\..\..\..\..\tools\asw\p2bin.exe .\cubewiz.p ..\..\..\..\..\data\sound\cubewiz.bin -k -r $0000-$1fff
-cd ../../../../../data/sound/musicbank0/
+cd ../../../../../data/sound/musicbank0-standard/
 echo Assembling music bank 0 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank0.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank0.p ..\musicbank0.bin -k -r $8000-$ffff
-cd ../musicbank1/
+cd ../musicbank1-standard/
 echo Assembling music bank 1 ...
     ..\..\..\..\tools\asw\asw.exe .\musicbank1.asm
     ..\..\..\..\tools\asw\p2bin.exe .\musicbank1.p ..\musicbank1.bin -k -r $8000-$ffff
-cd ../sfxbank/
+cd ../musicbankext0-standard/
+echo Assembling music bank ext 0 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbankext0.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbankext0.p ..\musicbankext0.bin -k -r $8000-$ffff
+cd ../musicbankext1-standard/
+echo Assembling music bank ext 1 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbankext1.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbankext1.p ..\musicbankext1.bin -k -r $8000-$ffff
+cd ../musicbankext2-standard/
+echo Assembling music bank ext 2 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbankext2.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbankext2.p ..\musicbankext2.bin -k -r $8000-$ffff
+cd ../musicbankext3-standard/
+echo Assembling music bank ext 3 ...
+    ..\..\..\..\tools\asw\asw.exe .\musicbankext3.asm
+    ..\..\..\..\tools\asw\p2bin.exe .\musicbankext3.p ..\musicbankext3.bin -k -r $8000-$ffff
+cd ../sfxbank-standard/
 echo Assembling SFX bank ...
     ..\..\..\..\tools\asw\asw.exe .\sfxbank.asm
-    ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $E000-$ffff
+    ..\..\..\..\tools\asw\p2bin.exe .\sfxbank.p ..\sfxbank.bin -k -r $F000-$ffff
 REM Build text banks
 echo Checking text banks ...
 cd ../../scripting/text/

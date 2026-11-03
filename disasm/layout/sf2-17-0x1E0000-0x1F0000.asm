@@ -4,12 +4,17 @@
 ; FREE SPACE : 462 bytes.
 
 
-                incbin "data/sound/pcmbank0.bin"
-                incbin "data/sound/pcmbank1.bin"
-                incbin "data/sound/yminst.bin"
+                incbinIfVanilla "data/sound/pcmbank0.bin"
+                incbinIfVanilla "data/sound/pcmbank1.bin"
+                incbinIfVanilla "data/sound/yminst.bin"
+                
+                incbinIfStandard "data/sound/pcmbank0-standard.bin"
+                incbinIfStandard "data/sound/pcmbank1-standard.bin"
+                incbinIfStandard "data/sound/yminst-standard.bin"
+                
 SoundDriver:
                 
-                incbinIfStandard "data/sound/cubewiz.bin"
+                incbinIfStandard "data/sound/cubewiz.bin"	; MrCool: Cubewiz sound driver can be located at 0x1ED000 when viewing ROM in hex editor
                 incbinIfStandard "data/sound/sfxbank.bin"
                 
                 incbinIfVanilla "data/sound/sounddriver.bin"

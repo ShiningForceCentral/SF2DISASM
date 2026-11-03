@@ -40,19 +40,19 @@
     include "code\music_resuming.asm"
     include "code\dac\send_dac_byte.asm"
   align 10h, 0
+    include "bankdefs.asm"
+  align 10h, 0
     include "data\algo_slots.asm"
-    include "data\ym_frequencies.asm"
-    include "data\psg_frequencies.asm"
+    include "data\ym_frequencies-standard.asm"
+    include "data\psg_frequencies-standard.asm"
   align 10h, 0
     include "data\ym_levels.asm"
     include "data\psg_instruments.asm"
     include "data\pitch_effects.asm"
   align 10h, 0
-    include "data\pcm_samples.asm"
-    align 1800h
+    include "data\pcm_samples-standard.asm"
+    align 1A90h
     include "data\channel_data.asm"
-  align 10h, 0
-    include "bankdefs.asm"
 
 END_OF_DRIVER:
   if MOMPASS==2
