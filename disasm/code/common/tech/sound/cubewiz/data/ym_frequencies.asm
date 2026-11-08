@@ -1,8 +1,9 @@
 
 ; YM Frequency values for each driver note value from note 0 to $53
+; Note range (International Pitch Notation) : C1 33Hz to B7 3988Hz
 
 YM_FREQUENCIES:
-    dw 0A8Ah
+    dw 0A8Ah ; C1 33Hz
     dw 0AB1h
     dw 0ADAh
     dw 0B06h
@@ -85,4 +86,4 @@ YM_FREQUENCIES:
     dw 3C09h
     dw 3C46h
     dw 3C87h
-    dw 3CCBh
+    dw 3CCBh ; B7 3988Hz
