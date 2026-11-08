@@ -37,7 +37,7 @@ if /i "!JAVA_VERSION:~0,15!"=="!NO_JAVA!" (
     echo Warning: Java not installed so text banks will not be rebuilt. See https://github.com/ShiningForceCentral/SF2DISASM#editor-tool-requirements-
 ) ELSE (
     echo Assembling text banks ...
-    java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript.txt -e ./
+    java -XX:+IgnoreUnrecognizedVMOptions -jar SF2TextEditor.jar --headless -i ./gamescript-standard.txt -e ./
 )
 REM Assemble rom
 cd ../../../
