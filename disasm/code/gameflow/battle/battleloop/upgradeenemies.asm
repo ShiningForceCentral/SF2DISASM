@@ -292,8 +292,8 @@ UpgradeRandomBattleEnemies:
                 move.w  d5,d1
                 bra.w   @Done
 @CalculateUpgradeMultiplier:
-                
-                divu.w  #10,d2          ; d2 = bowie_level - battle_index / 10
+										; BUG: divu doesn't work because upper word in d2 is FFFF at this point, this results in absurdly overpowered enemies
+                divu.w  #10,d2          ; d2 = (bowie_level - battle_index) / 10
                 andi.l  #BYTE_MASK,d2
                 tst.w   d2
                 bne.s   @CalculateUpgradeRange

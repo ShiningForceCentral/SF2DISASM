@@ -311,7 +311,7 @@ table_ConfigurationMessages:
                 defineName "Which map?"                     ; Map Select
                 defineName "Which battle?"                  ; Battle Test 1
                 defineName "Play intro cutscene?"           ; Battle Test 2
-                defineName "Setup battle party?"            ; Battle Test 3
+                defineName "Reset characters and level them up to a suitable level for this  battle?" ; Battle Test 3		(it's not pretty but at least it's clearer!)
                 defineName "Which menu?"                    ; Menu Select
                 defineName "Which shop?"                    ; Shop Select
                 defineName "Recruit which character?"       ; Party Select 1
