@@ -1192,6 +1192,8 @@ MODIFY_STATUS3: equ $C000
 STAT_BOOST_MOV: equ 2
 STAT_BOOST_MIN: equ 2
 STAT_BOOST_MAX: equ 4
+STAT_BOOST_HP_BONUS: equ 0
+STAT_BOOST_MP_BONUS: equ 0
 STAT_BOOST_MOV_CAP: equ 9
 
 ; ---------------------------------------------------------------------------
@@ -2654,6 +2656,8 @@ MESSAGE_BATTLE_USED_ITEM_MISS_AND_DESTROYED_START: equ 387
 MESSAGE_BATTLE_FOUND_GOLD_COINS: equ 393
 MESSAGE_BATTLE_RECEIVED_ITEM: equ 395
 MESSAGE_BATTLE_DROPPED_ITEM: equ 396
+MESSAGE_BATTLE_STORED_ITEM: equ 369
+MESSAGE_DELAY: equ 411
 MESSAGE_END: equ 65535
 
 ; ---------------------------------------------------------------------------

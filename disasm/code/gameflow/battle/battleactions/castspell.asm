@@ -259,28 +259,28 @@ byte_B2B6:
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
                 rol.w   #4,d3           ; calculate difference between full and current BOOST increase values
                 mulu.w  d3,d2
-                lsr.l   #3,d2
+				buffDivide8  BOOST_DIVIDER,d2
                 sub.w   d2,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
                 move.w  d1,d2
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
                 mulu.w  d3,d2
-                lsr.l   #3,d2
+				buffDivide8  BOOST_DIVIDER,d2
                 sub.w   d2,d1
             else
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_AGI_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
             endif
                 displayMessage #MESSAGE_BATTLE_BOOST_SPELL_DEF_INCREASE,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -336,28 +336,28 @@ battlesceneScript_DisplaySlowMessages:
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
                 rol.w   #6,d3           ; calculate difference between full and current SLOW increase values
                 mulu.w  d3,d2
-                lsr.l   #3,d2
+				buffDivide8  SLOW_DIVIDER,d2
                 sub.w   d2,d1
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
                 move.w  d1,d2
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
                 mulu.w  d3,d2
-                lsr.l   #3,d2
+				buffDivide8  SLOW_DIVIDER,d2
                 sub.w   d2,d1
             else
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
                 displayMessage #MESSAGE_BATTLE_AGILITY_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
                 jsr     GetBaseDef
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
             endif
                 displayMessage #MESSAGE_BATTLE_DEFENSE_DECREASED_BY,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -407,14 +407,14 @@ byte_B3E2:
             if (STANDARD_BUILD&SPELLS_REFRESH_STATUS_COUNTERS=1)
                 move.w  d1,d2
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  ATTACK_DIVIDER,d1
                 rol.w   #2,d3           ; calculate difference between full and current ATTACK increase values
                 mulu.w  d3,d2
-                lsr.l   #3,d2
+				buffDivide8  ATTACK_DIVIDER,d2
                 sub.w   d2,d1
             else
                 mulu.w  #3,d1
-                lsr.l   #3,d1
+				buffDivide8  ATTACK_DIVIDER,d1
             endif
                 displayMessage #MESSAGE_BATTLE_ATTACK_SPELL_EFFECT,d0,#0,d1 
                                                         ; Message, Combatant, Item or Spell, Number
@@ -938,10 +938,20 @@ byte_B93A:
                                                         ; Message, Combatant, Item or Spell, Number
 @EvaluateLearnedSpell:
                 
+			if (STANDARD_BUILD=1)
+                txt     MESSAGE_DELAY   ; Shows "{D1}" so the last stat up message has a little time to breathe! 
+			endif
+			
                 move.b  (a1)+,d1
                 cmpi.b  #-1,d1
                 beq.s   @Return
                 
+			if (STANDARD_BUILD=1)
+			if (SPELL_LEARNING_SOUND_EFFECT>=1)
+				sndCom	SPELL_LEARNING_SOUND_EFFECT
+			endif
+			endif
+
                 move.w  d1,d2
                 andi.w  #SPELLENTRY_MASK_INDEX,d2
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1

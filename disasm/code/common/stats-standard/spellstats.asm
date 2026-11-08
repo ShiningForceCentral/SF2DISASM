@@ -115,9 +115,11 @@ CalculateTotalLevel:
                 move.w  d1,d2
                 bsr.w   GetLevel
                 add.w   d2,d1
-                bra.s   @Done
+				subq.w  #1,d1		; This fixes an issue where promotion gave 1 extra level for the purpose of learning spells from the base class spell list
+                bra.s   @Done		; Say, if character promotes at level 24 and is set-up to learn a spell at level 25, he must level up to promoted level 2 to learn the level 25 spell
                 
                 ; Pre-promoted characters are assumed to have been promoted at level 20
+				; Note that this case doesn't matter anyway since pre-promoted characters don't have a base class spell list in the first place
 @Skip:          bsr.w   CalculateEffectiveLevel
 @Done:          movem.l (sp)+,d0/d2/a0
                 rts
@@ -130,49 +132,74 @@ CalculateTotalLevel:
 
 ; In: d0.w = ally index
 
-LearnAllKnownSpells:
-                
+; Out: 	a0 = pointer to the first entry of the character spell list,
+;			 or to a dummy empty spell list if no data can be found for the character's class
+
+; This is a safe empty spell list in case we don't have a valid pointer to a real spell list...
+	dc.b	ALLYSTATS_CODE_END_OF_SPELL_LIST
+	dc.b	ALLYSTATS_CODE_END_OF_SPELL_LIST
+EMPTY_SPELL_LIST:
+	dc.b	ALLYSTATS_CODE_END_OF_SPELL_LIST
+	dc.b	ALLYSTATS_CODE_END_OF_SPELL_LIST
+	align
+	
+GetAllySpellListFirstEntry:
                 move.w  d3,-(sp)
-                bsr.w   CalculateEffectiveLevel
-                move.w  d1,d5
-                bsr.w   GetClass
+                bsr.w   GetClass  ; d1 = class index
                 
                 ; Get pointer to stat block for class d3.b -> a0
                 move.w  d0,d2
                 move.w  d1,d3
                 bsr.w   GetAllyStatsBlockAddress
                 tst.w   d3
-                bmi.s   @Done
+                bmi.s   @NoData
                 
                 lea     ALLYSTATS_OFFSET_SPELL_LIST_MINUS_ONE(a0),a0
-@FindAllLearnableSpells_Loop:
-                
-                bsr.s   FindNextLearnableSpell
-                tst.w   d2
-                bne.s   @Next
-                
-                moveq   #0,d2
-@Next:          bpl.s   @FindAllLearnableSpells_Loop
-                
+				bra.s	@Done
+@NoData:
+                lea     EMPTY_SPELL_LIST(pc),a0		; Should never happen...
+				
 @Done:          move.w  (sp)+,d3
                 rts
+
+    ; End of function GetAllySpellListFirstEntry
+
+
+; =============== S U B R O U T I N E =======================================
+
+; In: d0.w = ally index
+
+LearnAllKnownSpells:
+                
+                bsr.w   CalculateEffectiveLevel		; d1 = effective level
+                move.w  d1,d5
+				
+				bsr.s	GetAllySpellListFirstEntry	; a0 = pointer to first spell entry
+				
+				
+@FindAllLearnableSpells_Loop:
+                
+                bsr.s   FindNextLearnableSpell			; d2 = success status, d1 = learned spell (unused)
+                tst.w   d2
+                beq.s   @FindAllLearnableSpells_Loop	; Keep learning until FindNextLearnableSpell reports it's over (!= 0)
+
+@Done:          rts
 
     ; End of function LearnAllKnownSpells
 
 
 ; =============== S U B R O U T I N E =======================================
 
-; In: a0 = pointer to ally spell list entry
+; In: a0 = pointer to ally spell list entry (will advance as the list is browsed)
 ;     d0.w = ally index
 ;     d5.w = current level
 ;
-; Out: d2.w = 0: successfully learned spell
-;             1: failure : same or higher level spell already known
-;             2: failure : all spell slots already occupied
-;            -1: current level is too low, or end of spell list has been reached
+; Out: 	d1.w: spell learned, valid only if successful (see below)
+;		d2.w = 0: successfully learned a spell (a0 now points to the entry after the spell that was successfully learned)
+;             -1: end of spell list has been reached without finding a spell that could be successfully learned (a0 is now after the end of the spell list)
 
                 module
-@GetFirstSpellList:
+@RetryWithFirstSpellList:
                 
             if (EXPANDED_SAVED_DATA&LEARN_SPELLS_BASED_ON_TOTAL_LEVEL=1)
                 ; Consider promoted at level when learning spells from the first list (i.e., the base class's)
@@ -186,15 +213,25 @@ LearnAllKnownSpells:
                 lea     ALLYSTATS_OFFSET_SPELL_LIST(a0),a0
 FindNextLearnableSpell:
                 
-                move.b  (a0)+,d2            ; d2 = level which spell is learned at
+                move.b  (a0)+,d2            ; d2 = level which spell is learned at, or a special value that marks "end of list" / "use first list"
                 move.b  (a0)+,d1            ; d1 = spell index
-                cmp.b   d2,d5
-                bhs.s   LearnSpell
-                
-                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2
-                beq.s   @GetFirstSpellList
-                
-                moveq   #-1,d2
+				
+                cmpi.b  #ALLYSTATS_CODE_USE_FIRST_SPELL_LIST,d2 ; Have we reached the special entry in the list that tells us to use the first list?
+                beq.s   @RetryWithFirstSpellList				; We will attempt to learn a spell again, this time with the first list
+				
+				cmpi.b	#ALLYSTATS_CODE_END_OF_SPELL_LIST,d2	; Have we reached the special entry in the list that marks the end of the list?
+                beq.s   @ReachedEndOfSpellList					; We searched the full list, time to bail out
+				
+                cmp.b   d2,d5						; Perform comparison of (current level - learn level)
+				blo.s   FindNextLearnableSpell		; Too low level to learn the spell (current level < learn level), let's keep going
+				
+                bsr.s   LearnSpell				; We have an eligible spell we can try to learn, so let's try!
+				tst.w   d2						; Does LearnSpell report a success? (= 0)
+				beq.s	@Done					; We successfully learned a spell, our job is done, d1 = spell learned
+				bra.s   FindNextLearnableSpell	; Otherwise, keep browsing the list (we don't care about the reason the spell failed to be learned, we MUST keep browsing the full list)
+@ReachedEndOfSpellList:
+                moveq   #-1,d2					; Reached end of spell list, we're done and we report this fact
+@Done:
                 rts
                 
                 modend
@@ -206,7 +243,7 @@ FindNextLearnableSpell:
 
 ; In: d0.b = ally index, d1.w = spell entry
 ;
-; Out: d2 = result (0 = success, 1 = failure : same or higher level known, -1 = failure : no room)
+; Out: d2 = result (0 = success, 1 = failure : same or higher level known, 2 = failure : no room)
 
 
 LearnSpell:
@@ -246,7 +283,7 @@ LearnSpell:
                 beq.s   @LearnNewSpell
                 dbf     d3,@FindEmptySlot_Loop
                 
-                moveq   #-1,d2           ; 2 = failure : no room
+                moveq   #2,d2           ; 2 = failure : no room
                 bra.s   @Done
                 
 @LearnNewSpell: setSavedByteWithPreDecrement d1, a0
