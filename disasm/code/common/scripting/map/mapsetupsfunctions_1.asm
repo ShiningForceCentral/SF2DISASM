@@ -512,14 +512,20 @@ GetRhodeFacing:
 
 CheckRandomBattle:
                 
-            if (STANDARD_BUILD&NO_RANDOM_BATTLES=1)
+            if ((STANDARD_BUILD=1)&(NO_RANDOM_BATTLES=1))
                 ; Do nothing
             else
                 movem.l d1/d6-d7,-(sp)
                 move.w  #BATTLE_COMPLETED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_CheckFlag
+				
+			if ((STANDARD_BUILD=1)&(NO_RANDOM_BATTLES=2))
+				; Only once
+                bne.s   loc_478C0
+			else
                 bne.s   loc_4786E
+			endif
                 moveq   #-1,d1
                 bra.w   loc_47896
 loc_4786E:
@@ -547,14 +553,67 @@ loc_47896:
                 
                 tst.w   d1
                 beq.s   loc_478C0
+
+			if ((STANDARD_BUILD=1)&(NO_RANDOM_BATTLES=3))
+                ; This variant will give choice to the player!
+                jsr     (WaitForViewScrollEnd).w
+                sndCom  SFX_BOOST
+                bsr.w   ExecuteFlashScreenScript
+
+				; If the battle has already been completed: player has the choice, no questions asked.
+				move.w  #BATTLE_COMPLETED_FLAGS_START,d1
+                add.w   d0,d1
+                jsr     j_CheckFlag
+				bne.s	@AskPlayer
+				
+				; Otherwise, check if the battle is flagged as mandatory...
+                movem.l d0-d2/a0,-(sp)
+                lea     table_MandatoryRandomBattles(pc), a0
+				move.w  d0,d1		; looking for the battle index...
+                moveq   #0,d2		; no extra properties attached
+                jsr     (FindSpecialPropertyBytesAddressForObject).w
+                movem.l (sp)+,d0-d2/a0
+                bcc.s   @PlayBattle	; Battle is mandatory
+@AskPlayer:
+                ; Show message
+				clr.w   ((CURRENT_SPEECH_SFX-$1000000)).w
+                txt     364        ; "There are monsters ahead!{N}Will you sneak past them?"
+                move.w  d0,-(sp)
+                jsr     YesNoPrompt
+                tst.w   d0
+                movem.w (sp)+,d0
+                beq.s   @SkipBattle
+@PlayBattle:
+                ; Play battle
+                move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
+                add.w   d0,d1
+                jsr     j_SetFlag
+                move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
+                move.w  #30000,((STEP_COUNTER-$1000000)).w
+				bra.s   loc_478C0
+@SkipBattle:
+                ; Flag the battle as completed
+                move.w  #BATTLE_COMPLETED_FLAGS_START,d1
+                add.w   d0,d1
+                jsr     j_SetFlag
+                move.w  #15000,((STEP_COUNTER-$1000000)).w
+
+                ; Final text and exit
+                txt     365        ; "{LEADER} and his companions{N}sneaked past the monsters!{W2}{CLEAR}Monsters might come back later...{W1}"
+            else
                 move.w  #BATTLE_UNLOCKED_FLAGS_START,d1
                 add.w   d0,d1
                 jsr     j_SetFlag
                 move.l  #MAP_EVENT_RELOADMAP,((MAP_EVENT_TYPE-$1000000)).w
                 move.w  #30000,((STEP_COUNTER-$1000000)).w
                 jsr     (WaitForViewScrollEnd).w
+			if ((STANDARD_BUILD=1)&(NO_RANDOM_BATTLES=2))
+				; Only once = flash removed, should feel like a regular battle now
+			else
                 sndCom  SFX_BOOST
                 bsr.w   ExecuteFlashScreenScript
+			endif
+            endif
 loc_478C0:
                 
                 movem.l (sp)+,d1/d6-d7
