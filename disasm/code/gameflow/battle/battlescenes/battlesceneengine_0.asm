@@ -1609,11 +1609,21 @@ loc_1919E:
                 txt     270             ; "{D1}Agility increased by {#}!"
 loc_191AC:
                 
+			if (STANDARD_BUILD=1)
+                txt     MESSAGE_DELAY   ; Shows "{D1}" so the last stat up message has a little time to breathe! 
+			endif
+				
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 cmpi.b  #-1,d0
                 beq.s   return_191DE
                 
+			if (STANDARD_BUILD=1)
+			if (SPELL_LEARNING_SOUND_EFFECT>=1)
+				sndCom	SPELL_LEARNING_SOUND_EFFECT
+			endif
+			endif
+			
                 move.l  d0,d1
                 andi.w  #SPELLENTRY_MASK_INDEX,d0
                 lsr.w   #SPELLENTRY_OFFSET_LV,d1
