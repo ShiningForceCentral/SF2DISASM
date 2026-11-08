@@ -269,8 +269,8 @@
 010C={D1}Attack increased by {#}!
 010D={D1}Defense increased by {#}!
 010E={D1}Agility increased by {#}!
-010F={D1}{NAME} learned the new{N}magic spell {SPELL}!
-0110={D1}{SPELL} increased to{N}level {#}!
+010F={NAME} learned the new{N}magic spell {SPELL}!{W2}
+0110={SPELL} increased to{N}level {#}!{W2}
 0111={NAME}'s attack!
 0112={NAME} cast{N}{SPELL} level {#}!
 0113={NAME} used{N}{ITEM}!
@@ -367,7 +367,7 @@
 016E=Defense increased by {#}.{W2}
 016F=Agility increased by {#}.{W2}
 0170=Max. HP increased by {#}.{W2}
-0171=Max. MP increased by {#}.{W2}
+0171={NAME} can't carry{N}the {ITEM}.{D2}{N}It will be sent to the Caravan.{W2}
 0172=And learned a{N}new magic spell, {SPELL}.{W2}
 0173=And {SPELL} became{N}level {#}.{W2}
 0174=But smoke rose from{N}the {ITEM}.{D1}
@@ -393,7 +393,7 @@
 0188={NAME} earned {#}{N}experience points.
 0189=Found {#} gold coins.
 018A={NAME} found{N}the {ITEM}.{D1}
-018B={NAME} received{N}the {ITEM}.
+018B={NAME} received{N}the {ITEM}.{W2}
 018C={NAME} dropped{N}a {ITEM}.{D1}
 018D={CLEAR}{NAME} appeared!{D3}
 018E={NAME}'s attack{N}increased by {#}.
@@ -409,7 +409,7 @@
 0198=But, it was empty.{W1}
 0199=It was dark inside.{W1}
 019A=It was empty.{W1}
-019B=x
+019B={D1}
 019C=Nothing was there.{W1}
 019D={NAME} found{N}{ITEM}.{W2}{CLEAR}
 019E={NAME} found {#} gold{N}coins.
