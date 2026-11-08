@@ -1194,6 +1194,8 @@ MODIFY_STATUS3: equ $C000
 STAT_BOOST_MOV: equ 2
 STAT_BOOST_MIN: equ 2
 STAT_BOOST_MAX: equ 4
+STAT_BOOST_HP_BONUS: equ 0
+STAT_BOOST_MP_BONUS: equ 0
 STAT_BOOST_MOV_CAP: equ 9
 
 ; ---------------------------------------------------------------------------
