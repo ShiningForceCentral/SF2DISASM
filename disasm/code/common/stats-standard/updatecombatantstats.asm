@@ -123,29 +123,29 @@ ApplyStatusEffectsOnStats:
                 rol.w   #2,d2
                 bsr.w   GetBaseAtt
                 mulu.w  d2,d1
-                lsr.l   #3,d1
+				buffDivide8  ATTACK_DIVIDER,d1
                 bsr.w   IncreaseCurrentAtt
                 move.w  d3,d2
                 andi.w  #STATUSEFFECT_BOOST,d2
                 rol.w   #4,d2
                 bsr.w   GetBaseDef
                 mulu.w  d2,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
                 bsr.w   IncreaseCurrentDef
                 bsr.w   GetBaseAgi
                 mulu.w  d2,d1
-                lsr.l   #3,d1
+				buffDivide8  BOOST_DIVIDER,d1
                 bsr.w   IncreaseCurrentAgi
                 move.w  d3,d2
                 andi.w  #STATUSEFFECT_SLOW,d2
                 rol.w   #6,d2
                 bsr.w   GetBaseDef
                 mulu.w  d2,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
                 bsr.w   DecreaseCurrentDef
                 bsr.w   GetBaseAgi
                 mulu.w  d2,d1
-                lsr.l   #3,d1
+				buffDivide8  SLOW_DIVIDER,d1
                 bsr.w   DecreaseCurrentAgi
                 btst    #STATUSEFFECT_BIT_STUN,d3
                 beq.s   @Return

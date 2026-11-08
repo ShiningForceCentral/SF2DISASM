@@ -38,21 +38,20 @@ battlesceneScript_CalculateSpellDamage:
                 clr.w   d6
                 move.b  SPELLDEF_OFFSET_POWER(a0),d6
                 bsr.s   AdjustSpellPower
-                move.w  d6,d1
-                lsr.w   #2,d1           ; d1.w = spell power divided by 4
+                move.w  #100,d1			; 100% is the initial multiplier
                 cmpi.b  #RESISTANCESETTING_MINOR,d2
                 bne.s   @CheckMajorResistance
-                sub.w   d1,d6           ; -25% damage if target has minor resistance
+				subi.w  #RESISTANCE_MINOR_PERCENT,d1
 @CheckMajorResistance:
                 
                 cmpi.b  #RESISTANCESETTING_MAJOR,d2
                 bne.s   @CheckWeakness
-                lsr.w   #1,d6           ; -50% damage if target has major resistance
+				subi.w  #RESISTANCE_MAJOR_PERCENT,d1
 @CheckWeakness:
                 
                 cmpi.b  #RESISTANCESETTING_WEAKNESS,d2
                 bne.s   @DetermineCriticalHit
-                add.w   d1,d6           ; +25% damage if target is weak
+				addi.w  #RESISTANCE_WEAKNESS_PERCENT,d1
 @DetermineCriticalHit:
                 
                 move.w  d3,d0
@@ -60,10 +59,12 @@ battlesceneScript_CalculateSpellDamage:
                 jsr     (GenerateRandomOrDebugNumber).w
                 tst.w   d0
                 bne.s   @Skip
-                add.w   d1,d6           ; +25% damage if successful critical hit
+				addi.w  #RESISTANCE_CRITICAL_PERCENT,d1
                 st      criticalHit(a2)
                 
-@Skip:          bsr.w   battlesceneScript_InflictDamage
+@Skip:          mulu.w	d1,d6			; apply final percentage to d6
+				divu.w  #100,d6
+				bsr.w   battlesceneScript_InflictDamage
                 tst.b   targetDies(a2)
                 beq.s   @Return
                 bsr.w   battlesceneScript_DisplayDeathMessage

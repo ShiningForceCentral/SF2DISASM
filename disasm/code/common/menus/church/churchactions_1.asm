@@ -524,8 +524,12 @@ ChurchMenu:
                 txt     141             ; "{NAME} was successfully{N}promoted to {CLASS}.{W2}"
                 move.w  member(a6),d0
                 move.b  #1,d1
+			if (STANDARD_BUILD=1)
+				; No need to reset level to 1, it is already done by Promote
+			else
                 jsr     j_SetLevel
                 clr.w   d1
+			endif
                 jsr     j_SetCurrentExp
 @RestartPromo:
                 

@@ -115,6 +115,7 @@ SEND_DROPPED_ITEMS_TO_CARAVAN:      equ 1       ; If character inventory is full
 SPELLS_REFRESH_STATUS_COUNTERS:     equ 1       ; Boost, Slow, and Attack spells refresh status counters instead of failing, as long as the counter is increased by at least 1. Battle messages display the actual regained stats values.
 TRADEABLE_ITEMS:                    equ 0       ; Allow trading items in battle without full inventory.
 TRAP_DAMAGE_RAISES_WITH_DIFFICULTY: equ 0       ; Increase Laser/Burst Rock damage with difficulty.   Normal:100%  Hard:125%  Super: 150%  Ouch: 175%
+SPELL_LEARNING_SOUND_EFFECT:		equ 0		; 0 = 0FF, xxx = Play xxx SFX when a character learns a new spell or upgrades a spell.
 
 
 ; Special screens
@@ -138,7 +139,19 @@ EXTENDED_BATTLE_TURN_UPDATE:        equ 1       ; Trigger regions, activate AI, 
 SF1_LEVELUP:                        equ 0       ; Reproduces the stat gain calculations from SF1 using SF2 ally stat blocks and growthcurves, with modified parameters to better suit SF2's higher growth values.
 SF1_LEVELUP_RNG_SCALE_RATE:         equ 8       ; Determines the rate at which the randomization range scales relative to stat value. Higher value = slower rate (minimum = 1.) Starting at stat target value ± 1, range increases by ± 1 for every n points in a stat. Vanilla SF1 default = 4
 SF1_LEVELUP_RNG_CAP:                equ 8       ; Caps the randomization range to stat target value ± n. Vanilla SF1 default = 4
-LEARN_SPELLS_BASED_ON_TOTAL_LEVEL:  equ 1       ; Considers promoted at level when learning spells from the first list (i.e., the base class's.)
+LEARN_SPELLS_BASED_ON_TOTAL_LEVEL:  equ 1       ; If enabled, consider level = (promoted at level + current level - 1) when a promoted character is set-up to learn spells from its base class spell list.
+
+
+; Combat mechanics
+RESISTANCE_MINOR_PERCENT:			equ 25		; Minor resistance will adjust spell damage by -x% (25 in the base game).
+RESISTANCE_MAJOR_PERCENT:			equ 50		; Major resistance will adjust spell damage by -x% (50 in the base game).
+RESISTANCE_WEAKNESS_PERCENT:		equ 25		; Weakness will adjust spell damage by +x% (25 in the base game).
+RESISTANCE_CRITICAL_PERCENT:		equ 25		; Critical hit will adjust spell damage by +x% (25 in the base game). This stacks ADDITIVELY with resistance %.
+ATTACK_DIVIDER						equ 8		; Modify this value to adjust the power of Attack (8 in the base game). As a reminder, first turn Attack increases ATT stat by [3 * (100 / DIVIDER)]%.
+BOOST_DIVIDER						equ 8		; Modify this value to adjust the power of Boost (8 in the base game). As a reminder, first turn Boost increases DEF/AGI stats by [3 * (100 / DIVIDER)]%.
+SLOW_DIVIDER						equ 8		; Modify this value to adjust the power of Slow (8 in the base game). As a reminder, first turn Slow decreases DEF/AGI stats by [3 * (100 / DIVIDER)]%.
+ARCHER_DAMAGE_BONUS_IGNORE_DEF:		equ 0		; 0 = OFF, 1 = ON   Change the Archer 25% damage bonus against Flying/Hovering characters to ignore DEF.
+PLAY_CONSUMABLE_ITEM_ANIMATION:		equ 0		; 0 = OFF, 1 = ON   If enabled, play spell animation attached to a consumable item.
 
 
 ; Menu enhancements
