@@ -6,7 +6,7 @@
    include "..\macros.asm"
    include "..\enums.asm"
 
-SFX_ROM_OFFSET  equ 01EE000h
+SFX_ROM_OFFSET  equ 01EF000h
 SFX_BANK_OFFSET equ SFX_ROM_OFFSET#08000h+08000h
 
    org SFX_BANK_OFFSET
