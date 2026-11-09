@@ -2,15 +2,17 @@
 ; GAME SECTION 17 :
 ; 0x1E0000..0x1F0000 : PCM Banks, YM Instruments, sound driver, char stats, witch screens
 ; FREE SPACE : 462 bytes.
-
-
-                incbinIfVanilla "data/sound/pcmbank0.bin"
-                incbinIfVanilla "data/sound/pcmbank1.bin"
-                incbinIfVanilla "data/sound/yminst.bin"
                 
-                incbinIfStandard "data/sound/pcmbank0-standard.bin"
-                incbinIfStandard "data/sound/pcmbank1-standard.bin"
-                incbinIfStandard "data/sound/yminst-standard.bin"
+            if (INCLUDE_SF2MC_ASSETS=1)
+                incbin "data/sound/pcmbank0-standard.bin"
+                incbin "data/sound/pcmbank1-standard.bin"
+                incbin "data/sound/yminst-standard.bin"
+            else
+                incbin "data/sound/pcmbank0.bin"
+                incbin "data/sound/pcmbank1.bin"
+                incbin "data/sound/yminst.bin"
+                align $1ED000
+            endif                
                 
 SoundDriver:
                 
