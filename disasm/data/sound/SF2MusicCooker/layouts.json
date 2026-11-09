@@ -1,0 +1,159 @@
+﻿[
+  // SHINING FORCE 2 LAYOUT
+  {
+    "name": "SF2DISASM", // Name of the repository
+    "featureBranch": "feature/expanded_musics", // Hint of which feature branch to merge into the user's repository to get the required patches
+
+    "paths": {
+      "patches": "..\\..\\..\\disasm\\sf2patches.asm", // Path to the file that lists all available patches in the repository
+      "musicNumbersAndAsmNames": "..\\..\\..\\disasm\\enums\\music.asm", // Path to the file that lists all valid music numbers in the game, as a single enumeration
+      "sfxNumbersAndAsmNames": "..\\..\\..\\disasm\\enums\\sfx.asm", // Path to the file that lists all valid SFX numbers in the game, as a single enumeration
+      "noteNames": "..\\..\\..\\disasm\\data\\sound\\enums.asm", // Path to the file that defines aliases for Cube note values, as a single enumeration
+      "musicBankFolders": [
+        "..\\..\\..\\disasm\\data\\sound\\musicbank0", // Paths to vanilla music banks (must be in the same order as 'musicBanks')
+        "..\\..\\..\\disasm\\data\\sound\\musicbank1"
+      ],
+      "sfxBankFolders": [
+        "..\\..\\..\\disasm\\data\\sound\\sfxbank" // Paths to vanilla SFX banks (probably only 1)
+      ],
+      "pcmBankFiles": [
+        "..\\..\\..\\disasm\\data\\sound\\pcmbank0.bin", // Paths to vanilla PCM banks (in .bin format)
+        "..\\..\\..\\disasm\\data\\sound\\pcmbank1.bin"
+      ],
+      "pcmSamples": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\pcm_samples.asm", // Path to Cube sound driver .asm file that defines all available samples
+      "ymInstBin": "..\\..\\..\\disasm\\data\\sound\\yminst.bin", // Path to vanilla Cube YM instruments file (29 bytes per OPN instrument)
+      "ymFrequencies": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\ym_frequencies.asm", // Path to the file that defines all Cube YM note frequencies
+      "psgFrequencies": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_frequencies.asm", // Path to the file that defines all Cube PSG tone note frequencies
+      "psgInstruments": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_instruments.asm", // Path to the file that defines all Cube PSG instruments (volume envelopes)
+      "musicNamesTxt": "..\\..\\..\\disasm\\data\\sound\\musicnames.txt", // (Optional) Path to a text file that maps vanilla music numbers to a friendly soundtrack name
+      "soundTestFolder": "..\\..\\..\\disasm\\code\\specialscreens\\witch" // (Optional) Path where the generated "soundtest-standard.asm" file should be put
+    },
+
+    "pitch": {
+      "ymOffset": 0, // This is the hardcoded offset in macros.asm (UPDATED: it has been removed with the latest cubewiz driver!)
+      "ymShift": 7, // 3 was the original note shift I attempted when reading Furnace source code but I guess something escaped me #D
+      "psgOffset": 21, // This is the hardcoded offset in parse_tone_data.asm (sub 15h in $$newNote routine)
+      "psgShift": -33 // I didn't investigate why there is -1 octave (-12) in addition to the offset
+    },
+
+    "musicBanksExtPatch": "EXPANDED_MUSIC_BANKS", // If this patch is enabled, then 'musicBanksExt' will be added to 'musicBanks'
+    "musicBanksExt": [ // Expanded music banks
+      {
+        "name": "musicbankext0",
+        "maxSize": 32768,
+        "firstNumber": 45,
+        "length": 6
+      },
+      {
+        "name": "musicbankext1",
+        "maxSize": 32768,
+        "firstNumber": 51,
+        "length": 6
+      },
+      {
+        "name": "musicbankext2",
+        "maxSize": 32768,
+        "firstNumber": 57,
+        "length": 4
+      },
+      {
+        "name": "musicbankext3",
+        "maxSize": 32768,
+        "firstNumber": 61,
+        "length": 4
+      }
+    ],
+    "musicBanks": [ // Vanilla music banks
+      {
+        "name": "musicbank0",
+        "maxSize": 32768, // 0x8000
+        "firstNumber": 1,
+        "length": 32
+      },
+      {
+        "name": "musicbank1",
+        "maxSize": 32768, // 0x8000
+        "firstNumber": 33,
+        "length": 12 // Shrinked compared to vanilla, but still compatible (see the modified Cubewiz driver)
+      }
+    ],
+
+    "sfxBanks": [ // Vanilla SFX bank (only 1)
+      {
+        "name": "sfxbank",
+        "maxSize": 4096, // 0x1000
+        "offset": 24576, // 0x6000
+        "extraOffsetWithMaxInstruments": 4096 // Extra offset if double-size 'yminst.bin' patch is enabled (see below)
+      }
+    ],
+
+    "pcmBanksExtPatch": "EXPANDED_PCM_BANKS", // If this patch is enabled, then 'pcmBanksExt' will be added to 'pcmBanks'
+    "pcmBanksExt": [ // Expanded PCM banks
+      {
+        "length": 32768,
+        "name": "pcmbankext7",
+        "number": 9
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext6",
+        "number": 8
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext5",
+        "number": 7
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext4",
+        "number": 6
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext3",
+        "number": 5
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext2",
+        "number": 4
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext1",
+        "number": 3
+      },
+      {
+        "length": 32768,
+        "name": "pcmbankext0",
+        "number": 2
+      }
+    ],
+    "pcmBanks": [ // Vanilla PCM banks
+      {
+        "length": 32768, // 0x8000
+        "name": "pcmbank0",
+        "number": 0
+      },
+      {
+        "length": 12288, // 0x3000
+        "name": "pcmbank1",
+        "number": 1
+      }
+    ],
+
+    "pcmSlotsPatch": "EXPANDED_PCM_ENTRIES", // Name of the patch that, if present, will override the number of PCM samples
+    "pcmSlots": 17, // Number of vanilla PCM samples
+    "pcmNameFormat": "PCM_BANK_{0}_INDEX", // ASM bank name pattern in pcm_samples.asm file
+
+    "ymFrequenciesSlotsPatch": "EXPANDED_YM_FREQUENCIES", // (Optional) Name of the patch that, if present, will override the number of YM frequencies slots
+    "ymFrequenciesSlots": 84, // (Optional) Number of vanilla YM frequencies slots, if omitted it will be deduced from ym_frequencies.asm file
+
+    "ymMaxInstrumentsPatch": "EXPANDED_YM_INSTRUMENTS", // (Optional) If this patch is enabled, then we will build a double-size 'yminst.bin' that can hold 256 YM instruments
+
+    "musicPairs": [ 3, 4, 13, 14 ], // (Optional) Pairs of vanilla musics that depend on each other and cannot be replaced individually without affecting the other
+
+    "soundTestTemplate": "soundtest.asm.tpl" // (Optional) Path to the .tpl file from which a new soundtest asm file will be generated
+  }
+]

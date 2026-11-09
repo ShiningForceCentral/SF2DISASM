@@ -253,7 +253,6 @@ build/caravan.cfg
 *.tsx
 *.tmx
 *.msi
-*.json
 build/Lunar IPS.exe
 build/mega-usb.exe
 *.ips
