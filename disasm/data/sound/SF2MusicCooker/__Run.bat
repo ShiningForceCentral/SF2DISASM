@@ -1,7 +1,7 @@
 @ECHO off
 
 rem Put here the path to your SF2DISASM folder, it must have 'expanded musics' feature merged
-SET SF2DISASMPath=C:\Dev\Github\SF2DISASM
+SET SF2DISASMPath=..\..\..\..
 
 rem -----------------------------------------------
 rem --- Uncomment the usage method your prefer ----

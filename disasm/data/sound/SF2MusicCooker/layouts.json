@@ -5,28 +5,28 @@
     "featureBranch": "feature/expanded_musics", // Hint of which feature branch to merge into the user's repository to get the required patches
 
     "paths": {
-      "patches": "..\\..\\..\\disasm\\sf2patches.asm", // Path to the file that lists all available patches in the repository
-      "musicNumbersAndAsmNames": "..\\..\\..\\disasm\\enums\\music.asm", // Path to the file that lists all valid music numbers in the game, as a single enumeration
-      "sfxNumbersAndAsmNames": "..\\..\\..\\disasm\\enums\\sfx.asm", // Path to the file that lists all valid SFX numbers in the game, as a single enumeration
-      "noteNames": "..\\..\\..\\disasm\\data\\sound\\enums.asm", // Path to the file that defines aliases for Cube note values, as a single enumeration
+      "patches": "disasm\\sf2patches.asm", // Path to the file that lists all available patches in the repository
+      "musicNumbersAndAsmNames": "disasm\\enums\\music.asm", // Path to the file that lists all valid music numbers in the game, as a single enumeration
+      "sfxNumbersAndAsmNames": "disasm\\enums\\sfx.asm", // Path to the file that lists all valid SFX numbers in the game, as a single enumeration
+      "noteNames": "disasm\\data\\sound\\enums.asm", // Path to the file that defines aliases for Cube note values, as a single enumeration
       "musicBankFolders": [
-        "..\\..\\..\\disasm\\data\\sound\\musicbank0", // Paths to vanilla music banks (must be in the same order as 'musicBanks')
-        "..\\..\\..\\disasm\\data\\sound\\musicbank1"
+        "disasm\\data\\sound\\musicbank0", // Paths to vanilla music banks (must be in the same order as 'musicBanks')
+        "disasm\\data\\sound\\musicbank1"
       ],
       "sfxBankFolders": [
-        "..\\..\\..\\disasm\\data\\sound\\sfxbank" // Paths to vanilla SFX banks (probably only 1)
+        "disasm\\data\\sound\\sfxbank" // Paths to vanilla SFX banks (probably only 1)
       ],
       "pcmBankFiles": [
-        "..\\..\\..\\disasm\\data\\sound\\pcmbank0.bin", // Paths to vanilla PCM banks (in .bin format)
-        "..\\..\\..\\disasm\\data\\sound\\pcmbank1.bin"
+        "disasm\\data\\sound\\pcmbank0.bin", // Paths to vanilla PCM banks (in .bin format)
+        "disasm\\data\\sound\\pcmbank1.bin"
       ],
-      "pcmSamples": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\pcm_samples.asm", // Path to Cube sound driver .asm file that defines all available samples
-      "ymInstBin": "..\\..\\..\\disasm\\data\\sound\\yminst.bin", // Path to vanilla Cube YM instruments file (29 bytes per OPN instrument)
-      "ymFrequencies": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\ym_frequencies.asm", // Path to the file that defines all Cube YM note frequencies
-      "psgFrequencies": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_frequencies.asm", // Path to the file that defines all Cube PSG tone note frequencies
-      "psgInstruments": "..\\..\\..\\disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_instruments.asm", // Path to the file that defines all Cube PSG instruments (volume envelopes)
-      "musicNamesTxt": "..\\..\\..\\disasm\\data\\sound\\musicnames.txt", // (Optional) Path to a text file that maps vanilla music numbers to a friendly soundtrack name
-      "soundTestFolder": "..\\..\\..\\disasm\\code\\specialscreens\\witch" // (Optional) Path where the generated "soundtest-standard.asm" file should be put
+      "pcmSamples": "disasm\\code\\common\\tech\\sound\\cubewiz\\data\\pcm_samples.asm", // Path to Cube sound driver .asm file that defines all available samples
+      "ymInstBin": "disasm\\data\\sound\\yminst.bin", // Path to vanilla Cube YM instruments file (29 bytes per OPN instrument)
+      "ymFrequencies": "disasm\\code\\common\\tech\\sound\\cubewiz\\data\\ym_frequencies.asm", // Path to the file that defines all Cube YM note frequencies
+      "psgFrequencies": "disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_frequencies.asm", // Path to the file that defines all Cube PSG tone note frequencies
+      "psgInstruments": "disasm\\code\\common\\tech\\sound\\cubewiz\\data\\psg_instruments.asm", // Path to the file that defines all Cube PSG instruments (volume envelopes)
+      "musicNamesTxt": "disasm\\data\\sound\\musicnames.txt", // (Optional) Path to a text file that maps vanilla music numbers to a friendly soundtrack name
+      "soundTestFolder": "disasm\\code\\specialscreens\\witch" // (Optional) Path where the generated "soundtest-standard.asm" file should be put
     },
 
     "pitch": {
