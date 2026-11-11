@@ -14,8 +14,8 @@ HOW TO USE
 ----------
 
 - Put a bunch of .fur files into the "Input" folder with one of the following name patterns:
-	+musicXX-My new song title.fur		[ADD = XX is a music number NOT USED by vanilla SF2 songs, between 49-64 when using extra music banks]
-	@musicYY-My replacement song.fur	[REPLACE = YY is a music number USED by a vanilla SF2 song, please refer to "disasm/enum/musics.asm" for the available list]
+	+musicXX-My new song title.fur		[ADD = XX is a music number NOT USED by vanilla SF2 songs, between 45-64 when using extra music banks]
+	@musicYY-My replacement song.fur	[REPLACE = YY is a music number USED by a vanilla SF2 song, please refer to "disasm/enum/music.asm" for the available list]
 	+musicXX@YY-My moved song.fur		[MOVE-REPLACE = XX is a music number NOT USED by vanilla SF2 songs and YY is a music number USED by a vanilla SF2 song]
 	+musicXX%YY-My swapped song.fur		[MOVE-SWAP = XX is a music number NOT USED by vanilla SF2 songs and YY is a music number USED by a vanilla SF2 song]
 - As shown above, you can ADD NEW MUSICS or REPLACE EXISTING MUSICS or MOVE-REPLACE EXISTING MUSICS or MOVE-SWAP EXISTING MUSICS depending on how you name your .fur file.
@@ -39,7 +39,7 @@ HOW TO USE (SFX)
 
 - You can also replace SFXs (sound effects) by naming slightly differently your .fur files in the "Input" folder:
 	+sfxZZ-My new sound effect.fur			[ADD = ZZ is a SFX number NOT USED by vanilla SF2 SFXs, between 121-126] (yes it's quite tight)
-	@sfxWW-My replacement sound effect.fur	[REPLACE = WW is a SFX number USED by a vanilla SF2 SFXs, please refer to "disasm/enum/sfxs.asm" for the available list]
+	@sfxWW-My replacement sound effect.fur	[REPLACE = WW is a SFX number USED by a vanilla SF2 SFXs, please refer to "disasm/enum/sfx.asm" for the available list]
 - For SFXs, you cannot MOVE-REPLACE EXISTING SFXS or MOVE-SWAP EXISTING SFXS. You can only ADD NEW SFXS or REPLACE EXISTING SFXS.
 - SFXs can only use some of the sound channels. They can be one of these 2 types:
 	- Type 1: can use PSG tone 3 and Noise channels
@@ -55,7 +55,7 @@ GOLDEN RULES (this section is especially relevant to music composers)
 
 1. Please create custom Sega Genesis songs in Furnace in the most basic way: no macros, no extreme octave notes, no exotic effects (see "LIMITATIONS" below for more details).
 2. Your song should rely mostly on the standard 5 FM channels + the 6th channel. You can also use PSG tone channels 7 and 8.
-3. You can use samples in channel 6 (but you won't be able to it as FM channel for the *full* song). Samples should be small and you can't have too many of them.
+3. You can use samples in channel 6 (but you won't be able to it as FM channel for the *full* song). Samples should be small and their playback quality is pretty mediocre, sadly.
 4. Important instruments should use FM channels 1, 2, 3 because other channels can be borrowed by sound effects during SF2 gameplay.
 5. Space in the ROM is limited and you should avoid extremely long songs with a ludicrous number of FM instruments / samples ( but you can still try ;-) ).
 
