@@ -238,7 +238,7 @@ loc_1C110:
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1C136:
                 
                 bchg    #0,13(a3)

@@ -148,7 +148,7 @@ loc_1D272:
                 clr.w   (a5)
                 move.w  #1,(a4)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1D288:
                 
                 movem.w (sp)+,d0-d1

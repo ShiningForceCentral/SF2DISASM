@@ -49,7 +49,7 @@ loc_1EA7C:
                 move.w  #1,(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1EA98:
                 
                 movem.w (sp)+,d0-d1
@@ -131,7 +131,7 @@ loc_1EB72:
                 
                 cmpi.w  #26,(a5)
                 bne.w   loc_1EB7E
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1EB7E:
                 
                 cmpi.w  #34,(a5) 

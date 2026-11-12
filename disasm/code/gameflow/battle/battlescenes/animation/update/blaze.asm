@@ -15,7 +15,7 @@ spellanimationUpdate_Blaze:
                 addq.w  #1,(a5)
                 cmpi.w  #40,(a5) 
                 bne.s   loc_1B95A
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1B95A:
                 
                 tst.w   ((byte_FFB404-$1000000)).w

@@ -11,7 +11,7 @@ spellanimationUpdate_Dao:
                 lea     ((SPRITE_38-$1000000)).w,a4
                 subq.w  #1,((byte_FFB532-$1000000)).w
                 bne.s   loc_1DCFA
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DCFA:
                 
                 moveq   #15,d0

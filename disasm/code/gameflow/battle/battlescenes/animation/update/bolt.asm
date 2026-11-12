@@ -84,7 +84,7 @@ loc_1CEF6:
                 dbf     d1,loc_1CEF6 ; something to reset data?
                 
                 movea.l (sp)+,a4
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d6
                 andi.w  #7,d6 ; mask for variation (1/2/3/4)
                 add.w   d6,d6

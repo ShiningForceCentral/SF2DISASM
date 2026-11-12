@@ -26,7 +26,7 @@ spellanimationSetup_SnowBreath:
                 move.b  #SPELLANIMATION_SNOW_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette ; copy palette 1 current to base
 
     ; End of function spellanimationSetup_SnowBreath

@@ -15,7 +15,7 @@ spellanimationUpdate_Atlas:
                 bsr.s   sub_1E160
                 subq.w  #1,((byte_FFB53A-$1000000)).w
                 bne.s   loc_1E152
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1E152:
                 
                 bsr.w   UpdateSpellScreenShake       

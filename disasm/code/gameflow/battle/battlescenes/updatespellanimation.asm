@@ -108,8 +108,8 @@ loc_1B858:
                 clr.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 clr.b   ((byte_FFB568-$1000000)).w
                 clr.b   ((byte_FFB569-$1000000)).w
-                clr.b   ((byte_FFB56A-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 clr.b   ((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 jmp     (WaitForVInt).w
 
@@ -189,9 +189,9 @@ loc_1B8F8:
 
 ApplySpellScreenShake:
                 
-                tst.b   ((byte_FFB56A-$1000000)).w
+                tst.b   ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
                 bne.s   @Skip
-                move.b  #4,((byte_FFB56A-$1000000)).w
+                move.b  #4,((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
 @Skip:
                 
                 rts
@@ -208,14 +208,14 @@ UpdateSpellScreenShake:
                 
                 movem.w d5-d6,-(sp)
                 clr.w   d5
-                move.b  ((byte_FFB56A-$1000000)).w,d5
+                move.b  ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w,d5
                 add.w   d5,d5
                 move.w  table_ShakeOffsets-2(pc,d5.w),d6
                 tst.w   d5
                 beq.s   @Return
                 add.w   ((word_FFB3EE-$1000000)).w,d6
                 bsr.w   MoveBackgroundVertically
-                subq.b  #1,((byte_FFB56A-$1000000)).w
+                subq.b  #1,((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
 @Return:
                 
                 movem.w (sp)+,d5-d6

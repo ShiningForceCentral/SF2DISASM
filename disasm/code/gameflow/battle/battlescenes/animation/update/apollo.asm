@@ -14,7 +14,7 @@ spellanimationUpdate_Apollo:
                 addq.w  #1,(a5)
                 cmpi.w  #40,(a5) 
                 bne.s   loc_1DE3E
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DE3E:
                 
                 subq.w  #1,4(a5)

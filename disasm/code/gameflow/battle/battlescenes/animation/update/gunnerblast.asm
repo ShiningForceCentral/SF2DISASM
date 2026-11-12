@@ -160,7 +160,7 @@ loc_1DB8E:
                 cmpi.w  #54,(a5) 
                 bne.s   loc_1DB9C
                 bsr.w   LoadPalette1FromFFB41E
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DB9C:
                 
                 move.w  2(a5),d4

@@ -126,7 +126,7 @@ loc_1D88A:
                 bra.w   loc_1D9A8
 loc_1D8AE:
                 
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 moveq   #38,d0 
                 moveq   #15,d1
 loc_1D8B6:

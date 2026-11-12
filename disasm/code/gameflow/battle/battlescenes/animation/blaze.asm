@@ -102,7 +102,7 @@ loc_1A56E:
                 move.b  5(a1),d0
                 addq.b  #1,d0
                 move.b  d0,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Blaze

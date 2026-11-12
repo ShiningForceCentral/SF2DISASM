@@ -36,7 +36,7 @@ spellanimationSetup_FlameBreath:
                 move.b  #SPELLANIMATION_FLAME_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((byte_FFB585-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_FlameBreath
