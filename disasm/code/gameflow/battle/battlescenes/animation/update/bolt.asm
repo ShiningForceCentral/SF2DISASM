@@ -84,7 +84,7 @@ loc_1CEF6:
                 dbf     d1,loc_1CEF6 ; something to reset data?
                 
                 movea.l (sp)+,a4
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 move.b  ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w,d6
                 andi.w  #7,d6 ; mask for variation (1/2/3/4)
                 add.w   d6,d6
@@ -114,7 +114,7 @@ loc_1CF46:
                 dbf     d1,loc_1CF46 ; something to reset data?
                 
                 movea.l (sp)+,a4
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1CF68
                 clr.w   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
@@ -128,7 +128,7 @@ loc_1CF68:
                 addq.w  #2,d7
                 clr.w   2(a5)
                 move.w  d7,4(a5)
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
 loc_1CF84:
                 
                 movem.w (sp)+,d0-d1
@@ -176,12 +176,13 @@ loc_1CF84:
                 dbf     d1,@BoltOrb_Loop
 loc_1CFEA:
                 
-                bsr.w   sub_1B90C       
-                lea     table_1CFF6(pc), a0
-                bra.w   sub_1B8B2
+                bsr.w   UpdateSpellScreenShake
+                lea     table_BoltPaletteFlash(pc), a0
+                bra.w   UpdateSpellPaletteFlash
 
     ; End of function spellanimationUpdate_Bolt
 
-table_1CFF6:    dc.w $EAA
+table_BoltPaletteFlash:
+                dc.w $EAA
                 dc.w 14
                 dc.w 1

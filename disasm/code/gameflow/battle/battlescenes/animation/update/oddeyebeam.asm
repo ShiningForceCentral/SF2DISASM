@@ -49,7 +49,7 @@ loc_1ED42:
                 bcs.w   return_1EDDA
                 addq.b  #1,2(a5)
                 move.b  #30,3(a5)
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   return_1EDDA
 loc_1ED64:
                 
@@ -76,11 +76,11 @@ loc_1ED84:
                 bra.w   return_1EDDA
 loc_1EDB2:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 cmpi.b  #3,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 bne.w   return_1EDDA
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 move.b  #1,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 move.w  #258,2(a5)
                 clr.w   4(a5)
