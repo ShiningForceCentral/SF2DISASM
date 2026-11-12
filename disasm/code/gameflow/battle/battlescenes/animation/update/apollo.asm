@@ -14,7 +14,7 @@ spellanimationUpdate_Apollo:
                 addq.w  #1,(a5)
                 cmpi.w  #40,(a5) 
                 bne.s   loc_1DE3E
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DE3E:
                 
                 subq.w  #1,4(a5)
@@ -88,7 +88,7 @@ loc_1DEFC:
                 
                 cmpi.w  #3,(a5)
                 bne.w   loc_1DF24
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1DF7E
                 cmpi.b  #21,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1DF7E
@@ -135,8 +135,8 @@ loc_1DF7E:
                 addq.w  #1,d0
                 dbf     d1,loc_1DE8A
                 
-                lea     table_1DFCE(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_ApolloPaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 cmpi.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcs.w   ReinitializeSceneAfterSpell
                 rts
@@ -157,6 +157,7 @@ table_1DFC2:    dc.w $790
                 dc.w $210
                 dc.w $180
                 
-table_1DFCE:    dc.w $00F
+table_ApolloPaletteFlash:
+                dc.w $00F
                 dc.w 8
                 dc.w 1

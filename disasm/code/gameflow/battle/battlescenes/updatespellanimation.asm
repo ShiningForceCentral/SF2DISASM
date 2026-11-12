@@ -9,24 +9,24 @@ UpdateSpellanimation:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.s   @Return
-                move.b  ((byte_FFB585-$1000000)).w,d0
-                beq.s   @Return
+                move.b  ((SPELLANIMATION_STATE-$1000000)).w,d0
+                beq.s   @Return ; 0 = off
                 subq.b  #1,d0
-                beq.s   loc_1B7CE
+                beq.s   loc_1B7CE ; 1 = playing
                 subq.b  #1,d0
-                beq.s   loc_1B7CA
-                bra.w   ReinitializeSceneAfterSpell
+                beq.s   loc_1B7CA ; 2 = stopping (will set countdown to 0)
+                bra.w   ReinitializeSceneAfterSpell ; 3 = done
 @Return:
                 
                 rts
 loc_1B7CA:
                 
-                clr.w   ((byte_FFB404-$1000000)).w
+                clr.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
 loc_1B7CE:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.s   loc_1B7D8
-                subq.w  #1,((byte_FFB404-$1000000)).w
+                subq.w  #1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
 loc_1B7D8:
                 
                 clr.w   d7
@@ -101,15 +101,15 @@ ReinitializeSceneAfterSpell:
                 jsr     (InitializeSprites).w
 loc_1B858:
                 
-                clr.w   ((byte_FFB404-$1000000)).w
+                clr.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 clr.b   ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 clr.b   ((CURRENT_SPELLANIMATION-$1000000)).w
-                clr.b   ((byte_FFB585-$1000000)).w
+                clr.b   ((SPELLANIMATION_STATE-$1000000)).w
                 clr.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB568-$1000000)).w
-                clr.b   ((byte_FFB569-$1000000)).w
-                clr.b   ((byte_FFB56A-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w
+                clr.b   ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 clr.b   ((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 jmp     (WaitForVInt).w
 
@@ -149,14 +149,14 @@ sub_1B884:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1B8B2:
+UpdateSpellPaletteFlash:		; a0 = pointer to a table describing the palette flash effect to apply to borders of the battlescene
                 
                 movem.w d0-d1/d6-d7,-(sp)
-                addq.b  #1,((byte_FFB568-$1000000)).w
-                move.b  ((byte_FFB568-$1000000)).w,d0
-                cmp.b   ((byte_FFB569-$1000000)).w,d0
+                addq.b  #1,((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
+                move.b  ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w,d0
+                cmp.b   ((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w,d0
                 bcs.s   loc_1B8F8
-                clr.b   ((byte_FFB568-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
                 tst.w   ((PALETTE_1_CURRENT-$1000000)).w
                 bne.s   loc_1B8D6
                 move.w  4(a0),d0
@@ -171,7 +171,7 @@ loc_1B8DC:
                 move.w  d0,d6
                 jsr     (GenerateRandomNumber).w
                 add.w   d7,d0
-                move.b  d0,((byte_FFB569-$1000000)).w
+                move.b  d0,((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w
                 move.w  d1,((PALETTE_1_CURRENT-$1000000)).w
                 move.w  d1,((PALETTE_3_CURRENT_02-$1000000)).w
                 jsr     (ApplyVIntCramDma).w
@@ -181,22 +181,22 @@ loc_1B8F8:
                 movem.w (sp)+,d0-d1/d6-d7
                 rts
 
-    ; End of function sub_1B8B2
+    ; End of function UpdateSpellPaletteFlash
 
 
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1B8FE:
+ApplySpellScreenShake:
                 
-                tst.b   ((byte_FFB56A-$1000000)).w
-                bne.s   return_1B90A
-                move.b  #4,((byte_FFB56A-$1000000)).w
-return_1B90A:
+                tst.b   ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
+                bne.s   @Skip
+                move.b  #4,((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
+@Skip:
                 
                 rts
 
-    ; End of function sub_1B8FE
+    ; End of function ApplySpellScreenShake
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -204,26 +204,27 @@ return_1B90A:
 ; related to spellanimations
 
 
-sub_1B90C:
+UpdateSpellScreenShake:
                 
                 movem.w d5-d6,-(sp)
                 clr.w   d5
-                move.b  ((byte_FFB56A-$1000000)).w,d5
+                move.b  ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w,d5
                 add.w   d5,d5
-                move.w  table_1B932-2(pc,d5.w),d6
+                move.w  table_ShakeOffsets-2(pc,d5.w),d6
                 tst.w   d5
-                beq.s   loc_1B92C
+                beq.s   @Return
                 add.w   ((word_FFB3EE-$1000000)).w,d6
                 bsr.w   MoveBackgroundVertically
-                subq.b  #1,((byte_FFB56A-$1000000)).w
-loc_1B92C:
+                subq.b  #1,((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
+@Return:
                 
                 movem.w (sp)+,d5-d6
                 rts
 
-    ; End of function sub_1B90C
+    ; End of function UpdateSpellScreenShake
 
-table_1B932:    dc.b -1
+table_ShakeOffsets:
+                dc.b -1
                 dc.b -2
                 dc.b 0
                 dc.b 2

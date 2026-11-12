@@ -28,11 +28,11 @@ loc_1AF2C:
                 bsr.w   ConstructSimpleGraphic
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #$11D,((byte_FFB404-$1000000)).w
+                move.w  #$11D,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_SHOT_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
-                move.b  #1,((byte_FFB585-$1000000)).w
+                move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_ShotFire

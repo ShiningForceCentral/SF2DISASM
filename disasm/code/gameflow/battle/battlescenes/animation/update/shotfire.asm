@@ -126,7 +126,7 @@ loc_1D88A:
                 bra.w   loc_1D9A8
 loc_1D8AE:
                 
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 moveq   #38,d0 
                 moveq   #15,d1
 loc_1D8B6:
@@ -176,7 +176,7 @@ loc_1D928:
                 
                 cmpi.w  #4,(a5)
                 bne.w   loc_1D954
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1D998
                 cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1D998

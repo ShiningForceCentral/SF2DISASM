@@ -69,7 +69,7 @@ loc_1D0D4:
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 dbf     d1,loc_1D048
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
 
