@@ -15,10 +15,10 @@ spellanimationUpdate_Atlas:
                 bsr.s   sub_1E160
                 subq.w  #1,((byte_FFB53A-$1000000)).w
                 bne.s   loc_1E152
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1E152:
                 
-                bsr.w   sub_1B90C       
+                bsr.w   UpdateSpellScreenShake       
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
@@ -115,7 +115,7 @@ loc_1E224:
                 bra.w   loc_1E268
 loc_1E228:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1E25E
                 moveq   #2,d6
                 jsr     (GenerateRandomNumber).w
@@ -128,7 +128,7 @@ byte_1E240:
                 sndCom  SFX_HIT_2
 loc_1E244:
                 
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
                 clr.w   2(a5)
                 move.w  #2,4(a5)
                 moveq   #2,d6

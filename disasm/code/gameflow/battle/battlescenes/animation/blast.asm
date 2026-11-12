@@ -82,11 +82,11 @@ loc_1A99E:
                 bsr.w   ConstructComplexGraphic       
 loc_1AA06:
                 
-                move.w  #-1,((byte_FFB404-$1000000)).w
+                move.w  #-1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_BLAST,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                move.b  #1,((byte_FFB585-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_Blast

@@ -1189,7 +1189,7 @@ bsc0B_executeAllyReaction:
                 rts
 loc_18DCC:
                 
-                tst.b   ((byte_FFB588-$1000000)).w
+                tst.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bne.s   loc_18DCC
                 move.w  (a6)+,d1
                 move.w  d1,-(sp)
@@ -1344,7 +1344,7 @@ bsc0A_executeEnemyReaction:
                 rts
 loc_18F5C:
                 
-                tst.b   ((byte_FFB588-$1000000)).w
+                tst.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bne.s   loc_18F5C
                 bclr    #1,((byte_FFB583-$1000000)).w
                 move.w  (a6)+,d1
@@ -1468,7 +1468,7 @@ byte_19098:
 bsc0C_makeActorIdleAndEndAnimation:
                 
                 bsr.w   MakeActorIdle   
-                move.b  #3,((byte_FFB585-$1000000)).w
+                move.b  #3,((SPELLANIMATION_STATE-$1000000)).w
                 jsr     (WaitForVInt).w
                 bsr.w   RestorePalettes
                 bsr.w   sub_1F2F6
@@ -1482,7 +1482,7 @@ bsc0C_makeActorIdleAndEndAnimation:
 
 bsc0D_endAnimation:
                 
-                move.b  #2,((byte_FFB585-$1000000)).w
+                move.b  #2,((SPELLANIMATION_STATE-$1000000)).w
 loc_190C4:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w ; wait for byte cleared
