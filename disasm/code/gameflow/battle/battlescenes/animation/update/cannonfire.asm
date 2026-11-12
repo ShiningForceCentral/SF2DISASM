@@ -158,7 +158,7 @@ loc_1D71E:
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 clr.w   (a5)
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
 loc_1D748:
                 

@@ -14,7 +14,7 @@ spellanimationUpdate_Freeze:
                 beq.w   loc_1BF5C
                 tst.w   (a5)
                 beq.w   loc_1BF54
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1BEC8
                 clr.l   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
@@ -189,7 +189,7 @@ loc_1C08C:
                 add.w   d1,10(a5)
                 cmpi.w  #4,(a5)
                 bne.w   loc_1C136
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1C136
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -238,7 +238,7 @@ loc_1C110:
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4)
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1C136:
                 
                 bchg    #0,13(a3)
@@ -270,8 +270,8 @@ loc_1C170:
                 move.b  d7,14(a3)
 loc_1C178:
                 
-                lea     table_1C242(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_FreezePaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
 loc_1C184:
                 
@@ -401,6 +401,7 @@ table_1C19A:    ; Level 1
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
                 
-table_1C242:    dc.w $E44
+table_FreezePaletteFlash:
+                dc.w $E44
                 dc.w 8
                 dc.w 1

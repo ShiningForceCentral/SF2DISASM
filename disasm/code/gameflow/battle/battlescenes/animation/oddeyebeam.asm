@@ -43,12 +43,12 @@ loc_1B764:
                 move.b  #2,(a1)+
                 dbf     d0,loc_1B764
                 
-                move.w  #-1,((byte_FFB404-$1000000)).w
+                move.w  #-1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_ODD_EYE_BEAM,((CURRENT_SPELLANIMATION-$1000000)).w
-                move.b  #1,((byte_FFB585-$1000000)).w
+                move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 move.b  #1,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
-                move.b  #1,((byte_FFB588-$1000000)).w
+                move.b  #1,((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_OddEyeBeam
