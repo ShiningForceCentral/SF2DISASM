@@ -94,7 +94,7 @@ loc_1D5B6:
                 
                 cmpi.w  #16,(a5)
                 bcs.s   return_1D5C4
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 bra.w   ReinitializeSceneAfterSpell
 return_1D5C4:
                 

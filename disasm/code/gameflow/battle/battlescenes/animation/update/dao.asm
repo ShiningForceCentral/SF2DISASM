@@ -11,7 +11,7 @@ spellanimationUpdate_Dao:
                 lea     ((SPRITE_38-$1000000)).w,a4
                 subq.w  #1,((byte_FFB532-$1000000)).w
                 bne.s   loc_1DCFA
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DCFA:
                 
                 moveq   #15,d0
@@ -83,7 +83,7 @@ loc_1DD98:
                 bne.w   loc_1DDCC
                 cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1DDE8
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1DDE8
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
@@ -105,8 +105,8 @@ loc_1DDE8:
                 lea     12(a5),a5
                 dbf     d0,loc_1DCFC
                 
-                lea     table_1DE1E(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_DaoPaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
@@ -122,6 +122,7 @@ table_1DE06:    ; small rock
                 ; large rock
                 vdpSpell 0, 0, VDPTILE_SPELLTILE8, V4|H3|VALUE2
                 
-table_1DE1E:    dc.w $248
+table_DaoPaletteFlash:
+                dc.w $248
                 dc.w 30
                 dc.w 1
