@@ -275,7 +275,7 @@ loc_1BBFA:
                 dbf     d1,loc_1BA00
 loc_1BC0A:
                 
-                bsr.w   sub_1B90C       
+                bsr.w   UpdateSpellScreenShake       
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 btst    #2,((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w

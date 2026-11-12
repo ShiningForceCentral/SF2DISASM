@@ -176,8 +176,8 @@ loc_1CF84:
                 dbf     d1,@BoltOrb_Loop
 loc_1CFEA:
                 
-                bsr.w   sub_1B90C       
                 lea     table_1CFF6(pc), a0
+                bsr.w   UpdateSpellScreenShake
                 bra.w   sub_1B8B2
 
     ; End of function spellanimationUpdate_Bolt

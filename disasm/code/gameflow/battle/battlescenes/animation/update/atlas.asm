@@ -18,7 +18,7 @@ spellanimationUpdate_Atlas:
                 clr.b   ((byte_FFB588-$1000000)).w
 loc_1E152:
                 
-                bsr.w   sub_1B90C       
+                bsr.w   UpdateSpellScreenShake       
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts

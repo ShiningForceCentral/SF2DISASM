@@ -145,7 +145,7 @@ loc_1DB2E:
                 bsr.w   ApplySpellScreenShake
 loc_1DB62:
                 
-                bsr.w   sub_1B90C       
+                bsr.w   UpdateSpellScreenShake       
                 cmpi.w  #32,(a5) 
                 bcs.w   loc_1DBF8
                 bne.s   loc_1DB8E

@@ -172,7 +172,7 @@ loc_1C3E6:
                 bra.w   loc_1C43A
 loc_1C42A:
                 
-                bsr.w   sub_1B90C       
+                bsr.w   UpdateSpellScreenShake       
                 subq.b  #1,5(a5)
                 bne.w   loc_1C43A
                 clr.w   4(a3)

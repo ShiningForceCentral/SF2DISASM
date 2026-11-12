@@ -196,7 +196,7 @@ ApplySpellScreenShake:
                 
                 rts
 
-    ; End of function sub_1B8FE
+    ; End of function ApplySpellScreenShake
 
 
 ; =============== S U B R O U T I N E =======================================
@@ -204,26 +204,27 @@ ApplySpellScreenShake:
 ; related to spellanimations
 
 
-sub_1B90C:
+UpdateSpellScreenShake:
                 
                 movem.w d5-d6,-(sp)
                 clr.w   d5
                 move.b  ((byte_FFB56A-$1000000)).w,d5
                 add.w   d5,d5
-                move.w  table_1B932-2(pc,d5.w),d6
+                move.w  table_ShakeOffsets-2(pc,d5.w),d6
                 tst.w   d5
-                beq.s   loc_1B92C
+                beq.s   @Return
                 add.w   ((word_FFB3EE-$1000000)).w,d6
                 bsr.w   MoveBackgroundVertically
                 subq.b  #1,((byte_FFB56A-$1000000)).w
-loc_1B92C:
+@Return:
                 
                 movem.w (sp)+,d5-d6
                 rts
 
-    ; End of function sub_1B90C
+    ; End of function UpdateSpellScreenShake
 
-table_1B932:    dc.b -1
+table_ShakeOffsets:
+                dc.b -1
                 dc.b -2
                 dc.b 0
                 dc.b 2
