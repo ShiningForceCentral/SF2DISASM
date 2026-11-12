@@ -187,12 +187,12 @@ loc_1B8F8:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1B8FE:
+ApplySpellScreenShake:
                 
                 tst.b   ((byte_FFB56A-$1000000)).w
-                bne.s   return_1B90A
+                bne.s   @Skip
                 move.b  #4,((byte_FFB56A-$1000000)).w
-return_1B90A:
+@Skip:
                 
                 rts
 

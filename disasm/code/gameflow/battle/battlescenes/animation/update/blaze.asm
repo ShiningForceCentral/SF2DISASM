@@ -216,7 +216,7 @@ loc_1BB60:
                 move.w  d3,(a4)
                 move.w  d3,10(a5)
                 sndCom  SFX_BATTLEFIELD_DEATH
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
                 bra.w   loc_1BBFA
 loc_1BB80:
                 

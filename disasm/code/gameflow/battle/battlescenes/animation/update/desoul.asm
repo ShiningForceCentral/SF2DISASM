@@ -168,7 +168,7 @@ loc_1C3E6:
                 addq.w  #1,4(a3)
                 move.b  #32,5(a5) 
                 sndCom  SFX_DESOUL
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
                 bra.w   loc_1C43A
 loc_1C42A:
                 

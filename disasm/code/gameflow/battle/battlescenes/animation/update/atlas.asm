@@ -128,7 +128,7 @@ byte_1E240:
                 sndCom  SFX_HIT_2
 loc_1E244:
                 
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
                 clr.w   2(a5)
                 move.w  #2,4(a5)
                 moveq   #2,d6

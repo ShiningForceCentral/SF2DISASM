@@ -128,7 +128,7 @@ loc_1CF68:
                 addq.w  #2,d7
                 clr.w   2(a5)
                 move.w  d7,4(a5)
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
 loc_1CF84:
                 
                 movem.w (sp)+,d0-d1

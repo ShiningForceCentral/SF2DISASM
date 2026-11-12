@@ -142,7 +142,7 @@ loc_1DB2E:
                 move.b  ((FADING_COUNTER_MAX-$1000000)).w,((FADING_COUNTER-$1000000)).w
                 move.b  #%1111,((FADING_PALETTE_BITFIELD-$1000000)).w
                 move.w  #1,(a4)
-                bsr.w   sub_1B8FE
+                bsr.w   ApplySpellScreenShake
 loc_1DB62:
                 
                 bsr.w   sub_1B90C       
