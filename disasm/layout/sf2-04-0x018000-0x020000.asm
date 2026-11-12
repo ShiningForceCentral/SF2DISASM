@@ -6,6 +6,10 @@
 
                 include "code\common\tech\jumpinterfaces\s04_jumpinterface.asm"    ; Game Section 04 Jump Interface
                 includeIfStandard "code\gameflow\battle\battlescenes\initializebattlescene-standard.asm"    ; Battlescene engine
+			if (MUSIC_RESUMING=1)
+				includeIfStandard "data\resumingbattlescenemusics-standard.asm"
+                alignIfStandard
+			endif
                 includeIfVanilla "code\gameflow\battle\battlescenes\nullsub_18010.asm"    ; Battlescene engine
                 includeIfVanilla "code\gameflow\battle\battlescenes\initializebattlescene.asm"    ; Battlescene engine
                 include "code\gameflow\battle\battlescenes\battlesceneengine_0.asm"    ; Battlescene engine

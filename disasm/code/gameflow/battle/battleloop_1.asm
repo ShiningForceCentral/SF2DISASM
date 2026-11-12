@@ -11,9 +11,6 @@
 BattleLoop:
                 
                 clearSavedByte PLAYER_TYPE
-            if (MUSIC_RESUMING&RESUME_BATTLESCENE_MUSIC=1)
-                activateMusicResuming
-            endif
             if (STANDARD_BUILD&ORIGINAL_TAROS_INVULNERABILITY=1)
                 ; Make sure to clear the "invulnerable enemy" flag when initializing a new battle
                 clrFlg  112             ; Currently attacking Taros with Achilles Sword
