@@ -91,7 +91,7 @@ spellanimationSetup_Apollo:
                 move.l  #table_ApolloBackgroundModification,((BATTLESCENE_BACKGROUND_MODIFICATION_POINTER-$1000000)).w
                 move.w  #1,((word_FFB3C4-$1000000)).w
                 move.b  #5,((byte_FFB583-$1000000)).w
-                move.w  #-1,((byte_FFB404-$1000000)).w
+                move.w  #-1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_APOLLO,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

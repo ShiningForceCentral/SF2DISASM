@@ -29,7 +29,7 @@ spellanimationSetup_BubbleBreath:
                 jsr     (ApplyVIntCramDma).w
 loc_1B4CE:
                 
-                move.w  #228,((byte_FFB404-$1000000)).w 
+                move.w  #228,((SPELLANIMATION_COUNTDOWN-$1000000)).w 
                 move.b  #SPELLANIMATION_BUBBLE_BREATH,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

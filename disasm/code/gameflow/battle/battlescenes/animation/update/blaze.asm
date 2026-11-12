@@ -18,7 +18,7 @@ spellanimationUpdate_Blaze:
                 clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1B95A:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1B982
                 moveq   #1,d1
                 move.w  d1,(a4)
@@ -254,7 +254,7 @@ loc_1BBC0:
                 move.w  #1,(a4)
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1BBE8
                 clr.w   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

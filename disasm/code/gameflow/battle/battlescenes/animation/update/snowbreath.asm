@@ -82,7 +82,7 @@ loc_1E85C:
                 add.w   d1,8(a5)
                 cmpi.w  #5,(a5)
                 bne.w   loc_1E88A
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1E8AA
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

@@ -76,7 +76,7 @@ loc_1ED84:
                 bra.w   return_1EDDA
 loc_1EDB2:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 cmpi.b  #3,((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
                 bne.w   return_1EDDA

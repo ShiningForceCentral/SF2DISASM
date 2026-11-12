@@ -41,7 +41,7 @@ spellanimationSetup_Buff:
                 bsr.w   sub_1A2F6       
                 move.w  #1,2(a0)
                 move.w  d1,4(a0)
-                move.w  #$11D,((byte_FFB404-$1000000)).w
+                move.w  #$11D,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_BUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

@@ -152,7 +152,7 @@ loc_1E730:
                 bne.s   loc_1E75A
                 cmpi.b  #16,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.s   loc_1E75A
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.s   loc_1E75A
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

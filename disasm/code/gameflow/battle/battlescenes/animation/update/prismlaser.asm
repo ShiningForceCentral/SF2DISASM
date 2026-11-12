@@ -118,7 +118,7 @@ loc_1E432:
                 move.w  #7,2(a5)
 loc_1E44A:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
 return_1E452:
                 

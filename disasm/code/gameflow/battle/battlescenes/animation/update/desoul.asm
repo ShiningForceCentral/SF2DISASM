@@ -191,7 +191,7 @@ loc_1C43A:
                 bsr.w   AnimateSouls_Desoul
 loc_1C464:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
 

@@ -44,7 +44,7 @@ loc_1ADDA:
                 bsr.w   ConstructComplexGraphic       
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #$72,((byte_FFB404-$1000000)).w 
+                move.w  #$72,((SPELLANIMATION_COUNTDOWN-$1000000)).w 
                 move.b  #SPELLANIMATION_ARROWS_AND_SPEARS,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

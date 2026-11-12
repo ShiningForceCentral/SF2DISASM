@@ -43,7 +43,7 @@ loc_1A6B4:
                 ; variation 4
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
-                move.w  #-1,((byte_FFB404-$1000000)).w
+                move.w  #-1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_FREEZE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
 loc_1A6CC:

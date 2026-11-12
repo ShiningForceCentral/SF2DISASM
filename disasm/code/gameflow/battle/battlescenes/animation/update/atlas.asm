@@ -115,7 +115,7 @@ loc_1E224:
                 bra.w   loc_1E268
 loc_1E228:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1E25E
                 moveq   #2,d6
                 jsr     (GenerateRandomNumber).w

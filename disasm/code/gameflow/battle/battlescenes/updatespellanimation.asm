@@ -21,12 +21,12 @@ UpdateSpellanimation:
                 rts
 loc_1B7CA:
                 
-                clr.w   ((byte_FFB404-$1000000)).w
+                clr.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
 loc_1B7CE:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.s   loc_1B7D8
-                subq.w  #1,((byte_FFB404-$1000000)).w
+                subq.w  #1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
 loc_1B7D8:
                 
                 clr.w   d7
@@ -101,7 +101,7 @@ ReinitializeSceneAfterSpell:
                 jsr     (InitializeSprites).w
 loc_1B858:
                 
-                clr.w   ((byte_FFB404-$1000000)).w
+                clr.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 clr.b   ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 clr.b   ((CURRENT_SPELLANIMATION-$1000000)).w
                 clr.b   ((SPELLANIMATION_STATE-$1000000)).w

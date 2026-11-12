@@ -167,7 +167,7 @@ loc_1C968:
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
                 clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1C994
                 clr.w   (a5)
                 bra.w   loc_1C9A0
@@ -363,7 +363,7 @@ loc_1CB94:
                 
                 lea     table_BlastPaletteFlash(pc), a0
                 bsr.w   UpdateSpellPaletteFlash
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
 

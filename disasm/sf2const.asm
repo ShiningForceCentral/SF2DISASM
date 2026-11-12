@@ -420,7 +420,11 @@ BATTLESCENE_ALLY_Y_SPEED: equ $FFB3FC
 word_FFB3FE: equ $FFB3FE
 BATTLESCENE_ALLY_COPY: equ $FFB400
 DEAD_COMBATANTS_LIST_LENGTH: equ $FFB402
-byte_FFB404: equ $FFB404
+SPELLANIMATION_COUNTDOWN: equ $FFB404 ; spell animation code sets this word to -1 to let the animation play for an undefined amount of frames (65535 frames actually)
+	; otherwise spell animation code sets a specific number of frames the animation should play before finishing
+	; the game engine automatically decrements this word every spell animation update
+	; the game engine clears automatically this word when SPELLANIMATION_STATE becomes 2 (stopping)
+	; spell animation update code tests this word and when it becomes 0, the animation plays its final stage if it has one or simply ends
 SPELLANIMATION_PROPERTIES: equ $FFB406
 byte_FFB41E: equ $FFB41E
 byte_FFB496: equ $FFB496

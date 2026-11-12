@@ -176,7 +176,7 @@ loc_1D928:
                 
                 cmpi.w  #4,(a5)
                 bne.w   loc_1D954
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1D998
                 cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1D998

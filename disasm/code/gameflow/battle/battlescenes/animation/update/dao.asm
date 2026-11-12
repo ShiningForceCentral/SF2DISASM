@@ -83,7 +83,7 @@ loc_1DD98:
                 bne.w   loc_1DDCC
                 cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1DDE8
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1DDE8
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

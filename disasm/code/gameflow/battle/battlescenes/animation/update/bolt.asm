@@ -114,7 +114,7 @@ loc_1CF46:
                 dbf     d1,loc_1CF46 ; something to reset data?
                 
                 movea.l (sp)+,a4
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1CF68
                 clr.w   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

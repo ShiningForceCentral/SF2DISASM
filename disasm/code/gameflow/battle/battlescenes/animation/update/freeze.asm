@@ -14,7 +14,7 @@ spellanimationUpdate_Freeze:
                 beq.w   loc_1BF5C
                 tst.w   (a5)
                 beq.w   loc_1BF54
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1BEC8
                 clr.l   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
@@ -189,7 +189,7 @@ loc_1C08C:
                 add.w   d1,10(a5)
                 cmpi.w  #4,(a5)
                 bne.w   loc_1C136
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1C136
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       

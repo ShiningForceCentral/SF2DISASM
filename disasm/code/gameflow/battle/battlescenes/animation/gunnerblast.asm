@@ -29,7 +29,7 @@ loc_1AFAE:
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
                 bsr.w   CopyPalettes
-                move.w  #$11D,((byte_FFB404-$1000000)).w
+                move.w  #$11D,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_GUNNER_PROJECTILE,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

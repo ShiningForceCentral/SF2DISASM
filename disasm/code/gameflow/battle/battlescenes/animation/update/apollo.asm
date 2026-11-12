@@ -88,7 +88,7 @@ loc_1DEFC:
                 
                 cmpi.w  #3,(a5)
                 bne.w   loc_1DF24
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1DF7E
                 cmpi.b  #21,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1DF7E

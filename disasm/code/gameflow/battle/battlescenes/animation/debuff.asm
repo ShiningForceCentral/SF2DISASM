@@ -92,7 +92,7 @@ spellanimationSetup_Debuff:
                 jsr     (GenerateRandomNumber).w
                 addi.w  #$12,d7
                 move.w  d7,4(a0)
-                move.w  #-1,((byte_FFB404-$1000000)).w
+                move.w  #-1,((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 move.b  #SPELLANIMATION_DEBUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
                 move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #4,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

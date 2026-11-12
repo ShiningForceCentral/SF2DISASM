@@ -23,7 +23,7 @@ loc_1C552:
                 andi.w  #3,d1
                 cmpi.w  #3,d1
                 bne.w   loc_1C5B6
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1C57E
                 clr.w   (a5)
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w

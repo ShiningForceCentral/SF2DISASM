@@ -90,7 +90,7 @@ loc_1D3A6:
                 add.w   d1,(a4)
                 cmpi.w  #6,(a5)
                 bne.w   loc_1D402
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1D424
                 move.w  2(a5),d1
                 move.b  8(a5),d2

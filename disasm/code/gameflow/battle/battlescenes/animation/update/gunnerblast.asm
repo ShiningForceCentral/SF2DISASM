@@ -204,7 +204,7 @@ loc_1DBEE:
                 dbf     d1,loc_1DBEE
 loc_1DBF8:
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   return_1DC12
                 lea     ((PALETTE_1_BASE-$1000000)).w,a0
                 lea     ((byte_FFB41E-$1000000)).w,a1
