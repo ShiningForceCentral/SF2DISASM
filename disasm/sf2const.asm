@@ -431,7 +431,7 @@ BATTLESCENE_BACKGROUND_PALETTE: equ $FFB542
 word_FFB562: equ $FFB562
 byte_FFB568: equ $FFB568
 byte_FFB569: equ $FFB569
-byte_FFB56A: equ $FFB56A
+SPELLANIMATION_SCREEN_SHAKE: equ $FFB56A
 byte_FFB56B: equ $FFB56B
 ACTOR_TO_MAKE_IDLE: equ $FFB56C
 WAITING_FOR_BATTLESCENE_GRAPHICS_UPDATE: equ $FFB56D
@@ -476,7 +476,9 @@ UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
 byte_FFB585: equ $FFB585
 SPELLANIMATION_VARIATION_AND_MIRRORED_BIT: equ $FFB586
 CURRENT_SPELLANIMATION: equ $FFB587
-byte_FFB588: equ $FFB588
+SPELLANIMATION_HIT_TRIGGER: equ $FFB588 ; spell animation code sets this byte to 1 (otherwise the hit will happen immediately)
+	; spell animation update code clears this byte to 0 when the animation reaches the point where the hit should happen on the target
+	; the game engine waits until this byte becomes 0 to apply impact animation and reduce HP (or increase HP for healing)
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
 BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data
