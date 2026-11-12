@@ -45,7 +45,7 @@ loc_1EC22:
                 
                 cmpi.w  #4,(a5)
                 bne.w   loc_1EC46
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   loc_1EC46
                 cmpi.b  #$10,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.w   loc_1EC46

@@ -13,7 +13,7 @@ spellanimationUpdate_Neptun:
                 addq.w  #1,(a5)
                 cmpi.w  #40,(a5) 
                 bne.s   loc_1DFEA
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
 loc_1DFEA:
                 
                 subq.b  #1,4(a5)
@@ -98,7 +98,7 @@ loc_1E0C0:
                 addq.w  #VDP_SPRITE_ENTRY_SIZE,a4
                 dbf     d1,loc_1E01C
                 
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
 

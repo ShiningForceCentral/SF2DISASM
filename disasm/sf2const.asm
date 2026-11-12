@@ -420,7 +420,11 @@ BATTLESCENE_ALLY_Y_SPEED: equ $FFB3FC
 word_FFB3FE: equ $FFB3FE
 BATTLESCENE_ALLY_COPY: equ $FFB400
 DEAD_COMBATANTS_LIST_LENGTH: equ $FFB402
-byte_FFB404: equ $FFB404
+SPELLANIMATION_COUNTDOWN: equ $FFB404 ; spell animation code sets this word to -1 to let the animation play for an undefined amount of frames (65535 frames actually)
+	; otherwise spell animation code sets a specific number of frames the animation should play before finishing
+	; the game engine automatically decrements this word every spell animation update
+	; the game engine clears automatically this word when SPELLANIMATION_STATE becomes 2 (stopping)
+	; spell animation update code tests this word and when it becomes 0, the animation plays its final stage if it has one or simply ends
 SPELLANIMATION_PROPERTIES: equ $FFB406
 byte_FFB41E: equ $FFB41E
 byte_FFB496: equ $FFB496
@@ -429,9 +433,9 @@ dword_FFB536: equ $FFB536
 byte_FFB53A: equ $FFB53A
 BATTLESCENE_BACKGROUND_PALETTE: equ $FFB542
 word_FFB562: equ $FFB562
-byte_FFB568: equ $FFB568
-byte_FFB569: equ $FFB569
-byte_FFB56A: equ $FFB56A
+SPELLANIMATION_PALETTE_FLASH_COUNTER: equ $FFB568
+SPELLANIMATION_PALETTE_FLASH_TARGET: equ $FFB569
+SPELLANIMATION_SCREEN_SHAKE: equ $FFB56A
 byte_FFB56B: equ $FFB56B
 ACTOR_TO_MAKE_IDLE: equ $FFB56C
 WAITING_FOR_BATTLESCENE_GRAPHICS_UPDATE: equ $FFB56D
@@ -472,11 +476,17 @@ byte_FFB580: equ $FFB580
 byte_FFB581: equ $FFB581
 BATTLESCENE_GROUND: equ $FFB582
 byte_FFB583: equ $FFB583
-UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584
-byte_FFB585: equ $FFB585
+UPDATE_SPELLANIMATION_TOGGLE: equ $FFB584 ; spell animation code sets this byte to 1 (otherwise the game breaks)
+	; when animation is finished, spell animation update code must clear this byte to 0 (the game engine will wait until this happens)
+SPELLANIMATION_STATE: equ $FFB585 ; 0 = off, 1 = playing, 2 = stopping, 3 = done
+	; spell animation code sets this byte to 1 (otherwise the game breaks)
+	; the game engine automatically sets this byte to 2 when it has decided it is time to end the animation (i.e: when the actor reverts to idle animation)
+	; as a fallback, the game engine can also set this byte to 3 to forcefully end the animation (i.e: before it has really finished)
 SPELLANIMATION_VARIATION_AND_MIRRORED_BIT: equ $FFB586
 CURRENT_SPELLANIMATION: equ $FFB587
-byte_FFB588: equ $FFB588
+SPELLANIMATION_HIT_TRIGGER: equ $FFB588 ; spell animation code sets this byte to 1 (otherwise the hit will happen immediately)
+	; spell animation update code clears this byte to 0 when the animation reaches the point where the hit should happen on the target
+	; the game engine waits until this byte becomes 0 to apply impact animation and reduce HP (or increase HP for healing)
 BATTLESCENE_ACTOR_SWITCH_STATE: equ $FFB589 ; battlescene actor switching state: 1 = waiting, 2 = currently switching, 3 = done
 DEAD_COMBATANTS_LIST: equ $FFB58A
 BATTLESCENE_DATA_END: equ $FFB59A ; end of battlescene data

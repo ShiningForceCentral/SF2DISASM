@@ -85,7 +85,7 @@ loc_1CD1A:
 loc_1CD1C:
                 
                 move.b  d1,(byte_FFAFA0).l
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 bne.s   loc_1CD36
                 cmpi.w  #2,(a3)
                 bcc.s   loc_1CD36

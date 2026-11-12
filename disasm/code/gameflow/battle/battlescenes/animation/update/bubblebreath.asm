@@ -139,7 +139,7 @@ loc_1E716:
                 move.w  #1,(a4)
                 clr.l   VDPSPRITE_OFFSET_SIZE(a4) ; clear size, link, and tile
                 move.w  #1,VDPSPRITE_OFFSET_X(a4)
-                clr.b   ((byte_FFB588-$1000000)).w
+                clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 subq.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bra.s   loc_1E75A
 loc_1E730:
@@ -152,7 +152,7 @@ loc_1E730:
                 bne.s   loc_1E75A
                 cmpi.b  #16,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcc.s   loc_1E75A
-                tst.w   ((byte_FFB404-$1000000)).w
+                tst.w   ((SPELLANIMATION_COUNTDOWN-$1000000)).w
                 beq.s   loc_1E75A
                 moveq   #1,d0
                 bsr.w   sub_1A2F6       
