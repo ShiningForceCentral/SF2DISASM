@@ -270,8 +270,8 @@ loc_1C170:
                 move.b  d7,14(a3)
 loc_1C178:
                 
-                lea     table_1C242(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_FreezePaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
 loc_1C184:
                 
@@ -401,6 +401,7 @@ table_1C19A:    ; Level 1
                 dc.w VDPSPELLPROP_V4|VDPSPELLPROP_H4
                 dc.w 64
                 
-table_1C242:    dc.w $E44
+table_FreezePaletteFlash:
+                dc.w $E44
                 dc.w 8
                 dc.w 1

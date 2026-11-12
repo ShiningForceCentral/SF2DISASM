@@ -361,8 +361,8 @@ loc_1CB6E:
                 bchg    #0,5(a5)
 loc_1CB94:
                 
-                lea     table_1CC0E(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_BlastPaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 tst.w   ((byte_FFB404-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
@@ -448,7 +448,8 @@ table_1CBDE:    dc.w 5
                 dc.w VDPSPELLPROP_V2|VDPSPELLPROP_H4
                 dc.w 35
                 
-table_1CC0E:    dc.w $CC4
+table_BlastPaletteFlash:
+                dc.w $CC4
                 dc.w 10
                 dc.w 1
                 

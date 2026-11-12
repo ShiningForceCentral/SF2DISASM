@@ -176,12 +176,13 @@ loc_1CF84:
                 dbf     d1,@BoltOrb_Loop
 loc_1CFEA:
                 
-                lea     table_1CFF6(pc), a0
                 bsr.w   UpdateSpellScreenShake
-                bra.w   sub_1B8B2
+                lea     table_BoltPaletteFlash(pc), a0
+                bra.w   UpdateSpellPaletteFlash
 
     ; End of function spellanimationUpdate_Bolt
 
-table_1CFF6:    dc.w $EAA
+table_BoltPaletteFlash:
+                dc.w $EAA
                 dc.w 14
                 dc.w 1

@@ -105,8 +105,8 @@ loc_1DDE8:
                 lea     12(a5),a5
                 dbf     d0,loc_1DCFC
                 
-                lea     table_1DE1E(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_DaoPaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.w   ReinitializeSceneAfterSpell
                 rts
@@ -122,6 +122,7 @@ table_1DE06:    ; small rock
                 ; large rock
                 vdpSpell 0, 0, VDPTILE_SPELLTILE8, V4|H3|VALUE2
                 
-table_1DE1E:    dc.w $248
+table_DaoPaletteFlash:
+                dc.w $248
                 dc.w 30
                 dc.w 1

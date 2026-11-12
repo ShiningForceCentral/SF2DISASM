@@ -149,7 +149,7 @@ sub_1B884:
 ; =============== S U B R O U T I N E =======================================
 
 
-sub_1B8B2:
+UpdateSpellPaletteFlash:		; a0 = pointer to a table describing the palette flash effect to apply to borders of the battlescene
                 
                 movem.w d0-d1/d6-d7,-(sp)
                 addq.b  #1,((byte_FFB568-$1000000)).w
@@ -181,7 +181,7 @@ loc_1B8F8:
                 movem.w (sp)+,d0-d1/d6-d7
                 rts
 
-    ; End of function sub_1B8B2
+    ; End of function UpdateSpellPaletteFlash
 
 
 ; =============== S U B R O U T I N E =======================================

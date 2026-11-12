@@ -135,8 +135,8 @@ loc_1DF7E:
                 addq.w  #1,d0
                 dbf     d1,loc_1DE8A
                 
-                lea     table_1DFCE(pc), a0
-                bsr.w   sub_1B8B2
+                lea     table_ApolloPaletteFlash(pc), a0
+                bsr.w   UpdateSpellPaletteFlash
                 cmpi.b  #2,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bcs.w   ReinitializeSceneAfterSpell
                 rts
@@ -157,6 +157,7 @@ table_1DFC2:    dc.w $790
                 dc.w $210
                 dc.w $180
                 
-table_1DFCE:    dc.w $00F
+table_ApolloPaletteFlash:
+                dc.w $00F
                 dc.w 8
                 dc.w 1
