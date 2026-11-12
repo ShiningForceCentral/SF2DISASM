@@ -106,8 +106,8 @@ loc_1B858:
                 clr.b   ((CURRENT_SPELLANIMATION-$1000000)).w
                 clr.b   ((SPELLANIMATION_STATE-$1000000)).w
                 clr.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
-                clr.b   ((byte_FFB568-$1000000)).w
-                clr.b   ((byte_FFB569-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w
                 clr.b   ((SPELLANIMATION_SCREEN_SHAKE-$1000000)).w
                 clr.b   ((SPELLANIMATION_HIT_TRIGGER-$1000000)).w
                 clr.b   ((BATTLESCENE_ACTOR_SWITCH_STATE-$1000000)).w
@@ -152,11 +152,11 @@ sub_1B884:
 UpdateSpellPaletteFlash:		; a0 = pointer to a table describing the palette flash effect to apply to borders of the battlescene
                 
                 movem.w d0-d1/d6-d7,-(sp)
-                addq.b  #1,((byte_FFB568-$1000000)).w
-                move.b  ((byte_FFB568-$1000000)).w,d0
-                cmp.b   ((byte_FFB569-$1000000)).w,d0
+                addq.b  #1,((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
+                move.b  ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w,d0
+                cmp.b   ((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w,d0
                 bcs.s   loc_1B8F8
-                clr.b   ((byte_FFB568-$1000000)).w
+                clr.b   ((SPELLANIMATION_PALETTE_FLASH_COUNTER-$1000000)).w
                 tst.w   ((PALETTE_1_CURRENT-$1000000)).w
                 bne.s   loc_1B8D6
                 move.w  4(a0),d0
@@ -171,7 +171,7 @@ loc_1B8DC:
                 move.w  d0,d6
                 jsr     (GenerateRandomNumber).w
                 add.w   d7,d0
-                move.b  d0,((byte_FFB569-$1000000)).w
+                move.b  d0,((SPELLANIMATION_PALETTE_FLASH_TARGET-$1000000)).w
                 move.w  d1,((PALETTE_1_CURRENT-$1000000)).w
                 move.w  d1,((PALETTE_3_CURRENT_02-$1000000)).w
                 jsr     (ApplyVIntCramDma).w
