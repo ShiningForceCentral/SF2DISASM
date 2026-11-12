@@ -1,5 +1,6 @@
 
 ; PSG Frequency values for each driver note value from note 0 to $3F
+; Note range (International Pitch Notation) : A2 111Hz to C8 4143Hz
 
 PSG_FREQUENCIES:
     dw 3EFh

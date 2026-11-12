@@ -10,12 +10,7 @@ ParsePsgToneData:
     add  hl, hl
     add  hl, hl
     add  hl, hl
-    push  bc
-    ld  b, h
-    ld  c, l 
-    add  hl, hl
-    add  hl, bc    ; hl = 30h * a
-    pop  bc
+    add  hl, hl     ; hl = 20h * a (this code is valid as long as CHANNEL_DATA_SIZE = 20h)
     ex  de, hl
     add  ix, de    ; channel data base address
     rrca

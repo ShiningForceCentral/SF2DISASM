@@ -207,6 +207,12 @@ MUSIC_RESUMING:                     equ 1       ;
 RESUME_BATTLEFIELD_MUSIC_ONLY:      equ 1       ; Do not resume battlescene music.
 RESUME_MUSIC_AFTER_JOIN_JINGLE:     equ 1       ; Resume background music after playing a "Joined the Force" jingle.
 
+; Sound driver facts [DO NOT CHANGE THESE VALUES WITHOUT UPDATING THE CUBEWIZ SOUND DRIVER CODE FIRST, these values are used by SF2 Music Cooker tool to know what it is allowed to do]
+EXPANDED_PCM_ENTRIES:		equ 128		; Set to 128 because Cubewiz sound driver layout was changed to support extra sample entries (128, up from vanilla 17).
+EXPANDED_YM_FREQUENCIES:	equ 88		; Set to 88 because Cubewiz has room for 4 extra YM frequencies (88, up from vanilla 84).
+EXPANDED_YM_INSTRUMENTS:	equ 1		; Set to 1 because Cubewiz was changed to support maximal size for yminst.bin (8192, up from vanilla 4096).
+
+
 resumeBattlesceneMusic = 1
     if (RESUME_BATTLEFIELD_MUSIC_ONLY=1)
 resumeBattlesceneMusic = 0
@@ -219,7 +225,8 @@ EXPANDED_CLASSES:           equ 1       ; Enable support for 64 classes.
 EXPANDED_FORCE_MEMBERS:     equ 1       ; Enable all 32 force members supported by the engine instead of 30.
 EXPANDED_ITEMS_AND_SPELLS:  equ 1       ; Expand number of items from 127 to 255, and number of spells from 44 to 63. Forces build of a >= 4MB ROM with 32KB SRAM.
 EXPANDED_MAPSPRITES:        equ 1       ; Store mapsprite index in word-sized structure allowing 65k+ unique sprites.
-
+EXPANDED_MUSIC_BANKS:		equ 1		; Introduce 4 extra music banks in which you can fit new musics or relocate existing musics to make room in original banks 1/2.
+EXPANDED_PCM_BANKS:			equ 1		; Introduce 8 extra PCM banks in which you can fit new samples.
 
 ; Hardware expansions
 ROM_EXPANSION:              equ 1       ; 0 = 2 MB ROM, 1 = 4 MB ROM (default), 2 = 6 MB ROM
@@ -231,6 +238,14 @@ expandedRom = 0
     ;if (STANDARD_BUILD&(ROM_EXPANSION!EXPANDED_ITEMS_AND_SPELLS)=1)
     if (STANDARD_BUILD=1)
         if (ROM_EXPANSION!EXPANDED_ITEMS_AND_SPELLS>=1)
+expandedRom = 1
+        endif
+		; Also expand ROM is mandatory if using extra music banks
+        if (EXPANDED_MUSIC_BANKS>=1)
+expandedRom = 1
+        endif
+		; Also expand ROM is mandatory if using extra PCM banks
+        if (EXPANDED_PCM_BANKS>=1)
 expandedRom = 1
         endif
     endif

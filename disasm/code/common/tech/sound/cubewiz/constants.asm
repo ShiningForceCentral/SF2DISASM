@@ -8,7 +8,7 @@ BANK_TYPE_SFX                  equ 1
 BANK_ENTRY_SIZE                equ 8
 
 ; Channel data in data/channel_data.asm
-CHANNEL_DATA_SIZE              equ 30h
+CHANNEL_DATA_SIZE              equ 20h
 DATA_CURSOR                    equ 00h     ; $00-$01 Data cursor
 TIME_COUNTER                   equ 02h     ; $02     Time counter for note/sample play length
 CHANNEL_FREE                   equ 03h     ; $03     Channel is free/inactive (set to 1)
