@@ -69,7 +69,7 @@ loc_1A88E:
                 
                 move.w  #-1,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_HEALING_FAIRY,((CURRENT_SPELLANIMATION-$1000000)).w
-                move.b  #1,((byte_FFB585-$1000000)).w
+                move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
     ; End of function spellanimationSetup_HealingFairy

@@ -9,13 +9,13 @@ UpdateSpellanimation:
                 
                 tst.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 beq.s   @Return
-                move.b  ((byte_FFB585-$1000000)).w,d0
-                beq.s   @Return
+                move.b  ((SPELLANIMATION_STATE-$1000000)).w,d0
+                beq.s   @Return ; 0 = off
                 subq.b  #1,d0
-                beq.s   loc_1B7CE
+                beq.s   loc_1B7CE ; 1 = playing
                 subq.b  #1,d0
-                beq.s   loc_1B7CA
-                bra.w   ReinitializeSceneAfterSpell
+                beq.s   loc_1B7CA ; 2 = stopping (will set countdown to 0)
+                bra.w   ReinitializeSceneAfterSpell ; 3 = done
 @Return:
                 
                 rts
@@ -104,7 +104,7 @@ loc_1B858:
                 clr.w   ((byte_FFB404-$1000000)).w
                 clr.b   ((SPELLANIMATION_VARIATION_AND_MIRRORED_BIT-$1000000)).w
                 clr.b   ((CURRENT_SPELLANIMATION-$1000000)).w
-                clr.b   ((byte_FFB585-$1000000)).w
+                clr.b   ((SPELLANIMATION_STATE-$1000000)).w
                 clr.b   ((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 clr.b   ((byte_FFB568-$1000000)).w
                 clr.b   ((byte_FFB569-$1000000)).w

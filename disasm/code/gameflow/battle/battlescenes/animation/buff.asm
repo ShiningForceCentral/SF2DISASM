@@ -43,7 +43,7 @@ spellanimationSetup_Buff:
                 move.w  d1,4(a0)
                 move.w  #$11D,((byte_FFB404-$1000000)).w
                 move.b  #SPELLANIMATION_BUFF1,((CURRENT_SPELLANIMATION-$1000000)).w
-                move.b  #1,((byte_FFB585-$1000000)).w
+                move.b  #1,((SPELLANIMATION_STATE-$1000000)).w
                 move.b  #1,((UPDATE_SPELLANIMATION_TOGGLE-$1000000)).w
                 bra.w   StoreBattlespritePalette
 
