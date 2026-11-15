@@ -1,6 +1,6 @@
 
-; ASM FILE code\specialscreens\witch\soundtest-standard.asm :
-; Sound test restoration functions.
+; Original soundtest has been altered with replaced and/or added musics through an automated tool.
+; Manual edits in this file is strongly discouraged.
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -13,7 +13,7 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
                 
                 lea     table_SoundtrackTitles(pc),a0
                 clr.w   d1
-                moveq   #41,d2                      ; d2.w = index beyond which a number is written instead of a title
+                moveq   #-1,d2                      ; d2.w = index beyond which a number is written instead of a title (-1 = disabled)
                 
 @UpdateTrack:   move.b  table_Soundtracks(pc,d7.w),d1
                 jsr     (DisplaySoundtrackTitle).w
@@ -23,17 +23,23 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
 @Right:         btst    #INPUT_BIT_RIGHT,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @Left
                 cmpi.w  #91,d7      ; check we're not trying to go beyond final track
-                bge.s   @Left       ; if we are, branch into 'left button push' code
+                bge.s   @First      ; if we are, go to first track (circular navigation)
                 addq.w  #1,d7
                 bra.s   @UpdateTrack
                 
 @Left:          btst    #INPUT_BIT_LEFT,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @A
                 tst.w   d7          ; check we're not trying to go below the first track
-                ble.s   @A          ; if we are, branch into 'A button push' code
+				ble.s   @Last       ; if we are, go to last track (circular navigation)
                 subq.w  #1,d7
                 bra.s   @UpdateTrack
                 
+@First:         move.b  #0,d7       ; go to first track
+                bra.s   @UpdateTrack
+
+@Last:          move.b  #91,d7      ; go to last track
+                bra.s   @UpdateTrack
+
 @A:             btst    #INPUT_BIT_A,((PLAYER_1_INPUT-$1000000)).w
                 beq.s   @C
                 
@@ -61,29 +67,19 @@ SoundTest:      txt     464                         ; "Oh! I have a good idea.{N
 ; ---------------------------------------------------------------------------
 
 table_Soundtracks:
-                
-                dc.b MUSIC_INTRO
-                dc.b MUSIC_WITCH
-                dc.b MUSIC_SUSPEND
                 dc.b MUSIC_MAIN_THEME
-                dc.b MUSIC_BATTLE_THEME_3
-                dc.b MUSIC_BATTLE_THEME_1
-                dc.b MUSIC_SHRINE
-                dc.b MUSIC_FINAL_BATTLE
                 dc.b MUSIC_ATTACK
                 dc.b MUSIC_PROMOTED_ATTACK
                 dc.b MUSIC_ENEMY_ATTACK
                 dc.b MUSIC_BOSS_ATTACK
                 dc.b MUSIC_ZEON_ATTACK
                 dc.b MUSIC_TOWN
-                dc.b MUSIC_MITHRIL_DIGGERS
-                dc.b MUSIC_CASTLE
-                dc.b MUSIC_HEADQUARTERS
-                dc.b MUSIC_MITULA_SHRINE
+                dc.b MUSIC_INTRO
+                dc.b MUSIC_WITCH
+                dc.b MUSIC_SUSPEND
                 dc.b MUSIC_SAD_THEME_2
-                dc.b MUSIC_ENDING
-                dc.b MUSIC_MITULA
                 dc.b MUSIC_ELVEN_TOWN
+                dc.b MUSIC_MITULA
                 dc.b MUSIC_SAD_THEME_3
                 dc.b MUSIC_SAD_THEME_1
                 dc.b MUSIC_PIANO_THEME
@@ -98,6 +94,15 @@ table_Soundtracks:
                 dc.b MUSIC_CURSED_ITEM
                 dc.b MUSIC_ITEM
                 dc.b MUSIC_TITLE
+                dc.b MUSIC_BATTLE_THEME_3
+                dc.b MUSIC_BATTLE_THEME_1
+                dc.b MUSIC_SHRINE
+                dc.b MUSIC_FINAL_BATTLE
+                dc.b MUSIC_MITHRIL_DIGGERS
+                dc.b MUSIC_CASTLE
+                dc.b MUSIC_HEADQUARTERS
+                dc.b MUSIC_MITULA_SHRINE
+                dc.b MUSIC_ENDING
                 dc.b SFX_MENU_SWITCH
                 dc.b SFX_MENU_SELECTION
                 dc.b SFX_VALIDATION
@@ -155,10 +160,10 @@ table_Soundtracks:
                 dc.b SFX_BOLT_SPELL
                 dc.b SFX_TINKLING
 
+
 ; ---------------------------------------------------------------------------
 
 table_SoundtrackTitles:
-                
                 defineName ""
                 defineName "Legend of Light"
                 defineName "The Young Men of Granseal"
@@ -201,3 +206,82 @@ table_SoundtrackTitles:
                 defineName "The Caravan Proceeds"
                 defineName "Ancient Wings"
                 defineName "Chosen Heroes"
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName ""
+                defineName "SFX: MENU_SWITCH"
+                defineName "SFX: MENU_SELECTION"
+                defineName "SFX: VALIDATION"
+                defineName "SFX: REFUSAL"
+                defineName "SFX: DIALOG_BLEEP_1"
+                defineName "SFX: DIALOG_BLEEP_2"
+                defineName "SFX: DIALOG_BLEEP_3"
+                defineName "SFX: DIALOG_BLEEP_4"
+                defineName "SFX: DIALOG_BLEEP_5"
+                defineName "SFX: DIALOG_BLEEP_6"
+                defineName "SFX: DIALOG_BLEEP_7"
+                defineName "SFX: DIALOG_BLEEP_8"
+                defineName "SFX: SPELL_CAST"
+                defineName "SFX: DOOR_OPEN_HIGH_PITCH"
+                defineName "SFX: WALKING"
+                defineName "SFX: UNUSED_FROM_LANDSTALKER"
+                defineName "SFX: LIGHTNING_1"
+                defineName "SFX: LIGHTNING_2"
+                defineName "SFX: HIT_1"
+                defineName "SFX: HIT_2"
+                defineName "SFX: BLAST"
+                defineName "SFX: SWORDS_HIT"
+                defineName "SFX: JUMP"
+                defineName "SFX: FALLING"
+                defineName "SFX: WARP"
+                defineName "SFX: CHIRRUP_SANDALS"
+                defineName "SFX: MONSTER_DIALOG_BLEEP"
+                defineName "SFX: DOOR_OPEN"
+                defineName "SFX: BIG_DOOR_RUMBLE"
+                defineName "SFX: MONSTER_SCREAM"
+                defineName "SFX: BUUBOBI"
+                defineName "SFX: SECRET_PATH_ROCK"
+                defineName "SFX: PSH"
+                defineName "SFX: PSHHH"
+                defineName "SFX: BLOAB"
+                defineName "SFX: BLO"
+                defineName "SFX: LANDSTALKER_ITEM"
+                defineName "SFX: LEVEL_UP"
+                defineName "SFX: PRISM_LASER_LOADING"
+                defineName "SFX: SPAWN"
+                defineName "SFX: SFCD_STATUES"
+                defineName "SFX: DESOUL"
+                defineName "SFX: SITD_HOWL"
+                defineName "SFX: PRISM_LASER_FIRING"
+                defineName "SFX: BOOST"
+                defineName "SFX: DESOUL_HOVERING"
+                defineName "SFX: PRISM_LASER_CUTSCENE_FIRING"
+                defineName "SFX: TAROS_DIALOG_BLEEP"
+                defineName "SFX: HEALING"
+                defineName "SFX: BLAST_SPELL"
+                defineName "SFX: WING_FLAP"
+                defineName "SFX: BATTLEFIELD_DEATH"
+                defineName "SFX: DEMON_BREATH"
+                defineName "SFX: INTRO_LIGHTNING"
+                defineName "SFX: BOLT_SPELL"
+                defineName "SFX: TINKLING"

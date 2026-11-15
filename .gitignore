@@ -16,6 +16,10 @@
 # No side project stuff
 sf2edit.conf
 
+# No SF2MusicCooker stuff
+disasm/data/sound/SF2MusicCooker/Input
+disasm/data/sound/SF2MusicCooker/Output
+
 #################
 ## Below is the default ignore file, kept as is.
 #################
@@ -253,7 +257,6 @@ build/caravan.cfg
 *.tsx
 *.tmx
 *.msi
-*.json
 build/Lunar IPS.exe
 build/mega-usb.exe
 *.ips

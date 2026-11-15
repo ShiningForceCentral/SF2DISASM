@@ -48,7 +48,7 @@ Z80_Memory: equ $A00000
 
 z80Channel1NotInUse = $A01383
     if (STANDARD_BUILD=1)
-z80Channel1NotInUse = $A01813
+z80Channel1NotInUse = $A01AA3 ; This can be calculated like so: z80Channel1NotInUse = [Offset to "--CHANNEL_DATA--" (inspect ROM in Hex Editor!)] + $13
     endif
 Z80_CHANNEL_1_NOT_IN_USE: equ z80Channel1NotInUse
 

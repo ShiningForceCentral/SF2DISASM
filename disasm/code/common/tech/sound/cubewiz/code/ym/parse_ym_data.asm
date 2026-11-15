@@ -9,9 +9,7 @@ ParseYm1ChannelData:
     add  a, a
     add  a, a
     add  a, a
-    ld  d, a
-    add  a, a
-    add  a, d    ; a = 30h * a
+    add  a, a	 ; a = 20h * a (this code is valid as long as CHANNEL_DATA_SIZE = 20h)
     ld  d, 0
     ld  e, a
     add  ix, de    ; channel data base address
@@ -379,9 +377,7 @@ ParseYm2ChannelData:
     add  a, a
     add  a, a
     add  a, a
-    ld  d, a
-    add  a, a
-    add  a, d    ; a = 30h * a
+    add  a, a	 ; a = 20h * a (this code is valid as long as CHANNEL_DATA_SIZE = 20h)
     ld  d, 0
     ld  e, a
     add  ix, de    ; channel data base address

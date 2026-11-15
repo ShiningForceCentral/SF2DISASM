@@ -92,10 +92,8 @@ CopyMusicData:
     ld  b, 0Ah     ; 10 channels
 $$loop:      
     push  bc
-    ld  bc, 020h   ; copy $20 bytes of data
-    ldir           ; copy BC bytes from source HL to target DE
-    ld  bc, 010h   ; skip $10 bytes (currently contain channel label)
-    add  hl, bc
+    ld  bc, CHANNEL_DATA_SIZE   ; copy CHANNEL_DATA_SIZE ($20) bytes of data
+    ldir                        ; copy BC bytes from source HL to target DE
     ex  de, hl
     add  hl, bc
     ex  hl, de

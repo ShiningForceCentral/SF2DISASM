@@ -69,7 +69,7 @@ $$skipYm6:
     ld  (hl), a    ; set PSG noise  channel  volume to 0
 
     ld  hl, MUSIC_CHANNEL_YM1+CHANNEL_FREE
-    ld  de, 30h
+    ld  de, CHANNEL_DATA_SIZE
     ld  b, 0Ah
     ld  a, 1
 $$loop:

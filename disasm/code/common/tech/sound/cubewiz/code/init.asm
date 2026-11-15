@@ -4,11 +4,11 @@
     di                          ; disable interrupts : synchronization relies on YM Timer
     ld  sp, STACK_START
     ld  a, 0Fh
-    ld  (OUTPUT_LEVEL), a
-    ld  a, 0FFh
-    ld  (YM_TIMER_VALUE), a
-    ld  a, 0Fh
-    ld  (FADE_IN_PARAMS), a
+    ld  (OUTPUT_LEVEL), a		; MrCool: these instructions could be removed if the sound driver in the ROM that gets copied to Z80 RAM already has the correct values!
+    ld  a, 0FFh					;
+    ld  (YM_TIMER_VALUE), a		;
+    ld  a, 0Fh					;
+    ld  (FADE_IN_PARAMS), a		;
     call  ActivateResuming
     ld  a, 20h                  ; initialize music channels with void music entry $20
     call  ProcessNewCommand

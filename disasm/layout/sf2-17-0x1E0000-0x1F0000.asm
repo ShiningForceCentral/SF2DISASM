@@ -2,14 +2,21 @@
 ; GAME SECTION 17 :
 ; 0x1E0000..0x1F0000 : PCM Banks, YM Instruments, sound driver, char stats, witch screens
 ; FREE SPACE : 462 bytes.
-
-
+                
+            if (INCLUDE_SF2MC_ASSETS=1)
+                incbin "data/sound/pcmbank0-standard.bin"
+                incbin "data/sound/pcmbank1-standard.bin"
+                incbin "data/sound/yminst-standard.bin"
+            else
                 incbin "data/sound/pcmbank0.bin"
                 incbin "data/sound/pcmbank1.bin"
                 incbin "data/sound/yminst.bin"
+                align $1ED000
+            endif                
+                
 SoundDriver:
                 
-                incbinIfStandard "data/sound/cubewiz.bin"
+                incbinIfStandard "data/sound/cubewiz.bin"	; MrCool: Cubewiz sound driver can be located at 0x1ED000 when viewing ROM in hex editor
                 incbinIfStandard "data/sound/sfxbank.bin"
                 
                 incbinIfVanilla "data/sound/sounddriver.bin"
